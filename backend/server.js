@@ -17,5 +17,5 @@ connectToDatabase();
 app.use("/api", userRoutes);
 
 app.listen(PORT, () => {
-  console.log("Server is listening!");
+  console.log("Server is listening!", PORT);
 });
