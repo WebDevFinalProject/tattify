@@ -47,7 +47,7 @@ export async function registration(req, res) {
   } catch (error) {
     res.status(500).json(error.message);
   }
-}
+};
 
 //login
 export const userLogin = async (req, res) => {
@@ -73,5 +73,6 @@ export const userLogin = async (req, res) => {
       .json({ user, message: "Successfully logedIn!" });
   } catch (err) {
     res.status(500).send({ error: err.message });
+    
   }
 };
