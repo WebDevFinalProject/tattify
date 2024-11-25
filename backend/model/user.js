@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   portfolio: {
-    type: String,
+    type: [String],
     required: function () {
       return this.role === "artist";
     },
