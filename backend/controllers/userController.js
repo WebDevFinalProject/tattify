@@ -1,14 +1,15 @@
 // customers
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import User from "../model/user.js";
+import { generateJWT } from "../lib/jwt.js";
 
 //registration
 export async function registration(req, res) {
   const { firstName, lastName, email, password, role, portfolio } = req.body;
   try {
     if (!["artist", "customer"].includes(role)) {
-      return res.status(400).json({ error: "Invalid role" });       
+      return res.status(400).json({ error: "Invalid role" });
     }
 
     if (role === "artist" && !portfolio) {
@@ -53,14 +54,15 @@ export const userLogin = async (req, res) => {
     if (!isMatch) {
       return res.status(400).send({ msg: "Incorrect password!" });
     }
+    const token = generateJWT(user._id);
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "24h",
-    });
-    res.json({
-      msg: "Success! User logged in",
-      token,
-    });
+    res
+      .cookie("jwt", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+      })
+      .json({ user, message: "Successfully logedIn!" });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
