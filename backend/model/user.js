@@ -25,6 +25,13 @@ const userSchema = new mongoose.Schema({
     enum: ["customer", "artist"],
     required: true,
   },
+  portfolio: {
+    type: String,
+    required: function () {
+      return this.role === "artist";
+    },
+  },
+
   profileImage: String,
 });
 
