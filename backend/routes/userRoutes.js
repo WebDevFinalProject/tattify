@@ -1,16 +1,12 @@
-import express from "express";
-import { registration, userLogin } from "../controllers/userController.js";
-import storage from "../cloudinary-config/cloudinaryConfig.js";
-import multer from "multer";
+// routes
 
-const router = express.Router();
+import express from "express"
+import { registration, userLogin } from "../controllers/userController.js" 
 
-//uploading images
+const router = express.Router()
 
-const upload = multer({ storage });
 
-//form
-router.post("/signup", upload.array("portfolio", 3), registration);
+router.post("/signup",registration)
 
 router.post("/login", userLogin);
 
