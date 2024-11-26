@@ -10,7 +10,7 @@ const router = express.Router();
 const upload = multer({ storage });
 
 //form
-router.post("/signup", registration);
+router.post("/signup", upload.array("portfolio", 3), registration);
 
 router.post("/login", userLogin);
 
