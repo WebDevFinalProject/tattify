@@ -77,4 +77,18 @@ export const userLogin = async (req, res) => {
   }
 };
 
+export const getProfile = async (req, res) => {
+  try {
+    // Use req.userId from auth middleware
+    const userProfile = await User.findById(req.userId).select("-password"); // Exclude password
+  
 
+    if (!userProfile) {
+      return res.status(404).json({ message: "User not found!" });
+    }
+
+    res.status(200).json(userProfile); // Send user profile
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
