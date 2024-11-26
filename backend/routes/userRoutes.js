@@ -1,7 +1,12 @@
 import express from "express";
-import { registration, userLogin } from "../controllers/userController.js";
+import {
+  getProfile,
+  registration,
+  userLogin,
+} from "../controllers/userController.js";
 import storage from "../cloudinary-config/cloudinaryConfig.js";
 import multer from "multer";
+import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -13,5 +18,7 @@ const upload = multer({ storage });
 router.post("/signup", upload.array("portfolio", 3), registration);
 
 router.post("/login", userLogin);
+
+router.get("/profile", auth, getProfile);
 
 export default router;
