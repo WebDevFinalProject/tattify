@@ -6,16 +6,10 @@ import { generateJWT } from "../lib/jwt.js";
 
 //registration
 export async function registration(req, res) {
-  const { firstName, lastName, email, password, role, portfolio } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
   try {
     if (!["artist", "customer"].includes(role)) {
       return res.status(400).json({ error: "Invalid role" });
-    }
-
-    if (role === "artist" && !portfolio) {
-      return res
-        .status(400)
-        .json({ error: "Portfolio is required for artists." });
     }
 
     let existingUser = await User.findOne({ email });
@@ -23,6 +17,20 @@ export async function registration(req, res) {
       return res.status(400).json({ msg: "User already exists!" });
     }
 
+    // handling the portfolio for artists
+
+    let portfolio;
+
+    if (role === "artist") {
+      if (!req.files || req.files.length === 0) {
+        return res
+          .status(400)
+          .json({ error: "Portfolio is required for artists." });
+      }
+      portfolio = req.files.map((file) => file.path); // Cloudinary URLs
+    }
+
+    //Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
