@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-
-//chat 
+//chat
+// only for registered users
 const chatSchema = new mongoose.Schema(
   {
     sender: {
