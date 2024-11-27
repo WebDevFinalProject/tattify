@@ -7,7 +7,7 @@ const artistProfileSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the user's profile image
+    ref: "Users", // Reference to the user's profile image
     required: true,
   },
   specialties: {
@@ -74,6 +74,6 @@ const artistProfileSchema = new mongoose.Schema({
   },
 });
 
-const ArtistPortfolio = mongoose.model("ArtistPortfolio", artistProfileSchema);
+const ArtistProfile = mongoose.model("ArtistPortfolio", artistProfileSchema);
 
-export default ArtistPortfolio;
+export default ArtistProfile;
