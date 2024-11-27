@@ -14,26 +14,6 @@ const artistProfileSchema = new mongoose.Schema({
     type: [String],
     required: true, // Array of strings for specialties
   },
-  reviews: [
-    {
-      userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Users", // Reference to the User model
-      },
-      rating: {
-        type: Number,
-        min: 1,
-        max: 5,
-      },
-      reviewedAt: {
-        type: Date,
-        default: Date.now,
-      },
-      reviewText: {
-        type: String,
-      },
-    },
-  ],
   experience: {
     type: String,
   },
@@ -67,6 +47,12 @@ const artistProfileSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
