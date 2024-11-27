@@ -7,7 +7,7 @@ const artistProfileSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the user's profile image
+    ref: "Users", // Reference to the user's profile image
     required: true,
   },
   specialties: {
@@ -28,6 +28,9 @@ const artistProfileSchema = new mongoose.Schema({
       reviewedAt: {
         type: Date,
         default: Date.now,
+      },
+      reviewText: {
+        type: String,
       },
     },
   ],
