@@ -8,6 +8,7 @@ import {
 import storage from "../cloudinary-config/cloudinaryConfig.js";
 import multer from "multer";
 import { auth } from "../middleware/auth.js";
+import { writeReviewToArtistProfile } from "../controllers/createReview.js";
 
 const router = express.Router();
 
@@ -21,6 +22,10 @@ router.post("/signup", upload.array("portfolio", 3), registration);
 router.post("/login", userLogin);
 
 router.get("/profile", auth, getProfile);
+
+//review
+
+router.post("/submit-review", auth, writeReviewToArtistProfile);
 
 //logout
 router.post("/logout", logout);
