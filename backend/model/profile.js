@@ -63,6 +63,6 @@ const artistProfileSchema = new mongoose.Schema({
   },
 });
 
-const ArtistPortfolio = mongoose.model("ArtistPortfolio", artistProfileSchema);
+const ArtistProfile = mongoose.model("ArtistPortfolio", artistProfileSchema);
 
-export default ArtistPortfolio;
+export default ArtistProfile;
