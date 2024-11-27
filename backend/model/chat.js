@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+//chat 
 const chatSchema = new mongoose.Schema(
   {
     sender: {
