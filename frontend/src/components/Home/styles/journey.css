@@ -1,0 +1,43 @@
+:root {
+  --text-color-header: #fca93d;       
+  --text-color-p: #fefefe;             
+  --background-color: #0d0e4b;        
+  --line-color: #f2e2d7;              
+}
+.journey-container {
+  display: flex;
+  align-items: center; 
+  background-color: var(--background-color); 
+  color: var(--text-color-p);
+  padding: 2rem;
+}
+
+.image-container{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+.content{
+  flex:2;
+  display: flex;
+  flex-wrap: wrap;             
+  gap: 1.5rem; 
+}
+.content > div {               
+  flex: 1 1 45%;               
+  box-sizing: border-box;
+}
+.content h2{
+  color: var(--text-color-header);
+  margin-bottom: 0.5rem;
+}
+.content p {
+  color: var(--text-color-p);
+  margin-bottom: 1.5rem;
+}
+
