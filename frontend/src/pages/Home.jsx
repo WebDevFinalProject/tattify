@@ -5,9 +5,9 @@ import NavBar from "../components/NavBar";
 const Home = () => {
   return (
     <>
+      <NavBar />
       <Journey />
       <Contact />
-      <NavBar />
     </>
   );
 };
