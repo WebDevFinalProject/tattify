@@ -14,7 +14,7 @@ const SkinCare = () => {
           </h2>
           <img src={aftercare} alt="" />
         </div>
-        <div>
+        <div className="back-icon">
           <HiArrowLeft />
           Back
         </div>
