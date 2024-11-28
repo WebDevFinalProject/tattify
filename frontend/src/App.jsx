@@ -10,10 +10,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/article" element={<Articles />}>
-          <Route path="skin-care" element={<SkinCare />} />
-          <Route path="tattoo-history" element={<TattooHistory />} />
-        </Route>
+        <Route path="/articles" element={<Articles />} />
+        <Route path="article/skin-care" element={<SkinCare />} />
+        <Route path="article/tattoo-history" element={<TattooHistory />} />
       </Routes>
     </>
   );

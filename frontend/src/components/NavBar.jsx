@@ -13,7 +13,7 @@ function NavBar() {
           <NavLink>Home</NavLink>
           <NavLink>About</NavLink>
           <NavLink>Contact</NavLink>
-          <NavLink to="/article">Article</NavLink>
+          <NavLink to="/articles">Article</NavLink>
         </nav>
       </div>
     </>
