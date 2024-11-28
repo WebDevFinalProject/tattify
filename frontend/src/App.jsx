@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import "./App.css";
-import SkinCare from "./components/article/SkinCare";
 import Articles from "./pages/Articles";
-import TattooHistory from "./components/article/TattooHistory";
+import TattooHistory from "./components/article/tattoo-history/TattooHistory";
+import SkinCare from "./components/article/skin-care-blog/SkinCare";
 
 function App() {
   return (

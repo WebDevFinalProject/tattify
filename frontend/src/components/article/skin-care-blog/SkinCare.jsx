@@ -1,6 +1,6 @@
 import React from "react";
-import "./blogcard.css";
-import aftercare from "../../assets/blogs-images/aftercare.jpg";
+import "../skin-care-blog/skin_care.css";
+import aftercare from "../../../assets/blogs-images/aftercare.jpg";
 import { HiArrowLeft } from "react-icons/hi";
 
 const SkinCare = () => {
