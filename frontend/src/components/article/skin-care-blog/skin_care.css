@@ -37,6 +37,7 @@
   overflow: hidden;
   animation: typewriter 4s steps(75);
 }
+
 .header img {
   object-fit: cover;
   max-width: 350px;
@@ -45,6 +46,10 @@
 
 .back-icon {
   margin: 1.5em 0;
+}
+
+.back-icon:hover {
+  color: gray;
 }
 
 .article h3 {

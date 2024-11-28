@@ -2,19 +2,26 @@ import React from "react";
 import "../skin-care-blog/skin_care.css";
 import aftercare from "../../../assets/blogs-images/aftercare.jpg";
 import { HiArrowLeft } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 
 const SkinCare = () => {
+  const navigate = useNavigate();
+
+  const backToPageHandler = () => {
+    navigate(-1);
+  };
   return (
     <div className="skin-care-blog">
       <div className="blog-skin-container">
         <div className="header">
           <h2>
-            The Ultimate Guide to Tattoo Aftercare: <br /> Keep Your Ink Fresh
-            and Vibrant
+            The Ultimate Guide to Tattoo Aftercare:
+            <br />
+            Keep Your Ink Fresh and Vibrant
           </h2>
           <img src={aftercare} alt="" />
         </div>
-        <div className="back-icon">
+        <div className="back-icon" onClick={backToPageHandler}>
           <HiArrowLeft />
           Back
         </div>
