@@ -5,11 +5,10 @@ import ImageSnake from "../../assets/images/snake.jpeg";
 function Journey() {
   return (
     <div className="journey-container">
+      <div className="image-container">
+        <img src={ImageSnake} alt="Snake" />
+      </div>
       <div className="content">
-        <div className="image-container">
-          <img src={ImageSnake} alt="Snake" />
-        </div>
-
         <div>
           <h2>Search for a location</h2>
           <p>
