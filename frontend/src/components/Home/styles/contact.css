@@ -42,7 +42,7 @@ form {
 }
 
 input {
-  width: 70vh;
+  width: 50vh;
   height: 4vh;
   background-color: var(--form-background-color);
   border: none;
@@ -74,7 +74,7 @@ button {
   border: none;
   border-radius: 30px;
   height: 3rem;
-  width: 10rem;
+  width: 8rem;
   font-family: Verdana, Tahoma, sans-serif;
   font-size: 1.3rem;
   position: absolute;
@@ -82,8 +82,8 @@ button {
   bottom: 0%;
 }
 
-.line {
+.vertical-line {
   border-left: 1.5px solid var(--form-background-color); /* The vertical line */
-  height: 20vh; /* Adjust height as needed */
+  height: 15vh; /* Adjust height as needed */
   margin: 0 10px;
 }

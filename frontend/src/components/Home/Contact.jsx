@@ -44,7 +44,7 @@ const Contact = () => {
         <p>Got any questions?</p>
         <h1>Get in touch</h1>
       </div>
-      <div className="line"></div>
+      <div className="vertical-line"></div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
