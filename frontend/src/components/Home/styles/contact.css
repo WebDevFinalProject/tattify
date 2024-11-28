@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gafata&family=Varta:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gafata&family=Varta:wght@300..700&display=swap");
+
+.contact-body {
+  --text-color-heading: #830707;
+  --form-text-color: #45342d;
+  --main-background-color: #f08f7f;
+  --form-background-color: #f2e2d7;
+}
 
 .contact-body {
   display: flex;
@@ -8,21 +15,21 @@
   height: 100vh; /* Full viewport height */
   width: 100vw;
   margin: 0;
-  background-color: #f08f7f;
-padding: 4rem;
+  background-color: var(--main-background-color);
+  padding: 4rem;
 }
 
 h1 {
   font-family: "Abril Fatface", serif;
   font-weight: 400;
   font-style: normal;
-  color: #830707;
+  color: var(--text-color-heading);
   font-size: 66px;
 }
 
 p {
   text-align: center;
-  color: #830707;
+  color: var(--text-color-heading);
   font-size: 16px;
   font-family: "Times New Roman", Times, serif;
 }
@@ -37,17 +44,19 @@ form {
 input {
   width: 70vh;
   height: 4vh;
-  background-color: #f2e2d7;
+  background-color: var(--form-background-color);
   border: none;
   border-bottom-style: solid;
+  border-bottom-color: var(--form-text-color);
 }
 
 textarea {
   height: 15vh;
-  background-color: #f2e2d7;
+  background-color: var(--form-background-color);
   border: none;
   padding-top: 5px;
   border-bottom-style: solid;
+  border-bottom-color: var(--form-text-color);
 }
 
 input::placeholder,
@@ -56,25 +65,25 @@ textarea::placeholder {
   padding-left: 10px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-style: italic;
-  color: black;
+  color: var(--form-text-color);
 }
 
 button {
-    color           : #f2e2d7;
-    background-color: #830707;
-    border          : none;
-    border-radius   : 30px;
-    height          : 3rem;
-    width           : 10rem;
-    font-family     : Verdana, Tahoma, sans-serif;
-    font-size       : 1.3rem;
-    position: absolute;
-    right: 40%; /* Positions button 10px from the right of the container */
-    bottom: 0%;
+  color: var(--form-background-color);
+  background-color: var(--text-color-heading);
+  border: none;
+  border-radius: 30px;
+  height: 3rem;
+  width: 10rem;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 1.3rem;
+  position: absolute;
+  right: 40%; /* Positions button 10px from the right of the container */
+  bottom: 0%;
 }
 
-.line{
-    border-left: 1.5px solid #f2e2d7; /* The vertical line */
-    height: 20vh; /* Adjust height as needed */
-    margin: 0 10px;
+.line {
+  border-left: 1.5px solid var(--form-background-color); /* The vertical line */
+  height: 20vh; /* Adjust height as needed */
+  margin: 0 10px;
 }
