@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif&display=swap');
+:root {
+    --text-color-header: #fca93d;       
+    --text-color-p: #fefefe;             
+    --background-color: #0d0e4b;        
+    --line-color: #fca93d;
+  }
+  
+  .abril-fatface-regular {
+    font-family: "Abril Fatface", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .footer-container {
+    background-color: var(--background-color);
+    color: var(--text-color-p);
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    height: 40vh;
+  }
+  
+ 
+  .footer-logo h1 {
+    font-family: "Abril Fatface", serif;
+    font-size: 5rem;
+    margin-left: 50px;
+    color: var(--text-color-p);
+  }
+  
+  .footer-logo p {
+    font-size: 1.2rem;
+    margin-top: 5px;
+    margin-left: 50px;
+    color: #fca93d;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: space-around;
+    width: 68%;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section li {
+    margin: 5px 0;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--text-color-header);
+  }
+  
+  .footer-section li:hover {
+    color: var(--text-color-p);
+  }
+  
+ 
+  .footer-line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--line-color);
+    margin: 20px 0;
+  }
+  
+ 
+  .footer-icons img {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
+ 
+  .footer-copyright {
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
