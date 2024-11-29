@@ -17,8 +17,9 @@ const SkinCare = () => {
           <h2>
             The Ultimate Guide to Tattoo Aftercare:
             <br />
-            Keep Your Ink Fresh and Vibrant
+            <span>Keep Your Ink Fresh and Vibrant</span>
           </h2>
+
           <img src={aftercare} alt="" />
         </div>
         <div className="back-icon" onClick={backToPageHandler}>
@@ -87,6 +88,16 @@ const SkinCare = () => {
             </ul>
           </div>
         </div>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Xg9Dv7X6ck0?si=QtkC6-93-YHfO9D2"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
   );
