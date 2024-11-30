@@ -17,7 +17,7 @@ const SkinCare = () => {
         <div className="skin-care-logo-container">
           <div className="nav-skin-care">
             <NavLink className="back-to-homepage" to="/">
-              <HiHome size={18} className="home-logo"/> Home Page
+              <HiHome size={18} className="home-logo" /> Home Page
             </NavLink>
           </div>
           <img className="skin-care-logo" src={logo} alt="skin-care logo" />
@@ -35,6 +35,9 @@ const SkinCare = () => {
           <HiArrowLeft />
           Back
         </div>
+        <p className="update-skin-care">
+          Updated : <span>30 November 2024</span>
+        </p>
         <div className="article">
           <div className="section-1">
             <h3>Immediate Aftercare: The First 24-48 Hours</h3>
