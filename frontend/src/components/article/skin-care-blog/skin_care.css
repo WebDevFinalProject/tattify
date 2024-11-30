@@ -88,8 +88,19 @@
   color: rgb(134, 119, 119);
 }
 
-.article h3 {
+.update-skin-care {
+  text-align: justify;
+  font-size: 15px;
   margin-top: 3em;
+
+  span {
+    font-weight: 100;
+    font-style: italic;
+  }
+}
+
+.article h3 {
+  margin-top: 1em;
 }
 
 .article p {
