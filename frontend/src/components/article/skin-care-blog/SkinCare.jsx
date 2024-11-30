@@ -1,8 +1,9 @@
 import React from "react";
 import "../skin-care-blog/skin_care.css";
 import aftercare from "../../../assets/blogs-images/aftercare.jpg";
-import { HiArrowLeft } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { HiArrowLeft, HiHome } from "react-icons/hi";
+import { NavLink, useNavigate } from "react-router-dom";
+import logo from "../../../assets/blogs-images/Pink_Elegant_Logo.png";
 
 const SkinCare = () => {
   const navigate = useNavigate();
@@ -13,6 +14,14 @@ const SkinCare = () => {
   return (
     <div className="skin-care-blog">
       <div className="blog-skin-container">
+        <div className="skin-care-logo-container">
+          <div className="nav-skin-care">
+            <NavLink className="back-to-homepage" to="/">
+              <HiHome size={18} className="home-logo"/> Home Page
+            </NavLink>
+          </div>
+          <img className="skin-care-logo" src={logo} alt="skin-care logo" />
+        </div>
         <div className="header">
           <h2>
             The Ultimate Guide to Tattoo Aftercare:
@@ -87,17 +96,73 @@ const SkinCare = () => {
               </li>
             </ul>
           </div>
+          <div className="section-3">
+            <h3>Long-Term Tattoo Care</h3>
+            <p>
+              Once your tattoo has fully healed (usually after 4–6 weeks), you
+              can shift to long-term maintenance to keep it looking fresh and
+              vibrant.
+            </p>
+            <div className="sec-3-guide">
+              <ul>
+                <li>
+                  <strong>Moisturize daily:</strong> Hydrated skin helps
+                  maintain the brightness of your tattoo. Use a high-quality,
+                  unscented lotion regularly.
+                </li>
+                <li>
+                  <strong>Use sunscreen:</strong>UV rays are a tattoo’s worst
+                  enemy. Always apply a broad-spectrum sunscreen with at least
+                  SPF 30 when your tattoo will be exposed to the sun.
+                </li>
+                <li>
+                  <strong>Avoid abrasive products: </strong>Harsh exfoliants and
+                  scrubs can wear down your tattoo over time. Stick to gentle
+                  skincare products.
+                </li>
+              </ul>
+              <div className="youtube-skin-care">
+                <iframe
+                  allowFullScreen
+                  width="360"
+                  height="215"
+                  src="https://www.youtube.com/embed/Xg9Dv7X6ck0?si=QtkC6-93-YHfO9D2"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div className="section-4">
+            <h3>What to Avoid During Healing</h3>
+            <p>
+              To ensure your tattoo heals perfectly, steer clear of the
+              following:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Swimming and soaking: </strong>Avoid pools, hot tubs,
+                and baths for at least 2–3 weeks. Showering is fine, but
+                prolonged soaking can soften the scabs and increase the risk of
+                infection.
+              </li>
+              <li>
+                <strong>Direct sunlight: </strong>Sun exposure can fade the ink
+                and irritate the healing skin. Cover your tattoo or stay in the
+                shade.
+              </li>
+              <li>
+                <strong>Heavy exercise: </strong>Activities that cause excessive
+                sweating or friction on the tattooed area should be avoided
+                during the healing process.
+              </li>
+            </ul>
+          </div>
         </div>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/Xg9Dv7X6ck0?si=QtkC6-93-YHfO9D2"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
       </div>
     </div>
   );
