@@ -99,6 +99,12 @@
   }
 }
 
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+}
+
 .article h3 {
   margin-top: 1em;
 }
@@ -129,8 +135,8 @@
 
 .youtube-skin-care {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 iframe {

@@ -135,6 +135,15 @@ const SkinCare = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
                 ></iframe>
+                <div>
+                  Source :{" "}
+                  <a
+                    href="https://www.youtube.com/watch?v=Xg9Dv7X6ck0&t=22s"
+                    target="_blank"
+                  >
+                    Link
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -164,6 +173,33 @@ const SkinCare = () => {
                 during the healing process.
               </li>
             </ul>
+          </div>
+
+          <div className="section-5">
+            <h3>Signs of Trouble: When to Seek Help</h3>
+            <p>
+              While most tattoos heal without issues, it’s important to
+              recognize signs of infection or complications:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Excessive redness or swelling</strong>
+              </li>
+              <li>
+                <strong>Severe pain or tenderness</strong>
+              </li>
+              <li>
+                <strong>Oozing pus or unusual discharge</strong>
+              </li>
+              <li>
+                <strong>Foul odor from the tattooed area</strong>
+              </li>
+            </ul>
+            <p>
+              If you notice any of these symptoms, consult your artist or a
+              healthcare professional immediately.
+            </p>
           </div>
         </div>
       </div>
