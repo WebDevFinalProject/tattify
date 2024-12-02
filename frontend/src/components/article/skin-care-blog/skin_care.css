@@ -18,6 +18,11 @@
   display: flex;
   justify-content: space-between;
   height: 130px;
+  position: sticky;
+  top: 0;
+  background-color: #e1d6cc;
+  z-index: 999;
+  box-shadow: 0px 4px 2px -3px rgba(151, 149, 149, 0.445);
 }
 
 .nav-skin-care {
@@ -202,7 +207,7 @@ iframe {
 
 @media (max-width: 768px) {
   .skin-care-logo-container {
-    margin: 0 5%;
+    padding: 0 5%;
   }
 
   .blog-skin-container {
