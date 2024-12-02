@@ -5,16 +5,19 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Suggestion from "../components/Home/Suggestion";
 
-const Home = () => {
-  return (
-    <>
-      <NavBar />
-      <Journey />
-      <Suggestion />
-      <Contact />
 
-      <Footer />
-    </>
-  );
+import Hero from "../components/Home/Hero";
+
+const Home = () => {
+    return (
+        <>
+            <NavBar />
+            <Hero />
+            <Journey />
+            <Suggestion />
+            <Contact />
+            <Footer />
+        </>
+    );
 };
 export default Home;

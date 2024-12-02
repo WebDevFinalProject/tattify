@@ -1,0 +1,74 @@
+:root {
+    --main-bg-color     : #d9c6bc;
+    --primary-text-color: #4d4d4d;
+    --accent-color      : #830707;
+    --button-text-color : #fff;
+    --font-title        : "Abril Fatface", serif;
+    --font-body         : "PT Serif", serif;
+}
+
+.hero-container {
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+    background-color: var(--main-bg-color);
+    padding         : 2rem 5%;
+    height          : 100vh;
+    position        : relative;
+
+    .text-container {
+        max-width: 50%;
+
+        h1 {
+            font-family: var(--font-title);
+            font-size  : 20rem;
+            color      : #fff;
+            margin     : 0;
+            font-weight: 200;
+            position   : relative;
+            bottom     : 50px;
+            text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.253);
+        }
+
+        p {
+            font-family: var(--font-body);
+            font-size  : 2.7rem;
+            color      : var(--primary-text-color);
+            margin     : 1rem 0;
+            position   : relative;
+            bottom     : 100px;
+            left       : 190px;
+        }
+
+        button {
+            color           : #f2e2d7;
+            background-color: #830707;
+            border          : none;
+            border-radius   : 30px;
+            height          : 4rem;
+            width           : 20rem;
+            padding-bottom  : 0.2rem;
+            margin-left     : 250px;
+            font-family     : Verdana,
+                Geneva,
+                Tahoma,
+                sans-serif;
+            font-size: 1.8rem;
+            transform: scale(1);
+            cursor   : pointer;
+
+            &:hover {
+                background-color: #b31b1b;
+            }
+        }
+    }
+
+    .image-container {
+        img {
+            max-width    : 70%;
+            height       : auto;
+            border-radius: 5px;
+            box-shadow   : 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    }
+}

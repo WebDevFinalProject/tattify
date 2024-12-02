@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "../skin-care-blog/skin_care.css";
 import aftercare from "../../../assets/blogs-images/aftercare.jpg";
 import { HiArrowLeft, HiHome } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../../assets/blogs-images/Pink_Elegant_Logo.png";
+import CustomSlider from "./CustomSlider";
 
 const SkinCare = () => {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const clickHandler = () => {
+    setIsOpen(!isOpen);
+  };
 
   const backToPageHandler = () => {
     navigate(-1);
@@ -49,22 +55,22 @@ const SkinCare = () => {
             </p>
             <ul>
               <li>
-                <strong>Leave the covering on:</strong>Keep the bandage on for
+                <strong>Leave the covering on:</strong> Keep the bandage on for
                 the time specified by your artist, usually 2–4 hours.
               </li>
               <li>
-                <strong>Wash gently: </strong>After removing the covering, clean
-                the tattoo with lukewarm water and a fragrance-free,
+                <strong>Wash gently: </strong> After removing the covering,
+                clean the tattoo with lukewarm water and a fragrance-free,
                 antibacterial soap. Use your fingertips, not a washcloth, to
                 avoid irritation.
               </li>
               <li>
-                <strong>Pat dry: </strong>Gently pat the area dry with a clean,
+                <strong>Pat dry: </strong> Gently pat the area dry with a clean,
                 soft towel or let it air dry. Avoid rubbing, which can damage
                 the skin.
               </li>
               <li>
-                <strong>Apply moisturizer:</strong>Use a thin layer of a
+                <strong>Apply moisturizer:</strong> Use a thin layer of a
                 recommended tattoo aftercare product, such as unscented lotion
                 or specialized tattoo ointments. Avoid petroleum-based products
                 unless specifically advised by your artist.
@@ -89,11 +95,11 @@ const SkinCare = () => {
                 can lead to scarring or uneven healing.
               </li>
               <li>
-                <strong>Stay clean:</strong>Continue washing the tattoo daily,
+                <strong>Stay clean:</strong> Continue washing the tattoo daily,
                 but be gentle to avoid disturbing the healing skin.
               </li>
               <li>
-                <strong>Wear loose clothing:</strong>Tight clothing can rub
+                <strong>Wear loose clothing:</strong> Tight clothing can rub
                 against the tattoo, causing irritation and potentially pulling
                 off scabs prematurely.
               </li>
@@ -114,7 +120,7 @@ const SkinCare = () => {
                   unscented lotion regularly.
                 </li>
                 <li>
-                  <strong>Use sunscreen:</strong>UV rays are a tattoo’s worst
+                  <strong>Use sunscreen:</strong> UV rays are a tattoo’s worst
                   enemy. Always apply a broad-spectrum sunscreen with at least
                   SPF 30 when your tattoo will be exposed to the sun.
                 </li>
@@ -135,9 +141,10 @@ const SkinCare = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
                 ></iframe>
-                <div>
+                <div className="source">
                   Source :{" "}
                   <a
+                    className="youtube-source"
                     href="https://www.youtube.com/watch?v=Xg9Dv7X6ck0&t=22s"
                     target="_blank"
                   >
@@ -147,7 +154,7 @@ const SkinCare = () => {
               </div>
             </div>
           </div>
-
+          <hr />
           <div className="section-4">
             <h3>What to Avoid During Healing</h3>
             <p>
@@ -201,8 +208,37 @@ const SkinCare = () => {
               healthcare professional immediately.
             </p>
           </div>
+          <div className="section-6">
+            <div className="sec-6-conclusion">
+              <h3>Conclusion </h3>
+              <span onClick={clickHandler}>{isOpen ? "-" : "+"}</span>
+            </div>
+            {isOpen && (
+              <>
+                <p>
+                  Proper tattoo aftercare is key to preserving your ink and
+                  avoiding complications. By following your artist’s
+                  instructions and maintaining a consistent aftercare routine,
+                  you can ensure your tattoo heals beautifully and stays vibrant
+                  for years to come.
+                </p>
+                <p>
+                  Whether it’s your first tattoo or your tenth, remember that
+                  your skin is a canvas worth taking care of. Treat it well, and
+                  your tattoo will be a piece of art you’ll proudly show off for
+                  a lifetime.
+                </p>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="cube">
+          <CustomSlider />
         </div>
       </div>
+      <footer className="footer-skin-care">
+        <p>© 2024 Tattify. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 };
