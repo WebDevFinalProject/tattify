@@ -32,9 +32,7 @@
     padding-bottom: 0.2rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.3rem;
-    #register-button {
-      color: #f2e2d7;
-      text-decoration: none;
-    }
+
+    color: #f2e2d7;
   }
 }
