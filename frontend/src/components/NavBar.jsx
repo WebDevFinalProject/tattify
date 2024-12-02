@@ -17,7 +17,7 @@ function NavBar() {
           <NavLink to="/articles">Article</NavLink>
         </nav>
         <div className="button-container">
-          <button>Login/Register</button>
+          <button><NavLink to="/register" id="register-button">Login/Register</NavLink></button>
          </div>
       </div>
     </>

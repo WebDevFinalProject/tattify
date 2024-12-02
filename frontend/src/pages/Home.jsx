@@ -12,7 +12,6 @@ const Home = () => {
       <Journey />
       <Suggestion />
       <Contact />
-<Registration/>
       <Footer />
     </>
   );
