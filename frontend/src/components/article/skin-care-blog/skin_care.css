@@ -55,6 +55,7 @@
   gap: 1em;
   margin: auto;
   background-color: #f5ebe298;
+  line-height: 1.5em;
 }
 
 .skin-care-header {
@@ -67,7 +68,7 @@
   padding-left: 1em;
   margin: auto;
   line-height: 1.8em;
-  font-size: clamp(0.9rem, 1.4vw, 2.5rem);
+  font-size: clamp(1.6rem, 1.4vw, 2.5rem);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -82,6 +83,7 @@
 
 .back-icon {
   margin: 1.5em 0;
+  font-size: clamp(0.8em, 3vw, 0.8em);
 }
 
 .back-icon:hover {
@@ -90,7 +92,7 @@
 
 .update-skin-care {
   text-align: justify;
-  font-size: 15px;
+  font-size: clamp(0.7em, 3vw, 0.9em);
   margin-top: 3em;
 
   span {
@@ -117,9 +119,10 @@
 
 .article ul li {
   margin: 10px;
-  line-height: 1.5em;
+  line-height: 1.8em;
   margin-left: 2.5em;
-  font-size: 0.9em;
+  font-size: clamp(0.7em, 3vw, 0.9em);
+  padding-bottom: 1em;
 }
 
 .sec-3-guide {
@@ -141,4 +144,105 @@
 
 iframe {
   aspect-ratio: 16/9;
+}
+.source {
+  padding-top: 0.5em;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.youtube-source {
+  text-decoration: none;
+  color: black;
+  text-decoration: underline;
+}
+
+.section-6 {
+  margin-bottom: 2em;
+}
+
+.sec-6-conclusion {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 1em;
+
+  span {
+    font-size: 1.5em;
+    font-weight: 800;
+    color: rgb(75, 74, 74);
+    margin-right: 2em;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.cube {
+  max-width: 600px;
+  margin: auto;
+}
+
+.skin-care-img {
+  width: 100%;
+  max-height: 500px;
+}
+
+.footer-skin-care {
+  padding: 1em;
+  border-top: 1px solid rgba(128, 128, 128, 0.438);
+  margin-top: 5em;
+}
+
+@media (max-width: 768px) {
+  .skin-care-logo-container {
+    margin: 0 5%;
+  }
+
+  .blog-skin-container {
+    width: 100%;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2em;
+  }
+
+  .header h2 {
+    font-size: 1.7rem;
+  }
+
+  .header img {
+    margin: auto;
+  }
+
+  .back-icon,
+  .update-skin-care {
+    margin-left: 10px;
+  }
+
+  .article {
+    margin: 0 5%;
+  }
+
+  .sec-3-guide {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .youtube-skin-care {
+    margin: auto;
+  }
+
+  .sec-6-conclusion span {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1280px) {
+  .blog-skin-container {
+    width: 80%;
+  }
 }
