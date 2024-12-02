@@ -68,7 +68,7 @@ textarea::placeholder {
   color: var(--form-text-color);
 }
 
-button {
+form button {
   color: var(--form-background-color);
   background-color: var(--text-color-heading);
   border: none;
