@@ -110,7 +110,7 @@
 
 .article h3 {
   margin-top: 1em;
-  font-size: clamp(0.8em, 4vw, 0.9em);
+  font-size: clamp(0.8em, 4vw, 1em);
 }
 
 .article p {
@@ -196,6 +196,8 @@ iframe {
   padding: 1em;
   border-top: 1px solid rgba(128, 128, 128, 0.438);
   margin-top: 5em;
+  text-align: center;
+  font-size: 12px;
 }
 
 @media (max-width: 768px) {
