@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Abril+Fatface&display=swap');
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container-login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  width: 80%;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.logo h1 {
+  font-family: 'Abril Fatface', serif;
+  color: #0d0e4b;
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.logo p {
+  font-size: 18px;
+  color: #606770;
+  margin-bottom: 10px;
+}
+
+.login-form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  text-align: center;
+}
+
+.form input {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+}
+
+.form input:focus {
+  border-color: #1877f2;
+}
+
+.form button {
+  width: 100%;
+  padding: 14px;
+
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block; /* Ensures buttons take up full width and stack properly */
+}
+
+.login {
+  background-color: #1877f2;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.login:hover {
+  background-color: #145dbf;
+}
+
+.forgot-password {
+  display: inline-block;
+  margin: 10px 0;
+  color: #1877f2;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  border-bottom: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.create-account {
+  background-color: #42b72a;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.create-account:hover {
+  background-color: #36a420;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container-login {
+    flex-direction: column;
+    width: 90%;
+    padding: 20px;
+  }
+
+  .logo {
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .logo h1 {
+    font-size: 36px;
+  }
+
+  .login-form {
+    width: 100%;
+  }
+}
