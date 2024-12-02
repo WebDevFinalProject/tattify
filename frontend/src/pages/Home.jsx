@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Suggestion from "../components/Home/Suggestion";
 
 
+
 import Hero from "../components/Home/Hero";
 
 const Home = () => {
@@ -19,5 +20,6 @@ const Home = () => {
             <Footer />
         </>
     );
+
 };
 export default Home;
