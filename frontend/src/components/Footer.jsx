@@ -40,10 +40,9 @@ function Footer() {
                 <MdEmail size={50} color="#fefefe" />
                 <FaFacebook size={50} color="#fefefe" />
                 <IoLogoWhatsapp size={50} color="#fefefe" />
-            </div>
-
-            <div className="footer-copyright">
-                <p>Copyright. All rights reserved.</p>
+                <div className="footer-copyright">
+                    <p>Copyright. All rights reserved.</p>
+                </div>
             </div>
         </footer>
     );
