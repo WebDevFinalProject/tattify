@@ -4,6 +4,7 @@ import Journey from "../components/Home/Journey";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Suggestion from "../components/Home/Suggestion";
+import Registration from "./Registration";
 const Home = () => {
   return (
     <>
@@ -11,7 +12,7 @@ const Home = () => {
       <Journey />
       <Suggestion />
       <Contact />
-
+<Registration/>
       <Footer />
     </>
   );
