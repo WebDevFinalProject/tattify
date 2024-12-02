@@ -5,18 +5,22 @@
     display         : flex;
     justify-content : space-between;
     align-items     : center;
-    padding         : 0 5rem;
+    padding         : 2rem 5rem;
+    position        : sticky;
+    top             : 0px;
+    box-shadow      : 0px 8px 27px -9px #00000091;
+    z-index         : 1000;
 
     h1 {
         font-family: "Abril Fatface", serif;
-        font-size  : 3.4rem;
+        font-size  : 4rem;
         font-weight: 100;
     }
 
     nav {
 
         a {
-            font-size      : 1.6rem;
+            font-size      : 1.9rem;
             text-decoration: none;
             font-family    : Verdana, Geneva, Tahoma, sans-serif;
             margin         : 0 4rem;
@@ -35,5 +39,11 @@
         padding-bottom  : 0.2rem;
         font-family     : Verdana, Geneva, Tahoma, sans-serif;
         font-size       : 1.3rem;
+
+        &:hover {
+            background-color: #b31b1b;
+        }
+
+        cursor: pointer;
     }
 }
