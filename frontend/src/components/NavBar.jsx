@@ -16,10 +16,14 @@ function NavBar() {
           <NavLink to="/articles">Article</NavLink>
         </nav>
         <div className="button-container">
-          {/* <NavLink to="/login"> */}
+
           <button>Login/Register</button>
-          {/*  </NavLink> */}
+       
         </div>
+
+        <button>Login/Register</button>
+         </div>
+
       </div>
     </>
   );
