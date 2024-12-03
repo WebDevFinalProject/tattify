@@ -1,84 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif&display=swap");
 
 :root {
   --text-color-header: #fca93d;
-  --text-color-p     : #fefefe;
-  --background-color : #0d0e4b;
-  --line-color       : #fca93d;
+  --text-color-p: #fefefe;
+  --background-color: #0d0e4b;
+  --line-color: #fca93d;
 }
 
 .abril-fatface-regular {
   font-family: "Abril Fatface", serif;
   font-weight: 400;
-  font-style : normal;
+  font-style: normal;
 }
 
 .footer-container {
   background-color: var(--background-color);
-  color           : var(--text-color-p);
-  padding         : 40px 20px;
-  text-align      : center;
+  color: var(--text-color-p);
+  padding: 40px 20px;
+  text-align: center;
 }
-
 
 .footer-logo h1 {
   font-family: "Abril Fatface", serif;
-  font-size  : 6.3rem;
+  font-size: 6.3rem;
   margin-left: 50px;
   font-weight: 100;
-  color      : var(--text-color-p);
+  color: var(--text-color-p);
 }
 
 .footer-logo p {
-  font-size  : 1.5rem;
+  font-size: 1.5rem;
   margin-left: 80px;
-  color      : #fca93d;
-  font-family: "Lato",
-    serif;
+  color: #fca93d;
+  font-family: "Lato", serif;
 }
 
 .footer-content {
-  display        : flex;
+  display: flex;
   justify-content: space-between;
-  align-items    : flex-start;
-  flex-wrap      : wrap;
-  padding-top    : 20px;
-  height         : 200px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  height: 80%;
 }
 
 .footer-links {
-  display        : flex;
+  display: flex;
   justify-content: space-around;
-  width          : 68%;
+  width: 68%;
 }
 
 .footer-section ul {
   list-style: none;
-  padding   : 0;
+  padding: 0;
 }
 
 .footer-section li {
-  margin    : 20px 0;
-  font-size : 1.6rem;
-  cursor    : pointer;
-  color     : var(--text-color-header);
+  margin: 20px 0;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--text-color-header);
   text-align: left;
-  font-family: "Lato",
-    serif;
+  font-family: "Lato", serif;
 }
 
 .footer-section li:hover {
   color: var(--text-color-p);
 }
 
-
 .footer-line {
-  width           : 100%;
-  height          : 2px;
+  width: 100%;
+  height: 2px;
   background-color: var(--line-color);
-  margin          : 70px 0;
+  margin: 70px 0;
 }
-
 
 .footer-icons svg {
   margin: 0 13px;
@@ -86,14 +81,83 @@
 }
 
 .footer-icons {
-  height     : 15vh;
+  height: 20%;
   padding-top: 2vh;
 }
 
-
 .footer-copyright {
   margin-top: 20px;
-  font-size : 1.2rem;
-  font-family: "Lato",
-    serif;
+  font-size: 1.2rem;
+  font-family: "Lato", serif;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  .footer-logo {
+    width: 100%;
+
+    h1,
+    p {
+      margin: 0;
+    }
+
+    p {
+      font-style: italic;
+    }
+  }
+
+  .footer-links {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+    gap: 3em;
+    margin-top: 3em;
+  }
+
+  #term-condition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .footer-section ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    li {
+      margin: 0;
+    }
+  }
+
+  .footer-line {
+    margin: 30px 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1280px) {
+  .footer-logo {
+    justify-content: center;
+    width: 100%;
+
+    h1,
+    p {
+      margin: 0;
+    }
+  }
+
+  .footer-content {
+    gap: 3em;
+  }
+
+  .footer-links {
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 8%;
+  }
 }
