@@ -1,84 +1,139 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Abril+Fatface&display=swap");
+
+
+:root {
+    --form-color: #fca93d;
+    --text-color    : #fefefe;
+    --main-background-color : #0d0e4b;
   }
 
-  /* Registration Form Container */
-  .registration-container {
-    background-color: white;
-    width: 400px;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+body{
+  background-color: var(--main-background-color);
+}
+
+#registraion-div h1 {
+  font-family: "Abril Fatface", serif;
+  color: var(--form-color);
+  font-size: 5rem;
+  margin-bottom: 9rem;
+  margin-top: 8rem;
+  text-align: center;
+}
+
+#registration-form {
+  width: 100%;
+  max-width: 450px;
+  margin: auto;
+  background: #E1D6CC;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Lato', sans-serif;
+  position: relative;
+
+  h2 {
+    font-size: 2.5rem;
     text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
   }
-  
-  .registration-container h1 {
-    color: #1877f2;
-    font-size: 24px;
-    margin-bottom: 20px;
+
+  #intro-para {
+    font-size: 1.7rem;
+    color: #606770;
+    text-align: center;
+    margin-bottom: 3rem;
   }
-  
-  /* Input Fields */
-  .registration-container input[type="text"],
-  .registration-container input[type="email"],
-  .registration-container input[type="password"],
-  .registration-container input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+
+  div > #role-selection {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 auto; /* Ensures horizontal centering */
   }
-  
-  /* Role Selection */
-  .role-selection {
+
+  div {
     display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
   }
-  
-  .role-selection label {
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
+
+  input[type="radio"] {
+    margin-right: 6%;
+    width: 25%;
   }
-  
-  /* Portfolio Upload */
-  .portfolio-upload label {
-    font-size: 14px;
-    color: #555;
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  /* Button */
-  .registration-container button {
+
+  /* Input fields */
+  input {
     width: 100%;
     padding: 10px;
-    background-color: #1877f2;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    margin-bottom: 12px;
+    border: 1px solid #dddfe2;
+    border-radius: 4px;
+    background-color: #f9f9f9;
     font-size: 16px;
-    cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
-  
-  .registration-container button:disabled {
-    background-color: #99c0f7;
+
+  input:focus {
+    border-color: #1877f2;
+    outline: none;
+    background-color: #ffffff;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #606770;
+    font-size: 14px;
+  }
+
+  input[type="file"] {
+    height: 4rem;
+  }
+
+  .default-button,
+  .artist-button {
+    width: 30%;
+    font-size: 1.3rem;
+    height: 2.5rem;
+    color: #ffffff;
+    background-color: #1877f2;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 70px;
+  }
+
+  button:hover {
+    background-color: #155db3;
+  }
+
+  button:disabled {
+    background-color: #b0d4f1;
     cursor: not-allowed;
   }
-  
-  /* Response Message */
-  .response-message {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #333;
+  .artist-button {
+    position: absolute;
+    top: 37.5rem;
   }
-  
+
+  #artist-para {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 14px;
+    color: #606770;
+  }
+
+  #default-para {
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 14px;
+    color: #606770;
+  }
+}
+
+#response-para {
+  text-align: center;
+  margin-top: 1rem;
+}

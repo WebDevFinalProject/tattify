@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./registration.css";
 
 const Registration = () => {
   const [role, setRole] = useState("customer");
@@ -17,16 +18,59 @@ const Registration = () => {
     setFormData({ ...formData, [name]: files || value }); // Update input or file
   };
 
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      if (key === "portfolio" && role === "artist") {
+        Array.from(formData.portfolio || []).forEach((file) =>
+          formDataToSend.append(key, file)
+        );
+      } else {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+    formDataToSend.append("role", role);
+
+    try {
+      const res = await fetch("http://localhost:4000/api/signup", {
+        method: "POST",
+        body: formDataToSend,
+      });
+      const data = await res.json();
+      setResponse(res.ok ? "Registration successful!" : data.error || data.msg);
+      if (res.ok) {
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          portfolio: null,
+        });
+      }
+    } catch {
+      setResponse("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <div id="registraion-div">
+      <h1>Tattify</h1>
+      <form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        id="registration-form"
+      >
+        <h2>Create a new account</h2>
+        <p id="intro-para">It's quick and easy</p>
         {/* Role Selection */}
         <div>
           {["customer", "artist"].map((r) => (
-            <label key={r}>
+            <div key={r} id="role-selection">
               <input
                 type="radio"
                 name="role"
@@ -34,8 +78,8 @@ const Registration = () => {
                 checked={role === r}
                 onChange={() => setRole(r)}
               />
-              {r.charAt(0).toUpperCase() + r.slice(1)}
-            </label>
+              <label>{r.charAt(0).toUpperCase() + r.slice(1)}</label>
+            </div>
           ))}
         </div>
 
@@ -56,16 +100,29 @@ const Registration = () => {
         {role === "artist" && (
           <div>
             <label>Upload Portfolio*:</label>
-            <input type="file" name="portfolio" multiple onChange={handleChange} />
+            <input
+              type="file"
+              name="portfolio"
+              multiple
+              onChange={handleChange}
+            />
           </div>
         )}
 
-        <button type="submit" disabled={isSubmitting}>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={role === "artist" ? "artist-button" : "default-button"}
+        >
           {isSubmitting ? "Submitting..." : "Register"}
         </button>
+        <br />
+        <p id={role === "artist" ? "artist-para" : "default-para"}>
+          Do you already have an account?
+        </p>
       </form>
 
-      {response && <p>{response}</p>}
+      {response && <p id="response-para">{response}</p>}
     </div>
   );
 };

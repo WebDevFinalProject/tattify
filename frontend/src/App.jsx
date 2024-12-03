@@ -19,6 +19,7 @@ function App() {
         <Route path="/articles" element={<Articles />} />
         <Route path="article/skin-care" element={<SkinCare />} />
         <Route path="article/tattoo-history" element={<TattooHistory />} />
+        <Route path="/register" elemennt={<Registration/>}/>
       </Routes>
     </>
   );
