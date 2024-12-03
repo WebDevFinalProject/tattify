@@ -1,0 +1,116 @@
+.tattoo-history-page {
+  background-image: url("../../../assets/tattoo-history-images/background.jpeg");
+  height: 100%;
+  background-position: center;
+}
+
+.history-header {
+  display: flex;
+  justify-content: center;
+}
+
+.history-header img {
+  width: 250px;
+}
+
+.history-content {
+  width: 75%;
+  margin: auto;
+}
+
+.history-landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    font-size: clamp(1em, 5vw, 2em);
+    text-shadow: 1px 5px 15px rgb(37, 35, 35);
+    text-align: center;
+    padding-top: 1em;
+  }
+}
+
+.history-landing-page img {
+  margin: auto;
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  box-shadow: -1px 2px 5px rgb(70, 67, 67);
+  border-radius: 4px;
+}
+
+.history-blog-container {
+  background-color: rgba(255, 255, 255, 0.795);
+}
+
+.heading-intro p {
+  margin-top: 1.5em;
+  font-size: clamp(0.7em, 3vw, 1em);
+  line-height: 1.5em;
+}
+
+.sec-history {
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+  margin-top: 5em;
+}
+
+.history-body {
+  display: flex;
+  gap: 5em;
+
+  .iceman, .evolution-history {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3em;
+  }
+}
+
+.sec-2-history h3 {
+  margin-bottom: 1.5em;
+}
+
+.civilization,
+.asia-tattoo,
+.western-history {
+  padding-top: 1em;
+}
+
+.civilizations-content,
+.history-asia,
+.western-world {
+  margin-bottom: 1em;
+
+  h5 {
+    margin-bottom: 1em;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+}
+
+.asia-tattoo,
+.western-history {
+  display: flex;
+  align-items: center;
+}
+
+.sec-5-history,
+.sec-6-history {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.styles-images {
+  display: flex;
+  gap: 5px;
+  box-shadow: -1px 2px 5px rgb(70, 67, 67);
+}
+
+.styles-images img {
+  object-fit: contain;
+  box-shadow: none;
+}
