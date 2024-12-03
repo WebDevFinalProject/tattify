@@ -78,6 +78,7 @@
   white-space: nowrap;
   overflow: hidden;
   animation: typewriter 4s steps(75);
+  color: black;
 }
 
 .header img {
@@ -129,7 +130,7 @@
   margin: 10px;
   line-height: 1.8em;
   margin-left: 2.5em;
-  font-size: clamp(0.7em, 3vw, 0.9em);
+  font-size: clamp(0.9em, 3vw, 0.9em);
   padding-bottom: 1em;
 }
 
