@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Lato', sans-serif;
-  background-color: #f0f2f5;
+  background-color: #0B0D63;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,9 +14,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 900px;
-  width: 80%;
-  background-color: #ffffff;
+  width: 800px;
+  height: 600px;
+  background-color: #E1D6CC;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -42,48 +42,60 @@ body {
 }
 
 .login-form {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
+  background-color: #D7B49F;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 360px;
-  text-align: center;
+  width: 400px;
+  height: 400px;
+ 
+ 
+ 
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+ margin: 25px;
 }
 
 .form input {
   width: 100%;
   padding: 14px;
-  margin: 10px 0;
+  margin: 0;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 16px;
-  outline: none;
+ 
 }
+
 
 .form input:focus {
   border-color: #1877f2;
 }
 
-.form button {
-  width: 100%;
-  padding: 14px;
 
-  border: none;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: bold;
+
+#login,
+.create-account  {
+  color           : #f2e2d7;
+  background-color: #830707;
+  border          : none;
+  border-radius   : 30px;
+  height          : 3.5rem;
+  width           : 14rem;
+  padding-bottom  : 0.2rem;
+  font-family     : Verdana, Geneva, Tahoma, sans-serif;
+  font-size       : 1.3rem;
+  margin-left: 35px;
+
+  &:hover {
+      background-color: #b31b1b;
+  }
+
   cursor: pointer;
-  display: block; /* Ensures buttons take up full width and stack properly */
-}
-
-.login {
-  background-color: #1877f2;
-  color: white;
-  margin-bottom: 15px;
-}
-
-.login:hover {
-  background-color: #145dbf;
 }
 
 .forgot-password {
@@ -92,27 +104,18 @@ body {
   color: #1877f2;
   text-decoration: none;
   font-size: 14px;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.forgot-password:hover {
-  text-decoration: underline;
-}
 
 .divider {
   border-bottom: 1px solid #ddd;
   margin: 20px 0;
 }
 
-.create-account {
-  background-color: #42b72a;
-  color: white;
-  font-size: 16px;
-  margin-bottom: 5px;
-}
 
-.create-account:hover {
-  background-color: #36a420;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
