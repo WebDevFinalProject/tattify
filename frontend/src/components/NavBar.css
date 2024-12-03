@@ -18,12 +18,15 @@
     }
 
     nav {
+        width          : 45%;
+        display        : flex;
+        justify-content: space-around;
+
 
         a {
             font-size      : 1.9rem;
             text-decoration: none;
             font-family    : Verdana, Geneva, Tahoma, sans-serif;
-            margin         : 0 4rem;
             color          : #45342d;
 
         }
@@ -37,13 +40,24 @@
         height          : 3.5rem;
         width           : 14rem;
         padding-bottom  : 0.2rem;
-        font-family     : Verdana, Geneva, Tahoma, sans-serif;
-        font-size       : 1.3rem;
+        cursor          : pointer;
 
         &:hover {
             background-color: #b31b1b;
         }
 
-        cursor: pointer;
+        a {
+            color: #f2e2d7;
+            font-family: Verdana,
+                Geneva,
+                Tahoma,
+                sans-serif;
+            text-decoration: none;
+            font-size      : 1.4rem;
+
+            &:visited {
+                color: #f2e2d7;
+            }
+        }
     }
 }
