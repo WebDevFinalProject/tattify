@@ -1,85 +1,92 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Abril+Fatface&display=swap');
 
-body {
+.login-page {
   font-family: 'Lato', sans-serif;
-  background-color: #0B0D63;
+  background-color: #d9c6bc;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  padding: 20px;
 }
 
 .container-login {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 800px;
+  max-width: 1000px;
+  width: 100%;
   height: 600px;
   background-color: #E1D6CC;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 100px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   text-align: center;
+  gap: 30px;
 }
 
 .logo {
   flex: 1;
   padding-right: 40px;
+  text-align: left;
 }
 
 .logo h1 {
   font-family: 'Abril Fatface', serif;
-  color: #0d0e4b;
-  font-size: 48px;
+  color: #2d2d8f;
+  font-size: 60px;
+  font-weight: normal;
   margin-bottom: 10px;
 }
+h2{
+  font-family: 'Abril Fatface', serif;
+  color: #2d2d8f;
+  font-weight: normal;
 
-.logo p {
-  font-size: 18px;
-  color: #606770;
+}
+.logo li, ul {
+  font-family: "Lato",serif;
+  margin-left: 20px;
+  font-size: 20px;
+  color: #45342D;
   margin-bottom: 10px;
+  line-height: 1;
 }
 
 .login-form {
-  background-color: #D7B49F;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #b8aaa0;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   width: 400px;
-  height: 400px;
- 
- 
- 
+  text-align: center;
 }
-.form {
+ .form {
   display: flex;
   flex-direction: column;
   gap: 15px; 
  margin: 25px;
-}
+} 
 
 .form input {
   width: 100%;
   padding: 14px;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
   font-size: 16px;
+  transition: border-color 0.3s ease;
+  &:focus{
+    border-color: #1877f2;
+  }
  
 }
 
 
-.form input:focus {
-  border-color: #1877f2;
-}
 
 
-
-#login,
-.create-account  {
+#login  {
   color           : #f2e2d7;
   background-color: #830707;
   border          : none;
@@ -89,7 +96,7 @@ body {
   padding-bottom  : 0.2rem;
   font-family     : Verdana, Geneva, Tahoma, sans-serif;
   font-size       : 1.3rem;
-  margin-left: 35px;
+  margin-left: 15px;
 
   &:hover {
       background-color: #b31b1b;
@@ -98,12 +105,12 @@ body {
   cursor: pointer;
 }
 
-.forgot-password {
+.string {
   display: inline-block;
   margin: 10px 0;
-  color: #1877f2;
+  color: #0B0D63;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 18px;
   &:hover {
     text-decoration: underline;
   }
@@ -122,19 +129,98 @@ body {
   .container-login {
     flex-direction: column;
     width: 90%;
-    padding: 20px;
+    padding: 15px;
   }
+
 
   .logo {
     padding-right: 0;
-    margin-bottom: 20px;
+    padding-top: 20px;
+    margin-bottom: 5px;
+    text-align: center;
   }
 
   .logo h1 {
-    font-size: 36px;
+    font-size: 40px;
+  }
+  .logo ul,li,h2{
+    display: none;
   }
 
   .login-form {
     width: 100%;
+    padding: 20px;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .container-login {
+    flex-direction: column;
+    padding: 25px;
+    width: 100%;
+    height: auto;
+    
+  }
+  .logo h1 {
+    font-size: 40px;
+  }
+  .logo ul,li,h2{
+    display: none;
+  }
+
+  .form {
+    margin: 0;             
+    gap: 10px;            
+  }
+ 
+
+  #login {
+    width: 80%;
+    height: 50px;
+    font-size: 18px;
+  }
+
+}
+@media (max-width: 480px) {  
+  .container-login {
+    flex-direction: column;
+    width: 100%;          
+    height: auto;          
+    padding: 10px;        
+    box-shadow: none;      
+    border-radius: 0;     
+  }
+  .logo h1 {
+    font-size: 40px;
+  }
+  .logo ul,li,h2{
+    display: none;
+  }
+
+  .login-form {
+    width: 100%;
+    padding: 15px;         
+    box-shadow: none;      
+    border-radius: 8px;   
+  }
+
+  .form {
+    margin: 0;             
+    gap: 5px;            
+  }
+
+  #login {
+    width: 100%;           
+    height: 50px;         
+    font-size: 16px;      
+    margin-left: 0;        
+  }
+
+  .string {
+    font-size: 14px;
+    margin: 5px 0;        
+  }
+
+  .divider {
+    margin: 10px 0;        
   }
 }
