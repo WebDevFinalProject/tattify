@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./registration.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import registrationApi from "../components/api";
 
 const Registration = () => {
   const [role, setRole] = useState("customer");
@@ -56,7 +59,6 @@ const Registration = () => {
       setIsSubmitting(false);
     }
   };
-
   return (
     <div id="registraion-div">
       <h1>Tattify</h1>
@@ -66,7 +68,7 @@ const Registration = () => {
         id="registration-form"
       >
         <h2>Create a new account</h2>
-        <p id="intro-para">It's quick and easy</p>
+        <p id="intro-para">It's quick and easy!!</p>
         {/* Role Selection */}
         <div>
           {["customer", "artist"].map((r) => (
@@ -118,7 +120,7 @@ const Registration = () => {
         </button>
         <br />
         <p id={role === "artist" ? "artist-para" : "default-para"}>
-          Do you already have an account?
+          Do you already have an account? <Link to="/login" id="login-link">Login</Link>
         </p>
       </form>
 

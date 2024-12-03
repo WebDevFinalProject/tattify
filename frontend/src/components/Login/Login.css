@@ -116,6 +116,10 @@ h2{
   }
 }
 
+.string span{
+  color: #830707;
+}
+
 
 .divider {
   border-bottom: 1px solid #ddd;

@@ -1,22 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Abril+Fatface&display=swap");
 
+#registraion-div {
+  --form-color: #c0afa5;
+  --text-color-header: #2d2d8f;
+  --main-background-color: #D9C6BC;
+  --para-color: #252424;
+  --button-color: #830707;
+}
 
-:root {
-    --form-color: #fca93d;
-    --text-color    : #fefefe;
-    --main-background-color : #0d0e4b;
-  }
-
-body{
+#registraion-div {
   background-color: var(--main-background-color);
+  height: 100vh;
 }
 
 #registraion-div h1 {
   font-family: "Abril Fatface", serif;
-  color: var(--form-color);
-  font-size: 5rem;
+  color: var(--text-color-header);
+  font-size: 6rem;
   margin-bottom: 9rem;
-  margin-top: 8rem;
+ padding-top: 8rem;
   text-align: center;
 }
 
@@ -24,11 +26,11 @@ body{
   width: 100%;
   max-width: 450px;
   margin: auto;
-  background: #E1D6CC;
+  background: var(--form-color);
   padding: 20px 30px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   position: relative;
 
   h2 {
@@ -36,11 +38,12 @@ body{
     text-align: center;
     margin-bottom: 0.5rem;
     margin-top: 2rem;
+    color: var(--text-color-header)
   }
 
   #intro-para {
     font-size: 1.7rem;
-    color: #606770;
+    color: var(--para-color);
     text-align: center;
     margin-bottom: 3rem;
   }
@@ -49,6 +52,7 @@ body{
     display: inline-flex;
     align-items: center;
     margin: 0 auto; /* Ensures horizontal centering */
+    
   }
 
   div {
@@ -59,7 +63,14 @@ body{
   input[type="radio"] {
     margin-right: 6%;
     width: 25%;
+    accent-color: var(--button-color);
   }
+
+  #role-selection label{
+    color: var(--para-color);
+    font-size: 18px;
+  }
+
 
   /* Input fields */
   input {
@@ -68,23 +79,20 @@ body{
     margin-bottom: 12px;
     border: 1px solid #dddfe2;
     border-radius: 4px;
-    background-color: #f9f9f9;
+    background-color: #fff;
     font-size: 16px;
     transition: all 0.3s ease-in-out;
   }
 
   input:focus {
-    border-color: #1877f2;
+    border-color: var(--button-color);
     outline: none;
-    background-color: #ffffff;
+    
   }
 
-  label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    color: #606770;
-    font-size: 14px;
+  input::placeholder {
+    color: var(--para-color);
+    font-size: 15px;
   }
 
   input[type="file"] {
@@ -93,20 +101,22 @@ body{
 
   .default-button,
   .artist-button {
-    width: 30%;
-    font-size: 1.3rem;
-    height: 2.5rem;
-    color: #ffffff;
-    background-color: #1877f2;
-    border: none;
-    border-radius: 4px;
+    color: #fff;
+    background-color: var(--button-color);
     cursor: pointer;
-    transition: background-color 0.3s ease;
     margin-top: 70px;
+    border          : none;
+    border-radius   : 30px;
+    height          : 3.5rem;
+    width           : 14rem;
+    padding-bottom  : 0.2rem;
+    font-family     : Verdana, Geneva, Tahoma, sans-serif;
+    font-size       : 1.3rem;
+    
   }
 
   button:hover {
-    background-color: #155db3;
+    background-color: #aa1c1c;
   }
 
   button:disabled {
@@ -120,20 +130,30 @@ body{
 
   #artist-para {
     margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
     text-align: center;
-    font-size: 14px;
-    color: #606770;
+    font-size: 16px;
+    color: var(--para-color);
   }
 
   #default-para {
     margin-top: 5rem;
     text-align: center;
-    font-size: 14px;
-    color: #606770;
+    font-size: 16px;
+    color: var(--para-color);
+    margin-bottom: 1.5rem;
+  }
+ 
+  #login-link{
+    color: var(--button-color);
+    font-weight: 600;
   }
 }
 
 #response-para {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  font-size: 18px;
+  color: var(--para-color);
 }
+
