@@ -147,7 +147,8 @@ h2{
   .logo h1 {
     font-size: 40px;
   }
-  .logo ul,li,h2{
+  .logo ul, .logo li, 
+  .logo h2{
     display: none;
   }
 
@@ -167,7 +168,8 @@ h2{
   .logo h1 {
     font-size: 40px;
   }
-  .logo ul,li,h2{
+  .logo ul, .logo li, 
+  .logo h2{
     display: none;
   }
 
@@ -196,10 +198,10 @@ h2{
   .logo h1 {
     font-size: 40px;
   }
-  .logo ul,li,h2{
+  .logo ul, .logo li, 
+  .logo h2{
     display: none;
   }
-
   .login-form {
     width: 100%;
     padding: 15px;         

@@ -3,7 +3,7 @@
 #registraion-div {
   --form-color: #c0afa5;
   --text-color-header: #2d2d8f;
-  --main-background-color: #D9C6BC;
+  --main-background-color: #d9c6bc;
   --para-color: #252424;
   --button-color: #830707;
 }
@@ -18,7 +18,7 @@
   color: var(--text-color-header);
   font-size: 6rem;
   margin-bottom: 9rem;
- padding-top: 8rem;
+  padding-top: 8rem;
   text-align: center;
 }
 
@@ -38,7 +38,7 @@
     text-align: center;
     margin-bottom: 0.5rem;
     margin-top: 2rem;
-    color: var(--text-color-header)
+    color: var(--text-color-header);
   }
 
   #intro-para {
@@ -52,7 +52,6 @@
     display: inline-flex;
     align-items: center;
     margin: 0 auto; /* Ensures horizontal centering */
-    
   }
 
   div {
@@ -66,11 +65,10 @@
     accent-color: var(--button-color);
   }
 
-  #role-selection label{
+  #role-selection label {
     color: var(--para-color);
     font-size: 18px;
   }
-
 
   /* Input fields */
   input {
@@ -87,7 +85,6 @@
   input:focus {
     border-color: var(--button-color);
     outline: none;
-    
   }
 
   input::placeholder {
@@ -105,14 +102,13 @@
     background-color: var(--button-color);
     cursor: pointer;
     margin-top: 70px;
-    border          : none;
-    border-radius   : 30px;
-    height          : 3.5rem;
-    width           : 14rem;
-    padding-bottom  : 0.2rem;
-    font-family     : Verdana, Geneva, Tahoma, sans-serif;
-    font-size       : 1.3rem;
-    
+    border: none;
+    border-radius: 30px;
+    height: 3.5rem;
+    width: 14rem;
+    padding-bottom: 0.2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.3rem;
   }
 
   button:hover {
@@ -143,8 +139,8 @@
     color: var(--para-color);
     margin-bottom: 1.5rem;
   }
- 
-  #login-link{
+
+  #login-link {
     color: var(--button-color);
     font-weight: 600;
   }
@@ -157,3 +153,12 @@
   color: var(--para-color);
 }
 
+/* Media query for screens smaller than 600px */
+@media (max-width: 780px) {
+  #registraion-div h1 {
+    font-size: 5rem;
+    margin-bottom: 5rem;
+    padding-top: 8rem;
+    text-align: center;
+  }
+}
