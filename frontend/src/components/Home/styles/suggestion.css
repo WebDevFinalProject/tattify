@@ -43,6 +43,7 @@
   font-weight: 100;
   overflow: hidden;
   animation: typewriter 4s steps(75);
+  color: var(--text-color);
 }
 
 .author {
@@ -50,7 +51,7 @@
   font-family: "Lato", serif;
   font-size: 1.5rem;
   font-weight: 400;
-  color: var(--font-primary);
+  color: var(--text-color);
 }
 
 @keyframes typewriter {
