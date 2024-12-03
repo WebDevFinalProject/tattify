@@ -10,22 +10,17 @@
 .hero-container {
     display         : flex;
     align-items     : center;
-    justify-content : space-between;
     background-color: var(--main-bg-color);
     padding         : 2rem 5%;
     height          : 100vh;
 
     .text-container {
-        max-width     : 50%;
-        display       : flex;
-        flex-direction: column;
-        position      : relative;
 
 
 
         h1 {
             font-family: var(--font-title);
-            font-size  : 20rem;
+            font-size  : clamp(15rem, 13vw, 20rem);
             color      : #fff;
             font-weight: 200;
             text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.253);
@@ -35,9 +30,6 @@
             font-family: var(--font-body);
             font-size  : 2.7rem;
             color      : var(--primary-text-color);
-            position   : absolute;
-            bottom     : 10rem;
-            right      : 13rem;
 
         }
 
@@ -66,18 +58,17 @@
     }
 
     .image-container {
+
         img {
-            max-width    : 70%;
-            height       : auto;
+            width        : 65%;
             border-radius: 5px;
             box-shadow   : 0 4px 10px rgba(0, 0, 0, 0.2);
         }
     }
 }
 
-@media (min-width: 0px) and (max-width: 480px) {
+@media (min-width: 769px) and (max-width: 1280px) {
     .hero-container {
         flex-direction: column;
-
     }
 }
