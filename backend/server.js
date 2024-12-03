@@ -8,7 +8,10 @@ import profileRoutes from "./routes/profileRoutes.js";
 import contactRoutes from "./routes/contactRoute.js";
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // The frontend URL
+  credentials: true,  // Allow credentials to be sent with the request
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
