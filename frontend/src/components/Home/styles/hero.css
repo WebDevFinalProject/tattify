@@ -14,19 +14,20 @@
     background-color: var(--main-bg-color);
     padding         : 2rem 5%;
     height          : 100vh;
-    position        : relative;
 
     .text-container {
-        max-width: 50%;
+        max-width     : 50%;
+        display       : flex;
+        flex-direction: column;
+        position      : relative;
+
+
 
         h1 {
             font-family: var(--font-title);
             font-size  : 20rem;
             color      : #fff;
-            margin     : 0;
             font-weight: 200;
-            position   : relative;
-            bottom     : 50px;
             text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.253);
         }
 
@@ -34,10 +35,10 @@
             font-family: var(--font-body);
             font-size  : 2.7rem;
             color      : var(--primary-text-color);
-            margin     : 1rem 0;
-            position   : relative;
-            bottom     : 100px;
-            left       : 190px;
+            position   : absolute;
+            bottom     : 10rem;
+            right      : 13rem;
+
         }
 
         button {
@@ -48,7 +49,8 @@
             height          : 4rem;
             width           : 20rem;
             padding-bottom  : 0.2rem;
-            margin-left     : 250px;
+            margin-top      : 5rem;
+            margin-left     : 30rem;
             font-family     : Verdana,
                 Geneva,
                 Tahoma,
@@ -70,5 +72,12 @@
             border-radius: 5px;
             box-shadow   : 0 4px 10px rgba(0, 0, 0, 0.2);
         }
+    }
+}
+
+@media (min-width: 0px) and (max-width: 480px) {
+    .hero-container {
+        flex-direction: column;
+
     }
 }
