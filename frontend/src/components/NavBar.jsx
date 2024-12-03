@@ -16,14 +16,8 @@ function NavBar() {
           <NavLink to="/articles">Article</NavLink>
         </nav>
         <div className="button-container">
-
-          <button>Login/Register</button>
-       
-        </div>
-
         <button>Login/Register</button>
          </div>
-
       </div>
     </>
   );

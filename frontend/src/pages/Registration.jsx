@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./registration.css";
 
 const Registration = () => {
   const [role, setRole] = useState("customer");
@@ -17,7 +18,38 @@ const Registration = () => {
     setFormData({ ...formData, [name]: files || value }); // Update input or file
   };
 
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      if (key === "portfolio" && role === "artist") {
+        Array.from(formData.portfolio || []).forEach((file) =>
+          formDataToSend.append(key, file)
+        );
+      } else {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+    formDataToSend.append("role", role);
+
+    try {
+      const res = await fetch("http://localhost:4000/api/signup", {
+        method: "POST",
+        body: formDataToSend,
+      });
+      const data = await res.json();
+      setResponse(res.ok ? "Registration successful!" : data.error || data.msg);
+      if (res.ok) {
+        setFormData({ firstName: "", lastName: "", email: "", password: "", portfolio: null });
+      }
+    } catch {
+      setResponse("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div>
