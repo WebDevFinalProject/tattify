@@ -1,38 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import api from "../api";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await api.post(
+        "/api/login",
+        { email, password },
+        { withCredentials: true }  // Ensures cookies are sent with the request
+      );
+
+      // Handle successful login
+      console.log(response.data);
+      window.location.href = "/dashboard";  // Redirect after successful login
+    } catch (error) {
+      if (error.response) {
+        // Handle response error (e.g. bad credentials)
+        setErrorMessage(error.response.data.msg || "Login failed!");
+      } else {
+        // Handle network or server errors
+        setErrorMessage("An error occurred. Please try again later.");
+      }
+    }
+  };
+
   return (
-    <div className="container-login">
-      <div className="logo">
-        <h1>Tattify</h1>
-        <h2>For users:</h2>
-        <p>Connect with artists</p>
-        <p>Search for a location</p>
-        <p>Leave a review</p>
-        <h2>Are you an artist?</h2>
-        <p> Show your work.</p>
-        <p>Connect with users</p>
-        <p>Stay recognizable</p>
-      </div>
-      <div className="login-form">
-        <form className="form">
-          <input type="email" placeholder="Enter your Email" required />
-          <input type="password" placeholder="Enter your password" required />
-
-          <a href="#" className="forgot-password">
-            Forgot password?
+    <div className="login-page">
+      <div className="container-login">
+        <div className="logo">
+          <h1>Tattify</h1>
+          <h2>For users:</h2>
+          <ul>
+            <li>Connect with artists.</li>
+            <li>Search for a location.</li>
+            <li>Leave a review.</li>
+          </ul>
+          <h2>Are you an artist?</h2>
+          <ul>
+            <li>Show your work.</li>
+            <li>Connect with users.</li>
+            <li>Stay recognizable.</li>
+          </ul>
+        </div>
+        <div className="login-form">
+          <form className="form" onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Enter your Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Enter your password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <a href="#" className="string">Forgot password?</a>
+            <button type="submit" id="login">Log In</button>
+          </form>
+          <div className="divider"></div>
+          <a href="/register" className="string">
+            Create an account? <span>Register</span>
           </a>
-        </form>
-
-        <button type="submit" id="login">
-          Log In
-        </button>
-        <div className="divider"></div>
-        <button type="button" className="create-account">
-          Registration
-        </button>
+        </div>
       </div>
     </div>
   );

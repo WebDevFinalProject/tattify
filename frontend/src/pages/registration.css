@@ -2,7 +2,7 @@
 
 #registraion-div {
   --form-color: #c0afa5;
-  --text-color-header: #FFFFFF;
+  --text-color-header: #2d2d8f;
   --main-background-color: #D9C6BC;
   --para-color: #252424;
   --button-color: #830707;
@@ -16,7 +16,7 @@
 #registraion-div h1 {
   font-family: "Abril Fatface", serif;
   color: var(--text-color-header);
-  font-size: 8rem;
+  font-size: 6rem;
   margin-bottom: 9rem;
  padding-top: 8rem;
   text-align: center;
@@ -79,7 +79,7 @@
     margin-bottom: 12px;
     border: 1px solid #dddfe2;
     border-radius: 4px;
-    background-color: var(--text-color-header);
+    background-color: #fff;
     font-size: 16px;
     transition: all 0.3s ease-in-out;
   }
@@ -101,15 +101,18 @@
 
   .default-button,
   .artist-button {
-    width: 35%;
-    font-size: 15px;
-    height: 2.5rem;
-    color: var(--text-color-header);
+    color: #fff;
     background-color: var(--button-color);
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
     margin-top: 70px;
+    border          : none;
+    border-radius   : 30px;
+    height          : 3.5rem;
+    width           : 14rem;
+    padding-bottom  : 0.2rem;
+    font-family     : Verdana, Geneva, Tahoma, sans-serif;
+    font-size       : 1.3rem;
+    
   }
 
   button:hover {
@@ -153,3 +156,4 @@
   font-size: 18px;
   color: var(--para-color);
 }
+

@@ -1,6 +1,9 @@
 import axios from "axios";
-const registrationApi = axios.create({
+
+const api = axios.create({
   baseURL: "http://localhost:4000",
   withCredentials: true,
 });
-export default registrationApi;
+
+
+export default api;
