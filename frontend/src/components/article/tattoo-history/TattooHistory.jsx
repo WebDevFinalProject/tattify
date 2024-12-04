@@ -1,7 +1,6 @@
 import "../tattoo-history/history.css";
 import historyLogo from "../../../assets/tattoo-history-images/history-logo.png";
 import landingImg from "../../../assets/tattoo-history-images/landing-img.jpeg";
-import evolution from "../../../assets/tattoo-history-images/evolution.jpeg";
 import iceman from "../../../assets/tattoo-history-images/iceman.jpeg";
 import irezume from "../../../assets/tattoo-history-images/irezumi.jpeg";
 import maori from "../../../assets/tattoo-history-images/maori.jpeg";
@@ -11,6 +10,15 @@ import future from "../../../assets/tattoo-history-images/the future.jpeg";
 import styles1 from "../../../assets/tattoo-history-images/various_styles.jpeg";
 import styles2 from "../../../assets/tattoo-history-images/various_styles2.jpeg";
 import styles3 from "../../../assets/tattoo-history-images/various_styles3.jpeg";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-cards";
+
+// import required modules
+import { EffectCards, Keyboard, Mousewheel } from "swiper/modules";
 
 const TattooHistory = () => {
   return (
@@ -20,7 +28,7 @@ const TattooHistory = () => {
       </div>
       <div className="history-content">
         <div className="history-landing-page">
-          <img src={landingImg} alt="" />
+          <img className="history-landing-image" src={landingImg} alt="" />
           <div className="history-blog-container">
             <div className="heading-intro">
               <h1>
@@ -44,7 +52,7 @@ const TattooHistory = () => {
               <div className="sec-1-history">
                 <div className="history-body">
                   <div className="iceman">
-                    <h3>Ancient Origins: The Earliest Tattoos</h3>
+                    <h3> 1. Ancient Origins: The Earliest Tattoos</h3>
                     <p>
                       The oldest known evidence of tattooing dates back over
                       5,000 years. In 1991, archaeologists discovered Ötzi the
@@ -59,7 +67,7 @@ const TattooHistory = () => {
               </div>
 
               <div className="sec-2-history">
-                <h3>Tattoos in Early Civilizations</h3>
+                <h3>2. Tattoos in Early Civilizations</h3>
                 <div className="history-body">
                   <img src={maori} alt="Māori" />
                   <div className="civilization">
@@ -101,15 +109,14 @@ const TattooHistory = () => {
               </div>
 
               <div className="sec-3-history">
-                <h3> Sacred Art in Asia</h3>
-                <p>
-                  Tattooing has held a sacred place in many Asian cultures for
-                  centuries.
-                </p>
-
                 <div className="history-body">
                   <div className="asia-tattoo">
                     <div className="history-asia">
+                      <h3> 3. Sacred Art in Asia</h3>
+                      <p>
+                        Tattooing has held a sacred place in many Asian cultures
+                        for centuries.
+                      </p>
                       <h5>Greek and Roman Stigma</h5>
                       <p>
                         In ancient Greece and Rome, tattoos were often
@@ -141,10 +148,10 @@ const TattooHistory = () => {
               </div>
 
               <div className="sec-4-history">
-                <h3>Tattoos in the Western World</h3>
                 <div className="history-body">
                   <div className="western-history">
                     <div className="western-world">
+                      <h3>4. Tattoos in the Western World</h3>
                       <h5>Greek and Roman Stigma</h5>
                       <p>
                         In ancient Greece and Rome, tattoos were often
@@ -175,31 +182,37 @@ const TattooHistory = () => {
               </div>
 
               <div className="sec-5-history">
-                <h3>The Tattoo Renaissance: From Subculture to Mainstream</h3>
-                <p>
-                  By the 20th century, tattoos became synonymous with rebellion,
-                  embraced by subcultures such as bikers, punks, and rock stars.
-                  However, the perception of tattoos began to shift during the
-                  late 20th century.
-                </p>
-                <p>
-                  With the rise of professional tattoo studios and improved
-                  technology, tattooing emerged as a respected art form. Shows
-                  like Miami Ink and the explosion of social media have brought
-                  tattoo culture into the mainstream, celebrating its diversity
-                  and creativity.
-                </p>
-                <div className="styles-images">
-                  <img src={styles1} alt="Various Styles of Tattoo!" />
-                  <img src={styles2} alt="Various Styles of Tattoo!" />
-                  <img src={styles3} alt="Various Styles of Tattoo!" />
+                <h3>
+                  5. The Tattoo Renaissance: From Subculture to Mainstream
+                </h3>
+                <div className="history-body">
+                  <div className="styles-images">
+                    <img src={styles1} alt="Various Styles of Tattoo!" />
+                    <img src={styles2} alt="Various Styles of Tattoo!" />
+                    <img src={styles3} alt="Various Styles of Tattoo!" />
+                  </div>
+                  <div className="renaissance">
+                    <p>
+                      By the 20th century, tattoos became synonymous with
+                      rebellion, embraced by subcultures such as bikers, punks,
+                      and rock stars. However, the perception of tattoos began
+                      to shift during the late 20th century.
+                    </p>
+                    <p>
+                      With the rise of professional tattoo studios and improved
+                      technology, tattooing emerged as a respected art form.
+                      Shows like Miami Ink and the explosion of social media
+                      have brought tattoo culture into the mainstream,
+                      celebrating its diversity and creativity.
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div className="sec-6-history">
                 <div className="history-body">
                   <div className="evolution-history">
-                    <h3>Cultural Resurgence and Global Influence</h3>
+                    <h3>6. Cultural Resurgence and Global Influence</h3>
                     <p>
                       Today, tattoos blend ancient traditions with modern
                       innovation. Many people use tattoos to honor their
@@ -209,18 +222,52 @@ const TattooHistory = () => {
                       significance of tattooing in the modern era.
                     </p>
                   </div>
-                  <img
-                    className="evolution"
-                    src={evolution}
-                    alt="Modern designs to show the evolution of tattooing"
-                  />
                 </div>
               </div>
               <hr />
+
+              <div className="sec-7-history">
+                <h3>7. The Future of Tattoos</h3>
+                <p>
+                  The future of tattoos is as dynamic as its past. Innovations
+                  like 3D tattooing, UV-reactive inks, and augmented reality
+                  designs are pushing the boundaries of what tattoos can
+                  achieve. Meanwhile, advancements in biodegradable inks and
+                  laser removal technology make tattoos more adaptable to
+                  changing tastes.
+                </p>
+
+                <p>
+                  What remains constant is the universal appeal of tattoos as a
+                  form of self-expression. They connect us to our ancestors, our
+                  communities, and ourselves in ways that words often cannot.
+                </p>
+                {/* SWIPER */}
+                <div className="robot-slide">
+                  <Swiper
+                    effect={"cards"}
+                    grabCursor={true}
+                    modules={[EffectCards, Keyboard, Mousewheel]}
+                    className="mySwiper"
+                    keyboard={true}
+                    mousewheel={true}
+                  >
+                    <SwiperSlide>
+                      <img src={future} alt="" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src={robotic} alt="" />
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <footer className="footer-skin-care history-footer">
+        <p>© 2024 Tattify. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 };
