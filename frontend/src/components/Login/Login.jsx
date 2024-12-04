@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,15 +16,23 @@ function Login() {
       const response = await api.post(
         "/api/login",
         { email, password },
-        { withCredentials: true }  // Ensures cookies are sent with the request
+        { withCredentials: true } // Ensures cookies are sent with the request
       );
 
-      // Handle successful login
-      console.log(response.data);
-      window.location.href = "/dashboard";  // Redirect after successful login
+      const { role } = response.data;
+
+      if (role === "artist") {
+        // Redirect to artist profile setup
+        navigate("/artist-profile");
+      } else if (role === "customer") {
+        // Redirect to dashboard
+        navigate("/");
+      } else {
+        setErrorMessage("Unknown role. Please contact support.");
+      }
     } catch (error) {
       if (error.response) {
-        // Handle response error (e.g. bad credentials)
+        // Handle response error (e.g., bad credentials)
         setErrorMessage(error.response.data.msg || "Login failed!");
       } else {
         // Handle network or server errors
@@ -67,8 +76,12 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
             {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <a href="#" className="string">Forgot password?</a>
-            <button type="submit" id="login">Log In</button>
+            <a href="#" className="string">
+              Forgot password?
+            </a>
+            <button type="submit" id="login">
+              Log In
+            </button>
           </form>
           <div className="divider"></div>
           <a href="/register" className="string">
