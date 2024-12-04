@@ -8,19 +8,26 @@
 }
 
 .hero-container {
-    display         : flex;
-    align-items     : center;
+    display        : flex;
+    align-items    : center;
+    justify-content: space-evenly;
+    width          : 100%;
+
     background-color: var(--main-bg-color);
-    padding         : 2rem 5%;
     height          : 100vh;
+    position        : relative;
 
     .text-container {
-
-
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+        align-items    : center;
+        position       : relative;
+        bottom         : 140px;
 
         h1 {
             font-family: var(--font-title);
-            font-size  : clamp(15rem, 13vw, 20rem);
+            font-size  : clamp(10rem, 15vw, 22rem);
             color      : #fff;
             font-weight: 200;
             text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.253);
@@ -29,7 +36,11 @@
         p {
             font-family: var(--font-body);
             font-size  : 2.7rem;
+            font-size  : clamp(1.7rem, 3vw, 2.7rem);
             color      : var(--primary-text-color);
+            position   : absolute;
+            right      : 130px;
+            bottom     : 15px;
 
         }
 
@@ -41,8 +52,6 @@
             height          : 4rem;
             width           : 20rem;
             padding-bottom  : 0.2rem;
-            margin-top      : 5rem;
-            margin-left     : 30rem;
             font-family     : Verdana,
                 Geneva,
                 Tahoma,
@@ -50,6 +59,9 @@
             font-size: 1.8rem;
             transform: scale(1);
             cursor   : pointer;
+            position : absolute;
+            bottom   : -125px;
+            left     : 60px;
 
             &:hover {
                 background-color: #b31b1b;
@@ -58,17 +70,18 @@
     }
 
     .image-container {
+        display        : flex;
+        justify-content: center;
+        align-items    : center;
+
 
         img {
-            width        : 65%;
+            max-width    : 650px;
+            min-width    : 500px;
             border-radius: 5px;
             box-shadow   : 0 4px 10px rgba(0, 0, 0, 0.2);
         }
     }
 }
 
-@media (min-width: 769px) and (max-width: 1280px) {
-    .hero-container {
-        flex-direction: column;
-    }
-}
+@media (min-width: 769px) and (max-width: 1280px) {}
