@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./registration.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import registrationApi from "../components/api";
+import api from "../components/api.js";
 
 const Registration = () => {
   const [role, setRole] = useState("customer");
@@ -15,6 +14,9 @@ const Registration = () => {
   });
   const [response, setResponse] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Ref for file input
+  const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -37,14 +39,19 @@ const Registration = () => {
     }
     formDataToSend.append("role", role);
 
+    console.log(formData);
+    console.log(formDataToSend);
     try {
-      const res = await fetch("http://localhost:4000/api/signup", {
-        method: "POST",
-        body: formDataToSend,
+      const res = await api.post("/api/signup", formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      const data = await res.json();
-      setResponse(res.ok ? "Registration successful!" : data.error || data.msg);
-      if (res.ok) {
+
+      setResponse(
+        res.status === 201
+          ? "Registration successful!"
+          : res.data.error || res.data.msg
+      );
+      if (res.status === 201) {
         setFormData({
           firstName: "",
           lastName: "",
@@ -52,9 +59,17 @@ const Registration = () => {
           password: "",
           portfolio: null,
         });
+        // Clear file input field
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+
+        // Make the response disappear after 3 seconds
+        setTimeout(() => setResponse(""), 2000);
       }
     } catch {
       setResponse("An error occurred. Please try again.");
+      setTimeout(() => setResponse(""), 2000);
     } finally {
       setIsSubmitting(false);
     }
@@ -107,6 +122,7 @@ const Registration = () => {
               name="portfolio"
               multiple
               onChange={handleChange}
+              ref={fileInputRef} // Attach ref to file input
             />
           </div>
         )}
@@ -120,7 +136,10 @@ const Registration = () => {
         </button>
         <br />
         <p id={role === "artist" ? "artist-para" : "default-para"}>
-          Do you already have an account? <Link to="/login" id="login-link">Login</Link>
+          Do you already have an account?{" "}
+          <Link to="/login" id="login-link">
+            Login
+          </Link>
         </p>
       </form>
 
