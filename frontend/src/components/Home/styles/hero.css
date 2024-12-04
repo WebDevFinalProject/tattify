@@ -1,8 +1,8 @@
 :root {
-    --main-bg-color     : #d9c6bc;
+    --main-bg-color     : rgb(217, 198, 188);
     --primary-text-color: #4d4d4d;
     --accent-color      : #830707;
-    --button-text-color : #fff;
+    --button-text-color : rgb(255, 255, 255);
     --font-title        : "Abril Fatface", serif;
     --font-body         : "PT Serif", serif;
 }
@@ -11,38 +11,44 @@
     display        : flex;
     align-items    : center;
     justify-content: space-evenly;
-    width          : 100%;
+    width          : 100vw;
+    height         : 100vh;
 
     background-color: var(--main-bg-color);
     height          : 100vh;
     position        : relative;
 
     .text-container {
+        border         : 3px solid black;
         display        : flex;
         flex-direction : column;
         justify-content: center;
         align-items    : center;
         position       : relative;
         bottom         : 140px;
+        width          : 50%;
 
-        h1 {
-            font-family: var(--font-title);
-            font-size  : clamp(10rem, 15vw, 22rem);
-            color      : #fff;
-            font-weight: 200;
-            text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.253);
+        img {
+            width: 65%;
+        }
+
+        /* h1 {
+            font-family   : var(--font-title);
+            font-size     : 10vw;
+            color         : #fff;
+            font-weight   : 200;
+            text-shadow   : 4px 4px 6px rgba(66, 68, 90, 0.253);
         }
 
         p {
-            font-family: var(--font-body);
-            font-size  : 2.7rem;
-            font-size  : clamp(1.7rem, 3vw, 2.7rem);
-            color      : var(--primary-text-color);
-            position   : absolute;
-            right      : 130px;
-            bottom     : 15px;
+            font-family               : var(--font-body);
+            font-size                 : 1.3vw;
+            color                     : var(--primary-text-color);
+            position                  : absolute;
+            bottom                    : 15px;
+            right                     : 120px;
 
-        }
+        } */
 
         button {
             color           : #f2e2d7;
@@ -73,11 +79,15 @@
         display        : flex;
         justify-content: center;
         align-items    : center;
+        width          : 50%;
+        position       : relative;
 
 
         img {
-            max-width    : 650px;
-            min-width    : 500px;
+            /* max-width    : 650px;
+            min-width    : 500px; */
+            position     : absolute;
+            width        : 65%;
             border-radius: 5px;
             box-shadow   : 0 4px 10px rgba(0, 0, 0, 0.2);
         }
