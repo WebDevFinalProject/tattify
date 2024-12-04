@@ -245,6 +245,10 @@ iframe {
     margin: 0 5%;
   }
 
+  .article ul li {
+    margin-left: 1em;
+  }
+
   .sec-3-guide {
     display: flex;
     flex-direction: column;
