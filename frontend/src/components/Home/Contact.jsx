@@ -46,7 +46,7 @@ const Contact = () => {
         <h1>Get in touch</h1>
       </div>
       <div className="vertical-line"></div>
-      <form onSubmit={handleSubmit} className="contact-form">
+      <form onSubmit={handleSubmit} className="hero-contact-form">
         <input
           type="text"
           name="firstName"

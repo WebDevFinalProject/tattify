@@ -36,7 +36,7 @@
   color: #45342d;
 }
 
-button {
+.button-container button {
   color: #f2e2d7;
   background-color: #830707;
   border: none;
@@ -94,6 +94,8 @@ button {
 
   .nav-header-dropdown h2 {
     color: black;
+    font-family: var(--font-title);
+    font-size: 5rem;
   }
 
   .nav-links {
