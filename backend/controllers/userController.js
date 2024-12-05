@@ -91,6 +91,27 @@ export const getProfile = async (req, res) => {
   }
 };
 
+// profile image upload
+export const uploadProfileImage = async (req, res) => {
+  try {
+    const imgUrl = req.file.path;
+
+    const userId = req.userId;
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { profileImage: imgUrl },
+      { new: true }
+    );
+
+    res.json({
+      imgUrl: user.profileImage,
+      message: "Profile picture updated successfully!",
+    });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 //LOGOUT
 
 export const logout = (req, res) => {

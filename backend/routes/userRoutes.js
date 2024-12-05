@@ -3,6 +3,7 @@ import {
   getProfile,
   logout,
   registration,
+  uploadProfileImage,
   userLogin,
 } from "../controllers/userController.js";
 import storage from "../cloudinary-config/cloudinaryConfig.js";
@@ -22,6 +23,15 @@ router.post("/signup", upload.array("portfolio", 3), registration);
 router.post("/login", userLogin);
 
 router.get("/profile", auth, getProfile);
+
+//UPLOAD => PROFILE image
+
+router.post(
+  "/profile-image",
+  auth,
+  upload.single("avatar"),
+  uploadProfileImage
+);
 
 //review
 
