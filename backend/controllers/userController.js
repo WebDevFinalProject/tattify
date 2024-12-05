@@ -70,7 +70,17 @@ export const userLogin = async (req, res) => {
         secure: false,
         sameSite: "lax",
       })
-      .json({ user, message: "Successfully logedIn!" });
+      .json({
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          role: user.role,
+          profileImage: user.profileImage,
+          portfolio: user.portfolio,
+        },
+        message: "Successfully logedIn!",
+      });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }

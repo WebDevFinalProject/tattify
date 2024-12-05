@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/ContextProvider";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { login } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -21,13 +24,12 @@ function Login() {
         { withCredentials: true } // Ensures cookies are sent with the request
       );
 
-      const { role, user } = response.data.user;
-      console.log(response.data.user.role);
-      // Save user data to localStorage
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      const { role, ...userData } = response.data.user;
+      login(userData);
+
       if (role === "artist") {
         // Redirect to artist profile setup
-        navigate("/artist-profile");
+        navigate("/test-profile");
       } else if (role === "customer") {
         // Redirect to dashboard
         navigate("/");
