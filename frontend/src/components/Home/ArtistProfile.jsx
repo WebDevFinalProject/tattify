@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+
 function ArtistProfile() {
   const [profile, setProfile] = useState({
     email: "",
@@ -16,16 +17,26 @@ function ArtistProfile() {
     studioLocation: "",
     pricingDetails: "",
     socialLinks: "",
+    images: [],
   });
+
+  const [isEditMode, setIsEditMode] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Fetch initial data from localStorage
   useEffect(() => {
-    // If the user is logged in, populate profile from localStorage or API
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setProfile(JSON.parse(storedUser)); // If user data is stored, load it into state
+      const parsedUser = JSON.parse(storedUser);
+      setProfile({
+        ...parsedUser,
+        images: parsedUser.images || [], // Ensure `images` is always an array
+      });
     }
   }, []);
+
+  // Handle input field changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProfile((prevProfile) => ({
@@ -33,77 +44,72 @@ function ArtistProfile() {
       [name]: value,
     }));
   };
-  const generateProfileLink = () => {
-    const baseName =
-      profile.firstName && profile.firstName.trim() !== ""
-        ? profile.firstName.toLowerCase().replace(/\s+/g, "")
-        : "artist"; // Fallback if firstName is empty
-    return `${baseName}.tattify.com`;
+
+  // Handle image uploads
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      images: [...(prevProfile.images || []), ...files],
+    }));
   };
+
+  // Remove an uploaded image
+  const removeImage = (index) => {
+    setProfile((prevProfile) => {
+      const updatedImages = [...prevProfile.images];
+      updatedImages.splice(index, 1);
+      return { ...prevProfile, images: updatedImages };
+    });
+  };
+
+  // Save profile data
   const handleSave = async () => {
-    const {
-      firstName,
-      lastName,
-      email,
-      bio,
-      specialties,
-      city,
-      country,
-      basePrice,
-      certifications,
-      languagesSpoken,
-      studioLocation,
-      pricingDetails,
-      socialLinks,
-    } = profile;
-    // Validate required fields
+    const { firstName, lastName, email, bio } = profile;
     if (!firstName || !lastName || !email || !bio) {
       setErrorMessage("Please fill out all required fields!");
       return;
     }
+
     try {
-      const response = await axios.post("/artists/create-profile", profile, {
-        withCredentials: true,
+      const formData = new FormData();
+      Object.keys(profile).forEach((key) => {
+        if (key === "images") {
+          profile.images.forEach((file, index) => {
+            formData.append(`images[${index}]`, file);
+          });
+        } else {
+          formData.append(key, profile[key]);
+        }
       });
+
+      const response = await axios.post("/artists/create-profile", formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       setSuccessMessage(
-        response.data.message || "Profile was created successfully!"
+        response.data.message || "Profile updated successfully!"
       );
       setErrorMessage("");
-      // Save profile to localStorage after successful save
       localStorage.setItem("user", JSON.stringify(profile));
-      // Optionally clear form if needed
-      setProfile({
-        email: "",
-        firstName: "",
-        lastName: "",
-        bio: "",
-        specialties: "",
-        city: "",
-        country: "",
-        basePrice: "",
-        certifications: "",
-        languagesSpoken: "",
-        studioLocation: "",
-        pricingDetails: "",
-        socialLinks: "",
-      });
-      setTimeout(() => setSuccessMessage(""), 3000); // Auto-hide success message after 3 seconds
+      setIsEditMode(false); // Switch back to view mode
     } catch (error) {
-      setSuccessMessage("");
-      if (error.response) {
-        setErrorMessage(
-          error.response.data.message || "An error has occurred."
-        );
-      } else {
-        setErrorMessage("Network error, please try again later.");
-      }
+      setErrorMessage(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
     }
   };
+
+  // Logout function
   const handleLogout = () => {
-    localStorage.removeItem("user"); // Clear user data from localStorage
-    document.cookie = "jwt=; Max-Age=-99999999; path=/"; // Clear JWT cookie
-    window.location.href = "/login"; // Redirect to login page
+    localStorage.removeItem("user");
+    document.cookie = "jwt=; Max-Age=-99999999; path=/";
+    window.location.href = "/login";
   };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -120,7 +126,9 @@ function ArtistProfile() {
             </h5>
             <p>
               My direct link: <br />
-              <span>{generateProfileLink()}</span>
+              <span>{`${
+                profile.firstName?.toLowerCase() || "artist"
+              }.tattify.com`}</span>
             </p>
             <button
               className="btn btn-outline-dark btn-sm mb-3"
@@ -141,114 +149,122 @@ function ArtistProfile() {
             </a>
           </nav>
         </div>
+
         {/* Main Content */}
         <div className="col-md-9 p-5">
-          <h2>My Portfolio</h2>
-          <form>
-            <h4>My Personal Information</h4>
-            <div className="row mb-3">
-              <div className="col-md-6">
-                <label className="form-label">E-Mail Address *</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  value={profile.email}
-                  onChange={handleInputChange}
-                  required
-                />
+          <h2>{isEditMode ? "Edit Portfolio" : "My Portfolio"}</h2>
+          {isEditMode ? (
+            <form>
+              {Object.keys(profile).map((key) =>
+                key === "images" ? (
+                  <div className="mb-3" key={key}>
+                    <label className="form-label">Upload Images</label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      multiple
+                      onChange={handleImageUpload}
+                    />
+                    <div className="mt-2">
+                      {profile.images.map((file, index) => (
+                        <div
+                          key={index}
+                          className="d-inline-block position-relative me-2"
+                        >
+                          <img
+                            src={
+                              file instanceof File
+                                ? URL.createObjectURL(file)
+                                : file
+                            }
+                            alt={`Preview ${index}`}
+                            className="img-thumbnail"
+                            style={{ width: "100px", height: "100px" }}
+                          />
+                          <button
+                            type="button"
+                            className="btn-close position-absolute top-0 end-0"
+                            onClick={() => removeImage(index)}
+                          ></button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mb-3" key={key}>
+                    <label className="form-label">
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name={key}
+                      value={profile[key]}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                )
+              )}
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleSave}
+              >
+                SAVE
+              </button>
+            </form>
+          ) : (
+            <div>
+              <h4>Personal Information</h4>
+              <p>
+                <strong>Name:</strong>{" "}
+                {`${profile.firstName} ${profile.lastName}`}
+              </p>
+              <p>
+                <strong>Email:</strong> {profile.email}
+              </p>
+              <p>
+                <strong>Bio:</strong> {profile.bio}
+              </p>
+              <p>
+                <strong>Specialties:</strong> {profile.specialties}
+              </p>
+              <p>
+                <strong>City:</strong> {profile.city}
+              </p>
+              <p>
+                <strong>Country:</strong> {profile.country}
+              </p>
+              <p>
+                <strong>Languages Spoken:</strong> {profile.languagesSpoken}
+              </p>
+
+              <h4>Portfolio Images</h4>
+              <div className="mt-2">
+                {profile.images.length > 0 ? (
+                  profile.images.map((file, index) => (
+                    <img
+                      key={index}
+                      src={
+                        file instanceof File ? URL.createObjectURL(file) : file
+                      }
+                      alt={`Portfolio ${index}`}
+                      className="img-thumbnail me-2"
+                      style={{ width: "150px", height: "150px" }}
+                    />
+                  ))
+                ) : (
+                  <p>No images uploaded yet.</p>
+                )}
               </div>
+              <button
+                className="btn btn-secondary mt-3"
+                onClick={() => setIsEditMode(true)}
+              >
+                EDIT PORTFOLIO
+              </button>
             </div>
-            <div className="row mb-3">
-              <div className="col-md-6">
-                <label className="form-label">First Name *</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="firstName"
-                  value={profile.firstName}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="col-md-6">
-                <label className="form-label">Last Name *</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="lastName"
-                  value={profile.lastName}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Bio *</label>
-              <textarea
-                className="form-control"
-                name="bio"
-                value={profile.bio}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            {/* Additional Fields */}
-            <div className="row mb-3">
-              <div className="col-md-6">
-                <label className="form-label">Specialties</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="specialties"
-                  value={profile.specialties}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="col-md-6">
-                <label className="form-label">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="city"
-                  value={profile.city}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            {/* More Fields */}
-            <div className="row mb-3">
-              <div className="col-md-6">
-                <label className="form-label">Country</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="country"
-                  value={profile.country}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="col-md-6">
-                <label className="form-label">Pricing Details</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="pricingDetails"
-                  value={profile.pricingDetails}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            {/* Submit Button */}
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleSave}
-            >
-              SAVE
-            </button>
-          </form>
-          {/* Messages */}
+          )}
           {successMessage && (
             <div className="alert alert-success mt-3">{successMessage}</div>
           )}
@@ -260,4 +276,5 @@ function ArtistProfile() {
     </div>
   );
 }
+
 export default ArtistProfile;
