@@ -4,7 +4,7 @@ import api from "../api";
 
 export const UserContext = createContext();
 
-const contextProvider = ({ children }) => {
+const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -61,4 +61,4 @@ const contextProvider = ({ children }) => {
   );
 };
 
-export default contextProvider;
+export default ContextProvider;
