@@ -28,6 +28,6 @@ router.get("/profile", auth, getProfile);
 router.post("/submit-review", auth, writeReviewToArtistProfile);
 
 //logout
-router.post("/logout", logout);
+router.post("/user-logout", logout);
 
 export default router;
