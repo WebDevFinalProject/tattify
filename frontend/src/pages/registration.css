@@ -101,7 +101,7 @@
     color: #fff;
     background-color: var(--button-color);
     cursor: pointer;
-    margin-top: 70px;
+    margin-top: 90px;
     border: none;
     border-radius: 30px;
     height: 3.5rem;
@@ -121,7 +121,7 @@
   }
   .artist-button {
     position: absolute;
-    top: 37.5rem;
+    top: 37rem;
   }
 
   #artist-para {
