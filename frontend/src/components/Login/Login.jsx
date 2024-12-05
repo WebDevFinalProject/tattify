@@ -8,7 +8,9 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,8 +21,10 @@ function Login() {
         { withCredentials: true } // Ensures cookies are sent with the request
       );
 
-      const { role } = response.data;
-
+      const { role, user } = response.data.user;
+      console.log(response.data.user.role);
+      // Save user data to localStorage
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       if (role === "artist") {
         // Redirect to artist profile setup
         navigate("/artist-profile");
@@ -79,14 +83,14 @@ function Login() {
             <a href="#" className="string">
               Forgot password?
             </a>
+            <a href="/register" className="string">
+              Create an account? <span>Register</span>
+            </a>
             <button type="submit" id="login">
               Log In
             </button>
           </form>
           <div className="divider"></div>
-          <a href="/register" className="string">
-            Create an account? <span>Register</span>
-          </a>
         </div>
       </div>
     </div>

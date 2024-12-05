@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles/contact.css";
+import api from "../api";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,23 +19,23 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/api/contact", {
+      const res = await api.post("/api/contact", formData, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-      if (res.ok) {
-        setResponse(data.message);
+      if (res.status === 201) {
+        setResponse(res.data.message);
         setFormData({ firstName: "", lastName: "", email: "", message: "" }); // Reset form
+        setTimeout(() => setResponse(""), 2000);
       } else {
-        setResponse(data.error || "An error occurred");
+        setResponse(res.data.error || "An error occurred");
       }
     } catch (error) {
       setResponse("An error occurred. Please try again.");
+      setTimeout(() => setResponse(""), 2000);
     }
   };
 
@@ -45,7 +46,7 @@ const Contact = () => {
         <h1>Get in touch</h1>
       </div>
       <div className="vertical-line"></div>
-      <form onSubmit={handleSubmit} className="contact-form">
+      <form onSubmit={handleSubmit} className="hero-contact-form">
         <input
           type="text"
           name="firstName"
