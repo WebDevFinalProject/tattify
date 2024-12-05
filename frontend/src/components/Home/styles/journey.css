@@ -2,99 +2,99 @@
 
 :root {
   --text-color-header: #fca93d;
-  --text-color-p: #fefefe;
-  --background-color: #0d0e4b;
-  --line-color: #f2e2d7;
+  --text-color-p     : #fefefe;
+  --background-color : #0d0e4b;
+  --line-color       : #f2e2d7;
 }
 
 .lato-light {
   font-family: "Lato", serif;
   font-weight: 400;
-  font-style: normal;
+  font-style : normal;
 }
 
 .abril-fatface-regular {
   font-family: "Abril Fatface", serif;
   font-weight: 400;
-  font-style: normal;
+  font-style : normal;
 }
 
 .journey-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
   background-color: var(--background-color);
-  color: var(--text-color-p);
-  gap: 15em;
-  width: 100vw;
-  padding: 10em 0;
+  color           : var(--text-color-p);
+  gap             : 15em;
+  /* width        : 100vw; */
+  padding         : 10em 0;
 }
 
 .content {
-  display: flex;
+  display       : flex;
   flex-direction: column;
-  width: 35%;
+  width         : 35%;
 
   p {
-    color: var(--text-color-p);
+    color      : var(--text-color-p);
     font-family: "Lato", serif;
     margin-left: 25px;
-    text-align: left;
-    font-size: clamp(0.8rem, 3.4vw, 2rem);
+    text-align : left;
+    font-size  : clamp(0.8rem, 3.4vw, 2rem);
   }
 }
 
-.content > div {
+.content>div {
   margin-bottom: 3.5rem;
-  text-align: left;
+  text-align   : left;
 }
 
 .content h2 {
-  color: var(--text-color-header);
-  margin: 0 0 0.5rem 0;
+  color      : var(--text-color-header);
+  margin     : 0 0 0.5rem 0;
   font-family: "Abril Fatface", serif;
-  font-size: clamp(1rem, 4.3vw, 2.5rem);
+  font-size  : clamp(1rem, 4.3vw, 2.5rem);
   font-weight: 100;
 }
 
 @keyframes focusIn {
   0% {
-    opacity: 0;
+    opacity  : 0;
     transform: translateY(20px);
   }
 
   100% {
-    opacity: 1;
+    opacity  : 1;
     transform: translateY(0);
   }
 }
 
-.content > div {
+.content>div {
   margin-bottom: 3.5rem;
-  text-align: left;
-  opacity: 0;
+  text-align   : left;
+  opacity      : 0;
   /* Start hidden */
-  animation: focusIn 0.8s ease-out forwards;
+  animation    : focusIn 0.8s ease-out forwards;
   /* Apply animation */
 }
 
-.content > div:nth-child(1) {
+.content>div:nth-child(1) {
   animation-delay: 0s;
 }
 
-.content > div:nth-child(2) {
+.content>div:nth-child(2) {
   animation-delay: 0.2s;
 }
 
-.content > div:nth-child(3) {
+.content>div:nth-child(3) {
   animation-delay: 0.4s;
 }
 
-.content > div:nth-child(4) {
+.content>div:nth-child(4) {
   animation-delay: 0.6s;
 }
 
-.content > div:nth-child(5) {
+.content>div:nth-child(5) {
   animation-delay: 0.8s;
 }
 
@@ -102,12 +102,13 @@
   .journey-container {
     padding: 5em 0;
   }
+
   .image-container {
     display: none;
   }
 
   .content {
-    width: 100%;
+    width : 100%;
     margin: 0 10%;
   }
 }
@@ -118,8 +119,8 @@
   }
 
   .image-container {
-    width: 30%;
-    display: flex;
+    width          : 30%;
+    display        : flex;
     justify-content: center;
   }
 
