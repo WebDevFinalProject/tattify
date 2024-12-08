@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./styles/ArtistForm.css";
 
 const ArtistForm = () => {
   const [formData, setFormData] = useState({
@@ -47,7 +48,7 @@ const ArtistForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="fromArtist">
       <input
         type="text"
         name="bio"
@@ -56,6 +57,7 @@ const ArtistForm = () => {
         placeholder="Bio"
       />
       <input
+        className="form-input"
         type="text"
         name="specialties"
         value={formData.specialties}
@@ -63,6 +65,7 @@ const ArtistForm = () => {
         placeholder="Specialties"
       />
       <input
+        className="form-input"
         type="text"
         name="city"
         value={formData.city}
@@ -70,6 +73,7 @@ const ArtistForm = () => {
         placeholder="City"
       />
       <input
+        className="form-input"
         type="text"
         name="country"
         value={formData.country}
@@ -77,6 +81,7 @@ const ArtistForm = () => {
         placeholder="Country"
       />
       <input
+        className="form-input"
         type="text"
         name="basePrice"
         value={formData.basePrice}
@@ -84,6 +89,7 @@ const ArtistForm = () => {
         placeholder="Base Price"
       />
       <input
+        className="form-input"
         type="text"
         name="certifications"
         value={formData.certifications}
@@ -91,6 +97,7 @@ const ArtistForm = () => {
         placeholder="Certifications"
       />
       <input
+        className="form-input"
         type="text"
         name="languagesSpoken"
         value={formData.languagesSpoken}
@@ -98,6 +105,7 @@ const ArtistForm = () => {
         placeholder="Languages Spoken"
       />
       <input
+        className="form-input"
         type="text"
         name="studioLocation"
         value={formData.studioLocation}
@@ -105,6 +113,7 @@ const ArtistForm = () => {
         placeholder="Studio Location"
       />
       <input
+        className="form-input"
         type="text"
         name="pricingDetails"
         value={formData.pricingDetails}
@@ -112,13 +121,16 @@ const ArtistForm = () => {
         placeholder="Pricing Details"
       />
       <input
+        className="form-input"
         type="text"
         name="socialLinks"
         value={formData.socialLinks}
         onChange={handleChange}
         placeholder="Social Links"
       />
-      <button type="submit">Create Profile</button>
+      <button type="submit" className="form-button">
+        Create Profile
+      </button>
     </form>
   );
 };
