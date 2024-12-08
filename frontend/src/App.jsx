@@ -7,7 +7,7 @@ import SkinCare from "./components/article/skin-care-blog/SkinCare";
 import Login from "./components/Login/Login.jsx";
 import Registration from "./pages/Registration.jsx";
 import ArtistProfile from "./components/Home/ArtistProfile.jsx";
-import Profile from "./components/testing/Profile.jsx";
+
 
 function App() {
   return (
