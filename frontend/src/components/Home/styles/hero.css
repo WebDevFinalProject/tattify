@@ -25,7 +25,7 @@
             font-family: var(--font-title);
             font-weight: 100;
             color      : #ffffff;
-            font-size  : 17rem;
+            font-size  : 14.5rem;
             text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.445);
         }
 
@@ -33,7 +33,7 @@
             font-family  : var(--font-body);
             color        : var(--secondary-bg-color);
             text-shadow  : 4px 4px 6px rgba(66, 68, 90, 0.445);
-            font-size    : 2.5rem;
+            font-size    : 2.4rem;
             margin-bottom: 2rem;
             position     : relative;
             top          : -10px;
@@ -78,6 +78,48 @@
         img {
             width: 100%;
 
+        }
+    }
+}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 1024px) {
+    .hero-container {
+        height        : 100vh;
+        flex-direction: row;
+
+        .hero-image-container {
+            margin-bottom: 15rem;
+            transform    : scale(1.2);
+        }
+
+        .hero-text-container {
+            padding-bottom: 30rem;
+            padding-right : 17rem;
+            align-items   : start;
+            gap           : 2rem;
+            max-width     : 40%;
+            white-space   : nowrap;
+            /* white-space prevents text to break into different lines when shrinking/growing */
+
+
+            h1 {
+                font-size: clamp(20rem, 10vw, 25rem);
+            }
+
+            p {
+                font-size   : clamp(2.0rem, 3vw, 3rem);
+                padding-left: 5rem;
+            }
+
+            .hero-button {
+                height     : 3rem;
+                width      : 16rem;
+                font-size  : 1.5rem;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin-left: 7rem;
+            }
         }
     }
 }

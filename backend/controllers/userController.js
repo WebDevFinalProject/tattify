@@ -70,7 +70,17 @@ export const userLogin = async (req, res) => {
         secure: false,
         sameSite: "lax",
       })
-      .json({ user, message: "Successfully logedIn!" });
+      .json({
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          role: user.role,
+          profileImage: user.profileImage,
+          portfolio: user.portfolio,
+        },
+        message: "Successfully logedIn!",
+      });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
@@ -88,6 +98,27 @@ export const getProfile = async (req, res) => {
     res.status(200).json(userProfile); // Send user profile
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
+  }
+};
+
+// profile image upload
+export const uploadProfileImage = async (req, res) => {
+  try {
+    const imgUrl = req.file.path;
+
+    const userId = req.userId;
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { profileImage: imgUrl },
+      { new: true }
+    );
+
+    res.json({
+      imgUrl: user.profileImage,
+      message: "Profile picture updated successfully!",
+    });
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 

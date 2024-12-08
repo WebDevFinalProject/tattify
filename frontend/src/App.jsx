@@ -6,7 +6,8 @@ import TattooHistory from "./components/article/tattoo-history/TattooHistory";
 import SkinCare from "./components/article/skin-care-blog/SkinCare";
 import Login from "./components/Login/Login.jsx";
 import Registration from "./pages/Registration.jsx";
-import ArtistProfile from "../../backend/model/profile.js";
+import ArtistProfile from "./components/Home/ArtistProfile.jsx";
+
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/artist-profile" element={<ArtistProfile />} />
+        <Route path="/test-profile" element={<Profile />} />
       </Routes>
     </>
   );
