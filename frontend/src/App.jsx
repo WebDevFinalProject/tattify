@@ -6,7 +6,7 @@ import TattooHistory from "./components/article/tattoo-history/TattooHistory";
 import SkinCare from "./components/article/skin-care-blog/SkinCare";
 import Login from "./components/Login/Login.jsx";
 import Registration from "./pages/Registration.jsx";
-import ArtistProfile from "./components/Home/ArtistProfile.jsx";
+import ArtistProfile from "../../backend/model/profile.js";
 
 function App() {
   return (

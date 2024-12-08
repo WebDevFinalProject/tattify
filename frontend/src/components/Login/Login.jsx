@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/ContextProvider";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -25,6 +26,7 @@ function Login() {
       console.log(response.data.user.role);
       // Save user data to localStorage
       localStorage.setItem("user", JSON.stringify(response.data.user));
+      login(userData);
       if (role === "artist") {
         // Redirect to artist profile setup
         navigate("/artist-profile");
