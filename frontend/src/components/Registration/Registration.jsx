@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import "./registration.css";
 import { Link } from "react-router-dom";
 import api from "../api";
+import NavBar from "../NavBar";
 
 const Registration = () => {
   const [role, setRole] = useState("customer");
@@ -75,76 +76,82 @@ const Registration = () => {
     }
   };
   return (
-    <div id="registraion-div">
-      <h1>Tattify</h1>
-      <form
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-        id="registration-form"
-      >
-        <h2>Create a new account</h2>
-        <p id="intro-para">It's quick and easy!!</p>
-        {/* Role Selection */}
-        <div>
-          {["customer", "artist"].map((r) => (
-            <div key={r} id="role-selection">
-              <input
-                type="radio"
-                name="role"
-                value={r}
-                checked={role === r}
-                onChange={() => setRole(r)}
-              />
-              <label>{r.charAt(0).toUpperCase() + r.slice(1)}</label>
-            </div>
-          ))}
-        </div>
-
-        {/* Text Inputs */}
-        {["firstName", "lastName", "email", "password"].map((field) => (
-          <input
-            key={field}
-            type={field === "password" ? "password" : "text"}
-            name={field}
-            placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)}*`}
-            value={formData[field]}
-            onChange={handleChange}
-            required
-          />
-        ))}
-
-        {/* Portfolio Upload for Artists */}
-        {role === "artist" && (
-          <div>
-            <label>Upload Portfolio*:</label>
-            <input
-              type="file"
-              name="portfolio"
-              multiple
-              onChange={handleChange}
-              ref={fileInputRef} // Attach ref to file input
-            />
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={role === "artist" ? "artist-button" : "default-button"}
+    <>
+      <NavBar />
+      <div id="registraion-div">
+        <h1>Tattify</h1>
+        <form
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+          id="registration-form"
         >
-          {isSubmitting ? "Submitting..." : "Register"}
-        </button>
-        <br />
-        <p id={role === "artist" ? "artist-para" : "default-para"}>
-          Do you already have an account?{" "}
-          <Link to="/login" id="login-link">
-            Login
-          </Link>
-        </p>
-      </form>
+          <h2>Create a new account</h2>
+          <p id="intro-para">It's quick and easy!!</p>
+          {/* Role Selection */}
+          <div className="reg-role-select">
+            {["customer", "artist"].map((r) => (
+              <div key={r} id="role-selection">
+                <input
+                  type="radio"
+                  name="role"
+                  value={r}
+                  checked={role === r}
+                  onChange={() => setRole(r)}
+                />
+                <label>{r.charAt(0).toUpperCase() + r.slice(1)}</label>
+              </div>
+            ))}
+          </div>
 
-      {response && <p id="response-para">{response}</p>}
-    </div>
+          {/* Text Inputs */}
+          {["firstName", "lastName", "email", "password"].map((field) => (
+            <input
+              key={field}
+              type={field === "password" ? "password" : "text"}
+              name={field}
+              placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)}*`}
+              value={formData[field]}
+              onChange={handleChange}
+              required
+            />
+          ))}
+
+          {/* Portfolio Upload for Artists */}
+          {role === "artist" && (
+            <div className="registration-portfolio">
+              <label>Upload Portfolio*:</label>
+              <input
+                className="reg-input-file"
+                type="file"
+                name="portfolio"
+                multiple
+                onChange={handleChange}
+                ref={fileInputRef} // Attach ref to file input
+              />
+            </div>
+          )}
+
+          <div className="reg-submission">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={role === "artist" ? "artist-button" : "default-button"}
+            >
+              {isSubmitting ? "Submitting..." : "Register"}
+            </button>
+            <br />
+            <p id={role === "artist" ? "artist-para" : "default-para"}>
+              Do you already have an account?{" "}
+              <Link to="/login" id="login-link">
+                Login
+              </Link>
+            </p>
+          </div>
+        </form>
+
+        {response && <p id="response-para">{response}</p>}
+      </div>
+    </>
   );
 };
 
