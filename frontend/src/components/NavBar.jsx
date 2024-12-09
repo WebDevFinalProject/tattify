@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location]);
 
   const navOpen = () => {
     setIsOpen(!isOpen);
@@ -23,9 +35,9 @@ function NavBar() {
           <div className="nav-header-dropdown">
             <h2>Tattify</h2>
           </div>
-          <NavLink>Home</NavLink>
+          <NavLink to="/">Home</NavLink>
           <NavLink>About</NavLink>
-          <NavLink>Contact</NavLink>
+          <NavLink to="/#contact-form">Contact</NavLink>
           <NavLink to="/articles">Article</NavLink>
         </nav>
         <div className="button-container">
