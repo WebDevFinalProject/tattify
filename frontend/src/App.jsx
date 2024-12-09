@@ -5,9 +5,9 @@ import Articles from "./pages/Articles";
 import TattooHistory from "./components/article/tattoo-history/TattooHistory";
 import SkinCare from "./components/article/skin-care-blog/SkinCare";
 import Login from "./components/Login/Login.jsx";
-import Registration from "./pages/Registration.jsx";
 import ArtistProfile from "./components/ArtistProfile/ArtistForm.jsx"
 import ArtistList from "./components/Home/ArtistList.jsx";
+import Registration from "./components/Registration/Registration.jsx";
 
 function App() {
   return (
