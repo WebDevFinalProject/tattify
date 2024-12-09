@@ -4,6 +4,7 @@ import "./Login.css";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/ContextProvider";
+import NavBar from "../NavBar";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -48,54 +49,57 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
-      <div className="container-login">
-        <div className="logo">
-          <h1>Tattify</h1>
-          <h2>For users:</h2>
-          <ul>
-            <li>Connect with artists.</li>
-            <li>Search for a location.</li>
-            <li>Leave a review.</li>
-          </ul>
-          <h2>Are you an artist?</h2>
-          <ul>
-            <li>Show your work.</li>
-            <li>Connect with users.</li>
-            <li>Stay recognizable.</li>
-          </ul>
-        </div>
-        <div className="login-form">
-          <form className="form" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Enter your Email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Enter your password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <a href="#" className="string">
-              Forgot password?
-            </a>
-            <a href="/register" className="string">
-              Create an account? <span>Register</span>
-            </a>
-            <button type="submit" id="login">
-              Log In
-            </button>
-          </form>
-          <div className="divider"></div>
+    <>
+      <NavBar />
+      <div className="login-page">
+        <div className="container-login">
+          <div className="logo">
+            <h1>Tattify</h1>
+            <h2>For users:</h2>
+            <ul>
+              <li>Connect with artists.</li>
+              <li>Search for a location.</li>
+              <li>Leave a review.</li>
+            </ul>
+            <h2>Are you an artist?</h2>
+            <ul>
+              <li>Show your work.</li>
+              <li>Connect with users.</li>
+              <li>Stay recognizable.</li>
+            </ul>
+          </div>
+          <div className="login-form">
+            <form className="form" onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Enter your Email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Enter your password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <a href="#" className="string">
+                Forgot password?
+              </a>
+              <a href="/register" className="string">
+                Create an account? <span>Register</span>
+              </a>
+              <button type="submit" id="login">
+                Log In
+              </button>
+            </form>
+            <div className="divider"></div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
