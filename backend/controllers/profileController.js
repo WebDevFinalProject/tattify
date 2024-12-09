@@ -78,7 +78,7 @@ export const getArtistProfile = async (req, res) => {
   try {
     const artists = await ArtistProfile.find().populate({
       path: "user",
-      select: "firstName lastName email profileImage", // Select fields to include from User
+      select: "firstName lastName location portfolio profileImage", // Select fields to include from User
       match: { role: "artist" }, // Ensure only users with the role "artist" are included
     });
 
