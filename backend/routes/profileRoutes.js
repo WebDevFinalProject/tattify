@@ -11,7 +11,7 @@ import { publicProfile } from "../controllers/publicController.js";
 const router = express.Router();
 
 router.post("/artists/create-profile", auth, createArtistProfile);
-router.get("/artists/profile", auth, getArtistProfile);
+router.get("/artists/profile",  getArtistProfile);
 router.delete("/artists/:artistId", auth, deleteArtistProfile);
 router.put("/artists/:artistId", auth, updateArtistProfile);
 
