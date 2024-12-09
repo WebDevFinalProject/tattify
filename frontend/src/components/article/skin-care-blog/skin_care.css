@@ -34,7 +34,7 @@
   text-decoration: none;
   color: rgb(41, 40, 40);
   font-weight: 700;
-  font-size: 1.7em;
+  font-size: 1.7rem;
 
   &:hover {
     color: rgb(134, 119, 119);
@@ -43,7 +43,7 @@
 
 .home-logo {
   position: relative;
-  top: -2px;
+  top: 1px;
 }
 
 .skin-care-logo {
@@ -55,7 +55,7 @@
   margin: auto;
 }
 
-.header {
+.skin-care-header {
   display: flex;
   justify-content: space-between;
   gap: 1em;
@@ -64,17 +64,11 @@
   line-height: 1.5em;
 }
 
-.skin-care-header {
-  display: flex;
-  width: 60%;
-  flex-wrap: wrap;
-}
-
-.header h2 {
+.skin-care-header h2 {
   padding-left: 1em;
   margin: auto;
   line-height: 1.8em;
-  font-size: clamp(1.6rem, 2vw, 2.5rem);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -82,7 +76,7 @@
   color: #45342d;
 }
 
-.header img {
+.skin-care-header img {
   object-fit: cover;
   max-width: 40%;
   height: auto;
@@ -90,7 +84,7 @@
 
 .back-icon {
   margin: 1.5em 0;
-  font-size: clamp(0.9em, 2.5vw, 1.5em);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   color: #45342d;
 }
 
@@ -100,7 +94,7 @@
 
 .update-skin-care {
   text-align: justify;
-  font-size: clamp(1em, 2.5vw, 1.2em);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   margin-top: 3em;
   margin-bottom: 1em;
   color: #45342d;
@@ -119,7 +113,7 @@
 
 .article h3 {
   margin-top: 1em;
-  font-size: clamp(1em, 3.5vw, 1.8em);
+  font-size: clamp(1rem, 3.5vw, 1.8rem);
   color: #45342d;
 }
 
@@ -127,7 +121,7 @@
   text-align: justify;
   padding-top: 1.5em;
   margin-bottom: 1em;
-  font-size: clamp(0.8em, 3.5vw, 1.5em);
+  font-size: clamp(0.8rem, 3.5vw, 1.5rem);
   line-height: 1.8em;
   color: #45342d;
   font-family: "Lato", serif;
@@ -183,7 +177,7 @@ iframe {
   padding-bottom: 1em;
 
   span {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 800;
     color: rgb(75, 74, 74);
     margin-right: 2em;
@@ -221,18 +215,14 @@ iframe {
   .blog-skin-container {
     width: 100%;
   }
-  .header {
+  .skin-care-header {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 2em;
   }
 
-  .header h2 {
-    font-size: 1.9rem;
-  }
-
-  .header img {
+  .skin-care-header img {
     margin: auto;
   }
 
@@ -266,5 +256,9 @@ iframe {
 @media (min-width: 769px) and (max-width: 1280px) {
   .blog-skin-container {
     width: 80%;
+  }
+
+  .skin-care-header h2 {
+    font-size: 1.6rem;
   }
 }
