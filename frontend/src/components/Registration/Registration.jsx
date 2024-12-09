@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./registration.css";
 import { Link } from "react-router-dom";
-import api from "../components/api.js";
+import api from "../api";
 
 const Registration = () => {
   const [role, setRole] = useState("customer");
