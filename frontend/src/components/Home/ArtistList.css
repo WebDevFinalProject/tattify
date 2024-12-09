@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gafata&family=Varta:wght@300..700&display=swap");
+
+.artistListCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.artist-hero-image {
+  background-image: url("../../assets/hero2.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  border-radius: 10px;
+  position: relative;
+  color: white;
+  text-align: center;
+
+  h1 {
+    font-family: "Abril Fatface", serif;
+    font-size: 5em;
+  }
+  p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2rem;
+  }
+}

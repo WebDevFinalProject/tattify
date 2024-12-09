@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { SlLocationPin } from "react-icons/sl";
+import "./ArtistList.css";
 
 const ArtistList = () => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // Single search query
 
   useEffect(() => {
     const fetchArtists = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
-          "http://localhost:4000/api/artists/profile"
-        ); // API endpoint
+          "http://localhost:4000/api/artists/profile",
+          {
+            params: { query: searchQuery }, // Pass the search query to the backend
+          }
+        );
         setArtists(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load artists.");
@@ -21,11 +29,31 @@ const ArtistList = () => {
     };
 
     fetchArtists();
-  }, []);
+  }, [searchQuery]); // Re-run effect when search query changes
 
   return (
     <div className="container my-5">
+      {/* Hero Section */}
+      <div className="artist-hero-image mb-5 p-5">
+        <div>
+          <h1 className="display-4 pt-5">Hire Artists</h1>
+          <p className="lead">
+            Transform your ideas into art — hire a talented tattoo artist today.
+          </p>
+        </div>
+      </div>
+
       <h1 className="text-center mb-4">Our Artists</h1>
+      {/* Search Box */}
+      <div className="mb-4">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search by name or location..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+        />
+      </div>
 
       {loading && <p>Loading...</p>}
       {error && <p className="text-danger">{error}</p>}
@@ -33,25 +61,29 @@ const ArtistList = () => {
       <div className="row">
         {artists.map((artist) => (
           <div key={artist._id} className="col-md-4">
-            <div className="card mb-4">
-              {/* Portfolio images */}
-              <div className="d-flex">
-                {artist.user.portfolio.slice(0, 3).map((work, index) => (
+            <div className="card mb-4 artistListCard">
+              {/* Portfolio Images */}
+              <div className="portfolio-container d-flex">
+                {artist.user.portfolio.map((work, index) => (
                   <img
                     key={index}
-                    src={work.imageUrl}
+                    src={work}
                     alt={`Work ${index + 1}`}
-                    className="w-100"
+                    className="portfolio-img"
                     style={{
-                      width: "33.33%",
+                      width: "33%",
                       height: "100px",
                       objectFit: "cover",
+                      margin: 1,
                     }}
                   />
                 ))}
               </div>
               {/* Profile Picture */}
-              <div className="text-center mt-3">
+              <div
+                className="text-center"
+                style={{ marginTop: "-40px" }} // Negative margin to overlap
+              >
                 <img
                   src={
                     artist.user.profileImage ||
@@ -59,18 +91,24 @@ const ArtistList = () => {
                   }
                   alt={artist.user.firstName}
                   className="rounded-circle"
-                  style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                    border: "3px solid white",
+                  }}
                 />
               </div>
-              {/* Name, location, and chat button */}
+              {/* Name, Location, and Chat Button */}
               <div className="card-body text-center">
-                <h5 className="card-title">
+                <h3 className="card-title">
                   {`${artist.user.firstName} ${artist.user.lastName}`}
-                </h5>
-                <p className="card-text">
+                </h3>
+                <p className="card-text fs-4">
+                  <SlLocationPin className="fs-5" />
                   {artist.city}, {artist.country}
                 </p>
-                <button className="btn btn-primary">Chat</button>
+                <button className="btn btn-danger fs-5">Chat</button>
               </div>
             </div>
           </div>
@@ -81,4 +119,3 @@ const ArtistList = () => {
 };
 
 export default ArtistList;
-
