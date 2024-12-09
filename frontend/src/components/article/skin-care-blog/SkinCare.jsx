@@ -28,7 +28,7 @@ const SkinCare = () => {
           </div>
           <img className="skin-care-logo" src={logo} alt="skin-care logo" />
         </div>
-        <div className="header">
+        <div className="skin-care-header">
           <h2>
             The Ultimate Guide to Tattoo Aftercare:
             <br />
