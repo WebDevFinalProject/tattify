@@ -1,0 +1,33 @@
+/* H2 is a styled component */
+/* It may be edited in StyledComponents.css */
+/* components/ArtistProfile/styled/StyledComponents.css */
+
+.artist-details-main-container {
+    margin-bottom: 5rem;
+
+    .secondary-container {
+        background-color: #f1eae3;
+        color           : #4d4238;
+        padding         : 1.3rem 2.2rem;
+
+        h3 {
+            font-size  : 1.7rem;
+            font-weight: 500;
+        }
+
+        p {
+            font-family: "Lora",
+                serif;
+            font-size       : 1.6rem;
+            padding-left    : 2rem;
+            padding-bottom  : 1rem;
+            font-weight     : 500;
+            background-color: #f1eae3;
+            color           : #4d4238;
+            letter-spacing  : 0.02rem;
+        }
+    }
+
+
+
+}
