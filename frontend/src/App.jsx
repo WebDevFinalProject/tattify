@@ -6,8 +6,9 @@ import TattooHistory from "./components/article/tattoo-history/TattooHistory";
 import SkinCare from "./components/article/skin-care-blog/SkinCare";
 import Login from "./components/Login/Login.jsx";
 import ArtistProfile from "./pages/ArtistProfile.jsx";
-import ArtistForm from "./components/ArtistProfile/ArtistForm.jsx";
-import ArtistList from "./components/Home/ArtistList.jsx";
+import ArtistForm from "./components/ArtistProfile/ArtistForm.jsx"
+import ArtistList from "./components/ArtistList/ArtistList.jsx";
+import TattooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
 import Registration from "./components/Registration/Registration.jsx";
 import Customers from "./components/Customers-Profile/Customers.jsx";
 import GlobalTattoo from "./components/article/GlobalTattoo/GlobalTattoo.jsx";
