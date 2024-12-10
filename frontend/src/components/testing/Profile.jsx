@@ -1,23 +1,18 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/ContextProvider";
-import { useNavigate } from "react-router-dom";
+import NavBar from "../NavBar";
 
 const Profile = () => {
-  const { user, logout } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
-  const handleLogout = async () => {
-    await logout();
-    navigate("/login");
-  };
   return (
     <>
+      <NavBar />
       {user && (
         <div>
-          <img src={user.portfolio} />
+          <img src={user.profileImage} />
           <h1>NAME : {user.firstName}</h1>
           <p>{user.email}</p>
-          <button onClick={handleLogout}>Logout</button>
         </div>
       )}
     </>
