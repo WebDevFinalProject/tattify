@@ -1,6 +1,7 @@
 import skinCare from "../../assets/blogs-images/skincare.jpeg";
 import history from "../../assets/blogs-images/history.webp";
 import considerations from "../../assets/blogs-images/considerations.jpg"
+import GlobalTattoo from "../../assets/global-tattoo/GlobalTatoo.webp";
 
 const blogsData = [
   {
@@ -24,6 +25,12 @@ const blogsData = [
     description: "Discover essential tips and advice before your first tattoo.",
     path: "/article/tattoo-considerations",
   },
+  {
+    id: "global-tattoo",
+    img: GlobalTattoo,
+    title:"The Art of Tattoos: Connecting Cultures Globally",
+    path:"/article/global-tattoo"
+  }
 ];
 
 export default blogsData;

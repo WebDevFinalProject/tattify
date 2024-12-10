@@ -11,6 +11,8 @@ import TattooConsiderations from "./components/article/TattooConsideration/Tatto
 import ArtistList from "./components/Home/ArtistList.jsx";
 import Registration from "./components/Registration/Registration.jsx";
 import Customers from "./components/Customers-Profile/Customers.jsx";
+import GlobalTattoo from "./components/article/GlobalTattoo/GlobalTattoo.jsx";
+
 
 function App() {
     return (
@@ -27,6 +29,7 @@ function App() {
                     path="article/tattoo-considerations"
                     element={<TattooConsiderations />}
                 />
+                      <Route path="/article/global-tattoo" element={<GlobalTattoo />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Registration />} />
                 <Route path="/artist-profile" element={<ArtistProfile />} />
@@ -35,6 +38,7 @@ function App() {
             </Routes>
         </>
     );
+
 }
 
 export default App;
