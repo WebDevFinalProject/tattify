@@ -38,16 +38,23 @@
 .search-bar input {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 2em;
-  background: rgba(244, 234, 234, 0.498);
+  background: rgba(255, 255, 255, 0.321);
   border: none;
- 
-  ::placeholder{
-    color: white;
-  }
+
 }
 
+.search-bar input::placeholder {
+  color: white;
+  font-weight: 500;
+}
+
+.search-bar input:hover{
+  border: 2px solid rgba(248, 164, 164, 0.703);
+  background-color: #b8b7b66d;
+}
 .search-bar {
   text-align: center;
 }
+
 
 
