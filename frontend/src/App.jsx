@@ -10,7 +10,7 @@ import TatooConsiderations from "./components/article/TattooConsideration/Tattoo
 import ArtistList from "./components/Home/ArtistList.jsx";
 import Registration from "./components/Registration/Registration.jsx";
 import Customers from "./components/Customers-Profile/Customers.jsx";
-
+import GlobalTattoo from "./components/article/GlobalTattoo/GlobalTattoo.jsx";
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
         <Route path="/artist-profile" element={<ArtistProfile />} />
         <Route path="/artists" element={<ArtistList />} />
         <Route path="/cutomer-profile" element={<Customers />} />
+        <Route path="/article/global-tattoo" element={<GlobalTattoo />} />
       </Routes>
     </>
   );
