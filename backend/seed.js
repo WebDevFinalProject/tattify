@@ -1,6 +1,7 @@
 import { connectToDatabase } from "./database/database.js";
 import User from "./model/user.js";
 import ArtistProfile from "./model/profile.js";
+import bcrypt from "bcryptjs";
 
 connectToDatabase();
 
@@ -560,6 +561,7 @@ const seedToDatabase = async () => {
     await ArtistProfile.deleteMany({});
 
     for (const artist of artists) {
+      artist.password = await bcrypt.hash(artist.password, 10);
       const { artistProfile, ...userData } = artist;
 
       //Create User Document
@@ -577,6 +579,7 @@ const seedToDatabase = async () => {
     // Seed Customer Data
 
     for (const customer of customers) {
+      customer.password = await bcrypt.hash(customer.password, 10);
       await User.create(customer);
     }
     console.log("Seeding complete!");
