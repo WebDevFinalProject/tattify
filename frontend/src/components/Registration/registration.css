@@ -11,15 +11,7 @@
 #registraion-div {
   background-color: var(--main-background-color);
   height: 100vh;
-}
-
-#registraion-div h1 {
-  font-family: "Abril Fatface", serif;
-  color: var(--text-color-header);
-  font-size: 6rem;
-  margin-bottom: 9rem;
-  padding-top: 8rem;
-  text-align: center;
+  display: flex;
 }
 
 #registration-form {
@@ -30,8 +22,6 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: "Lato", sans-serif;
-  display: flex;
-  flex-direction: column;
 
   h2 {
     font-size: 2.5rem;

@@ -6,11 +6,11 @@ import TattooHistory from "./components/article/tattoo-history/TattooHistory";
 import SkinCare from "./components/article/skin-care-blog/SkinCare";
 import Login from "./components/Login/Login.jsx";
 import ArtistProfile from "./components/ArtistProfile/ArtistForm.jsx";
-import ArtistForm from "./components/ArtistProfile/ArtistForm.jsx";
 import TatooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
 import ArtistList from "./components/Home/ArtistList.jsx";
 import Registration from "./components/Registration/Registration.jsx";
-import Login from "./components/Login/Login.jsx";
+import Customers from "./components/Customers-Profile/Customers.jsx";
+
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
         <Route path="/register" element={<Registration />} />
         <Route path="/artist-profile" element={<ArtistProfile />} />
         <Route path="/artists" element={<ArtistList />} />
+        <Route path="/cutomer-profile" element={<Customers />} />
       </Routes>
     </>
   );

@@ -44,6 +44,12 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+  //
+
+  const clickHandlerVisibility = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -52,7 +58,7 @@ const ContextProvider = ({ children }) => {
         logout,
         setUser,
         isOpen,
-        setIsOpen,
+        clickHandlerVisibility,
         error,
       }}
     >
