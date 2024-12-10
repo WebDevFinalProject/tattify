@@ -3,7 +3,7 @@
     display       : flex;
     flex-direction: column;
     align-items   : center;
-    background    : linear-gradient(180deg, rgb(229, 209, 188) 0%, rgba(0, 0, 0, 0) 50%);
+
 
     h2 {
         font-family: "Lora", serif;
@@ -30,14 +30,15 @@
         background-color: #830707;
         border          : none;
         border-radius   : 30px;
-        height          : 3.5rem;
-        width           : 16rem;
+        height          : 4rem;
+        width           : 14rem;
         padding-bottom  : 0.2rem;
         cursor          : pointer;
         font-family     : Verdana, Geneva, Tahoma, sans-serif;
-        color           : white;
+        color           : whitesmoke;
         padding-top     : 2px;
         font-size       : 1.5rem;
+        text-transform  : uppercase;
     }
 
 }
