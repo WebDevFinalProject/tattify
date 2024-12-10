@@ -3,8 +3,8 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SlLocationPin } from "react-icons/sl";
 import "./ArtistList.css";
-import NavBar from "../NavBar";
 import { Link } from "react-router-dom";
+import NavBar from "../NavBar";
 
 const ArtistList = () => {
   const [artists, setArtists] = useState([]);
@@ -32,7 +32,7 @@ const ArtistList = () => {
 
   return (
     <div className="artist-list">
-      <NavBar />
+      <NavBar/>
       <div className="my-5 container-fluid">
         <div className="artist-hero-image mb-5 p-5">
           <div>
@@ -45,7 +45,7 @@ const ArtistList = () => {
               <input
                 type="text"
                 className="form-control w-25"
-                placeholder="Search by city or country..."
+                placeholder=" 🔍 Search by city or country..."
                 value={search} // Bind search state to the input
                 onChange={(e) => setSearch(e.target.value)} // Update search state on input change
               />
