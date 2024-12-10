@@ -31,7 +31,7 @@ function TatooConsiderations() {
           Your tattoo is a reflection of your personality. Spend time exploring
           different designs, tattoo styles, and their meanings. Whether it's a
           symbolic quote, a vibrant piece of art, or a simple minimalist design,
-          ensure it resonates with you.
+          ensure it resonates with you again.
         </p>
         <ul>
           <li>
