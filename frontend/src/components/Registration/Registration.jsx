@@ -79,7 +79,6 @@ const Registration = () => {
     <>
       <NavBar />
       <div id="registraion-div">
-        <h1>Tattify</h1>
         <form
           onSubmit={handleSubmit}
           encType="multipart/form-data"

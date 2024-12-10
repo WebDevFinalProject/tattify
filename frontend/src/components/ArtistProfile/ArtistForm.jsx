@@ -24,7 +24,7 @@ const ArtistForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/artists/create-profile", formData);
+      const response = await api.post("/artists/create-profile", formData);
       alert(response.data.message || "Profile created successfully!");
       setFormData({
         bio: "",

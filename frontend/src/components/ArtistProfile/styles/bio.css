@@ -1,0 +1,18 @@
+/* H2 is a styled component */
+/* It may be edited in StyledComponents.css */
+/* components/ArtistProfile/styled/StyledComponents.css */
+
+.artist-bio-container {
+    margin-bottom: 5rem;
+
+    p {
+        font-family     : "Lora", serif;
+        font-size       : 1.6rem;
+        padding         : 1.3rem 2.2rem;
+        font-weight     : 500;
+        background-color: #f1eae3;
+        color           : #4d4238;
+        letter-spacing  : 0.02rem;
+
+    }
+}

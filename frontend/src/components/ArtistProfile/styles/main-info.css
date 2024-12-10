@@ -1,0 +1,44 @@
+.artist-profile-main-info-container {
+    padding       : 5rem;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+
+
+    h2 {
+        font-family: "Lora", serif;
+        font-weight: 900;
+        font-size  : 2.9rem;
+    }
+
+    p {
+        font-family: "Antic", sans-serif;
+        font-size  : 2rem;
+        font-weight: 800;
+        color      : #a24435;
+
+    }
+
+    img {
+        width        : 23rem;
+        border       : 0.7rem solid white;
+        border-radius: 50%;
+    }
+
+    button {
+        margin-top      : 2rem;
+        background-color: #830707;
+        border          : none;
+        border-radius   : 30px;
+        height          : 4rem;
+        width           : 14rem;
+        padding-bottom  : 0.2rem;
+        cursor          : pointer;
+        font-family     : Verdana, Geneva, Tahoma, sans-serif;
+        color           : whitesmoke;
+        padding-top     : 2px;
+        font-size       : 1.5rem;
+        text-transform  : uppercase;
+    }
+
+}

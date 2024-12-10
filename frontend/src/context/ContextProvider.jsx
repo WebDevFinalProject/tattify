@@ -38,10 +38,17 @@ const ContextProvider = ({ children }) => {
     try {
       await api.post("/api/user-logout");
       setUser(null);
+      setIsOpen(false);
     } catch (error) {
       setError("An error occurred while logging out. Please try again.");
       setTimeout(() => setError(null), 5000);
     }
+  };
+
+  //
+
+  const clickHandlerVisibility = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -52,7 +59,7 @@ const ContextProvider = ({ children }) => {
         logout,
         setUser,
         isOpen,
-        setIsOpen,
+        clickHandlerVisibility,
         error,
       }}
     >
