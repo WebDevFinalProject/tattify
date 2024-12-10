@@ -88,22 +88,23 @@ export const createArtistProfile = async (req, res) => {
     res.status(500).json({ message: "Error fetching artists", error });
   }
 };  */
-
 export const getArtistProfile = async (req, res) => {
   try {
-    const {city } = req.query;  // Get the location from the query parameters
- 
-
+    const { search } = req.query; // Search term from query parameters
     let filter = {};
 
-    if (city) {
-      filter["city"] = city;
+    if (search) {
+      filter = {
+        $or: [
+          { city: { $regex: search, $options: "i" } }, // Case-insensitive match for city
+          { country: { $regex: search, $options: "i" } }, // Case-insensitive match for country
+        ],
+      };
     }
 
     const artists = await ArtistProfile.find(filter).populate({
       path: "user",
       select: "firstName lastName location portfolio profileImage",
-      match: { role: "artist" } // Select fields to include from User
     });
 
     res.status(200).json(artists);
@@ -113,19 +114,47 @@ export const getArtistProfile = async (req, res) => {
 };
 
 
+
 //UPDATE ARTIST PROFILE
 export const updateArtistProfile = async (req, res) => {
   const { artistId } = req.params;
-  const { bio, specialties, experience, certifications, languagesSpoken, city, country, studioLocation, basePrice, pricingDetails, socialLinks, isAvailable } = req.body;
+  const {
+    bio,
+    specialties,
+    experience,
+    certifications,
+    languagesSpoken,
+    city,
+    country,
+    studioLocation,
+    basePrice,
+    pricingDetails,
+    socialLinks,
+    isAvailable,
+  } = req.body;
 
   try {
     const artist = await ArtistProfile.findById(artistId);
     if (!artist) return res.status(404).json({ message: "Artist not found" });
-    if (artist.user.toString() !== req.userId) return res.status(403).json({ message: "Unauthorized" });
+    if (artist.user.toString() !== req.userId)
+      return res.status(403).json({ message: "Unauthorized" });
 
     // Update fields dynamically
-    const updatedFields = { bio, specialties, experience, certifications, languagesSpoken, city, country, studioLocation, basePrice, pricingDetails, socialLinks, isAvailable };
-    Object.keys(updatedFields).forEach(key => {
+    const updatedFields = {
+      bio,
+      specialties,
+      experience,
+      certifications,
+      languagesSpoken,
+      city,
+      country,
+      studioLocation,
+      basePrice,
+      pricingDetails,
+      socialLinks,
+      isAvailable,
+    };
+    Object.keys(updatedFields).forEach((key) => {
       if (updatedFields[key] !== undefined) artist[key] = updatedFields[key];
     });
 
@@ -135,7 +164,6 @@ export const updateArtistProfile = async (req, res) => {
     res.status(500).json({ message: "Error updating profile", error });
   }
 };
-
 
 // Delete Artist Profile
 export const deleteArtistProfile = async (req, res) => {
@@ -163,17 +191,16 @@ export const deleteArtistProfile = async (req, res) => {
   }
 };
 
-
 export const searchArtistProfile = async (req, res) => {
   try {
     const { name, location } = req.query;
 
     const filter = {};
     if (name) {
-      filter['user.firstName'] = name; // Exact match for name
+      filter["user.firstName"] = name; // Exact match for name
     }
     if (location) {
-      filter['user.location'] = location; // Exact match for location
+      filter["user.location"] = location; // Exact match for location
     }
 
     // Fetch artists and populate user data

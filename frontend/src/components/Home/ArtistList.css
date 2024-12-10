@@ -2,7 +2,7 @@
 
 .artistListCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(237, 12, 12, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -25,3 +25,36 @@
     font-size: 2rem;
   }
 }
+
+.artist-list {
+  background-color: #f1eae3;
+}
+
+.search-bar-heading {
+  font-family: "Abril Fatface", serif;
+  font-size: 4em;
+}
+
+.search-bar input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2em;
+  background: rgba(255, 255, 255, 0.321);
+  border: none;
+
+}
+
+.search-bar input::placeholder {
+  color: white;
+  font-weight: 500;
+}
+
+.search-bar input:hover{
+  border: 2px solid rgba(248, 164, 164, 0.703);
+  background-color: #b8b7b66d;
+}
+.search-bar {
+  text-align: center;
+}
+
+
+
