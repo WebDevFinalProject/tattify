@@ -15,6 +15,7 @@ import { UserContext } from "./context/ContextProvider.jsx";
 import Profile from "./components/testing/Profile.jsx";
 import TatooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
 import ArtistList from "./components/ArtistList/ArtistList.jsx";
+import FirstTattooGuide from "./components/article/FirstTattooGuide/FirstTattooGuide.jsx";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           path="article/tattoo-considerations"
           element={<TatooConsiderations />}
         />
+        <Route path="/article/first-tattoo-guide" element={<FirstTattooGuide/>}/>
         <Route path="/article/global-tattoo" element={<GlobalTattoo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
