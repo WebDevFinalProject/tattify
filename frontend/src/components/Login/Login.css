@@ -96,7 +96,7 @@
   padding-bottom  : 0.2rem;
   font-family     : Verdana, Geneva, Tahoma, sans-serif;
   font-size       : 1.3rem;
-  margin-left: 15px;
+  margin-left: 85px;
  
 
   &:hover {
@@ -130,34 +130,7 @@
 
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .container-login {
-    flex-direction: column;
-    width: 90%;
-    padding: 15px;
-  }
 
-
-  .logo {
-    padding-right: 0;
-    padding-top: 20px;
-    margin-bottom: 5px;
-    text-align: center;
-  }
-
-  .logo h1 {
-    font-size: 40px;
-  }
-  .logo ul, .logo li, 
-  .logo h2{
-    display: none;
-  }
-
-  .login-form {
-    width: 100%;
-    padding: 20px;
-  }
-}
 @media (min-width: 481px) and (max-width: 768px) {
   .container-login {
     flex-direction: column;
@@ -184,6 +157,7 @@
     width: 80%;
     height: 50px;
     font-size: 18px;
+   margin-left: 40px;
   }
 
 }
