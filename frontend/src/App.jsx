@@ -11,6 +11,7 @@ import ArtistList from "./components/Home/ArtistList.jsx";
 import Registration from "./components/Registration/Registration.jsx";
 import Customers from "./components/Customers-Profile/Customers.jsx";
 
+
 function App() {
   return (
     <>

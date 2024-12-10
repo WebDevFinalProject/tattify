@@ -8,17 +8,15 @@ const ArtistList = () => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [searchQuery, setSearchQuery] = useState(""); // Single search query
+  const [search, setSearch] = useState(""); // State to store the search input
 
   useEffect(() => {
     const fetchArtists = async () => {
+
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:4000/api/artists/profile",
-          {
-            params: { query: searchQuery }, // Pass the search query to the backend
-          }
+          `http://localhost:4000/api/artists/profile?city=${search}`
         );
         setArtists(response.data);
       } catch (err) {
@@ -29,7 +27,7 @@ const ArtistList = () => {
     };
 
     fetchArtists();
-  }, [searchQuery]); // Re-run effect when search query changes
+  }, [search]); // Fetch artists whenever the search term changes
 
   return (
     <div className="container my-5">
@@ -49,9 +47,9 @@ const ArtistList = () => {
         <input
           type="text"
           className="form-control"
-          placeholder="Search by name or location..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+          placeholder="Search by name or city..."
+          value={search}  // Bind search state to the input
+          onChange={(e) => setSearch(e.target.value)}  // Update search state on input change
         />
       </div>
 
@@ -106,7 +104,7 @@ const ArtistList = () => {
                 </h3>
                 <p className="card-text fs-4">
                   <SlLocationPin className="fs-5" />
-                  {artist.city}, {artist.country}
+                  {artist.city} {artist.country}
                 </p>
                 <button className="btn btn-danger fs-5">Chat</button>
               </div>
