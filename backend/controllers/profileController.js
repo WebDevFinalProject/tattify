@@ -74,12 +74,36 @@ export const createArtistProfile = async (req, res) => {
 };
 
 // Get all artists
-export const getArtistProfile = async (req, res) => {
+/* export const getArtistProfile = async (req, res) => {
   try {
+    
     const artists = await ArtistProfile.find().populate({
       path: "user",
       select: "firstName lastName location portfolio profileImage", // Select fields to include from User
       match: { role: "artist" }, // Ensure only users with the role "artist" are included
+    });
+
+    res.status(200).json(artists);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching artists", error });
+  }
+};  */
+
+export const getArtistProfile = async (req, res) => {
+  try {
+    const {city } = req.query;  // Get the location from the query parameters
+ 
+
+    let filter = {};
+
+    if (city) {
+      filter["city"] = city;
+    }
+
+    const artists = await ArtistProfile.find(filter).populate({
+      path: "user",
+      select: "firstName lastName location portfolio profileImage",
+      match: { role: "artist" } // Select fields to include from User
     });
 
     res.status(200).json(artists);
@@ -136,5 +160,32 @@ export const deleteArtistProfile = async (req, res) => {
     res.status(200).json({ message: "Profile deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting profile", error });
+  }
+};
+
+
+export const searchArtistProfile = async (req, res) => {
+  try {
+    const { name, location } = req.query;
+
+    const filter = {};
+    if (name) {
+      filter['user.firstName'] = name; // Exact match for name
+    }
+    if (location) {
+      filter['user.location'] = location; // Exact match for location
+    }
+
+    // Fetch artists and populate user data
+    const artists = await ArtistProfile.find(filter).populate({
+      path: "user",
+      select: "firstName lastName location portfolio profileImage",
+      match: { role: "artist" },
+    });
+
+    res.status(200).json(artists); // Return the artists as JSON response
+  } catch (error) {
+    console.error(error); // Log the error for debugging
+    res.status(500).json({ message: "Error fetching artists" });
   }
 };
