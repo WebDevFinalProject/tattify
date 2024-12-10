@@ -33,7 +33,7 @@ function Login() {
         navigate("/artist-profile");
       } else if (role === "customer") {
         // Redirect to dashboard
-        navigate("/cutomer-profile");
+        navigate("/customer-profile");
       } else {
         setErrorMessage("Unknown role. Please contact support.");
       }

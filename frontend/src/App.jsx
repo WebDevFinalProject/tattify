@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import "./App.css";
 import Articles from "./pages/Articles";
@@ -10,9 +10,12 @@ import TatooConsiderations from "./components/article/TattooConsideration/Tattoo
 import ArtistList from "./components/Home/ArtistList.jsx";
 import Registration from "./components/Registration/Registration.jsx";
 import Customers from "./components/Customers-Profile/Customers.jsx";
-
+import { useContext } from "react";
+import { UserContext } from "./context/ContextProvider.jsx";
+import Profile from "./components/testing/Profile.jsx";
 
 function App() {
+  const { user } = useContext(UserContext);
   return (
     <>
       <Routes>
@@ -26,9 +29,16 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
-        <Route path="/artist-profile" element={<ArtistProfile />} />
+        <Route path="/artist-form" element={<ArtistProfile />} />
         <Route path="/artists" element={<ArtistList />} />
-        <Route path="/cutomer-profile" element={<Customers />} />
+        <Route
+          path="/customer-profile"
+          element={user ? <Customers /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/artist-profile"
+          element={user ? <Profile /> : <Navigate to="/login" />}
+        />
       </Routes>
     </>
   );

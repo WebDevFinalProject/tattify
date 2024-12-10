@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useContext } from "react";
 import { UserContext } from "../context/ContextProvider";
+import { HiLogout, HiUser } from "react-icons/hi";
 
 function NavBar() {
   const location = useLocation();
   const { user, clickHandlerVisibility, isOpen, logout } =
     useContext(UserContext);
+  const [isProfileOpen, setProfileIsOpen] = useState(false);
+
+  const toggleProfile = () => {
+    setProfileIsOpen(!isProfileOpen);
+  };
 
   useEffect(() => {
     if (location.hash) {
@@ -40,10 +46,32 @@ function NavBar() {
           <NavLink to="/articles">Article</NavLink>
         </nav>
         {user ? (
-          <div className="button-container">
-            <button className="nav-button" onClick={logout}>
-              Logout
-            </button>
+          <div className="nav-dropdown-container">
+            <div className="nav-account" onClick={toggleProfile}>
+              <img src={user.profileImage} alt="User Profile" />
+            </div>
+
+            <div
+              className={`nav-profile-path ${
+                isProfileOpen ? "open-profile-dropdown" : ""
+              }`}
+            >
+              <div className="account-dropdown-menu">
+                <NavLink
+                  to={
+                    user.role === "customer"
+                      ? "/customer-profile"
+                      : "/artist-profile"
+                  }
+                  className="nav-profile"
+                >
+                  <HiUser size={21} /> &nbsp; Profile
+                </NavLink>
+                <button className="nav-button-logout" onClick={logout}>
+                  <HiLogout size={21} /> &nbsp; Logout
+                </button>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="button-container">
