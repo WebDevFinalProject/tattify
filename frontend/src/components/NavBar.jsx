@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./NavBar.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import { useContext } from "react";
+import { UserContext } from "../context/ContextProvider";
 
 function NavBar() {
-  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user, clickHandlerVisibility, isOpen, logout } =
+    useContext(UserContext);
 
   useEffect(() => {
     if (location.hash) {
@@ -18,17 +21,13 @@ function NavBar() {
     }
   }, [location]);
 
-  const navOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <>
       <div className="navbar-container">
         <div className="logo-container">
           <h1>Tattify</h1>
         </div>
-        <div className="nav-icon" onClick={navOpen}>
+        <div className="nav-icon" onClick={clickHandlerVisibility}>
           {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
         </div>
         <nav className={`nav-links ${isOpen ? "open-nav" : ""}`}>
@@ -40,11 +39,19 @@ function NavBar() {
           <NavLink to="/#contact-form">Contact</NavLink>
           <NavLink to="/articles">Article</NavLink>
         </nav>
-        <div className="button-container">
-          <button className="nav-button">
-            <NavLink to="/login">Login/Register</NavLink>
-          </button>
-        </div>
+        {user ? (
+          <div className="button-container">
+            <button className="nav-button" onClick={logout}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="button-container">
+            <NavLink to="/login" className="nav-button">
+              Login/Register
+            </NavLink>
+          </div>
+        )}
       </div>
     </>
   );

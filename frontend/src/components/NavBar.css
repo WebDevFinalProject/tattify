@@ -2,18 +2,18 @@
 
 .navbar-container {
   background-color: #d4c6bd;
-  display         : flex;
-  justify-content : space-between;
-  align-items     : center;
-  padding         : 2rem 5rem;
-  position        : sticky;
-  top             : 0px;
-  box-shadow      : 0px 8px 27px -9px #00000091;
-  z-index         : 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5rem;
+  position: sticky;
+  top: 0px;
+  box-shadow: 0px 8px 27px -9px #00000091;
+  z-index: 1000;
 
   h1 {
     font-family: "Abril Fatface", serif;
-    font-size  : 4rem;
+    font-size: 4rem;
     font-weight: 100;
   }
 }
@@ -24,54 +24,50 @@
 }
 
 .nav-links {
-  width          : 45%;
-  display        : flex;
+  width: 45%;
+  display: flex;
   justify-content: space-around;
 }
 
 .nav-links a {
-  font-size      : 1.9rem;
+  font-size: 1.9rem;
   text-decoration: none;
-  font-family    : Verdana, Geneva, Tahoma, sans-serif;
-  color          : #45342d;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #45342d;
 }
 
-
-.button-container button {
+.button-container .nav-button {
   color: #f2e2d7;
   background-color: #830707;
-  border          : none;
-  border-radius   : 30px;
-  height          : 3.5rem;
-  width           : 14rem;
-  padding-bottom  : 0.2rem;
-  cursor          : pointer;
+  border: none;
+  border-radius: 30px;
+  height: 3.5rem;
+  width: 14rem;
+  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+  cursor: pointer;
+  color: #f2e2d7;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+  font-size: 1.4rem;
+
+  &:visited {
+    color: #f2e2d7;
+  }
 
   &:hover {
     background-color: #b31b1b;
-  }
-
-  a {
-    color          : #f2e2d7;
-    font-family    : Verdana, Geneva, Tahoma, sans-serif;
-    text-decoration: none;
-    font-size      : 1.4rem;
-
-    &:visited {
-      color: #f2e2d7;
-    }
   }
 }
 
 @keyframes dropdown {
   0% {
     max-height: 0;
-    opacity   : 0;
+    opacity: 0;
   }
 
   100% {
     max-height: 500px;
-    opacity   : 1;
+    opacity: 1;
   }
 }
 
@@ -91,7 +87,7 @@
 
   .nav-header-dropdown {
     padding-bottom: 1em;
-    font-size     : 3.5rem;
+    font-size: 3.5rem;
   }
 
   .nav-header-dropdown h2 {
@@ -101,20 +97,20 @@
   }
 
   .nav-links {
-    display         : none;
-    flex-direction  : column;
-    justify-content : center;
-    align-items     : center;
-    gap             : 2em;
-    position        : absolute;
-    top             : 100px;
-    left            : 0;
-    width           : 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
     background-color: #d4c6bd;
-    height          : 450px;
-    z-index         : 999;
-    box-shadow      : 0px 8px 27px -9px #00000091;
-    animation       : dropdown 0.3s ease forwards;
+    height: 450px;
+    z-index: 999;
+    box-shadow: 0px 8px 27px -9px #00000091;
+    animation: dropdown 0.3s ease forwards;
   }
 
   .nav-links.open-nav {
