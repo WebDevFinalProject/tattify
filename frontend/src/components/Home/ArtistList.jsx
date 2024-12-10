@@ -10,15 +10,15 @@ const ArtistList = () => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState(""); // State to store the search input
+  const [search, setSearch] = useState(""); // Single search input
 
   useEffect(() => {
     const fetchArtists = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          `http://localhost:4000/api/artists/profile?city=${search}`
-        );
+        const response = await axios.get(`http://localhost:4000/api/artists/profile`, {
+          params: { search }, // Pass search term directly
+        });
         setArtists(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load artists.");
@@ -28,26 +28,24 @@ const ArtistList = () => {
     };
 
     fetchArtists();
-  }, [search]); // Fetch artists whenever the search term changes
+  }, [search]);
 
   return (
     <div className="artist-list">
       <NavBar />
       <div className="my-5 container-fluid">
-        {/* Hero Section */}
         <div className="artist-hero-image mb-5 p-5">
           <div>
             <h1 className="display-4 pt-5">Hire Artists</h1>
             <p className="lead">
-              Transform your ideas into art — hire a talented tattoo artist
-              today.
+              Transform your ideas into art — hire a talented tattoo artist today.
             </p>
-            {/* Search Box */}
-            <div className="m-4  search-bar  d-flex justify-content-center">
+            {/* Single Search Bar */}
+            <div className="m-4 search-bar d-flex justify-content-center">
               <input
                 type="text"
                 className="form-control w-25"
-                placeholder="Search by name or city..."
+                placeholder="Search by city or country..."
                 value={search} // Bind search state to the input
                 onChange={(e) => setSearch(e.target.value)} // Update search state on input change
               />
