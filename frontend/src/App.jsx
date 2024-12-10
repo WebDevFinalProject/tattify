@@ -10,7 +10,7 @@ import ArtistForm from "./components/ArtistProfile/ArtistForm.jsx";
 import TatooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
 import ArtistList from "./components/Home/ArtistList.jsx";
 import Registration from "./components/Registration/Registration.jsx";
-
+import Login from "./components/Login/Login.jsx";
 
 function App() {
   return (
