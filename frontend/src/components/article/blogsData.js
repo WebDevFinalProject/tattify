@@ -2,6 +2,7 @@ import skinCare from "../../assets/blogs-images/skincare.jpeg";
 import history from "../../assets/blogs-images/history.webp";
 import considerations from "../../assets/blogs-images/considerations.jpg"
 import GlobalTattoo from "../../assets/global-tattoo/GlobalTatoo.webp";
+import first_Tattoo from "../../assets/blogs-images/first_Tattoo.jpg"
 
 const blogsData = [
   {
@@ -30,6 +31,12 @@ const blogsData = [
     img: GlobalTattoo,
     title:"The Art of Tattoos: Connecting Cultures Globally",
     path:"/article/global-tattoo"
+  },
+  {
+    id: "first-tattoo-guide",
+    img: first_Tattoo,
+    title:"First Tattoo Guide",
+    path:"/article/first-tattoo-guide"
   }
 ];
 

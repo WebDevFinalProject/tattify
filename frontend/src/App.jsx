@@ -6,9 +6,7 @@ import TattooHistory from "./components/article/tattoo-history/TattooHistory";
 import SkinCare from "./components/article/skin-care-blog/SkinCare";
 import Login from "./components/Login/Login.jsx";
 import ArtistProfile from "./pages/ArtistProfile.jsx";
-import ArtistForm from "./components/ArtistProfile/ArtistForm.jsx"
-import ArtistList from "./components/ArtistList/ArtistList.jsx";
-import TattooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
+import ArtistForm from "./components/ArtistProfile/ArtistForm.jsx";
 import Registration from "./components/Registration/Registration.jsx";
 import Customers from "./components/Customers-Profile/Customers.jsx";
 import GlobalTattoo from "./components/article/GlobalTattoo/GlobalTattoo.jsx";
@@ -16,6 +14,9 @@ import { useContext } from "react";
 import { UserContext } from "./context/ContextProvider.jsx";
 import Profile from "./components/testing/Profile.jsx";
 import TatooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
+import ArtistList from "./components/ArtistList/ArtistList.jsx";
+import FirstTattooGuide from "./components/article/FirstTattooGuide/FirstTattooGuide.jsx";
+
 
 function App() {
   const { user } = useContext(UserContext);
@@ -30,6 +31,7 @@ function App() {
           path="article/tattoo-considerations"
           element={<TatooConsiderations />}
         />
+        <Route path="/article/first-tattoo-guide" element={<FirstTattooGuide/>}/>
         <Route path="/article/global-tattoo" element={<GlobalTattoo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />

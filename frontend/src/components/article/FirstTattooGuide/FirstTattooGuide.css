@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Antic&family=Gafata&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lora:ital,wght@0,400..700;1,400..700&family=Varta:wght@300..700&display=swap");
+
+.tattooGuideContainer {
+  background-color: #e1d6cc;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+ 
+  padding: 100px;
+}
+
+
+.tattooGuideHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tattooGuideHeader h1 {
+  font-family: "Abril Fatface", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4em;
+}
+
+.tattooGuideHeader p {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 2em;
+}
+
+.tattooGuideHeader img {
+  width: 25%;
+  height: 25%;
+}
+
+.research {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%;
+}
+
+.rsearch-point {
+  margin-bottom: 2%;
+}
+.rsearch-point h2 {
+  font-family: "Lora", serif;
+  font-style: normal;
+  font-size: 2.5em;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.rsearch-point h3 {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 2em;
+  font-weight: 800;
+}
+.rsearch-point p {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 2em;
+}
+
+.rsearch-point ul li {
+  padding: 5px;
+}
+
+.footer-first-tattoo {
+  background-color: #e1d6cc;
+  padding: 5px;
+  border-top: 1px solid rgba(128, 128, 128, 0.438);
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+}
+
+@media (max-width: 1150px) {
+  .tattooGuideContainer {
+    padding: 50px;
+  }
+  .tattooGuideHeader {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .first-tattoo-video {
+    width: 500px;
+  }
+}
+
+@media (max-width: 550px) {
+  .first-tattoo-video {
+    width: 300px;
+  }
+}
