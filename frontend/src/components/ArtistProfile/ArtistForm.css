@@ -122,6 +122,19 @@
   resize: vertical;
 }
 
+.required {
+  color: red;
+  font-weight: bold;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+}
+
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .fromArtist {
