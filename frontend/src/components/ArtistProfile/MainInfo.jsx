@@ -1,35 +1,42 @@
-import ProfileImagePlaceholder from "../../assets/profile-image-placeholder.jpg";
-import "./styles/main-info.css";
-import api from "../api";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-function MainInfo() {
-    // const { user } = useContext(UserContext);
-    const { artistId } = useParams();
-    const [Artist, setArtist] = useState(null);
+const MainInfo = () => {
+    const { id } = useParams();
+    const [artist, setArtist] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchArtist = async () => {
             try {
-                const res = await api.get(`/api/artist/profile/${artistId}`);
+                const res = await axios.get(
+                    `http://localhost:4000/api/artist/profile/${id}`
+                );
+                console.log(res.data);
                 setArtist(res.data);
             } catch (error) {
-                console.log(error);
+                console.log(error.message);
+            } finally {
+                setLoading(false);
             }
         };
         fetchArtist();
-    }, [artistId]);
-
+    }, [id]);
     return (
-        <div className="artist-profile-main-info-container">
-            {Artist.map((artist) => (
+        <>
+            <h1>hi</h1>
+            {artist ? (
                 <div>
-                    <h2>Domi</h2>
+                    <h2>{artist.firstName}</h2>
+                    <h3>{artist.bio}</h3>
+                    {/* Render other artist details here */}
                 </div>
-            ))}
-        </div>
+            ) : (
+                <p>No artist data available.</p>
+            )}
+        </>
     );
-}
+};
 
 export default MainInfo;
