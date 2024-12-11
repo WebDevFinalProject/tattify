@@ -88,13 +88,24 @@ export const createArtistProfile = async (req, res) => {
     res.status(500).json({ message: "Error fetching artists", error });
   }
 };  */
+
 export const getArtistProfile = async (req, res) => {
   try {
     const { search } = req.query; // Search term from query parameters
-    let filter = {};
+    let userFilter = {};
+    let profileFilter = {};
 
     if (search) {
-      filter = {
+      // Filter for users (firstName or lastName)
+      userFilter = {
+        $or: [
+          { firstName: { $regex: search, $options: "i" } }, // Case-insensitive match for first name
+          { lastName: { $regex: search, $options: "i" } }, // Case-insensitive match for last name
+        ],
+      };
+
+      // Filter for profiles (city or country)
+      profileFilter = {
         $or: [
           { city: { $regex: search, $options: "i" } }, // Case-insensitive match for city
           { country: { $regex: search, $options: "i" } }, // Case-insensitive match for country
@@ -102,9 +113,23 @@ export const getArtistProfile = async (req, res) => {
       };
     }
 
-    const artists = await ArtistProfile.find(filter).populate({
+    // Find matching users (if search term exists)
+    let matchingUserIds = [];
+    if (Object.keys(userFilter).length > 0) {
+      const matchingUsers = await User.find(userFilter).select("_id"); // Get only user IDs
+      matchingUserIds = matchingUsers.map((user) => user._id); // Extract user IDs
+    }
+
+    // Combine user IDs into the profile filter if search term exists
+    if (matchingUserIds.length > 0) {
+      profileFilter.$or = profileFilter.$or || [];
+      profileFilter.$or.push({ user: { $in: matchingUserIds } }); // Match profiles linked to these users
+    }
+
+    // Fetch all profiles if no search, otherwise filter
+    const artists = await ArtistProfile.find(profileFilter).populate({
       path: "user",
-      select: "firstName lastName location portfolio profileImage",
+      select: "firstName lastName location portfolio profileImage", // Select specific fields
     });
 
     res.status(200).json(artists);
@@ -112,6 +137,8 @@ export const getArtistProfile = async (req, res) => {
     res.status(500).json({ message: "Error fetching artists", error });
   }
 };
+
+
 
 
 
@@ -154,6 +181,7 @@ export const updateArtistProfile = async (req, res) => {
       socialLinks,
       isAvailable,
     };
+    
     Object.keys(updatedFields).forEach((key) => {
       if (updatedFields[key] !== undefined) artist[key] = updatedFields[key];
     });
