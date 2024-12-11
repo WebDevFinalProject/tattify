@@ -3,9 +3,9 @@ import User from "../model/user.js";
 
 export const publicProfile = async (req, res) => {
   try {
-    const artistId = req.params.id;
-
-    const artistUser = await User.findById(artistId).select(
+    const { id } = req.params;
+    console.log(id);
+    const artistUser = await User.findById(id).select(
       "role firstName lastName profileImage portfolio"
     );
 
@@ -15,7 +15,7 @@ export const publicProfile = async (req, res) => {
         .json({ message: "Artist not found or not an artist!" });
     }
 
-    const artist = await ArtistPortfolio.findOne({ user: artistId })
+    const artist = await ArtistPortfolio.findOne({ user: id })
       .populate("user", "firstName lastName profileImage")
       .populate({
         path: "reviews", // Populate the reviews and specific fields within reviews
@@ -40,7 +40,7 @@ export const publicProfile = async (req, res) => {
     const response = {
       firstName: artist.user.firstName,
       lastName: artist.user.lastName,
-      profileImage: artist.user.profileImage,
+      profileImage: artist.user.profileImage || null,
       bio: artist.bio,
       specialties: artist.specialties,
       experience: artist.experience,

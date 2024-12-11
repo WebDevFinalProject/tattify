@@ -16,9 +16,12 @@ const ArtistList = () => {
     const fetchArtists = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:4000/api/artists/profile`, {
-          params: { search }, // Pass search term directly
-        });
+        const response = await axios.get(
+          `http://localhost:4000/api/artists/profile`,
+          {
+            params: { search }, // Pass search term directly
+          }
+        );
         setArtists(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load artists.");
@@ -32,13 +35,14 @@ const ArtistList = () => {
 
   return (
     <div className="artist-list">
-      <NavBar/>
+      <NavBar />
       <div className="my-5 container-fluid">
         <div className="artist-hero-image mb-5 p-5">
           <div>
             <h1 className="display-4 pt-5">Hire Artists</h1>
             <p className="lead">
-              Transform your ideas into art — hire a talented tattoo artist today.
+              Transform your ideas into art — hire a talented tattoo artist
+              today.
             </p>
             {/* Single Search Bar */}
             <div className="m-4 search-bar d-flex justify-content-center">
@@ -116,6 +120,7 @@ const ArtistList = () => {
                       Chat
                     </Link>
                   </button>
+                  <Link to={`/test/${artist.user._id}`}>Profile</Link>
                 </div>
               </div>
             </div>
