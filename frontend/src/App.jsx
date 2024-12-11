@@ -42,6 +42,7 @@ function App() {
           path="/customer-profile"
           element={user ? <Customers /> : <Navigate to="/login" />}
         />
+        <Route path="/artist-profile" element={<ArtistProfile />} />
         <Route
           path="/artist-profile"
           element={user ? <ArtistProfile /> : <Navigate to="/login" />}
