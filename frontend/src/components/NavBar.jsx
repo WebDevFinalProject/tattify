@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useContext } from "react";
 import { UserContext } from "../context/ContextProvider";
-import { HiLogout, HiUser } from "react-icons/hi";
+import { HiChat, HiLogout, HiUser } from "react-icons/hi";
 
 function NavBar() {
   const location = useLocation();
@@ -57,16 +57,20 @@ function NavBar() {
               }`}
             >
               <div className="account-dropdown-menu">
+                {user && (
+                  <>
+                    <h2 className="customer-name">{`${user.firstName} ${user.lastName}`}</h2>
+                  </>
+                )}
                 <NavLink
-                  to={
-                    user.role === "customer"
-                      ? "/customer-profile"
-                      : "/artist-profile"
-                  }
+                  to={user.role === "customer" ? "/artists" : "/artists"}
                   className="nav-profile"
                 >
-                  <HiUser size={21} /> &nbsp; Profile
+                  <HiUser size={21} /> &nbsp; Artists
                 </NavLink>
+                <div className="chat-link">
+                  <HiChat size={30} /> Messages
+                </div>
                 <button className="nav-button-logout" onClick={logout}>
                   <HiLogout size={21} /> &nbsp; Logout
                 </button>
