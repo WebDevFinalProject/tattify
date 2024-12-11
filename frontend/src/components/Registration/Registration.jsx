@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./registration.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import NavBar from "../NavBar";
 
@@ -15,6 +15,8 @@ const Registration = () => {
   });
   const [response, setResponse] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
 
   // Ref for file input
   const fileInputRef = useRef(null);
@@ -37,11 +39,11 @@ const Registration = () => {
       } else {
         formDataToSend.append(key, formData[key]);
       }
+
+      
     }
     formDataToSend.append("role", role);
 
-    console.log(formData);
-    console.log(formDataToSend);
     try {
       const res = await api.post("/api/signup", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -68,6 +70,14 @@ const Registration = () => {
         // Make the response disappear after 3 seconds
         setTimeout(() => setResponse(""), 2000);
       }
+
+      if (role === "artist") {
+        // Redirect to artist profile setup
+        navigate("/artist/create-profile");
+      }else{
+        navigate("/login")
+      }
+
     } catch {
       setResponse("An error occurred. Please try again.");
       setTimeout(() => setResponse(""), 2000);

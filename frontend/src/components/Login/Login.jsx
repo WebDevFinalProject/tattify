@@ -31,12 +31,7 @@ function Login() {
       if (role === "artist") {
         // Redirect to artist profile setup
         navigate("/artist/create-profile");
-      } else if (role === "customer") {
-        // Redirect to dashboard
-        navigate("/customer-profile");
-      } else {
-        setErrorMessage("Unknown role. Please contact support.");
-      }
+      } 
     } catch (error) {
       if (error.response) {
         // Handle response error (e.g., bad credentials)
