@@ -16,6 +16,7 @@ import Profile from "./components/testing/Profile.jsx";
 import TatooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
 import ArtistList from "./components/ArtistList/ArtistList.jsx";
 import FirstTattooGuide from "./components/article/FirstTattooGuide/FirstTattooGuide.jsx";
+import Test from "./components/testing/Test.jsx";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -43,11 +44,12 @@ function App() {
           element={user ? <Customers /> : <Navigate to="/login" />}
         />
         <Route path="/artist-profile" element={<ArtistProfile />} />
-        <Route
+        {/*   <Route
           path="/artist-profile"
           element={user ? <ArtistProfile /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route path="/artist/create-profile" element={<ArtistForm />} />
+        <Route path="/test/:id" element={<Test />} />
       </Routes>
     </>
   );
