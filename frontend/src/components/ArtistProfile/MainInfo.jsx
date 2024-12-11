@@ -1,36 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+import "./styles/main-info.css";
 
-const MainInfo = () => {
-    const { id } = useParams();
-    const [artist, setArtist] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchArtist = async () => {
-            try {
-                const res = await axios.get(
-                    `http://localhost:4000/api/artist/profile/${id}`
-                );
-                console.log(res.data);
-                setArtist(res.data);
-            } catch (error) {
-                console.log(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchArtist();
-    }, [id]);
+const MainInfo = ({ artist }) => {
     return (
         <>
-            <h1>hi</h1>
             {artist ? (
-                <div>
-                    <h2>{artist.firstName}</h2>
-                    <h3>{artist.bio}</h3>
-                    {/* Render other artist details here */}
+                <div className="artist-profile-main-info-container">
+                    <img src={artist.profileImage} alt="" />
+                    <h2>
+                        {artist.firstName} {artist.lastName}
+                    </h2>
+                    <p>{artist.city}</p>
                 </div>
             ) : (
                 <p>No artist data available.</p>
