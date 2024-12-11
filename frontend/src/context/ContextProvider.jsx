@@ -61,6 +61,7 @@ const ContextProvider = ({ children }) => {
         isOpen,
         clickHandlerVisibility,
         error,
+        loading,
       }}
     >
       {children}

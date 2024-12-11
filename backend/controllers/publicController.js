@@ -4,7 +4,7 @@ import User from "../model/user.js";
 export const publicProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+
     const artistUser = await User.findById(id).select(
       "role firstName lastName profileImage portfolio"
     );

@@ -43,7 +43,19 @@ export async function registration(req, res) {
     });
 
     await newUser.save();
-    res.status(201).send({ message: "User generated successfully!" });
+    // res.status(201).send({ message: "User generated successfully!" });
+    const token = generateJWT(newUser._id);
+
+    res
+      .cookie("jwt", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+      })
+      .status(201)
+      .json({
+        message: "User generated successfully!",
+      });
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -72,6 +84,7 @@ export const userLogin = async (req, res) => {
       })
       .json({
         user: {
+          id: user._id,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,

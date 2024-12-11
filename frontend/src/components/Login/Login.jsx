@@ -29,8 +29,9 @@ function Login() {
       login(userData);
 
       if (role === "artist") {
-        // Redirect to artist profile 
-        navigate("/artist-profile");
+        // Redirect to artist profile
+        // navigate("/artist-profile");
+        navigate(`/artist-profile/${userData.id}`);
       } else if (role === "customer") {
         // Redirect to dashboard
         navigate("/customer-profile");
