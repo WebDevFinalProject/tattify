@@ -18,45 +18,38 @@ import ArtistList from "./components/ArtistList/ArtistList.jsx";
 import FirstTattooGuide from "./components/article/FirstTattooGuide/FirstTattooGuide.jsx";
 
 function App() {
-    const { user } = useContext(UserContext);
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/articles" element={<Articles />} />
-                <Route path="article/skin-care" element={<SkinCare />} />
-                <Route
-                    path="article/tattoo-history"
-                    element={<TattooHistory />}
-                />
-                <Route
-                    path="article/tattoo-considerations"
-                    element={<TatooConsiderations />}
-                />
-                <Route
-                    path="/article/first-tattoo-guide"
-                    element={<FirstTattooGuide />}
-                />
-                <Route
-                    path="/article/global-tattoo"
-                    element={<GlobalTattoo />}
-                />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Registration />} />
-                <Route path="/artists" element={<ArtistList />} />
-                <Route
-                    path="/customer-profile"
-                    element={user ? <Customers /> : <Navigate to="/login" />}
-                />
-                <Route
-                    path="/artist-profile"
-                    element={
-                        user ? <ArtistProfile /> : <Navigate to="/login" />
-                    }
-                />
-            </Routes>
-        </>
-    );
+  const { user } = useContext(UserContext);
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/articles" element={<Articles />} />
+        <Route path="article/skin-care" element={<SkinCare />} />
+        <Route path="article/tattoo-history" element={<TattooHistory />} />
+        <Route
+          path="article/tattoo-considerations"
+          element={<TatooConsiderations />}
+        />
+        <Route
+          path="/article/first-tattoo-guide"
+          element={<FirstTattooGuide />}
+        />
+        <Route path="/article/global-tattoo" element={<GlobalTattoo />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/artists" element={<ArtistList />} />
+        <Route
+          path="/customer-profile"
+          element={user ? <Customers /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/artist-profile"
+          element={user ? <ArtistProfile /> : <Navigate to="/login" />}
+        />
+        <Route path="/artist/create-profile" element={<ArtistForm />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
