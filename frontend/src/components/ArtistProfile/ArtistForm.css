@@ -1,57 +1,144 @@
-.form-artist-create{
-  background-color: #d7b49f;
-
+/* Section Styling */
+.form-artist-create {
+  display: flex;
+  flex-direction: column; /* Ensures content stacks vertically */
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
+  min-height: 100vh; /* Full viewport height */
+  background-image: var(--background-image); /* Background image */
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 20px;
+  color: #fff;
+  box-sizing: border-box;
 }
 
-.fromArtist{
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #e1d6cc;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Header Styling */
+.form-artist-create h1 {
+  font-family: "Abril Fatface", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 45px;
+  color: #700606; 
+  margin-bottom: 40px; 
+  text-align: center; 
 }
-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
 
-    &:focus{
-      border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
-    }
-    &::placeholder
-      {
-        font-style: italic;
-        color: #888;
-      }
-    
+/* Sub-header Styling */
+.form-artist-create h2 {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-size: 24px;
+  color: #700606;
+  font-weight: 600;
+  font-style: normal;
+  text-align: center;
+}
+
+/* Paragraph Styling */
+.form-artist-create p {
+  font-family: "Gafata", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center; 
+}
+
+/* Label Styling */
+.artistForm-label {
+  font-family: "Antic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  color: black;
+}
+
+/* Form Container */
+.fromArtist {
+  max-width: 700px; 
+  width: 100%;
+  padding: 20px;
+  background-color: #e1d6cc;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+/* Input Fields */
+.formArtist-input,
+.bio-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Focus Styling */
+.formArtist-input:focus,
+.bio-input:focus {
+  border-color: #700606;
+  outline: none;
+  box-shadow: 0 0 5px rgba(112, 6, 6, 0.3);
+}
+
+/* Placeholder Styling */
+.formArtist-input::placeholder,
+.bio-input::placeholder {
+  font-style: italic;
+  color: #888;
+}
+
+/* Button Styling */
+.formArtist-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #700606;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover{
+    background-color: #b31b1b;
+  transform: translateY(-2px);
   }
-  
- 
-  .form-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    color           : #f2e2d7;
-    background-color: #700606;
-    border          : none;
-    border-radius: 4px;
+}
+
+
+
+/* Bio Input Styling */
+.bio-input {
+  height: 120px;
+  resize: vertical;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .fromArtist {
+    padding: 15px;
+  }
+
+  .form-artist-create h2 {
+    font-size: 20px;
+  }
+
+  .formArtist-input,
+  .bio-input {
+    font-size: 14px;
+  }
+
+  .formArtist-button {
     font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    &:hover{
-      background-color: #b31b1b;
-    }
+    padding: 12px;
   }
-  
- 
-  .bio-input{
-    height: 150px;
-  }
- 
+}
