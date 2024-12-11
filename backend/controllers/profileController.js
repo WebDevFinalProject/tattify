@@ -89,47 +89,35 @@ export const createArtistProfile = async (req, res) => {
   }
 };  */
 
+
+
+// Get all artists card
 export const getArtistProfile = async (req, res) => {
   try {
-    const { search } = req.query; // Search term from query parameters
-    let userFilter = {};
-    let profileFilter = {};
+    const { search } = req.query;
+    const userFilter = search
+      ? {
+          $or: [
+            { firstName: { $regex: search, $options: "i" } },
+            { lastName: { $regex: search, $options: "i" } },
+          ],
+        }
+      : {};
 
-    if (search) {
-      // Filter for users (firstName or lastName)
-      userFilter = {
-        $or: [
-          { firstName: { $regex: search, $options: "i" } }, // Case-insensitive match for first name
-          { lastName: { $regex: search, $options: "i" } }, // Case-insensitive match for last name
-        ],
-      };
+    const profileFilter = search
+      ? {
+          $or: [
+            { city: { $regex: search, $options: "i" } },
+            { country: { $regex: search, $options: "i" } },
+            { user: { $in: await getUserIds(userFilter) } }, // Get user IDs if search exists
+          ],
+        }
+      : {};
 
-      // Filter for profiles (city or country)
-      profileFilter = {
-        $or: [
-          { city: { $regex: search, $options: "i" } }, // Case-insensitive match for city
-          { country: { $regex: search, $options: "i" } }, // Case-insensitive match for country
-        ],
-      };
-    }
-
-    // Find matching users (if search term exists)
-    let matchingUserIds = [];
-    if (Object.keys(userFilter).length > 0) {
-      const matchingUsers = await User.find(userFilter).select("_id"); // Get only user IDs
-      matchingUserIds = matchingUsers.map((user) => user._id); // Extract user IDs
-    }
-
-    // Combine user IDs into the profile filter if search term exists
-    if (matchingUserIds.length > 0) {
-      profileFilter.$or = profileFilter.$or || [];
-      profileFilter.$or.push({ user: { $in: matchingUserIds } }); // Match profiles linked to these users
-    }
-
-    // Fetch all profiles if no search, otherwise filter
     const artists = await ArtistProfile.find(profileFilter).populate({
       path: "user",
-      select: "firstName lastName location portfolio profileImage", // Select specific fields
+      select: "firstName lastName location portfolio profileImage",
+      match: { role: "artist" }, // Ensure only users with the role "artist" are included
     });
 
     res.status(200).json(artists);
@@ -138,8 +126,11 @@ export const getArtistProfile = async (req, res) => {
   }
 };
 
-
-
+// Helper function to get user IDs based on user filter
+const getUserIds = async (filter) => {
+  const users = await User.find(filter).select("_id");
+  return users.map((user) => user._id);
+};
 
 
 //UPDATE ARTIST PROFILE
