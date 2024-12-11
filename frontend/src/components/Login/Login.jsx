@@ -29,7 +29,7 @@ function Login() {
       login(userData);
 
       if (role === "artist") {
-        // Redirect to artist profile setup
+        // Redirect to artist profile 
         navigate("/artist-profile");
       } else if (role === "customer") {
         // Redirect to dashboard
