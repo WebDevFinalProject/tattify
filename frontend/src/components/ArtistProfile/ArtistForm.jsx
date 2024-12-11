@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ArtistForm.css";
+import { useNavigate } from "react-router-dom";
+import api from "../api";
 import backgroundImage from "../../assets/ArtistForm/backgroundImage.png";
+import { UserContext } from "../../context/ContextProvider.jsx";
 
 const ArtistForm = () => {
+  const { user, logout, error } = useContext(UserContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     bio: "",
     specialties: "",
@@ -16,16 +21,58 @@ const ArtistForm = () => {
     socialLinks: "",
   });
 
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  if (!user) {
+    navigate("/login");
+  }
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Validate form data
+  const validateForm = () => {
+    const validationErrors = {};
+    const requiredFields = [
+      "specialties",
+      "city",
+      "country",
+      "basePrice",
+      "bio",
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        validationErrors[field] = "This field is required.";
+      }
+    });
+
+    return validationErrors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({}); // Clear previous errors
+
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors); // Display validation errors
+      alert("You have to fill all fields marked with a red star!");
+      return;
+    }
+
+    setLoading(true);
     try {
-      const response = await api.post("/artists/create-profile", formData);
-      alert(response.data.message || "Profile created successfully!");
+      const response = await api.post("/artists/create-profile", formData, {
+        withCredentials: true,
+      });
+
+      alert(response.data.message || "Profile updated successfully!");
+
+      navigate("/artist-profile");
       setFormData({
         bio: "",
         specialties: "",
@@ -39,11 +86,13 @@ const ArtistForm = () => {
         socialLinks: "",
       });
     } catch (error) {
-      console.error("Error creating profile:", error);
+      console.error("Error updating profile:", error);
       alert(
         error.response?.data?.message ||
           "An error occurred. Please try again later."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,7 +109,7 @@ const ArtistForm = () => {
             is your chance to stand out!
           </p>
           <label className="artistForm-label" htmlFor="specialties">
-            Styles:
+            Styles:<span className="required">*</span>:
           </label>
           <input
             className="formArtist-input"
@@ -70,6 +119,9 @@ const ArtistForm = () => {
             onChange={handleChange}
             placeholder="e.g., Traditional, Minimalist, Abstract"
           />
+          {errors.specialties && (
+            <p className="error-text">{errors.specialties}</p>
+          )}
 
           <h2>Personal Information</h2>
           <p>
@@ -77,7 +129,7 @@ const ArtistForm = () => {
             easily.
           </p>
           <label className="artistForm-label" htmlFor="city">
-            City:
+            City:<span className="required">*</span>:
           </label>
           <input
             className="formArtist-input"
@@ -87,8 +139,10 @@ const ArtistForm = () => {
             onChange={handleChange}
             placeholder="City"
           />
+          {errors.city && <p className="error-text">{errors.city}</p>}
+
           <label className="artistForm-label" htmlFor="country">
-            Country:
+            Country:<span className="required">*</span>:
           </label>
           <input
             className="formArtist-input"
@@ -98,6 +152,7 @@ const ArtistForm = () => {
             onChange={handleChange}
             placeholder="Country"
           />
+          {errors.country && <p className="error-text">{errors.country}</p>}
 
           <h2>Pricing Details</h2>
           <p>
@@ -105,7 +160,7 @@ const ArtistForm = () => {
             for their next tattoo.
           </p>
           <label className="artistForm-label" htmlFor="basePrice">
-            Base Price:
+            Base Price:<span className="required">*</span>:
           </label>
           <input
             className="formArtist-input"
@@ -115,6 +170,8 @@ const ArtistForm = () => {
             onChange={handleChange}
             placeholder="e.g., $100/hour"
           />
+          {errors.basePrice && <p className="error-text">{errors.basePrice}</p>}
+
           <label className="artistForm-label" htmlFor="studioLocation">
             Studio Location:
           </label>
@@ -126,6 +183,7 @@ const ArtistForm = () => {
             onChange={handleChange}
             placeholder="Studio Location"
           />
+
           <label className="artistForm-label" htmlFor="pricingDetails">
             Pricing Details:
           </label>
@@ -138,47 +196,9 @@ const ArtistForm = () => {
             placeholder="e.g., Additional costs for large designs"
           />
 
-          <h2>Languages You Speak</h2>
-          <p>
-            Communicating in multiple languages can attract more clients. List
-            the languages you speak!
-          </p>
-          <label className="artistForm-label" htmlFor="languagesSpoken">
-            Languages Spoken:
-          </label>
-          <input
-            className="formArtist-input"
-            type="text"
-            name="languagesSpoken"
-            value={formData.languagesSpoken}
-            onChange={handleChange}
-            placeholder="e.g., English, Spanish, French"
-          />
-
-          <h2>Social Media and Online Presence</h2>
-          <p>
-            Share your social media links to showcase your work and connect with
-            clients.
-          </p>
-          <label className="artistForm-label" htmlFor="socialLinks">
-            Social Links:
-          </label>
-          <input
-            className="formArtist-input"
-            type="text"
-            name="socialLinks"
-            value={formData.socialLinks}
-            onChange={handleChange}
-            placeholder="e.g., Instagram, Facebook"
-          />
-
           <h2>About You</h2>
-          <p>
-            Add more information about yourself! Share your story and what
-            inspires you as an artist.
-          </p>
           <label className="artistForm-label" htmlFor="bio">
-            Bio:
+            Bio:<span className="required">*</span>:
           </label>
           <input
             className="bio-input"
@@ -188,9 +208,14 @@ const ArtistForm = () => {
             onChange={handleChange}
             placeholder="Write a brief introduction about yourself"
           />
+          {errors.bio && <p className="error-text">{errors.bio}</p>}
 
-          <button type="submit" className="formArtist-button">
-            Save
+          <button
+            type="submit"
+            className="formArtist-button"
+            disabled={loading}
+          >
+            {loading ? "Saving..." : "Save"}
           </button>
         </form>
       </section>
