@@ -49,7 +49,6 @@ function App() {
         /> */}
         <Route path="/artist/create-profile" element={<ArtistForm />} />
         <Route path="/artist-profile/:id" element={<ArtistProfile />} />
-        <Route path="/artist-profile" element={<ArtistProfile />} />
       </Routes>
     </>
   );
