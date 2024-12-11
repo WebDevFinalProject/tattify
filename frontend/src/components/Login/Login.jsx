@@ -30,7 +30,7 @@ function Login() {
 
       if (role === "artist") {
         // Redirect to artist profile setup
-        navigate("/artist-profile");
+        navigate("/artist/create-profile");
       } else if (role === "customer") {
         // Redirect to dashboard
         navigate("/customer-profile");
