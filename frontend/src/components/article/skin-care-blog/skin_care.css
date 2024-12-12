@@ -16,7 +16,6 @@
 
 .skin-care-logo-container {
   display: flex;
-  justify-content: space-between;
   height: 130px;
   position: sticky;
   top: 0;
@@ -28,17 +27,6 @@
 .nav-skin-care {
   display: flex;
   align-items: center;
-}
-
-.back-to-homepage {
-  text-decoration: none;
-  color: rgb(41, 40, 40);
-  font-weight: 700;
-  font-size: 1.7rem;
-
-  &:hover {
-    color: rgb(134, 119, 119);
-  }
 }
 
 .home-logo {
@@ -80,16 +68,6 @@
   object-fit: cover;
   max-width: 40%;
   height: auto;
-}
-
-.back-icon {
-  margin: 1.5em 0;
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  color: #45342d;
-}
-
-.back-icon:hover {
-  color: rgb(134, 119, 119);
 }
 
 .update-skin-care {
