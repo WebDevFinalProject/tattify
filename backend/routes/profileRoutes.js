@@ -8,17 +8,15 @@ import {
 import { auth } from "../middleware/auth.js";
 import { publicProfile } from "../controllers/publicController.js";
 
+
 const router = express.Router();
 
 router.post("/artists/create-profile", auth, createArtistProfile);
-router.get("/artists/profile",  getArtistProfile); // artist cards
+router.get("/artists/profile", getArtistProfile); // artist cards
 router.delete("/artists/:artistId", auth, deleteArtistProfile);
 router.put("/artists/:artistId", auth, updateArtistProfile);
 
 // more info about the artist during registration
-
-router.post("/artist/more-info", auth)
-
 
 router.get("/artist/profile/:id", publicProfile);
 

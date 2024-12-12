@@ -39,8 +39,6 @@ const Registration = () => {
       } else {
         formDataToSend.append(key, formData[key]);
       }
-
-      
     }
     formDataToSend.append("role", role);
 
@@ -73,11 +71,10 @@ const Registration = () => {
 
       if (role === "artist") {
         // Redirect to artist profile setup
-        navigate("/artist/create-profile");
-      }else{
-        navigate("/login")
+        navigate(`/artist/create-profile`);
+      } else {
+        navigate("/login");
       }
-
     } catch {
       setResponse("An error occurred. Please try again.");
       setTimeout(() => setResponse(""), 2000);

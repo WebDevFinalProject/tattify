@@ -91,6 +91,7 @@ export const userLogin = async (req, res) => {
           role: user.role,
           profileImage: user.profileImage,
           portfolio: user.portfolio,
+          isProfileComplete: user.isProfileComplete,
         },
         message: "Successfully logedIn!",
       });

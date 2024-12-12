@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ArtistForm.css";
 import backgroundImage from "../../assets/ArtistForm/backgroundImage.png";
 import api from "../api";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const ArtistForm = () => {
   const { loading } = useContext(UserContext);
+  const { logout, user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     bio: "",
@@ -25,6 +26,31 @@ const ArtistForm = () => {
     return <p>Loading...</p>;
   }
 
+  useEffect(() => {
+    const handlePopState = () => {
+      if (!user?.isProfileComplete) {
+        const confirmLeave = window.confirm(
+          "Your profile is incomplete. Are you sure you want to go back?"
+        );
+        if (!confirmLeave) {
+          // Prevent navigation
+          navigate(1); // Go forward to prevent leaving
+        } else {
+          logout();
+          navigate("/login");
+        }
+      }
+    };
+
+    // Add the event listener for the browser back button
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      // Cleanup the event listener
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [user, logout]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -38,6 +64,7 @@ const ArtistForm = () => {
 
       if (response.status === 201) {
         alert("Artist profile created successfully!");
+        logout();
         navigate("/login"); // Redirect to the login page after profile creation
       } else {
         // Handle error if profile creation fails
