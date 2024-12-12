@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/ContextProvider";
 import NavBar from "../NavBar";
 
@@ -67,7 +67,7 @@ function Login() {
             </ul>
           </div>
           <div className="login-form">
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="login-container" onSubmit={handleSubmit}>
               <input
                 type="email"
                 placeholder="Enter your Email"
@@ -86,9 +86,9 @@ function Login() {
               <a href="#" className="string">
                 Forgot password?
               </a>
-              <a href="/register" className="string">
+              <Link to="/register" className="string">
                 Create an account? <span>Register</span>
-              </a>
+              </Link>
               <button type="submit" id="login">
                 Log In
               </button>

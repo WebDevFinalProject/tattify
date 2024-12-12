@@ -50,9 +50,9 @@
   }
 
   input[type="radio"] {
-    margin-right: 6%;
     width: 25%;
     accent-color: var(--button-color);
+    margin-right: 5px;
   }
 
   #role-selection label {
@@ -69,6 +69,8 @@
     background-color: #fff;
     font-size: 16px;
     transition: all 0.3s ease-in-out;
+    margin: 6px;
+    cursor: pointer;
   }
 
   input:focus {
@@ -139,6 +141,16 @@
     align-items: center;
   }
 
+  .registration-portfolio label {
+    font-size: 1.4rem;
+    white-space: nowrap;
+  }
+
+  .registration-portfolio span {
+    color: var(--button-color);
+    font-size: 2rem;
+  }
+
   .reg-input-file {
     font-size: 1.1rem;
   }
@@ -151,9 +163,9 @@
 
 #response-para {
   text-align: center;
-  margin-top: 2rem;
-  font-size: 18px;
-  color: var(--para-color);
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: var(--button-color);
 }
 
 /* Media query for screens smaller than 600px */

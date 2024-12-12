@@ -76,8 +76,8 @@ const Registration = () => {
         navigate("/login");
       }
     } catch {
-      setResponse("An error occurred. Please try again.");
-      setTimeout(() => setResponse(""), 2000);
+      setResponse("* Please complete the form to proceed.");
+      setTimeout(() => setResponse(""), 3000);
     } finally {
       setIsSubmitting(false);
     }
@@ -113,9 +113,17 @@ const Registration = () => {
           {["firstName", "lastName", "email", "password"].map((field) => (
             <input
               key={field}
-              type={field === "password" ? "password" : "text"}
+              type={
+                field === "password"
+                  ? "password"
+                  : field === "email"
+                  ? "email"
+                  : "text"
+              }
               name={field}
-              placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)}*`}
+              placeholder={`${
+                field.charAt(0).toUpperCase() + field.slice(1)
+              } *`}
               value={formData[field]}
               onChange={handleChange}
               required
@@ -125,7 +133,9 @@ const Registration = () => {
           {/* Portfolio Upload for Artists */}
           {role === "artist" && (
             <div className="registration-portfolio">
-              <label>Upload Portfolio*:</label>
+              <label>
+                Upload Portfolio <span>* </span>:
+              </label>
               <input
                 className="reg-input-file"
                 type="file"
@@ -136,6 +146,7 @@ const Registration = () => {
               />
             </div>
           )}
+          {response && <p id="response-para">{response}</p>}
 
           <div className="reg-submission">
             <button
@@ -154,8 +165,6 @@ const Registration = () => {
             </p>
           </div>
         </form>
-
-        {response && <p id="response-para">{response}</p>}
       </div>
     </>
   );

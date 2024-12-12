@@ -50,7 +50,12 @@
   border: none;
   border-bottom-style: solid;
   border-bottom-color: var(--form-text-color);
-  padding: 5px;
+  padding: 20px;
+  cursor: pointer;
+
+  &:focus {
+    border-color: #a86060;
+  }
 }
 
 .hero-contact-form textarea {
@@ -62,13 +67,17 @@
   padding-top: 5px;
   border-bottom-style: solid;
   border-bottom-color: var(--form-text-color);
-  padding: 5px;
+  padding: 14px;
   outline: none;
+  cursor: pointer;
+  &:focus {
+    border-color: #a86060;
+  }
 }
 
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  font-size: 13px;
+.hero-contact-form input::placeholder,
+.hero-contact-form textarea::placeholder {
+  font-size: 1.2rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-style: italic;
   color: var(--form-text-color);
@@ -85,10 +94,14 @@
   font-size: 1.3rem;
   position: absolute;
   /* Positions button 10px from the right of the container */
-  top: 320px;
+  top: 340px;
   bottom: 0%;
   left: 50%;
   transform: translateX(-50%);
+
+  &:hover {
+    background-color: #b31b1b;
+  }
 }
 
 .vertical-line {

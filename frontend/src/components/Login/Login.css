@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Abril+Fatface&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Abril+Fatface&display=swap");
 
 .login-page {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   background-color: #d9c6bc;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@
   max-width: 1000px;
   width: 100%;
   height: 600px;
-  background-color: #E1D6CC;
+  background-color: #e1d6cc;
   padding: 100px;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
@@ -33,23 +33,24 @@
 }
 
 .logo h1 {
-  font-family: 'Abril Fatface', serif;
+  font-family: "Abril Fatface", serif;
   color: #2d2d8f;
   font-size: 60px;
   font-weight: normal;
   margin-bottom: 10px;
 }
-.logo h2{
-  font-family: 'Abril Fatface', serif;
+.logo h2 {
+  font-family: "Abril Fatface", serif;
   color: #2d2d8f;
   font-weight: normal;
   margin-bottom: 10px;
 }
-.logo li, ul {
-  font-family: "Lato",serif;
+.logo li,
+ul {
+  font-family: "Lato", serif;
   margin-left: 20px;
   font-size: 20px;
-  color: #45342D;
+  color: #45342d;
   margin-bottom: 25px;
   line-height: 1;
 }
@@ -62,14 +63,14 @@
   width: 400px;
   text-align: center;
 }
- .form {
+.login-container {
   display: flex;
   flex-direction: column;
-  gap: 15px; 
- margin: 25px;
-} 
+  gap: 15px;
+  margin: 25px;
+}
 
-.form input {
+.login-container input {
   width: 100%;
   padding: 14px;
   margin: 10px 0;
@@ -77,30 +78,27 @@
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.3s ease;
-  &:focus{
+  outline: none;
+  cursor: pointer;
+  &:focus {
     border-color: #1877f2;
   }
- 
 }
 
-
-
-
-#login  {
-  color           : #f2e2d7;
+#login {
+  color: #f2e2d7;
   background-color: #830707;
-  border          : none;
-  border-radius   : 30px;
-  height          : 3.5rem;
-  width           : 14rem;
-  padding-bottom  : 0.2rem;
-  font-family     : Verdana, Geneva, Tahoma, sans-serif;
-  font-size       : 1.3rem;
+  border: none;
+  border-radius: 30px;
+  height: 3.5rem;
+  width: 14rem;
+  padding-bottom: 0.2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.3rem;
   margin-left: 85px;
- 
 
   &:hover {
-      background-color: #b31b1b;
+    background-color: #b31b1b;
   }
 
   cursor: pointer;
@@ -109,7 +107,7 @@
 .string {
   display: inline-block;
 
-  color: #0B0D63;
+  color: #0b0d63;
   text-decoration: none;
   font-size: 18px;
   &:hover {
@@ -117,91 +115,87 @@
   }
 }
 
-.string span{
+.string span {
   color: #830707;
 }
-
 
 .divider {
   border-bottom: 1px solid #ddd;
   margin: 20px 0;
 }
 
-
-
 /* Responsive Design */
 
 @media (min-width: 481px) and (max-width: 768px) {
   .container-login {
     flex-direction: column;
-    padding: 25px;
+    padding: 50px 25px;
     width: 100%;
     height: auto;
-    
   }
   .logo h1 {
-    font-size: 40px;
+    font-size: 5rem;
   }
-  .logo ul, .logo li, 
-  .logo h2{
+  .logo ul,
+  .logo li,
+  .logo h2 {
     display: none;
   }
 
   .form {
-    margin: 0;             
-    gap: 10px;            
+    margin: 0;
+    gap: 10px;
   }
- 
 
   #login {
     width: 80%;
     height: 50px;
     font-size: 18px;
-   margin-left: 40px;
+    margin-left: 40px;
   }
-
 }
-@media (max-width: 480px) {  
+@media (max-width: 480px) {
   .container-login {
     flex-direction: column;
-    width: 100%;          
-    height: auto;          
-    padding: 10px;        
-    box-shadow: none;      
-    border-radius: 0;     
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
   }
   .logo h1 {
-    font-size: 40px;
+    font-size: 5rem;
   }
-  .logo ul, .logo li, 
-  .logo h2{
+  .logo ul,
+  .logo li,
+  .logo h2 {
     display: none;
   }
+
   .login-form {
-    width: 100%;
-    padding: 15px;         
-    box-shadow: none;      
-    border-radius: 8px;   
+    padding: 30px 15px;
+    box-shadow: none;
+    border-radius: 8px;
   }
 
   .form {
-    margin: 0;             
-    gap: 5px;            
+    margin: 0;
+    gap: 5px;
   }
 
   #login {
-    width: 100%;           
-    height: 50px;         
-    font-size: 16px;      
-    margin-left: 0;        
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    margin-left: 0;
   }
 
   .string {
     font-size: 14px;
-    margin: 5px 0;        
+    margin: 5px 0;
   }
 
   .divider {
-    margin: 10px 0;        
+    margin: 10px 0;
   }
 }
