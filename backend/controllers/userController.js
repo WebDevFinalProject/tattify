@@ -118,12 +118,15 @@ export const getProfile = async (req, res) => {
 // profile image upload
 export const uploadProfileImage = async (req, res) => {
   try {
-    const imgUrl = req.file.path;
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
 
-    const userId = req.userId;
+    const imgUrl = req.file.path;  // The URL of the uploaded image on Cloudinary
+    const userId = req.userId;  // Assuming userId is available via auth middleware
     const user = await User.findByIdAndUpdate(
       userId,
-      { profileImage: imgUrl },
+      { profileImage: imgUrl },  // Update the user's profile image URL
       { new: true }
     );
 

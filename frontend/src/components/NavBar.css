@@ -36,10 +36,24 @@
   color: #45342d;
 }
 
+.nav-account {
+  position: relative;
+  border-radius: 50%;
+  height: 50px;
+  object-fit: cover;
+}
+
 .nav-account img {
   height: 50px;
   border-radius: 50%;
   margin-left: 2rem;
+}
+
+ .camera-icon {
+position: absolute;
+font-size: 1.5rem;
+top: 40px;
+right: 1px;
 }
 
 .button-container .nav-button {
@@ -135,6 +149,55 @@
   }
 }
 
+
+.upload-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears above all other content */
+}
+
+.upload-dialog-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.file-input {
+  display: block;
+  margin: 1rem auto;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.uploadimage-button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.uploadimage-button:hover {
+  background-color: #ddd;
+}
+
+.uploadimage-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 @media (max-width: 1280px) {
   .logo-container {
     display: none;
@@ -187,3 +250,5 @@
     padding: 3rem 5rem;
   }
 }
+
+
