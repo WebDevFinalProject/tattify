@@ -7,6 +7,7 @@ import Details from "../components/ArtistProfile/Details.jsx";
 import { Wrapper } from "../components/ArtistProfile/styles/StyledComponents.js";
 import useArtistData from "../hooks/useArtistData.jsx";
 import Portfolio from "../components/ArtistProfile/Portfolio.jsx";
+import Reviews from "../components/ArtistProfile/Reviews.jsx";
 
 function PublicProfile() {
     const { artist, loading } = useArtistData();
@@ -20,6 +21,7 @@ function PublicProfile() {
                 <Bio artist={artist} />
                 <Details artist={artist} />
                 <Portfolio artist={artist} />
+                <Reviews />
             </Wrapper>
             <Footer />
         </>
