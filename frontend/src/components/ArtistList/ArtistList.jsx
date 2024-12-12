@@ -10,7 +10,11 @@ const ArtistList = () => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState(""); // Single search input
+  const [search, setSearch] = useState(""); // Search term
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit, setLimit] = useState(9);
+
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -19,10 +23,15 @@ const ArtistList = () => {
         const response = await axios.get(
           `http://localhost:4000/api/artists/profile`,
           {
-            params: { search }, // Pass search term directly
+            params: {
+              search,
+              page,
+              limit,
+            },
           }
         );
-        setArtists(response.data);
+        setArtists(response.data.artists);
+        setTotalPages(response.data.totalPages);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load artists.");
       } finally {
@@ -31,7 +40,7 @@ const ArtistList = () => {
     };
 
     fetchArtists();
-  }, [search]);
+  }, [search, page, limit]);
 
   return (
     <div className="artist-list">
@@ -50,8 +59,8 @@ const ArtistList = () => {
                 type="text"
                 className="form-control w-25"
                 placeholder=" 🔍 Search by location or name..."
-                value={search} // Bind search state to the input
-                onChange={(e) => setSearch(e.target.value)} // Update search state on input change
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>
@@ -65,13 +74,11 @@ const ArtistList = () => {
         <div className="row m-5">
           {artists.map((artist) => (
             <div key={artist._id} className="col-xl-4 col-md-6">
-              {/* Wrap the entire card with Link */}
               <Link
                 to={`/artist-profile/${artist.user._id}`}
                 className="text-decoration-none"
               >
                 <div className="card mb-4 artistListCard p-2 m-4">
-                  {/* Portfolio Images */}
                   <div className="portfolio-container d-flex">
                     {artist.user.portfolio.map((work, index) => (
                       <img
@@ -88,10 +95,9 @@ const ArtistList = () => {
                       />
                     ))}
                   </div>
-                  {/* Profile Picture */}
                   <div
                     className="text-center"
-                    style={{ marginTop: "-40px" }} // Negative margin to overlap
+                    style={{ marginTop: "-40px" }}
                   >
                     <img
                       src={
@@ -108,7 +114,6 @@ const ArtistList = () => {
                       }}
                     />
                   </div>
-                  {/* Name, Location, and Chat Button */}
                   <div className="card-body text-center">
                     <h3 className="card-title">
                       {`${artist.user.firstName} ${artist.user.lastName}`}
@@ -118,10 +123,7 @@ const ArtistList = () => {
                       {artist.city}, {artist.country}
                     </p>
                     <button className="btn btn-danger fs-5">
-                      <Link
-                        className="text-light text-decoration-none"
-                        to="/register"
-                      >
+                      <Link className="text-light text-decoration-none" to="/register">
                         Chat
                       </Link>
                     </button>
@@ -130,6 +132,25 @@ const ArtistList = () => {
               </Link>
             </div>
           ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="pagination-controls text-center">
+          <button
+            onClick={() => setPage(page > 1 ? page - 1 : 1)}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+          <span>
+            {" "}Page {page} of {totalPages}{" "}
+          </span>
+          <button
+            onClick={() => setPage(page < totalPages ? page + 1 : page)}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
