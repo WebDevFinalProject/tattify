@@ -1,15 +1,12 @@
 import React from "react";
 import "./FirstTattooGuide.css";
-import { HiArrowLeft, HiHome } from "react-icons/hi";
-import { NavLink, useNavigate } from "react-router-dom";
+import CircleNavigation from "../../navigation-circle/CircleNavigation.jsx";
 
 const FirstTattooGuide = () => {
   return (
     <>
       <div className="tattooGuideContainer">
-        <NavLink className="back-to-homepage" to="/">
-          <HiHome size={18} className="tattoo-guide-home-logo" /> Home Page
-        </NavLink>
+        <CircleNavigation />
         <div className="tattooGuideHeader">
           <div>
             <h1>Preparing for Your First Tattoo: A Beginner's Guide</h1>

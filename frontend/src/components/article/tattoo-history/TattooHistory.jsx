@@ -13,6 +13,8 @@ import styles3 from "../../../assets/tattoo-history-images/various_styles3.jpeg"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import CircleNavigation from "../../navigation-circle/CircleNavigation";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cards";
@@ -23,9 +25,11 @@ import { EffectCards, Keyboard, Mousewheel } from "swiper/modules";
 const TattooHistory = () => {
   return (
     <div className="tattoo-history-page">
+      <CircleNavigation />
       <div className="history-header">
         <img src={historyLogo} alt="" />
       </div>
+
       <div className="history-content">
         <div className="history-landing-page">
           <img className="history-landing-image" src={landingImg} alt="" />

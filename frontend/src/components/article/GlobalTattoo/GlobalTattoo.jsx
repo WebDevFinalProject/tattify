@@ -1,7 +1,7 @@
 import React from "react";
 import "./GlobalTattoo.css";
 import { Link } from "react-router-dom";
-
+import CircleNavigation from "../../navigation-circle/CircleNavigation";
 import MaoriTatoo1 from "../../../assets/global-tattoo/maori-tattoo1.jpg";
 import MaoriTattoo2 from "../../../assets/global-tattoo/maori.jpg";
 import JapaneseTattoo from "../../../assets/global-tattoo/japanese.avif";
@@ -13,6 +13,7 @@ import Mini2 from "../../../assets/global-tattoo/Mini.jpg";
 function GlobalTattoo() {
   return (
     <div className="global-article">
+      <CircleNavigation />
       <div className="global-header">
         <h1>The Art of Tattoos: Connecting Cultures Globally</h1>
         <p>
