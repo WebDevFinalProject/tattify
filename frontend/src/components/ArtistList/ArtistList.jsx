@@ -3,14 +3,18 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SlLocationPin } from "react-icons/sl";
 import "./ArtistList.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 import NavBar from "../NavBar";
 
 const ArtistList = () => {
+  const navigate = useNavigate(); 
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState(""); // Single search input
+  const [search, setSearch] = useState(""); // Search term
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit, setLimit] = useState(9);
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -19,10 +23,15 @@ const ArtistList = () => {
         const response = await axios.get(
           `http://localhost:4000/api/artists/profile`,
           {
-            params: { search }, // Pass search term directly
+            params: {
+              search,
+              page,
+              limit,
+            },
           }
         );
-        setArtists(response.data);
+        setArtists(response.data.artists);
+        setTotalPages(response.data.totalPages);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load artists.");
       } finally {
@@ -31,7 +40,12 @@ const ArtistList = () => {
     };
 
     fetchArtists();
-  }, [search]);
+  }, [search, page, limit]);
+
+  // Handle card click
+  const handleCardClick = (artistId) => {
+    navigate(`/artist-profile/${artistId}`); // Navigate to the artist profile page
+  };
 
   return (
     <div className="artist-list">
@@ -50,8 +64,8 @@ const ArtistList = () => {
                 type="text"
                 className="form-control w-25"
                 placeholder=" 🔍 Search by location or name..."
-                value={search} // Bind search state to the input
-                onChange={(e) => setSearch(e.target.value)} // Update search state on input change
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>
@@ -65,71 +79,79 @@ const ArtistList = () => {
         <div className="row m-5">
           {artists.map((artist) => (
             <div key={artist._id} className="col-xl-4 col-md-6">
-              {/* Wrap the entire card with Link */}
-              <Link
-                to={`/artist-profile/${artist.user._id}`}
-                className="text-decoration-none"
+              <div
+                className="card mb-4 artistListCard p-2 m-4"
+                onClick={() => handleCardClick(artist.user._id)} // navigation on click
               >
-                <div className="card mb-4 artistListCard p-2 m-4">
-                  {/* Portfolio Images */}
-                  <div className="portfolio-container d-flex">
-                    {artist.user.portfolio.map((work, index) => (
-                      <img
-                        key={index}
-                        src={work}
-                        alt={`Work ${index + 1}`}
-                        className="portfolio-img"
-                        style={{
-                          width: "33%",
-                          height: "100px",
-                          objectFit: "cover",
-                          margin: 1,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  {/* Profile Picture */}
-                  <div
-                    className="text-center"
-                    style={{ marginTop: "-40px" }} // Negative margin to overlap
-                  >
+                <div className="portfolio-container d-flex">
+                  {artist.user.portfolio.map((work, index) => (
                     <img
-                      src={
-                        artist.user.profileImage ||
-                        "https://via.placeholder.com/100"
-                      }
-                      alt={artist.user.firstName}
-                      className="rounded-circle"
+                      key={index}
+                      src={work}
+                      alt={`Work ${index + 1}`}
+                      className="portfolio-img"
                       style={{
-                        width: "100px",
+                        width: "33%",
                         height: "100px",
                         objectFit: "cover",
-                        border: "3px solid white",
+                        margin: 1,
                       }}
                     />
-                  </div>
-                  {/* Name, Location, and Chat Button */}
-                  <div className="card-body text-center">
-                    <h3 className="card-title">
-                      {`${artist.user.firstName} ${artist.user.lastName}`}
-                    </h3>
-                    <p className="card-text fs-4">
-                      <SlLocationPin className="fs-5" />
-                      {artist.city}, {artist.country}
-                    </p>
-                    <button className="btn btn-danger fs-5">
-                      <Link
-                        className="text-light text-decoration-none"
-                        to="/register"
-                      >
-                        Chat
-                      </Link>
-                    </button>
-                  </div>
+                  ))}
                 </div>
-              </Link>
+                <div className="text-center" style={{ marginTop: "-40px" }}>
+                  <img
+                    src={
+                      artist.user.profileImage ||
+                      "https://via.placeholder.com/100"
+                    }
+                    alt={artist.user.firstName}
+                    className="rounded-circle"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectFit: "cover",
+                      border: "3px solid white",
+                    }}
+                  />
+                </div>
+                <div className="card-body text-center">
+                  <h3 className="card-title">
+                    {`${artist.user.firstName} ${artist.user.lastName}`}
+                  </h3>
+                  <p className="card-text fs-4">
+                    <SlLocationPin className="fs-5" />
+                    {artist.city}, {artist.country}
+                  </p>
+                  <button className="btn btn-danger fs-5">
+                    <span className="text-light">Chat</span>
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="pagination-controls text-center pt-3 pb-5 fs-3">
+          <button
+            className="btn btn-light fs-3"
+            onClick={() => setPage(page > 1 ? page - 1 : 1)}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+          <span className="m-2">
+            {" "}
+            Page {page} of {totalPages}{" "}
+          </span>
+          <button
+            className="btn btn-light fs-3"
+            onClick={() => setPage(page < totalPages ? page + 1 : page)}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

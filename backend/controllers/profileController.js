@@ -80,7 +80,13 @@ export const createArtistProfile = async (req, res) => {
 // Get all artists card
 export const getArtistProfile = async (req, res) => {
   try {
-    const { search } = req.query;
+    const {
+      search,
+      page = 1,
+      limit = 9,
+    } = req.query;
+    
+
     const userFilter = search
       ? {
           $or: [
@@ -100,13 +106,23 @@ export const getArtistProfile = async (req, res) => {
         }
       : {};
 
-    const artists = await ArtistProfile.find(profileFilter).populate({
-      path: "user",
-      select: "firstName lastName location portfolio profileImage",
-      match: { role: "artist" }, // Ensure only users with the role "artist" are included
-    });
+    const artists = await ArtistProfile.find(profileFilter)
+      .populate({
+        path: "user",
+        select: "firstName lastName location portfolio profileImage",
+        match: { role: "artist" }, // Ensure only users with the role "artist" are included
+      })
+      .limit(parseInt(limit)) // Limiting the number of results
+      .skip((page - 1) * limit); // Skipping previous pages for pagination;
 
-    res.status(200).json(artists);
+    // Get the total number of artists matching the filter
+    const total = await ArtistProfile.countDocuments(profileFilter);
+
+    res.status(200).json({
+      artists,
+      totalPages: Math.ceil(total / limit),
+      currentPage: parseInt(page),
+    });
   } catch (error) {
     res.status(500).json({ message: "Error fetching artists", error });
   }

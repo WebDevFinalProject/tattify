@@ -5,7 +5,7 @@ export const Wrapper = styled.section`
     background: linear-gradient(
         180deg,
         rgb(229, 209, 188) 0%,
-        rgba(0, 0, 0, 0) 50%
+        rgba(0, 0, 0, 0) 18%
     );
 `;
 
@@ -17,4 +17,11 @@ export const H2 = styled.h2`
     width: 100%;
     border-bottom: 1px solid black;
     padding-bottom: 1rem;
+`;
+
+export const PortfolioContainer = styled.div`
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
 `;
