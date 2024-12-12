@@ -5,15 +5,36 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { useContext } from "react";
 import { UserContext } from "../context/ContextProvider";
 import { HiChat, HiLogout, HiUser } from "react-icons/hi";
+import useProfileImageUpload from "../hooks/useProfileImageUpload";
+import { FaCamera } from "react-icons/fa";
 
 function NavBar() {
   const location = useLocation();
-  const { user, clickHandlerVisibility, isOpen, logout } =
-    useContext(UserContext);
+  const { user, clickHandlerVisibility, isOpen, logout } = useContext(UserContext);
   const [isProfileOpen, setProfileIsOpen] = useState(false);
+  const [isUploadDialogOpen, setUploadDialogOpen] = useState(false);
+
+  const {
+    file,
+    loading,
+    error,
+    response,
+    handleSelectFile,
+    handleUpload,
+  } = useProfileImageUpload();
 
   const toggleProfile = () => {
     setProfileIsOpen(!isProfileOpen);
+  };
+
+  const toggleUploadDialog = () => {
+    setUploadDialogOpen(!isUploadDialogOpen);
+  };
+
+  const handleProfileImageUpload = async () => {
+    if (file) {
+    await handleUpload(); // Upload the image using the custom hook
+    }
   };
 
   useEffect(() => {
@@ -48,7 +69,13 @@ function NavBar() {
         {user ? (
           <div className="nav-dropdown-container">
             <div className="nav-account" onClick={toggleProfile}>
-              <img src={user.profileImage} alt="User Profile" />
+              <img
+                src={user.profileImage || "default-image.jpg"}
+                alt="User Profile"
+                className="user-profile-img"
+                
+              />
+              <FaCamera  onClick={toggleUploadDialog} className="camera-icon"/>
             </div>
 
             <div
@@ -84,9 +111,33 @@ function NavBar() {
             </NavLink>
           </div>
         )}
+
+        {/* Dialog for uploading the profile image */}
+        {isUploadDialogOpen && (
+          <div className="upload-dialog">
+            <div className="upload-dialog-content">
+              <h2>Upload Profile Image</h2>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleSelectFile}
+                disabled={loading}
+                className="file-input"
+              />
+              {loading && <p>Uploading...</p>}
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              {response && <p style={{ color: "green" }}>Image uploaded successfully!</p>}
+              <button onClick={handleProfileImageUpload} disabled={loading} className="uploadimage-button">
+                Upload Image
+              </button>
+              <button onClick={toggleUploadDialog} className="uploadimage-button">Cancel</button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
 }
 
 export default NavBar;
+

@@ -15,7 +15,7 @@ const router = express.Router();
 
 //uploading images
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
 //form
 router.post("/signup", upload.array("portfolio", 3), registration);

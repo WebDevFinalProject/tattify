@@ -211,28 +211,3 @@ export const deleteArtistProfile = async (req, res) => {
   }
 };
 
-export const searchArtistProfile = async (req, res) => {
-  try {
-    const { name, location } = req.query;
-
-    const filter = {};
-    if (name) {
-      filter["user.firstName"] = name; // Exact match for name
-    }
-    if (location) {
-      filter["user.location"] = location; // Exact match for location
-    }
-
-    // Fetch artists and populate user data
-    const artists = await ArtistProfile.find(filter).populate({
-      path: "user",
-      select: "firstName lastName location portfolio profileImage",
-      match: { role: "artist" },
-    });
-
-    res.status(200).json(artists); // Return the artists as JSON response
-  } catch (error) {
-    console.error(error); // Log the error for debugging
-    res.status(500).json({ message: "Error fetching artists" });
-  }
-};
