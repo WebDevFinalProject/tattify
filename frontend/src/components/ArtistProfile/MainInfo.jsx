@@ -7,10 +7,15 @@ const MainInfo = ({ artist }) => {
             {artist ? (
                 <div className="artist-profile-main-info-container">
                     <img src={artist.profileImage} alt="" />
-                    <h2>
-                        {artist.firstName} {artist.lastName}
-                    </h2>
-                    <p>{artist.city}</p>
+                    <div>
+                        <h2>
+                            {artist.firstName} {artist.lastName}
+                        </h2>
+                        <p>
+                            {artist.city}, {artist.country}
+                        </p>
+                    </div>
+                    <button>Chat</button>
                 </div>
             ) : (
                 <p>No artist data available.</p>
