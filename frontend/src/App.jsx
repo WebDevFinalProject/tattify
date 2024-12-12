@@ -43,10 +43,10 @@ function App() {
           path="/customer-profile"
           element={user ? <ArtistList /> : <Navigate to="/login" />}
         />
-        {/*   <Route
-          path="/artist-profile"
+        <Route
+          path="/artist-profile/:id"
           element={user ? <ArtistProfile /> : <Navigate to="/login" />}
-        /> */}
+        />
         <Route path="/artist/create-profile" element={<ArtistForm />} />
         <Route path="/artist-profile/:id" element={<ArtistProfile />} />
       </Routes>

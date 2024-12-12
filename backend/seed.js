@@ -69,6 +69,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739045/xQ27Hiso_io1xhc.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739044/jtUnj8Dr_m55oy5.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739703/5o4gdu9k_z1k1oh.jpg",
     artistProfile: {
@@ -95,6 +96,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738973/KfsY-cl8_ydey1q.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738971/JgNBK1Km_xcahe6.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739698/fbNjexhe_zdq2yk.jpg",
     artistProfile: {
@@ -121,6 +123,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738968/NpZdNybU_k93y1b.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738968/-n7OfHtW_j1n7et.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739702/1kmxydF__lwjhz2.jpg",
     artistProfile: {
@@ -147,6 +150,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738965/Nm16Ydgu_rnnynx.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738963/2TLdx3C5_lirpzv.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739707/k-GCS_bM_vljlyt.jpg",
     artistProfile: {
@@ -173,6 +177,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738957/PgA4VDtd_wqqpyk.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738957/0oEaou8Y_squwd1.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739691/y4Snflxw_hosmrd.jpg",
     artistProfile: {
@@ -199,6 +204,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738954/q96EuA0C_wada8b.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738952/2JphKgey_xsiufn.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739700/AkPlGCaH_xcew3z.jpg",
     artistProfile: {
@@ -225,6 +231,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738950/NGyrFMcf_lsdptp.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738948/aELs-h0a_uuaxix.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739694/l4S42v3G_atmmil.jpg",
     artistProfile: {
@@ -251,6 +258,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738945/5jsBz0iz_u4rqbl.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738945/_pkoqGin_q06ptz.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739690/OHrtJsNU_fzbkip.jpg",
     artistProfile: {
@@ -277,6 +285,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738941/_QnRsP3v_gmwbo1.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738940/hBPJQqQt_dmzvoq.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739702/1kmxydF__lwjhz2.jpg",
     artistProfile: {
@@ -303,6 +312,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738936/jowJZEAm_u06liu.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738935/3mm6OZhQ_cqaibs.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741989/reYbwp9L_bb07kx.jpg",
     artistProfile: {
@@ -329,6 +339,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738932/ecQm7yhv_uegkbc.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738932/dIADxfRr_b0sdlw.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741986/UUK9GG_t_hpuytz.jpg",
     artistProfile: {
@@ -355,6 +366,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738928/LtT46Iqq_hao1ax.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738928/1tXK2luw_dzygbt.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741987/5fHATZNu_x0f7xg.jpg",
     artistProfile: {
@@ -381,6 +393,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738924/spcx2VBo_q0o87p.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738924/mAuq7ANN_ii1h3e.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741985/f-qdTHeA_lpxbhz.jpg",
     artistProfile: {
@@ -407,6 +420,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733736955/ed47bf07-1673-4b33-80fd-5f69a4cc809d_uhiree.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733736955/8131bb9c-bc65-45d9-af7d-9949471d2b4f_n3zvsj.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741992/Vxz5rsxk_ppv9tn.jpg",
     artistProfile: {
@@ -433,6 +447,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741997/xQ27Hiso_z8zktg.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741997/LErjuUOf_lxamun.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741983/ipKo6h3l_qfql3q.jpg",
     artistProfile: {
@@ -459,6 +474,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741977/aYcrMRDC_vzk757.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741976/8qj0-xmj_qghahv.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733747233/ANOoQF7E_zruf39.jpg",
     artistProfile: {
@@ -485,6 +501,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738970/Cry7Ez4X_rwesx3.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738971/JgNBK1Km_xcahe6.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733741981/YEghzb0q_ey7hgc.jpg",
     artistProfile: {
@@ -511,6 +528,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733746854/I14OTXjT_zw3bgv.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733746853/VtuXrswi_x6poyu.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733747231/LVj9RA00_dz5zyg.jpg",
     artistProfile: {
@@ -537,6 +555,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733746843/cryFdQOz_g6ltwx.jpg",
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733746846/7fdenAuX_hktjpb.jpg",
     ],
+    isProfileComplete: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733747227/jVF4IEyk_gmzkrn.jpg",
     artistProfile: {
