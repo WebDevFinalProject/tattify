@@ -43,7 +43,7 @@ function App() {
           path="/customer-profile"
           element={user ? <ArtistList /> : <Navigate to="/login" />}
         />
-     {/*    <Route
+        {/*    <Route
           path="/artist-profile/:id"
           element={user ? <ArtistProfile /> : <Navigate to="/login" />}
         /> */}
