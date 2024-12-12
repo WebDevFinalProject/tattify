@@ -55,6 +55,10 @@ export const createArtistProfile = async (req, res) => {
       socialLinks,
     });
 
+    // Update isProfileComplete to true
+
+    await User.findByIdAndUpdate(userId, { isProfileComplete: true });
+
     // Populate the `user` field before sending the response
     const populatedProfile = await artistProfile.populate(
       "user",
@@ -72,22 +76,6 @@ export const createArtistProfile = async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 };
-
-// Get all artists
-/* export const getArtistProfile = async (req, res) => {
-  try {
-    
-    const artists = await ArtistProfile.find().populate({
-      path: "user",
-      select: "firstName lastName location portfolio profileImage", // Select fields to include from User
-      match: { role: "artist" }, // Ensure only users with the role "artist" are included
-    });
-
-    res.status(200).json(artists);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching artists", error });
-  }
-};  */
 
 // Get all artists card
 export const getArtistProfile = async (req, res) => {

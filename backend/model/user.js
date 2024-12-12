@@ -32,7 +32,16 @@ const userSchema = new mongoose.Schema({
     },
   },
 
-  profileImage: String,
+  profileImage: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733992957/sUlJvukU_svsuos.jpg",
+  },
+
+  isProfileComplete: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const User = mongoose.model("Users", userSchema);

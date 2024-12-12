@@ -25,18 +25,15 @@ function Login() {
         { withCredentials: true } // Ensures cookies are sent with the request
       );
 
-      const { role, ...userData } = response.data.user;
+      const { isProfileComplete, role, ...userData } = response.data.user;
       login(userData);
 
-      if (role === "artist") {
-        // Redirect to artist profile
-        // navigate("/artist-profile");
-        navigate(`/artist-profile/${userData.id}`);
+      if (role === "artist" && !isProfileComplete) {
+        navigate("/artist/create-profile/");
       } else if (role === "customer") {
-        // Redirect to dashboard
         navigate("/customer-profile");
       } else {
-        setErrorMessage("Unknown role. Please contact support.");
+        navigate(`/artist-profile/${userData.id}`);
       }
     } catch (error) {
       if (error.response) {
