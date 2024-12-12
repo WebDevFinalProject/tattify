@@ -1,16 +1,19 @@
 import React from "react";
 import "./TattooConsideration.css";
 import considerationsImage from "../../../assets/consideration-article/considerationsImage.jpg";
+import CircleNavigation from "../../../components/navigation-circle/CircleNavigation";
 function TatooConsiderations() {
   return (
     <section className="consideration-section">
       <div className="tattoo-considerations">
+        <CircleNavigation />
         <h1>🌟 Things to Consider Before Getting a Tattoo</h1>
         <img
           src={considerationsImage}
           alt="Tattoo preparation"
           className="considerations-image"
         />
+
         <p className="intro">
           Thinking of getting inked? A tattoo is a lifelong work of art and a
           powerful form of self-expression. But before diving in, make sure you

@@ -30,12 +30,14 @@ const blogsData = [
     id: "global-tattoo",
     img: GlobalTattoo,
     title:"The Art of Tattoos: Connecting Cultures Globally",
+    description: "Tattoos tell stories, bridging cultures and connecting people worldwide.",
     path:"/article/global-tattoo"
   },
   {
     id: "first-tattoo-guide",
     img: first_Tattoo,
     title:"First Tattoo Guide",
+    description:"Your essential guide to making your first tattoo experience unforgettable.",
     path:"/article/first-tattoo-guide"
   }
 ];

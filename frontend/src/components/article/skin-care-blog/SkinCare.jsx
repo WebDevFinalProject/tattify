@@ -1,31 +1,23 @@
 import React, { useState } from "react";
 import "../skin-care-blog/skin_care.css";
 import aftercare from "../../../assets/blogs-images/aftercare.jpg";
-import { HiArrowLeft, HiHome } from "react-icons/hi";
-import { NavLink, useNavigate } from "react-router-dom";
+import CircleNavigation from "../../navigation-circle/CircleNavigation";
 import logo from "../../../assets/blogs-images/Pink_Elegant_Logo.png";
 import CustomSlider from "./CustomSlider";
 
 const SkinCare = () => {
-  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const clickHandler = () => {
     setIsOpen(!isOpen);
   };
 
-  const backToPageHandler = () => {
-    navigate(-1);
-  };
   return (
     <div className="skin-care-blog">
+      <CircleNavigation />
       <div className="blog-skin-container">
         <div className="skin-care-logo-container">
-          <div className="nav-skin-care">
-            <NavLink className="back-to-homepage" to="/">
-              <HiHome size={18} className="home-logo" /> Home Page
-            </NavLink>
-          </div>
+          <div className="nav-skin-care"> </div>
           <img className="skin-care-logo" src={logo} alt="skin-care logo" />
         </div>
         <div className="skin-care-header">
@@ -37,10 +29,7 @@ const SkinCare = () => {
 
           <img src={aftercare} alt="" />
         </div>
-        <div className="back-icon" onClick={backToPageHandler}>
-          <HiArrowLeft />
-          Back
-        </div>
+
         <p className="update-skin-care">
           Updated : <span>30 November 2024</span>
         </p>
