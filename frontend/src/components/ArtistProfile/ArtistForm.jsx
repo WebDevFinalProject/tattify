@@ -91,10 +91,10 @@ const ArtistForm = () => {
 
       if (response.status === 201) {
         alert("Artist profile created successfully!");
-        logout();
-        navigate("/login"); // Redirect to the login page after profile creation
+        navigate(`/artist-profile/${response.data.data.user._id}`);
+        window.location.reload();
       } else {
-        alert(response.data.message || "Error creating artist profile.");
+        alert("Error creating artist profile.");
       }
 
       setFormData({
