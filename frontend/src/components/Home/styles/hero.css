@@ -27,6 +27,7 @@
       color: #ffffff;
       font-size: 14.5rem;
       text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.445);
+      padding-top: 2rem;
     }
 
     p {
@@ -61,7 +62,7 @@
   }
 
   .hero-image-container {
-    width: 60rem;
+    width: 57rem;
     margin-top: 3rem;
     margin-right: 9rem;
     position: relative;
@@ -83,9 +84,6 @@
       width: 100%;
     }
   }
-}
-
-@media (min-width: 768px) {
 }
 
 @media (min-width: 1024px) {
