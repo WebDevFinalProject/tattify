@@ -10,6 +10,7 @@ import storage from "../cloudinary-config/cloudinaryConfig.js";
 import multer from "multer";
 import { auth } from "../middleware/auth.js";
 import { writeReviewToArtistProfile } from "../controllers/createReview.js";
+import { addImages } from "../controllers/addImages.js";
 
 const router = express.Router();
 
@@ -19,6 +20,14 @@ const upload = multer({ storage: storage });
 
 //form
 router.post("/signup", upload.array("portfolio", 3), registration);
+
+// adding more images to the portfolio
+router.post(
+  "/user/portfolio/add",
+  auth,
+  upload.array("portfolio", 5),
+  addImages
+);
 
 router.post("/login", userLogin);
 

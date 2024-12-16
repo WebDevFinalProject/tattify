@@ -75,6 +75,7 @@ export const userLogin = async (req, res) => {
       return res.status(400).send({ msg: "Incorrect password!" });
     }
     const token = generateJWT(user._id);
+    console.log(token)
 
     res
       .cookie("jwt", token, {
@@ -122,11 +123,11 @@ export const uploadProfileImage = async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    const imgUrl = req.file.path;  // The URL of the uploaded image on Cloudinary
-    const userId = req.userId;  // userId available via auth middleware
+    const imgUrl = req.file.path; // The URL of the uploaded image on Cloudinary
+    const userId = req.userId; // userId available via auth middleware
     const user = await User.findByIdAndUpdate(
       userId,
-      { profileImage: imgUrl },  // Update the user's profile image URL
+      { profileImage: imgUrl }, // Update the user's profile image URL
       { new: true }
     );
 
