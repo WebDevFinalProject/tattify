@@ -16,6 +16,7 @@ const ArtistList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(9);
 
+  // Fetch artists whenever search, page, or limit changes
   useEffect(() => {
     const fetchArtists = async () => {
       try {
@@ -42,7 +43,13 @@ const ArtistList = () => {
     fetchArtists();
   }, [search, page, limit]);
 
-  // Handle card click
+  // Handle search input change and reset page to 1
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    setPage(1); // Reset page to 1 when search term changes
+  };
+
+  // Handle card click (navigate to artist profile)
   const handleCardClick = (artistId) => {
     navigate(`/artist-profile/${artistId}`); // Navigate to the artist profile page
   };
@@ -65,7 +72,7 @@ const ArtistList = () => {
                 className="form-control w-25"
                 placeholder=" 🔍 Search by location or name..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={handleSearchChange} // Use the new handler
               />
             </div>
           </div>
@@ -81,7 +88,7 @@ const ArtistList = () => {
             <div key={artist._id} className="col-xl-4 col-md-6">
               <div
                 className="card mb-4 artistListCard p-2 m-4"
-                onClick={() => handleCardClick(artist.user._id)} // navigation on click
+                onClick={() => handleCardClick(artist.user._id)} // Navigate on click
               >
                 <div className="portfolio-container d-flex">
                   {Array.from({ length: 3 }).map((_, index) => {
@@ -157,8 +164,7 @@ const ArtistList = () => {
             Previous
           </button>
           <span className="m-2">
-            {" "}
-            Page {page} of {totalPages}{" "}
+            Page {page} of {totalPages}
           </span>
           <button
             className="btn btn-light fs-3"
