@@ -1,5 +1,5 @@
 import { useState } from "react";
-import  api from "../../components/api"
+import  api from "../../components/api.js"
 
 const useSubmitReview=()=>{
     const [loading,setloading] = useState(false);
@@ -7,17 +7,15 @@ const useSubmitReview=()=>{
     const[success, setSuccess] = useState(false);
 
 
-    const submitReview = async (artistId, rating, comment)=>{
+    const submitReview = async ( rating, comment)=>{
         setloading(true);
         setError(null);
         setSuccess(false);
 
-       
-
       try{
         const response = await api.post(
           "/api/submit-review",
-          {artistId, rating,comment},
+          { artistId,rating,comment},
           { withCredentials: true })
         setSuccess(true);
         return response.data;
