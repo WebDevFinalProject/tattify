@@ -22,6 +22,9 @@ const MainInfo = ({ artist }) => {
                         <button className="star-button-desktop">
                             <FontAwesomeIcon icon={faStar} size="3x" />
                         </button>
+                        <button className="edit-button-desktop">
+                            <FontAwesomeIcon icon={faPenToSquare} size="3x" />
+                        </button>
                         <button className="chat-button">Chat</button>
                     </div>
                 </div>
