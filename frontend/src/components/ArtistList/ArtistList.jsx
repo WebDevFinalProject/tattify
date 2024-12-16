@@ -3,11 +3,11 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SlLocationPin } from "react-icons/sl";
 import "./ArtistList.css";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 
 const ArtistList = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -84,21 +84,36 @@ const ArtistList = () => {
                 onClick={() => handleCardClick(artist.user._id)} // navigation on click
               >
                 <div className="portfolio-container d-flex">
-                  {artist.user.portfolio.map((work, index) => (
-                    <img
-                      key={index}
-                      src={work}
-                      alt={`Work ${index + 1}`}
-                      className="portfolio-img"
-                      style={{
-                        width: "33%",
-                        height: "100px",
-                        objectFit: "cover",
-                        margin: 1,
-                      }}
-                    />
-                  ))}
+                  {Array.from({ length: 3 }).map((_, index) => {
+                    const work = artist.user.portfolio[index]; // Get the work if it exists
+                    return work ? (
+                      <img
+                        key={index}
+                        src={work}
+                        alt={`Work ${index + 1}`}
+                        className="portfolio-img"
+                        style={{
+                          width: "33%",
+                          height: "100px",
+                          objectFit: "cover",
+                          margin: 1,
+                        }}
+                      />
+                    ) : (
+                      <div
+                        key={index}
+                        className="portfolio-placeholder"
+                        style={{
+                          width: "33%",
+                          height: "100px",
+                          margin: 1,
+                          backgroundColor: "lightgrey",
+                        }}
+                      ></div>
+                    );
+                  })}
                 </div>
+
                 <div className="text-center" style={{ marginTop: "-40px" }}>
                   <img
                     src={
