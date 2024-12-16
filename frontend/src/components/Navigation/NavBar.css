@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gafata&family=Varta:wght@300..700&display=swap");
+
+.navbar-container {
+  background-color: #d4c6bd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5rem;
+  position: sticky;
+  top: 0px;
+  box-shadow: 0px 8px 27px -9px #00000091;
+  z-index: 1000;
+
+  h1 {
+    font-family: "Abril Fatface", serif;
+    font-size: 4rem;
+    font-weight: 100;
+  }
+}
+
+.nav-icon,
+.nav-header-dropdown {
+  display: none;
+}
+
+.nav-links {
+  width: 45%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-links a {
+  font-size: 1.9rem;
+  text-decoration: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #45342d;
+}
+
+.nav-account {
+  position: relative;
+  border-radius: 50%;
+  height: 50px;
+  object-fit: cover;
+}
+
+.nav-account img {
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 2rem;
+}
+
+ .camera-icon {
+position: absolute;
+font-size: 1.5rem;
+top: 40px;
+right: 1px;
+}
+
+.button-container .nav-button {
+  color: #f2e2d7;
+  background-color: #830707;
+  border: none;
+  border-radius: 30px;
+  height: 3.5rem;
+  width: 14rem;
+  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+  cursor: pointer;
+  color: #f2e2d7;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+  font-size: 1.4rem;
+
+  &:visited {
+    color: #f2e2d7;
+  }
+
+  &:hover {
+    background-color: #b31b1b;
+  }
+}
+
+.nav-account {
+  position: relative;
+}
+
+.nav-profile-path {
+  display: none;
+  position: absolute;
+  bottom: -50px;
+}
+
+.nav-profile-path.open-profile-dropdown {
+  display: block;
+}
+
+.open-profile-dropdown {
+  background-color: #d4c6bd;
+  width: 250px;
+  height: 200px;
+  position: absolute;
+  top: 95px;
+  right: 0;
+  border-radius: 10px;
+  box-shadow: -1px 1px 2px rgba(172, 170, 170, 0.637);
+  animation: dropdown ease forwards 0.3s;
+}
+
+.account-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.nav-profile,
+.nav-button-logout,
+.customer-name,
+.chat-link {
+  text-decoration: none;
+  font-size: 1.9rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #45342d;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    padding: 1px;
+    color: #45342da1;
+  }
+}
+
+.nav-button-logout {
+  background-color: transparent;
+  border: none;
+}
+
+@keyframes dropdown {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  100% {
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+
+.upload-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears above all other content */
+}
+
+.upload-dialog-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.file-input {
+  display: block;
+  margin: 1rem auto;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.uploadimage-button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.uploadimage-button:hover {
+  background-color: #ddd;
+}
+
+.uploadimage-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 1280px) {
+  .logo-container {
+    display: none;
+  }
+
+  .navbar-container {
+    padding: 20px;
+  }
+
+  .nav-icon,
+  .nav-header-dropdown {
+    display: block;
+  }
+
+  .nav-header-dropdown {
+    padding-bottom: 1em;
+    font-size: 3.5rem;
+  }
+
+  .nav-header-dropdown h2 {
+    color: black;
+    font-family: var(--font-title);
+    font-size: 5rem;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    background-color: #d4c6bd;
+    height: 450px;
+    z-index: 999;
+    box-shadow: 0px 8px 27px -9px #00000091;
+    animation: dropdown 0.3s ease forwards;
+  }
+
+  .nav-links.open-nav {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1280px) {
+  .navbar-container {
+    padding: 3rem 5rem;
+  }
+}
+
+
