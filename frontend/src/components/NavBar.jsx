@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./NavBar.css";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useContext } from "react";
 import { UserContext } from "../context/ContextProvider";
 import { HiChat, HiLogout, HiUser } from "react-icons/hi";
 import useProfileImageUpload from "../hooks/useProfileImageUpload";
 import { FaCamera } from "react-icons/fa";
+import DropdownNav from "./Navigation/DropdownNav";
 
 function NavBar() {
   const location = useLocation();
-  const { user, clickHandlerVisibility, isOpen, logout } = useContext(UserContext);
+  const { user, clickHandlerVisibility, isOpen, logout } =
+    useContext(UserContext);
   const [isProfileOpen, setProfileIsOpen] = useState(false);
   const [isUploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const {
-    file,
-    loading,
-    error,
-    response,
-    handleSelectFile,
-    handleUpload,
-  } = useProfileImageUpload();
+  const { file, loading, error, response, handleSelectFile, handleUpload } =
+    useProfileImageUpload();
 
   const toggleProfile = () => {
     setProfileIsOpen(!isProfileOpen);
@@ -33,7 +30,7 @@ function NavBar() {
 
   const handleProfileImageUpload = async () => {
     if (file) {
-    await handleUpload(); // Upload the image using the custom hook
+      await handleUpload(); // Upload the image using the custom hook
     }
   };
 
@@ -47,6 +44,11 @@ function NavBar() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [location]);
+
+  const logoutHandler = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -70,12 +72,11 @@ function NavBar() {
           <div className="nav-dropdown-container">
             <div className="nav-account" onClick={toggleProfile}>
               <img
-                src={user.profileImage || "default-image.jpg"}
+                src={user.profileImage}
                 alt="User Profile"
                 className="user-profile-img"
-                
               />
-              <FaCamera  onClick={toggleUploadDialog} className="camera-icon"/>
+              <FaCamera onClick={toggleUploadDialog} className="camera-icon" />
             </div>
 
             <div
@@ -87,18 +88,11 @@ function NavBar() {
                 {user && (
                   <>
                     <h2 className="customer-name">{`${user.firstName} ${user.lastName}`}</h2>
+                    <DropdownNav />
                   </>
                 )}
-                <NavLink
-                  to={user.role === "customer" ? "/artists" : "/artists"}
-                  className="nav-profile"
-                >
-                  <HiUser size={21} /> &nbsp; Artists
-                </NavLink>
-                <div className="chat-link">
-                  <HiChat size={30} /> Messages
-                </div>
-                <button className="nav-button-logout" onClick={logout}>
+
+                <button className="nav-button-logout" onClick={logoutHandler}>
                   <HiLogout size={21} /> &nbsp; Logout
                 </button>
               </div>
@@ -126,11 +120,22 @@ function NavBar() {
               />
               {loading && <p>Uploading...</p>}
               {error && <p style={{ color: "red" }}>{error}</p>}
-              {response && <p style={{ color: "green" }}>Image uploaded successfully!</p>}
-              <button onClick={handleProfileImageUpload} disabled={loading} className="uploadimage-button">
+              {response && (
+                <p style={{ color: "green" }}>Image uploaded successfully!</p>
+              )}
+              <button
+                onClick={handleProfileImageUpload}
+                disabled={loading}
+                className="uploadimage-button"
+              >
                 Upload Image
               </button>
-              <button onClick={toggleUploadDialog} className="uploadimage-button">Cancel</button>
+              <button
+                onClick={toggleUploadDialog}
+                className="uploadimage-button"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         )}
@@ -140,4 +145,3 @@ function NavBar() {
 }
 
 export default NavBar;
-

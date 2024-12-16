@@ -75,7 +75,6 @@ export const userLogin = async (req, res) => {
       return res.status(400).send({ msg: "Incorrect password!" });
     }
     const token = generateJWT(user._id);
-    console.log(token)
 
     res
       .cookie("jwt", token, {

@@ -35,6 +35,8 @@ function Login() {
       } else {
         navigate(`/artist-profile/${userData.id}`);
       }
+
+      navigate(0);
     } catch (error) {
       if (error.response) {
         // Handle response error (e.g., bad credentials)
