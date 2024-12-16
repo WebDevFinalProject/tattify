@@ -4,14 +4,18 @@ import { NavLink } from "react-router-dom";
 
 const DropdownNav = () => {
   const { user, isLoading } = useContext(UserContext);
-  console.log("DropdownNav rendered", user);
+
   if (isLoading) {
     return <div>loading...</div>;
   }
   return (
     <>
-      {user && user.role === "customer" && <NavLink>Artist</NavLink>}
-      {user && user.role === "artist" && <NavLink>Profile</NavLink>}
+      {user && user.role === "customer" && (
+        <NavLink to="/customer-profile">Artist</NavLink>
+      )}
+      {user && user.role === "artist" && (
+        <NavLink to={`/artist-profile/${user._id}`}>Profile</NavLink>
+      )}
     </>
   );
 };

@@ -10,22 +10,22 @@ import Portfolio from "../components/ArtistProfile/Portfolio.jsx";
 import Reviews from "../components/ArtistProfile/Reviews.jsx";
 
 function PublicProfile() {
-    const { artist, loading } = useArtistData();
-    if (loading) return <p>Loading...</p>;
+  const { artist, loading } = useArtistData();
+  if (loading) return <p>Loading...</p>;
 
-    return (
-        <>
-            <NavBar />
-            <Wrapper>
-                <MainInfo artist={artist} />
-                <Bio artist={artist} />
-                <Details artist={artist} />
-                <Portfolio artist={artist} />
-                <Reviews />
-            </Wrapper>
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <NavBar />
+      <Wrapper>
+        <MainInfo artist={artist} />
+        <Bio artist={artist} />
+        <Details artist={artist} />
+        <Portfolio artist={artist} />
+        <Reviews />
+      </Wrapper>
+      <Footer />
+    </>
+  );
 }
 
 export default PublicProfile;
