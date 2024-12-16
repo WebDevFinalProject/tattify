@@ -75,9 +75,9 @@ const Registration = () => {
       } else {
         navigate("/login");
       }
-    } catch {
-      setResponse("* Please complete the form to proceed.");
-      setTimeout(() => setResponse(""), 3000);
+    } catch (err) {
+      setResponse(err.response.data.msg || "* Please complete the form to proceed.");
+      setTimeout(() => setResponse(""), 3000);  // Clear the response after 3 seconds
     } finally {
       setIsSubmitting(false);
     }
