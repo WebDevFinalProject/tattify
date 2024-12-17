@@ -31,15 +31,17 @@ function UploadPortfolio({ token, onClose }) {
         try {
             await addPortfolioImages(formData, token);
             alert("Images added successfully!");
+            window.location.reload()
             onClose(); // Close modal on success
         } catch (err) {
             console.error("Error uploading portfolio images:", err);
         }
+        window.relo
     };
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="upload-content">
                 <h3>Upload Portfolio Images</h3>
                 <form onSubmit={handleUpload}>
                     <input

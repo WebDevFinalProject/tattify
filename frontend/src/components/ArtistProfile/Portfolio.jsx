@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { H2, PortfolioContainer } from "./styles/StyledComponents";
 import UploadPortfolio from "./UploadPortfolio";
-import { FiPlus } from "react-icons/fi";
+import { GoPlusCircle } from "react-icons/go";
 import { UserContext } from "../../context/ContextProvider";
 
 function Portfolio({ artist }) {
@@ -21,17 +21,15 @@ function Portfolio({ artist }) {
       {artist ? (
         <div className="artist-portfolio-main-container">
           {/* Portfolio Heading */}
-          <H2>
-            Portfolio {/* Show Plus Icon only if user is logged in */}
-            {isArtist && (
-              <FiPlus
-                className="upload-icon"
-                onClick={toggleModal}
-                size={40}
-                style={{ cursor: "pointer", color: "#555" }}
-              />
-            )}
-          </H2>
+          <div className="portfolio-header">
+          <H2>Portfolio</H2>
+          {isArtist && (
+            <GoPlusCircle
+              className="upload-icon"
+              onClick={toggleModal}
+            />
+          )}
+        </div>
 
           {/* Display Portfolio Images */}
           <PortfolioContainer>
