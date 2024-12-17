@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { H2, PortfolioContainer } from "./styles/StyledComponents";
 import UploadPortfolio from "./UploadPortfolio";
-import { GoPlusCircle } from "react-icons/go";
+import { BiSolidCameraPlus } from "react-icons/bi";
 import { UserContext } from "../../context/ContextProvider";
 
 function Portfolio({ artist }) {
@@ -24,7 +24,7 @@ function Portfolio({ artist }) {
           <div className="portfolio-header">
           <H2>Portfolio</H2>
           {isArtist && (
-            <GoPlusCircle
+            <BiSolidCameraPlus
               className="upload-icon"
               onClick={toggleModal}
             />

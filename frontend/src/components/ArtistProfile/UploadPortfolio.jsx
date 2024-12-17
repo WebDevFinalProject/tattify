@@ -36,7 +36,7 @@ function UploadPortfolio({ token, onClose }) {
         } catch (err) {
             console.error("Error uploading portfolio images:", err);
         }
-        window.relo
+
     };
 
     return (

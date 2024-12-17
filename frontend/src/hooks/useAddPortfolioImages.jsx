@@ -23,8 +23,8 @@ const useAddPortfolioImages = () => {
       setPortfolio(response.data.portfolio);
       return response.data;
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
-      throw err; // Rethrow the error if needed
+      setError(err.response.data.message || "Something went wrong");
+      throw err; 
     } finally {
       setIsLoading(false);
     }
