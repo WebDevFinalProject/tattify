@@ -16,7 +16,7 @@ function PublicProfile() {
 
     // import editing logic from custom hook
     const { isEditing, setIsEditing, formData, handleInputChange, handleSave } =
-        useEditArtistProfile(artist);
+        useEditArtistProfile();
 
     if (loading) return <p>Loading...</p>;
 

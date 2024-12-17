@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { UserContext } from "../context/ContextProvider";
 
-const useEditArtistProfile = (artist) => {
+const useEditArtistProfile = () => {
     const [isEditing, setIsEditing] = useState(false); // Edit mode state
+    const { user, setUser } = useContext(UserContext); // Access user from Context
     const [formData, setFormData] = useState({
-        bio: artist?.bio || "",
-        specialties: artist?.specialties || "",
-        languagesSpoken: artist?.languagesSpoken || "",
-        city: artist?.city || "",
-        country: artist?.country || "",
-        basePrice: artist?.basePrice || "",
+        bio: user?.bio || "",
+        specialties: user?.specialties || "",
+        languagesSpoken: user?.languagesSpoken || "",
+        city: user?.city || "",
+        country: user?.country || "",
+        basePrice: user?.basePrice || "",
     });
 
-    // Handle input changes in form fields
+    // Handle input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -22,10 +24,12 @@ const useEditArtistProfile = (artist) => {
     const handleSave = async () => {
         try {
             const response = await axios.put(
-                `/api/artists/${artist.id}`,
+                `/api/artists/${user?.id}`,
                 formData
             );
+
             console.log("Profile updated successfully:", response.data);
+            setUser(response.data); // Update user with new profile data
             setIsEditing(false); // Exit edit mode
         } catch (error) {
             console.error("Error updating profile:", error);
