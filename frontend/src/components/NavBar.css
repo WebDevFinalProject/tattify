@@ -34,6 +34,10 @@
   text-decoration: none;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #45342d;
+
+  &:hover {
+    color: #45342da1;
+  }
 }
 
 .nav-account {
@@ -49,11 +53,12 @@
   margin-left: 2rem;
 }
 
- .camera-icon {
-position: absolute;
-font-size: 1.5rem;
-top: 40px;
-right: 1px;
+.camera-icon {
+  position: absolute;
+  font-size: 1.6rem;
+  top: 40px;
+  right: 1px;
+  color: rgb(105, 103, 103);
 }
 
 .button-container .nav-button {
@@ -85,8 +90,6 @@ right: 1px;
 
 .nav-profile-path {
   display: none;
-  position: absolute;
-  bottom: -50px;
 }
 
 .nav-profile-path.open-profile-dropdown {
@@ -95,46 +98,64 @@ right: 1px;
 
 .open-profile-dropdown {
   background-color: #d4c6bd;
-  width: 250px;
-  height: 200px;
   position: absolute;
   top: 95px;
-  right: 0;
+  width: 450px;
+  min-height: 60vh;
+  right: 0px;
   border-radius: 10px;
-  box-shadow: -1px 1px 2px rgba(172, 170, 170, 0.637);
-  animation: dropdown ease forwards 0.3s;
+  box-shadow: -1px 1px 4px rgba(116, 114, 114, 0.637);
+  animation: profile-nav ease forwards 0.3s;
 }
 
 .account-dropdown-menu {
   display: flex;
   flex-direction: column;
-  height: 100%;
   align-items: flex-start;
-  gap: 2rem;
-  padding: 2rem;
+  height: auto;
+  padding: 5rem 0;
+  gap: 3rem;
 }
 
-.nav-profile,
 .nav-button-logout,
 .customer-name,
-.chat-link {
+.chat-link,
+.nav-profile-links {
   text-decoration: none;
   font-size: 1.9rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #45342d;
   padding-left: 1rem;
-  display: flex;
-  align-items: center;
+  margin: 0 15%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
+.chat-link,
+.nav-profile-links,
+.nav-button-logout {
   &:hover {
-    padding: 1px;
     color: #45342da1;
   }
+}
+
+.customer-name {
+  padding: 2.5rem 0;
 }
 
 .nav-button-logout {
   background-color: transparent;
   border: none;
+}
+
+.mySwiper {
+  width: 70%;
+  max-height: 125px;
+  margin: auto;
+}
+
+.slide-images img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
 
 @keyframes dropdown {
@@ -149,6 +170,17 @@ right: 1px;
   }
 }
 
+@keyframes profile-nav {
+  0% {
+    max-width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    max-width: 100%;
+    opacity: 1;
+  }
+}
 
 .upload-dialog {
   position: fixed;
@@ -204,7 +236,7 @@ right: 1px;
   }
 
   .navbar-container {
-    padding: 20px;
+    padding: 3rem 5rem;
   }
 
   .nav-icon,
@@ -230,7 +262,7 @@ right: 1px;
     align-items: center;
     gap: 2em;
     position: absolute;
-    top: 100px;
+    top: 120px;
     left: 0;
     width: 100%;
     background-color: #d4c6bd;
@@ -243,12 +275,8 @@ right: 1px;
   .nav-links.open-nav {
     display: flex;
   }
-}
 
-@media (min-width: 769px) and (max-width: 1280px) {
-  .navbar-container {
-    padding: 3rem 5rem;
+  .open-profile-dropdown {
+    top: 115px;
   }
 }
-
-
