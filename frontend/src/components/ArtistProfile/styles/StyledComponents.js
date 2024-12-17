@@ -88,7 +88,19 @@ export const PortfolioContainer = styled.div`
     margin-bottom: 4rem;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap; 
+    
     img {
-        width: 32%;
+        width: 33%;
+        margin-bottom: 1rem; 
+        
+     
+        @media (max-width: 1300px) {
+            width: 48%; 
+        }
+        
+        @media (max-width: 480px) {
+            width: 100%;  
+        }
     }
 `;
