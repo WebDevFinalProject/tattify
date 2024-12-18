@@ -23,7 +23,7 @@ const CustomSlideImages = () => {
           clickable: true,
         }}
         modules={[EffectFade, Navigation, Pagination, Autoplay]}
-        className="mySwiper"
+        className="mySwiper2"
       >
         <SwiperSlide className="slide-images">
           <img src={ad1} />
