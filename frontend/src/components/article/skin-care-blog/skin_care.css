@@ -155,11 +155,12 @@ iframe {
   padding-bottom: 1em;
 
   span {
-    font-size: 2em;
+    font-size: 3rem;
     font-weight: 800;
     color: rgb(75, 74, 74);
     margin-right: 2em;
-
+    cursor: pointer;
+    
     &:hover {
       color: black;
     }
