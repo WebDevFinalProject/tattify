@@ -87,12 +87,12 @@ export const H2 = styled.h2`
 export const PortfolioContainer = styled.div`
     margin-bottom: 4rem;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap; 
     
     img {
         width: 33%;
         margin-bottom: 1rem; 
+        margin-right: 5px;
         
      
         @media (max-width: 1300px) {
