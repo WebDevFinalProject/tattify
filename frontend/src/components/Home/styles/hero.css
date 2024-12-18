@@ -1,57 +1,59 @@
 :root {
-  --main-bg-color: #a39387;
+  --main-bg-color     : #a39387;
   --secondary-bg-color: #f2e2d7;
   --primary-text-color: #4d4d4d;
-  --accent-color: #830707;
-  --button-text-color: #ffffff;
-  --font-title: "Abril Fatface", serif;
-  --font-body: "PT Serif", serif;
+  --accent-color      : #830707;
+  --button-text-color : #ffffff;
+  --font-title        : "Abril Fatface", serif;
+  --font-body         : "PT Serif", serif;
 }
 
 .hero-container {
   background-color: var(--main-bg-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display         : flex;
+  flex-direction  : column;
+  justify-content : center;
+  align-items     : center;
 
   .hero-text-container {
-    display: flex;
-    flex-direction: column;
+    display        : flex;
+    flex-direction : column;
     justify-content: center;
-    align-items: center;
+    align-items    : center;
 
     h1 {
       font-family: var(--font-title);
       font-weight: 100;
-      color: #ffffff;
-      font-size: 14.5rem;
+      color      : #ffffff;
+      font-size  : 14.5rem;
       text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.445);
       padding-top: 2rem;
+      position   : relative;
+      z-index    : 200;
     }
 
     p {
-      font-family: var(--font-body);
-      color: var(--secondary-bg-color);
-      text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.445);
-      font-size: 2.4rem;
+      font-family  : var(--font-body);
+      color        : var(--secondary-bg-color);
+      text-shadow  : 4px 4px 6px rgba(66, 68, 90, 0.445);
+      font-size    : 2.4rem;
       margin-bottom: 2rem;
-      position: relative;
-      top: -10px;
+      position     : relative;
+      top          : -10px;
     }
 
     .hero-button {
       background-color: #700606;
-      border: none;
-      border-radius: 30px;
-      height: 3rem;
-      width: 16rem;
-      cursor: pointer;
-      transform: scale(1.2);
-      text-decoration: none;
-      color: #f2e2d7;
-      text-align: center;
-      padding: 4px 0;
+      border          : none;
+      border-radius   : 30px;
+      height          : 3rem;
+      width           : 16rem;
+      cursor          : pointer;
+      transform       : scale(1.2);
+      text-decoration : none;
+      color           : #f2e2d7;
+      text-align      : center;
+      padding         : 4px 0;
 
       &&:hover {
         background-color: #b31b1b;
@@ -60,22 +62,21 @@
   }
 
   .hero-image-container {
-    width: 57rem;
-    margin-top: 3rem;
+    width       : 57rem;
+    margin-top  : 3rem;
     margin-right: 9rem;
-    position: relative;
+    position    : relative;
+    z-index     : 1;
 
     .hero-gradient {
-      width: 100%;
+      width : 100%;
       height: 100%;
-      background-image: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 80%,
-        rgba(163, 147, 135, 1) 100%
-      );
+      background-image: linear-gradient(180deg,
+          rgba(0, 0, 0, 0) 80%,
+          rgba(163, 147, 135, 1) 100%);
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom  : 0;
+      left    : 0;
     }
 
     img {
@@ -86,21 +87,21 @@
 
 @media (min-width: 1024px) {
   .hero-container {
-    height: 100vh;
+    height        : 100vh;
     flex-direction: row;
 
     .hero-image-container {
       margin-bottom: 15rem;
-      transform: scale(1.2);
+      transform    : scale(1.2);
     }
 
     .hero-text-container {
       padding-bottom: 30rem;
-      padding-right: 17rem;
-      align-items: start;
-      gap: 2rem;
-      max-width: 40%;
-      white-space: nowrap;
+      padding-right : 17rem;
+      align-items   : start;
+      gap           : 2rem;
+      max-width     : 40%;
+      white-space   : nowrap;
       /* white-space prevents text to break into different lines when shrinking/growing */
 
       h1 {
@@ -108,14 +109,14 @@
       }
 
       p {
-        font-size: clamp(2rem, 3vw, 3rem);
+        font-size   : clamp(2rem, 3vw, 3rem);
         padding-left: 5rem;
       }
 
       .hero-button {
-        height: 3rem;
-        width: 16rem;
-        font-size: 1.5rem;
+        height     : 3rem;
+        width      : 16rem;
+        font-size  : 1.5rem;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         margin-left: 7rem;
       }
