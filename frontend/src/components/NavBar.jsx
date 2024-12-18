@@ -4,7 +4,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useContext } from "react";
 import { UserContext } from "../context/ContextProvider";
-import { HiLogout } from "react-icons/hi";
+import { HiChat, HiLogout } from "react-icons/hi";
 import useProfileImageUpload from "../hooks/useProfileImageUpload";
 import { FaCamera } from "react-icons/fa";
 import DropdownNav from "./Navigation/DropdownNav";
@@ -94,17 +94,16 @@ function NavBar() {
               <div className="nav-profile-path open-profile-dropdown">
                 <div className="account-dropdown-menu">
                   <CustomSlideImages />
-                  {user && (
-                    <>
-                      <DropdownNav />
-                      <button
-                        className="nav-button-logout"
-                        onClick={logoutHandler}
-                      >
-                        <HiLogout size={21} /> &nbsp; Logout
-                      </button>
-                    </>
-                  )}
+                  <h2 className="customer-name">
+                    {`Welcome, ${user.firstName} ${user.lastName}!`}
+                  </h2>
+                  <DropdownNav />
+                  <NavLink className="chat-link">
+                    <HiChat /> &nbsp; Messages
+                  </NavLink>
+                  <button className="nav-button-logout" onClick={logoutHandler}>
+                    <HiLogout size={21} /> &nbsp; Logout
+                  </button>
                 </div>
               </div>
             )}
