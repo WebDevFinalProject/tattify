@@ -40,7 +40,7 @@ export const publicProfile = async (req, res) => {
     const response = {
       firstName: artist.user.firstName,
       lastName: artist.user.lastName,
-      profileImage: artist.user.profileImage || null,
+      profileImage: artist.user.profileImage,
       bio: artist.bio,
       specialties: artist.specialties,
       experience: artist.experience,
