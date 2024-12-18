@@ -22,19 +22,20 @@ function Portfolio({ artist }) {
         <div className="artist-portfolio-main-container">
           {/* Portfolio Heading */}
           <div className="portfolio-header">
-          <H2>Portfolio</H2>
-          {isArtist && (
-            <BiSolidCameraPlus
-              className="upload-icon"
-              onClick={toggleModal}
-            />
-          )}
-        </div>
+            <H2>Portfolio</H2>
+            {isArtist && (
+              <BiSolidCameraPlus
+                className="upload-icon"
+                onClick={toggleModal}
+              />
+            )}
+          </div>
 
           {/* Display Portfolio Images */}
           <PortfolioContainer>
             {artist.portfolio.map((imageUrl, index) => (
               <img
+                key={index}
                 index={index}
                 src={imageUrl}
                 alt={`Portfolio image ${index + 1}`}

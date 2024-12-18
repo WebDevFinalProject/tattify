@@ -46,14 +46,12 @@
       border-radius: 30px;
       height: 3rem;
       width: 16rem;
-      padding-bottom: 0.2rem;
       cursor: pointer;
       transform: scale(1.2);
-
-      a {
-        text-decoration: none;
-        color: #f2e2d7;
-      }
+      text-decoration: none;
+      color: #f2e2d7;
+      text-align: center;
+      padding: 4px 0;
 
       &&:hover {
         background-color: #b31b1b;

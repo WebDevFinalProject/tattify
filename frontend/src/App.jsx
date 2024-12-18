@@ -11,12 +11,10 @@ import Registration from "./components/Registration/Registration.jsx";
 import GlobalTattoo from "./components/article/GlobalTattoo/GlobalTattoo.jsx";
 import { useContext } from "react";
 import { UserContext } from "./context/ContextProvider.jsx";
-import Profile from "./components/testing/Profile.jsx";
 import TatooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
 import ArtistList from "./components/ArtistList/ArtistList.jsx";
 import FirstTattooGuide from "./components/article/FirstTattooGuide/FirstTattooGuide.jsx";
-import Test from "./components/testing/Test.jsx";
-import MainInfo from "./components/ArtistProfile/MainInfo.jsx";
+
 
 function App() {
   const { user } = useContext(UserContext);
@@ -42,6 +40,9 @@ function App() {
         <Route path="/customer-profile" element={user && <ArtistList />} />
         <Route path="/artist/create-profile" element={<ArtistForm />} />
         <Route path="/artist-profile/:id" element={<ArtistProfile />} />
+
+        {/* Default route */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );

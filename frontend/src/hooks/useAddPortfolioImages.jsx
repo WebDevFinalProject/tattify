@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../components/api";
 
 const useAddPortfolioImages = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,20 +11,15 @@ const useAddPortfolioImages = () => {
     setError(null);
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/user/portfolio/add",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
-        }
-      );
+      const response = await api.post("/api/user/portfolio/add", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setPortfolio(response.data.portfolio);
       return response.data;
     } catch (err) {
       setError(err.response.data.message || "Something went wrong");
-      throw err; 
+      throw err;
     } finally {
       setIsLoading(false);
     }

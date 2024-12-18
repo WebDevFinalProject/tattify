@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 import "./Login.css";
 import api from "../api";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,11 +18,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await api.post(
-        "/api/login",
-        { email, password },
-        { withCredentials: true } // Ensures cookies are sent with the request
-      );
+      const response = await api.post("/api/login", { email, password });
 
       const { isProfileComplete, role, ...userData } = response.data.user;
       login({ ...userData, role });
@@ -33,7 +28,7 @@ function Login() {
       } else if (role === "customer") {
         navigate("/customer-profile");
       } else {
-        navigate(`/artist-profile/${userData.id}`);
+        navigate(`/artist-profile/${userData._id}`);
       }
     } catch (error) {
       if (error.response) {
