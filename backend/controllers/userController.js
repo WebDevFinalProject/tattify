@@ -131,11 +131,11 @@ export const uploadProfileImage = async (req, res) => {
     );
 
     res.json({
-      imgUrl: user.profileImage,
+      profileImage: user.profileImage,
       message: "Profile picture updated successfully!",
     });
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ message: "Something went wrong!" });
   }
 };
 

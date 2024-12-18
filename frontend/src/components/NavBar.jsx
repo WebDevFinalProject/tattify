@@ -17,8 +17,15 @@ function NavBar() {
   const [isUploadDialogOpen, setUploadDialogOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { file, loading, error, response, handleSelectFile, handleUpload } =
-    useProfileImageUpload();
+  const {
+    file,
+    preview,
+    loading,
+    error,
+    response,
+    handleSelectFile,
+    handleUpload,
+  } = useProfileImageUpload();
 
   const toggleDropdown = (dropdownName) => {
     setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
@@ -121,6 +128,7 @@ function NavBar() {
           <div className="upload-dialog">
             <div className="upload-dialog-content">
               <h2>Upload Profile Image</h2>
+              {preview && <img src={preview} style={{ width: "50px" }} />}
               <input
                 type="file"
                 accept="image/*"
