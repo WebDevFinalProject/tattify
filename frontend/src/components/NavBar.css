@@ -229,6 +229,7 @@
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
+  align-items: baseline;
 }
 
 .uploadimage-button {
@@ -238,11 +239,12 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
+  background-color: #830707;
+  color: white;
 }
 
 .uploadimage-button:hover {
-  background-color: #ddd;
-  color: rgb(74, 72, 72);
+  background-color: #8d2c2c;
 }
 
 .uploadimage-button:disabled {
