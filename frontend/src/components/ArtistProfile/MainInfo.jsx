@@ -1,8 +1,10 @@
 import "./styles/main-info.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/ContextProvider";
+import { useParams } from "react-router";
+import DefaultProfileImage from "../../assets/default-profile-image.jpg";
 const MainInfo = ({
     artist,
     isEditing,
@@ -13,32 +15,20 @@ const MainInfo = ({
     toggleEditMode,
 }) => {
     const { user } = useContext(UserContext);
+    const { id } = useParams();
+
     const isOwner = user && user?._id === id;
-    // Local state for editing
-    // const [editableArtist, setEditableArtist] = useState({
-    //     firstName: artist?.firstName || "",
-    //     lastName: artist?.lastName || "",
-    //     city: artist?.city || "",
-    //     country: artist?.country || "",
-    // });
 
-    // Toggle edit mode
-    // const handleEditClick = () => {
-    //     setIsEditing(!isEditing);
-    // };
-
-    // Save changes
-    // const handleSave = () => {
-    //     if (onSave) onSave(editableArtist); // Pass updated data to parent
-    //     setIsEditing(false);
-    // };
     return (
         <>
             <div className="artist-profile-main-info-container">
                 <button className="star-button-phone">
                     <FontAwesomeIcon icon={faStar} />
                 </button>
-                <img src={artist.profileImage} alt="" />
+                <img
+                    src={artist.profileImage || { DefaultProfileImage }}
+                    alt={`${artist.firstName} ${artist.lastName}`}
+                />
                 {/* Editable fields for name, city, country */}
                 <div>
                     {isEditing ? (
@@ -47,28 +37,28 @@ const MainInfo = ({
                                 <input
                                     type="text"
                                     name="firstName"
-                                    value={user.firstName}
+                                    value={formData?.firstName}
                                     onChange={handleInputChange}
                                     placeholder="First Name"
                                 />
                                 <input
                                     type="text"
                                     name="lastName"
-                                    value={user.lastName}
+                                    value={formData?.lastName}
                                     onChange={handleInputChange}
                                     placeholder="Last Name"
                                 />
                                 <input
                                     type="text"
                                     name="city"
-                                    value={user.city}
+                                    value={formData?.city}
                                     onChange={handleInputChange}
                                     placeholder="City"
                                 />
                                 <input
                                     type="text"
                                     name="country"
-                                    value={user.country}
+                                    value={formData?.country}
                                     onChange={handleInputChange}
                                     placeholder="Country"
                                 />
@@ -90,7 +80,7 @@ const MainInfo = ({
                     <button className="star-button-desktop">
                         <FontAwesomeIcon icon={faStar} size="3x" />
                     </button>
-                    {!isEditing && (
+                    {isOwner && !isEditing && (
                         <button
                             className="edit-button-desktop"
                             onClick={toggleEditMode}
@@ -98,7 +88,8 @@ const MainInfo = ({
                             <FontAwesomeIcon icon={faPenToSquare} size="3x" />
                         </button>
                     )}
-                    {isEditing && (
+
+                    {isOwner && isEditing && (
                         <>
                             <button
                                 className="save-button"
@@ -120,4 +111,23 @@ const MainInfo = ({
         </>
     );
 };
+
+// Local state for editing
+// const [editableArtist, setEditableArtist] = useState({
+//     firstName: artist?.firstName || "",
+//     lastName: artist?.lastName || "",
+//     city: artist?.city || "",
+//     country: artist?.country || "",
+// });
+
+// Toggle edit mode
+// const handleEditClick = () => {
+//     setIsEditing(!isEditing);
+// };
+
+// Save changes
+// const handleSave = () => {
+//     if (onSave) onSave(editableArtist); // Pass updated data to parent
+//     setIsEditing(false);
+// };
 export default MainInfo;
