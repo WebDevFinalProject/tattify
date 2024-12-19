@@ -34,99 +34,89 @@ const MainInfo = ({
     // };
     return (
         <>
-            {artist ? (
-                <div className="artist-profile-main-info-container">
-                    <button className="star-button-phone">
-                        <FontAwesomeIcon icon={faStar} />
-                    </button>
-                    <img
-                        src={artist.profileImage || user?.profileImage}
-                        alt=""
-                    />
-                    {/* Editable fields for name, city, country */}
-                    <div>
-                        {isEditing ? (
-                            <>
-                                <form className="edit-artist-profile-form">
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        value={user.firstName}
-                                        onChange={handleInputChange}
-                                        placeholder="First Name"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        value={user.lastName}
-                                        onChange={handleInputChange}
-                                        placeholder="Last Name"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="city"
-                                        value={user.city}
-                                        onChange={handleInputChange}
-                                        placeholder="City"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="country"
-                                        value={user.country}
-                                        onChange={handleInputChange}
-                                        placeholder="Country"
-                                    />
-                                </form>
-                            </>
-                        ) : (
-                            <>
-                                <h2>
-                                    {artist.firstName} {artist.lastName}
-                                </h2>
-                                <p>
-                                    {artist.city}, {artist.country}
-                                </p>
-                            </>
-                        )}
-                    </div>
-                    {/* Buttons for desktop */}
-                    <div className="button-container">
-                        <button className="star-button-desktop">
-                            <FontAwesomeIcon icon={faStar} size="3x" />
-                        </button>
-                        {!isEditing && (
-                            <button
-                                className="edit-button-desktop"
-                                onClick={toggleEditMode}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faPenToSquare}
-                                    size="3x"
+            <div className="artist-profile-main-info-container">
+                <button className="star-button-phone">
+                    <FontAwesomeIcon icon={faStar} />
+                </button>
+                <img src={artist.profileImage} alt="" />
+                {/* Editable fields for name, city, country */}
+                <div>
+                    {isEditing ? (
+                        <>
+                            <form className="edit-artist-profile-form">
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={user.firstName}
+                                    onChange={handleInputChange}
+                                    placeholder="First Name"
                                 />
-                            </button>
-                        )}
-                        {isEditing && (
-                            <>
-                                <button
-                                    className="save-button"
-                                    onClick={handleSave}
-                                >
-                                    Save Changes
-                                </button>
-                                <button
-                                    className="cancel-button"
-                                    onClick={() => setIsEditing(false)}
-                                >
-                                    Cancel
-                                </button>
-                            </>
-                        )}
-                        <button className="chat-button">Chat</button>
-                    </div>
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={user.lastName}
+                                    onChange={handleInputChange}
+                                    placeholder="Last Name"
+                                />
+                                <input
+                                    type="text"
+                                    name="city"
+                                    value={user.city}
+                                    onChange={handleInputChange}
+                                    placeholder="City"
+                                />
+                                <input
+                                    type="text"
+                                    name="country"
+                                    value={user.country}
+                                    onChange={handleInputChange}
+                                    placeholder="Country"
+                                />
+                            </form>
+                        </>
+                    ) : (
+                        <>
+                            <h2>
+                                {artist.firstName} {artist.lastName}
+                            </h2>
+                            <p>
+                                {artist.city}, {artist.country}
+                            </p>
+                        </>
+                    )}
                 </div>
-            ) : (
-                <p>No artist data available.</p>
-            )}
+                {/* Buttons for desktop */}
+                <div className="button-container">
+                    <button className="star-button-desktop">
+                        <FontAwesomeIcon icon={faStar} size="3x" />
+                    </button>
+                    {!isEditing && (
+                        <button
+                            className="edit-button-desktop"
+                            onClick={toggleEditMode}
+                        >
+                            <FontAwesomeIcon icon={faPenToSquare} size="3x" />
+                        </button>
+                    )}
+                    {isEditing && (
+                        <>
+                            <button
+                                className="save-button"
+                                onClick={handleSave}
+                            >
+                                Save Changes
+                            </button>
+                            <button
+                                className="cancel-button"
+                                onClick={() => setIsEditing(false)}
+                            >
+                                Cancel
+                            </button>
+                        </>
+                    )}
+                    <button className="chat-button">Chat</button>
+                </div>
+            </div>
         </>
     );
 };
