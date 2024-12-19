@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
-import './resetPassword.css'; // Assuming your CSS file is named ResetPassword.css
+import "./resetPassword.css"; // Assuming your CSS file is named ResetPassword.css
 
 const ResetPassword = () => {
   const { userId } = useParams(); // Extract userId from the URL params
@@ -39,10 +39,10 @@ const ResetPassword = () => {
       console.log(response.data.message);
       setMessage(response.data.message);
 
-      // Navigate to login page after success
+      // Set a timeout to navigate to login page after 2 seconds
       setTimeout(() => {
         navigate("/login");
-      }, 1000); 
+      }, 1500); 
     } catch (error) {
       setMessage(error.response?.data?.message || "Error resetting password.");
     }
@@ -61,9 +61,7 @@ const ResetPassword = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-        
-              <button type="submit">Reset Password</button>
-            
+            <button type="submit">Reset Password</button>
             {message && <p className="success-message">{message}</p>}
           </form>
         ) : (
