@@ -78,7 +78,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {errorMessage && <p className="error-message">{errorMessage}</p>}
-              <a href="#" className="string">
+              <a href="/forgot-password" className="string">
                 Forgot password?
               </a>
               <Link to="/register" className="string">

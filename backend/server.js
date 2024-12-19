@@ -6,6 +6,7 @@ import { connectToDatabase } from "./database/database.js";
 import userRoutes from "./routes/userRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import contactRoutes from "./routes/contactRoute.js";
+import forgotPasswordRoutes from "./routes/forgetPasswordRoutes.js";
 
 const app = express();
 app.use(cors({
@@ -22,6 +23,7 @@ connectToDatabase();
 app.use("/api", userRoutes);
 app.use("/api", profileRoutes);
 app.use("/api", contactRoutes);
+app.use("/api", forgotPasswordRoutes)
 
 app.listen(PORT, () => {
   console.log("Server is listening!", PORT);
