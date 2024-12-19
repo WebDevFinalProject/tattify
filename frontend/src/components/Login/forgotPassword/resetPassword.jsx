@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 
 const ResetPassword = () => {
   const { userId } = useParams(); // Extract userId from the URL params
+  const navigate = useNavigate(); // Initialize navigate
   const [isValidUser, setIsValidUser] = useState(false);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -12,9 +13,11 @@ const ResetPassword = () => {
   useEffect(() => {
     const validateUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/reset-password/${userId}`);
+        const response = await axios.get(
+          `http://localhost:4000/api/reset-password/${userId}`
+        );
         if (response.status === 200) {
-          setIsValidUser(true);  // User is valid
+          setIsValidUser(true); // User is valid
         }
       } catch (error) {
         setMessage(error.response?.data?.message || "Invalid user or error.");
@@ -28,8 +31,17 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:4000/api/reset-password/${userId}`, { password });
+      const response = await axios.post(
+        `http://localhost:4000/api/reset-password/${userId}`,
+        { password }
+      );
+      console.log(response.data.message);
       setMessage(response.data.message);
+
+      // Navigate to login page after success
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000); 
     } catch (error) {
       setMessage(error.response?.data?.message || "Error resetting password.");
     }
@@ -48,15 +60,13 @@ const ResetPassword = () => {
             required
           />
           <button type="submit">Reset Password</button>
+          {message && <p className="success-message">{message}</p>}
         </form>
       ) : (
-        <p>{message}</p>  // Display error message if user is invalid
+        <p>{message}</p> // Display error message if user is invalid
       )}
     </div>
   );
 };
 
 export default ResetPassword;
-
-
-

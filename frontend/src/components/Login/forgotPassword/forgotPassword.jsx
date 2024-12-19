@@ -11,7 +11,7 @@ function ForgotPassword() {
 
     try {
       const response = await forgotPassword(email);
-      setMessage(response.data.msg); // Display success message
+      setMessage(response.data.message); // Display success message
       setError(""); // Clear any previous errors
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong.");
