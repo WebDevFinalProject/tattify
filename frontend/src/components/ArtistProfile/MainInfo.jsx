@@ -19,7 +19,7 @@ const MainInfo = ({ artist, isEditing, setIsEditing, handleInputChange }) => {
           <FontAwesomeIcon icon={faStar} />
         </button>
         <img
-          src={`${user ? user.profileImage : artist.profileImage}`}
+          src={artist.profileImage}
           alt="profile image"
         />
 

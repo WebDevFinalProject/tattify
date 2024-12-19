@@ -3,6 +3,7 @@ import { H2, PortfolioContainer } from "./styles/StyledComponents";
 import UploadPortfolio from "./UploadPortfolio";
 import { BiSolidCameraPlus } from "react-icons/bi";
 import { UserContext } from "../../context/ContextProvider";
+import { useParams } from "react-router-dom";
 
 function Portfolio({ artist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,9 +13,9 @@ function Portfolio({ artist }) {
 
   // Get user from context
   const { user } = useContext(UserContext);
+  const { id } = useParams();
 
-  // Check if user is logged in and role is "artist"
-  const isArtist = user && user.role === "artist";
+  const isOwner = user && user?._id === id;
 
   return (
     <>
@@ -23,7 +24,7 @@ function Portfolio({ artist }) {
           {/* Portfolio Heading */}
           <div className="portfolio-header">
             <H2>Portfolio</H2>
-            {isArtist && (
+            {isOwner && (
               <BiSolidCameraPlus
                 className="upload-icon"
                 onClick={toggleModal}
