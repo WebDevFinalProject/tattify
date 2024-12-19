@@ -1,6 +1,7 @@
 import { generateJWT } from "../lib/jwt.js";
 import User from "../model/user.js";
 import transporter from "../mail-config/nodemailer.js";
+import bcrypt from "bcryptjs";
 
 // Forget Password
 export const forgotPassword = async (req, res) => {
@@ -15,7 +16,7 @@ export const forgotPassword = async (req, res) => {
     const resetToken = generateJWT(user._id);
 
     // Construct reset URL
-    const resetUrl = `http://localhost:4000/api/reset-password/${user._id}`;
+    const resetUrl = `http://localhost:5173/reset-password/${user._id}`;
 
    
     // Email message
