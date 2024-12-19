@@ -14,6 +14,8 @@ import { UserContext } from "./context/ContextProvider.jsx";
 import TatooConsiderations from "./components/article/TattooConsideration/TattooConsiderations.jsx";
 import ArtistList from "./components/ArtistList/ArtistList.jsx";
 import FirstTattooGuide from "./components/article/FirstTattooGuide/FirstTattooGuide.jsx";
+import ForgotPassword from "./components/Login/forgotPassword/forgotPassword.jsx";
+import ResetPassword from "./components/Login/forgotPassword/resetPassword.jsx";
 
 
 function App() {
@@ -36,6 +38,9 @@ function App() {
         <Route path="/article/global-tattoo" element={<GlobalTattoo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:userId" element={<ResetPassword />} />
+
         <Route path="/artists" element={<ArtistList />} />
         <Route path="/customer-profile" element={user && <ArtistList />} />
         <Route path="/artist/create-profile" element={<ArtistForm />} />
