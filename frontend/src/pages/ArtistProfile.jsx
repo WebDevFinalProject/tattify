@@ -15,8 +15,14 @@ function PublicProfile() {
     const { artist, loading } = useArtistData();
 
     // import editing logic from custom hook
-    const { isEditing, setIsEditing, formData, handleInputChange, handleSave } =
-        useEditArtistProfile();
+    const {
+        isEditing,
+        setIsEditing,
+        toggleEditMode,
+        formData,
+        handleInputChange,
+        handleSave,
+    } = useEditArtistProfile();
 
     if (loading) return <p>Loading...</p>;
 
@@ -27,18 +33,25 @@ function PublicProfile() {
                 <MainInfo
                     artist={artist}
                     isEditing={isEditing}
+                    formData={formData}
+                    handleSave={handleSave}
                     setIsEditing={setIsEditing}
+                    toggleEditMode={toggleEditMode}
                     handleInputChange={handleInputChange}
                 />
                 <Bio
                     artist={artist}
                     isEditing={isEditing}
+                    formData={formData}
+                    handleSave={handleSave}
                     setIsEditing={setIsEditing}
                     handleInputChange={handleInputChange}
                 />
                 <Details
                     artist={artist}
                     isEditing={isEditing}
+                    formData={formData}
+                    handleSave={handleSave}
                     setIsEditing={setIsEditing}
                     handleInputChange={handleInputChange}
                 />

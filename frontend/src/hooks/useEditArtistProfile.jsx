@@ -13,7 +13,13 @@ const useEditArtistProfile = () => {
         country: user?.country || "",
         basePrice: user?.basePrice || "",
         firstName: user?.firstName || "",
+        lastName: user?.lastName || "",
     });
+
+    // Handle edit mode
+    const toggleEditMode = () => {
+        setIsEditing(!isEditing);
+    };
 
     // Handle input changes
     const handleInputChange = (e) => {
@@ -40,6 +46,7 @@ const useEditArtistProfile = () => {
     return {
         isEditing,
         setIsEditing,
+        toggleEditMode,
         formData,
         handleInputChange,
         handleSave,
