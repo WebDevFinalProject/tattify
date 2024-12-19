@@ -15,9 +15,9 @@ export const forgotPassword = async (req, res) => {
     const resetToken = generateJWT(user._id);
 
     // Construct reset URL
-    const resetUrl = `http://localhost:4000/reset-password/?id=${user._id}&token=${resetToken}`;
+    const resetUrl = `http://localhost:4000/api/reset-password/${user._id}`;
 
-    console.log(user._id)
+   
     // Email message
     const message = `You requested a password reset. Click on this link to reset your password:\n\n${resetUrl}\n\nIf you did not request this, please ignore this email.`;
 
@@ -39,38 +39,47 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
-//resetPassword
 
-export const resetPassword = async (req, res, next) => {
-  const { id, token } = req.params;
+ // GET Reset Password Route (using userId)
+export const getResetPassword = async (req, res) => {
+  const { userId } = req.params; // Extract userId from the route
+
+  try {
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    res.status(200).json({ message: "User found. Proceed to reset password." });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "Invalid user ID." });
+  }
+}; 
+
+// Reset Password
+export const resetPassword = async (req, res) => {
+  const { userId } = req.params; // Extract userId from the route
   const { password } = req.body;
 
   try {
-    const user = await User.findOne({ _id: id });
+    // Find the user by userId
+    const user = await User.findById(userId);
     if (!user) {
-      return res.status(400).json({ message: "User not exists!" });
+      return res.status(404).json({ message: "User not found." });
     }
 
-    const secret = process.env.SECRET_KEY;
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
 
-    const verify = jwt.verify(token, secret);
-    const encryptedPassword = await bcrypt.hash(password, 10);
-    await User.updateOne(
-      {
-        _id: id,
-      },
-      {
-        $set: {
-          password: encryptedPassword,
-        },
-      }
-    );
-
+    // Save the updated user
     await user.save();
 
-    res.status(200).json({ message: "Password has been reset" });
+    res.status(200).json({ message: "Password reset successfully." });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Something went wrong" });
+    console.error(error);
+    res.status(500).json({ message: "Server error." });
   }
 };

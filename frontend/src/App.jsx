@@ -39,7 +39,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/reset-password/:userId" element={<ResetPassword />} />
 
         <Route path="/artists" element={<ArtistList />} />
         <Route path="/customer-profile" element={user && <ArtistList />} />

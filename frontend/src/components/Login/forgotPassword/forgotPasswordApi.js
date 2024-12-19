@@ -10,8 +10,8 @@ export const forgotPassword = async (email) => {
 };
 
 // Reset Password API
-export const resetPassword = async (token, newPassword) => {
-  return passwordApi.post(`/api/reset-password/:${token}`, { password: newPassword });
+/* export const resetPassword = async (userId, newPassword) => {
+  return passwordApi.post(`/api/reset-password/${userId}`, { password: newPassword });
 };
-
+ */
 export default passwordApi;
