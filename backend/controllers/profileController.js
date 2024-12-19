@@ -73,7 +73,7 @@ export const createArtistProfile = async (req, res) => {
     console.error("Error creating artist profile:", error.message);
     return res
       .status(500)
-      .json({ message: "Internal Server Error", error: error.message });
+      .json({ message: "Something went wrong!", error: error.message });
   }
 };
 

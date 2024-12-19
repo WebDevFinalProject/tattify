@@ -87,8 +87,18 @@ export const H2 = styled.h2`
 export const PortfolioContainer = styled.div`
     margin-bottom: 4rem;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
     img {
-        width: 32%;
+        max-width: 35rem;
+
+        @media (max-width: 1300px) {
+            width: 48%;
+        }
+
+        @media (max-width: 480px) {
+            width: 100%;
+        }
     }
 `;

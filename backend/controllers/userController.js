@@ -84,7 +84,7 @@ export const userLogin = async (req, res) => {
       })
       .json({
         user: {
-          id: user._id,
+          _id: user._id,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
@@ -131,11 +131,11 @@ export const uploadProfileImage = async (req, res) => {
     );
 
     res.json({
-      imgUrl: user.profileImage,
+      profileImage: user.profileImage,
       message: "Profile picture updated successfully!",
     });
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ message: "Something went wrong!" });
   }
 };
 

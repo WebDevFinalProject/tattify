@@ -13,9 +13,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const userCheck = async () => {
       try {
-        const response = await api.get("/api/profile", {
-          withCredentials: true,
-        });
+        const response = await api.get("/api/profile");
         setUser(response.data);
       } catch (error) {
         setUser(null);

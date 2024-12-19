@@ -1,39 +1,50 @@
-import { useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
+import api from "../components/api";
+import { UserContext } from "../context/ContextProvider";
 
 const useProfileImageUpload = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const { setUser } = useContext(UserContext);
 
   const handleSelectFile = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setPreview(URL.createObjectURL(selectedFile));
   };
 
   const handleUpload = async () => {
     if (!file) {
       setError("Please select a file before uploading.");
-      return
+      return;
     }
 
     try {
       setLoading(true);
       const formData = new FormData();
-      formData.append("avatar", file);  // Adjusted to match the backend field name
+      formData.append("avatar", file); // Adjusted to match the backend field name
 
-      const res = await axios.post("http://localhost:4000/api/profile-image", formData, {
+      const res = await api.post("/api/profile-image", formData, {
         headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
       });
 
-      setResponse(res.data);  // Assuming your backend returns the updated user profile image URL
-      window.close()
-      window.location.href = "/artists"; 
-      setError(null);  // Clear any previous errors
+      setUser((prev) => ({
+        ...prev,
+        profileImage: res.data.profileImage,
+      }));
+
+      setResponse(res.data);
+      setPreview(res.data.profileImage);
+      setError(null); // Clear any previous errors
+      setPreview(null);
+      setTimeout(() => {
+        setResponse(null); // Clear the response on error
+      }, 4000);
     } catch (error) {
-      setError(error.message || "An error occurred while uploading the image.");
-      setResponse(null);  // Clear the response on error
+      setError("An error occurred while uploading the image.");
     } finally {
       setLoading(false);
     }
@@ -46,9 +57,9 @@ const useProfileImageUpload = () => {
     error,
     handleSelectFile,
     handleUpload,
+    preview,
+    setFile,
   };
 };
 
 export default useProfileImageUpload;
-
-

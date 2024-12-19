@@ -75,9 +75,10 @@
         border       : 0.7rem solid white;
         border-radius: 50%;
     }
+}
 
-
-
+.edit-artist-profile-form {
+    /* to be added */
 }
 
 @media (min-width: 768px) {
