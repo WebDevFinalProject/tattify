@@ -8,6 +8,7 @@ const useArtistData = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let interval;
     const fetchArtist = async () => {
       try {
         const res = await api.get(`/api/artist/profile/${id}`);
@@ -20,6 +21,13 @@ const useArtistData = () => {
     };
 
     fetchArtist();
+    interval = setInterval(fetchArtist, 1000);
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
   }, [id]);
 
   return { artist, loading };
