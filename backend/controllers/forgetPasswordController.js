@@ -33,7 +33,7 @@ export const forgotPassword = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Reset password email sent successfully." });
+      .json({ message: "Email sent successfully." });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server error." });
