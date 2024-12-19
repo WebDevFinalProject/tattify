@@ -1,9 +1,8 @@
 import "./styles/main-info.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
-
 const MainInfo = ({
     artist,
     isEditing,
@@ -11,57 +10,74 @@ const MainInfo = ({
     handleSave,
     formData,
     handleInputChange,
+    toggleEditMode,
 }) => {
     const { user } = useContext(UserContext);
-    const isOwner = user && user?._id === artist?._id;
+    const isOwner = user && user?._id === id;
+    // Local state for editing
+    // const [editableArtist, setEditableArtist] = useState({
+    //     firstName: artist?.firstName || "",
+    //     lastName: artist?.lastName || "",
+    //     city: artist?.city || "",
+    //     country: artist?.country || "",
+    // });
 
     // Toggle edit mode
-    const handleEditClick = () => {
-        setIsEditing(!isEditing);
-    };
+    // const handleEditClick = () => {
+    //     setIsEditing(!isEditing);
+    // };
 
+    // Save changes
+    // const handleSave = () => {
+    //     if (onSave) onSave(editableArtist); // Pass updated data to parent
+    //     setIsEditing(false);
+    // };
     return (
         <>
-     
+            {artist ? (
                 <div className="artist-profile-main-info-container">
                     <button className="star-button-phone">
                         <FontAwesomeIcon icon={faStar} />
                     </button>
-                    <img src={artist.profileImage} alt="" />
-
+                    <img
+                        src={artist.profileImage || user?.profileImage}
+                        alt=""
+                    />
                     {/* Editable fields for name, city, country */}
                     <div>
                         {isEditing ? (
-                            <form className="edit-artist-profile-form">
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    value={formData.firstName || ""}
-                                    onChange={handleInputChange}
-                                    placeholder="First Name"
-                                />
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    value={formData.lastName || ""}
-                                    onChange={handleInputChange}
-                                    placeholder="Last Name"
-                                />
-                                <input
-                                    type="text"
-                                    name="city"
-                                    value={formData.city || ""}
-                                    onChange={handleInputChange}
-                                    placeholder="City"
-                                />
-                                <input
-                                    type="text"
-                                    name="country"
-                                    value={formData.country || ""}
-                                    onChange={handleInputChange}
-                                    placeholder="Country"
-                                />
-                            </form>
+                            <>
+                                <form className="edit-artist-profile-form">
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        value={user.firstName}
+                                        onChange={handleInputChange}
+                                        placeholder="First Name"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        value={user.lastName}
+                                        onChange={handleInputChange}
+                                        placeholder="Last Name"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        value={user.city}
+                                        onChange={handleInputChange}
+                                        placeholder="City"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="country"
+                                        value={user.country}
+                                        onChange={handleInputChange}
+                                        placeholder="Country"
+                                    />
+                                </form>
+                            </>
                         ) : (
                             <>
                                 <h2>
@@ -73,7 +89,6 @@ const MainInfo = ({
                             </>
                         )}
                     </div>
-
                     {/* Buttons for desktop */}
                     <div className="button-container">
                         <button className="star-button-desktop">
@@ -82,14 +97,20 @@ const MainInfo = ({
                         {!isEditing && (
                             <button
                                 className="edit-button-desktop"
-                                onClick={handleEditClick}
+                                onClick={toggleEditMode}
                             >
-                                <FontAwesomeIcon icon={faPenToSquare} size="3x" />
+                                <FontAwesomeIcon
+                                    icon={faPenToSquare}
+                                    size="3x"
+                                />
                             </button>
                         )}
                         {isEditing && (
                             <>
-                                <button className="save-button" onClick={handleSave}>
+                                <button
+                                    className="save-button"
+                                    onClick={handleSave}
+                                >
                                     Save Changes
                                 </button>
                                 <button
@@ -103,8 +124,10 @@ const MainInfo = ({
                         <button className="chat-button">Chat</button>
                     </div>
                 </div>
+            ) : (
+                <p>No artist data available.</p>
+            )}
         </>
     );
 };
-
 export default MainInfo;
