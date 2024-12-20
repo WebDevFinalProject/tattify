@@ -80,12 +80,7 @@ export const createArtistProfile = async (req, res) => {
 // Get all artists card
 export const getArtistProfile = async (req, res) => {
   try {
-    const {
-      search,
-      page = 1,
-      limit = 9,
-    } = req.query;
-    
+    const { search, page = 1, limit = 9 } = req.query;
 
     const userFilter = search
       ? {
@@ -136,8 +131,10 @@ const getUserIds = async (filter) => {
 
 //UPDATE ARTIST PROFILE
 export const updateArtistProfile = async (req, res) => {
-  const { artistId } = req.params;
+  const { id } = req.params;
   const {
+    firstName,
+    lastName,
     bio,
     specialties,
     experience,
@@ -153,35 +150,45 @@ export const updateArtistProfile = async (req, res) => {
   } = req.body;
 
   try {
-    const artist = await ArtistProfile.findById(artistId);
-    if (!artist) return res.status(404).json({ message: "Artist not found" });
-    if (artist.user.toString() !== req.userId)
-      return res.status(403).json({ message: "Unauthorized" });
+    const artistProfile = await ArtistProfile.findOne({ user: id });
 
-    // Update fields dynamically
-    const updatedFields = {
-      bio,
-      specialties,
-      experience,
-      certifications,
-      languagesSpoken,
-      city,
-      country,
-      studioLocation,
-      basePrice,
-      pricingDetails,
-      socialLinks,
-      isAvailable,
-    };
+    if (!artistProfile) {
+      return res.status(404).json({ message: "Artist profile not found." });
+    }
 
-    Object.keys(updatedFields).forEach((key) => {
-      if (updatedFields[key] !== undefined) artist[key] = updatedFields[key];
-    });
+    // Update the artist profile with the provided data
+    artistProfile.bio = bio || artistProfile.bio;
+    artistProfile.specialties = specialties || artistProfile.specialties;
+    artistProfile.experience = experience || artistProfile.experience;
+    artistProfile.certifications =
+      certifications || artistProfile.certifications;
+    artistProfile.languagesSpoken =
+      languagesSpoken || artistProfile.languagesSpoken;
+    artistProfile.city = city || artistProfile.city;
+    artistProfile.country = country || artistProfile.country;
+    artistProfile.studioLocation =
+      studioLocation || artistProfile.studioLocation;
+    artistProfile.basePrice = basePrice || artistProfile.basePrice;
+    artistProfile.pricingDetails =
+      pricingDetails || artistProfile.pricingDetails;
+    artistProfile.socialLinks = socialLinks || artistProfile.socialLinks;
+    artistProfile.isAvailable = isAvailable ?? artistProfile.isAvailable;
 
-    await artist.save();
-    res.status(200).json({ message: "Profile updated", artist });
+    artistProfile.updatedAt = Date.now();
+    // Save the updated artist profile
+    await artistProfile.save();
+
+    // Optionally update user profile if needed
+    const user = await User.findById(id);
+    if (user) {
+      user.firstName = firstName || user.firstName;
+      user.lastName = lastName || user.lastName;
+      await user.save();
+    }
+
+    res.status(200).json(artistProfile);
   } catch (error) {
-    res.status(500).json({ message: "Error updating profile", error });
+    res.status(500).json({ message: "Error updating profile" });
   }
 };
 
@@ -210,4 +217,3 @@ export const deleteArtistProfile = async (req, res) => {
     res.status(500).json({ message: "Error deleting profile", error });
   }
 };
-
