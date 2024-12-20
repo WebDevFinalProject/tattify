@@ -11,70 +11,67 @@ import Reviews from "../components/ArtistProfile/Reviews.jsx";
 import useEditArtistProfile from "../hooks/useEditArtistProfile.jsx";
 
 function PublicProfile() {
-    //import fetched data from database
-    const { artist, loading } = useArtistData();
+  //import fetched data from database
+  const { artist, loading } = useArtistData();
 
-    // import editing logic from custom hook
-    const {
-        isEditing,
-        setIsEditing,
-        toggleEditMode,
-        formData,
-        handleInputChange,
-        handleSave,
-    } = useEditArtistProfile();
+  // import editing logic from custom hook
+  const {
+    isEditing,
+    setIsEditing,
+    toggleEditMode,
+    formData,
+    handleInputChange,
+    handleSave,
+  } = useEditArtistProfile();
 
-    if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
 
-    return (
-        <>
-            <NavBar />
-            <Wrapper>
-                <MainInfo
-                    artist={artist}
-                    isEditing={isEditing}
-                    formData={formData}
-                    handleSave={handleSave}
-                    setIsEditing={setIsEditing}
-                    toggleEditMode={toggleEditMode}
-                    handleInputChange={handleInputChange}
-                />
-                <Bio
-                    artist={artist}
-                    isEditing={isEditing}
-                    formData={formData}
-                    handleSave={handleSave}
-                    setIsEditing={setIsEditing}
-                    handleInputChange={handleInputChange}
-                />
-                <Details
-                    artist={artist}
-                    isEditing={isEditing}
-                    formData={formData}
-                    handleSave={handleSave}
-                    setIsEditing={setIsEditing}
-                    handleInputChange={handleInputChange}
-                />
-                <Portfolio artist={artist} />
-                <Reviews />
-            </Wrapper>
-            <Footer />
-            {/* Save Button (for all edits) */}
-            {isEditing && (
-                <div className="artist-save-button-container">
-                    <button onClick={handleSave} className="save-button">
-                        Save Changes
-                    </button>
-                    <button
-                        onClick={() => setIsEditing(false)}
-                        className="cancel-button"
-                    >
-                        Cancel
-                    </button>
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      <NavBar />
+      <Wrapper>
+        <MainInfo
+          artist={artist}
+          isEditing={isEditing}
+          formData={formData}
+          handleSave={handleSave}
+          setIsEditing={setIsEditing}
+          toggleEditMode={toggleEditMode}
+          handleInputChange={handleInputChange}
+        />
+        <Bio
+          artist={artist}
+          isEditing={isEditing}
+          formData={formData}
+          handleSave={handleSave}
+          setIsEditing={setIsEditing}
+          handleInputChange={handleInputChange}
+        />
+        <Details
+          artist={artist}
+          isEditing={isEditing}
+          formData={formData}
+          handleSave={handleSave}
+          setIsEditing={setIsEditing}
+          handleInputChange={handleInputChange}
+        />
+        <Portfolio artist={artist} />
+        <Reviews />
+      </Wrapper>
+      <Footer />
+      {/* Save Button (for all edits) */}
+      {isEditing && (
+        <div className="artist-save-button-container">
+          <button onClick={handleSave} className="save-button">
+            Save Changes
+          </button>
+          <button onClick={() => setIsEditing(false)} className="cancel-button">
+            Cancel
+          </button>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default PublicProfile;
