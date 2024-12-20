@@ -4,24 +4,27 @@ import backgroundImage from "../../assets/ArtistForm/backgroundImage.png";
 import api from "../api";
 import { UserContext } from "../../context/ContextProvider";
 import { useNavigate } from "react-router-dom";
+import useChangeHandler from "../../hooks/useChangeHandler";
 
 const ArtistForm = () => {
-  const { loading } = useContext(UserContext);
-  const { logout, user, setUser } = useContext(UserContext);
+  const { logout, user, loading } = useContext(UserContext);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+
+  const initialFormState = {
     bio: "",
-    specialties: "",
+    specialties: [],
     city: "",
     country: "",
     basePrice: "",
-    certifications: "",
-    languagesSpoken: "",
+    certifications: [],
+    languagesSpoken: [],
     studioLocation: "",
     pricingDetails: "",
-    socialLinks: "",
-  });
-  const [errors, setErrors] = useState({});
+    socialLinks: [],
+  };
+
+  const { formData, setFormData, handleChange } =
+    useChangeHandler(initialFormState);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -52,12 +55,6 @@ const ArtistForm = () => {
     };
   }, [user, logout]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" })); // Clear error for the field when user types
-  };
-
   //Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,15 +72,15 @@ const ArtistForm = () => {
 
       setFormData({
         bio: "",
-        specialties: "",
+        specialties: [],
         city: "",
         country: "",
         basePrice: "",
-        certifications: "",
-        languagesSpoken: "",
+        certifications: [],
+        languagesSpoken: [],
         studioLocation: "",
         pricingDetails: "",
-        socialLinks: "",
+        socialLinks: [],
       });
     } catch (error) {
       alert(
@@ -111,7 +108,7 @@ const ArtistForm = () => {
           className="formArtist-input"
           type="text"
           name="specialties"
-          value={formData.specialties}
+          value={formData.specialties.join(", ")}
           onChange={handleChange}
           placeholder="e.g., Traditional, Minimalist, Abstract"
           required
@@ -200,7 +197,7 @@ const ArtistForm = () => {
           className="formArtist-input "
           type="text"
           name="languagesSpoken"
-          value={formData.languagesSpoken}
+          value={formData.languagesSpoken.join(", ")}
           onChange={handleChange}
           placeholder="e.g., English, Spanish, French"
         />
@@ -217,7 +214,7 @@ const ArtistForm = () => {
           className="formArtist-input"
           type="text"
           name="socialLinks"
-          value={formData.socialLinks}
+          value={formData.socialLinks.join(", ")}
           onChange={handleChange}
           placeholder="e.g., Instagram, Facebook"
         />
