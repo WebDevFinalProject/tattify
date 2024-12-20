@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/artists/create-profile", auth, createArtistProfile);
 router.get("/artists/profile", getArtistProfile); // artist cards
 router.delete("/artists/:artistId", auth, deleteArtistProfile);
-router.put("/artists/:artistId", auth, updateArtistProfile);
+router.put("/artists/:id", auth, updateArtistProfile);
 
 // more info about the artist during registration
 
