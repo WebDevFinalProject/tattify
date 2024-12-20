@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useAddPortfolioImages from "../../hooks/useAddPortfolioImages";
 import "./styles/UploadPortfolio.css";
 import { HiPlus } from "react-icons/hi";
@@ -9,18 +9,29 @@ function UploadPortfolio({ onClose }) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previews, setPreview] = useState([]);
   const fileInputRef = useRef(null);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 5000);
+      return () => clearTimeout(timer); // Cleanup on unmount or re-render
+    }
+  }, [message]);
 
   // Handle File Selection
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    if (files.length > 5) {
-      alert("You can only upload up to 5 files at a time.");
+    if (selectedFiles.length + files.length > 5) {
+      setMessage("You can only upload up to 5 files at a time.");
+      return;
     }
 
-    const selected = [...selectedFiles, ...files];
-    setSelectedFiles(selected);
+    const validFiles = files.slice(0, 5 - selectedFiles.length);
+    const newPreviews = validFiles.map((file) => URL.createObjectURL(file));
 
-    const newPreviews = files.map((file) => URL.createObjectURL(file));
+    //const selected = [...selectedFiles, ...validFiles];
+
+    setSelectedFiles((prev) => [...prev, ...validFiles]);
     setPreview((prev) => [...prev, ...newPreviews]);
   };
 
@@ -34,8 +45,8 @@ function UploadPortfolio({ onClose }) {
   const handleUpload = async (e) => {
     e.preventDefault();
 
-    if (!selectedFiles.length) {
-      alert("Please select up to 5 files to upload.");
+    if (selectedFiles.length === 0) {
+      setMessage("Please select at least one file to upload.");
       return;
     }
 
@@ -45,9 +56,11 @@ function UploadPortfolio({ onClose }) {
     try {
       await addPortfolioImages(formData);
       alert("Images added successfully!");
-      onClose(); // Close modal on success
+      setSelectedFiles([]);
+      setPreview([]);
+      onClose();
     } catch (err) {
-      console.error("Error uploading portfolio images:", err);
+      setMessage(err.response?.data?.message || "An error occurred.");
     }
   };
 
@@ -77,10 +90,13 @@ function UploadPortfolio({ onClose }) {
             })}
             <span>
               {selectedFiles.length > 0
-                ? `${selectedFiles.length} file(s) selected`
-                : " (max 5)"}
+                ? `${selectedFiles.length} file(s) selected (max 5 photos)`
+                : " (max 5 photos)"}
             </span>
           </div>
+          {message && (
+            <p style={{ color: "red", paddingBottom: "15px" }}>{message}</p>
+          )}
 
           <div className="portfolio-input">
             <input
