@@ -38,6 +38,7 @@ function NavBar() {
   const handleProfileImageUpload = async () => {
     if (file) {
       await handleUpload(); // Upload the image using the custom hook
+      toggleUploadDialog();
     }
   };
 
