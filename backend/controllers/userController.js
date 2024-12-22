@@ -33,9 +33,12 @@ export async function registration(req, res) {
     //Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const name = firstName[0].toUpperCase() + firstName.slice(1);
+    const famName = lastName[0].toUpperCase() + lastName.slice(1);
+
     const newUser = new User({
-      firstName,
-      lastName,
+      firstName: name,
+      lastName: famName,
       email,
       password: hashedPassword,
       role,

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SlLocationPin } from "react-icons/sl";
 import "./ArtistList.css";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
+import api from "../api";
 
 const ArtistList = () => {
   const navigate = useNavigate();
@@ -21,16 +21,13 @@ const ArtistList = () => {
     const fetchArtists = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          `http://localhost:4000/api/artists/profile`,
-          {
-            params: {
-              search,
-              page,
-              limit,
-            },
-          }
-        );
+        const response = await api.get(`/api/artists/profile`, {
+          params: {
+            search,
+            page,
+            limit,
+          },
+        });
         setArtists(response.data.artists);
         setTotalPages(response.data.totalPages);
       } catch (err) {
@@ -66,10 +63,10 @@ const ArtistList = () => {
               today.
             </p>
             {/* Single Search Bar */}
-            <div className="m-4 search-bar d-flex justify-content-center">
+            <div className="search-bar d-flex justify-content-center">
               <input
                 type="text"
-                className="form-control w-25"
+                className="form-control"
                 placeholder=" 🔍 Search by location or name..."
                 value={search}
                 onChange={handleSearchChange} // Use the new handler
