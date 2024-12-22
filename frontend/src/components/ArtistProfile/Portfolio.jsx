@@ -4,18 +4,20 @@ import UploadPortfolio from "./UploadPortfolio";
 import { BiSolidCameraPlus } from "react-icons/bi";
 import { UserContext } from "../../context/ContextProvider";
 import { useParams } from "react-router-dom";
+import useImageDelete from "../../hooks/useImageDelete";
+import { HiTrash } from "react-icons/hi";
+import { IoIosMore } from "react-icons/io";
 
 function Portfolio({ artist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Toggle Modal
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
-
-  // Get user from context
-  const { user } = useContext(UserContext);
+  const { deleteImageHandler } = useImageDelete();
+  const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
   const { id } = useParams();
 
   const isOwner = user && user?._id === id;
+
+  // Toggle Modal
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   return (
     <>
@@ -35,12 +37,18 @@ function Portfolio({ artist }) {
           {/* Display Portfolio Images */}
           <PortfolioContainer>
             {artist.portfolio.map((imageUrl, index) => (
-              <img
-                key={index}
-                index={index}
-                src={imageUrl}
-                alt={`Portfolio image ${index + 1}`}
-              />
+              <div key={index} className="porfolio-image-box">
+                <img
+                  index={index}
+                  src={imageUrl}
+                  alt={`Portfolio image ${index + 1}`}
+                />
+                {isOwner && (
+                  <button onClick={() => deleteImageHandler(imageUrl)}>
+                    delete
+                  </button>
+                )}
+              </div>
             ))}
           </PortfolioContainer>
         </div>
