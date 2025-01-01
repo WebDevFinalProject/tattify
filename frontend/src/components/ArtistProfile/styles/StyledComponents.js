@@ -39,6 +39,8 @@ export const Wrapper = styled.section`
     );
     display: grid;
     gap: 4rem;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: auto;
     grid-template-areas:
       "main main"
       "bio portfolio"
@@ -89,6 +91,7 @@ export const PortfolioContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1.2rem;
+  justify-content: center;
 
   .porfolio-image-box {
     position: relative;
