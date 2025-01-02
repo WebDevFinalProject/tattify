@@ -18,7 +18,8 @@ const StarRating = ({ rating, onStarClick }) => (
 );
 
 const Reviews = () => {
-  const { artistId } = useParams();
+  const { id } = useParams();
+
   const navigate = useNavigate();
   const { submitReview, loading, error, success } = useSubmitReview();
 
@@ -28,20 +29,21 @@ const Reviews = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    console.log("Extracted artistId:", artistId);
-  }, [artistId]);
+    console.log("Extracted artistId:", id);
+  }, [id]);
 
   const handleSubmit = async (e) => {
+    console.log(id)
     e.preventDefault();
-    if (!artistId || !rating || !comment.trim()) {
+    if (!id || !rating || !comment.trim()) {
       console.error("Artist ID, rating, or comment is missing");
       return;
     }
 
     try {
-      await submitReview(artistId, rating, comment);
+      await submitReview(id, rating, comment);
       setIsSubmitted(true);
-      navigate(`/artist-profile/${artistId}`);
+      navigate(`/artist-profile/${id}`);
     } catch (err) {
       console.error("Error submitting review:", err);
     }

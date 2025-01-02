@@ -1,9 +1,9 @@
 import User from "../model/user.js";
-import ArtistProfile from "../model/profile.js";
 import Review from "../model/review.js";
 
 export const writeReviewToArtistProfile = async (req, res) => {
-  const { artistId, rating, comment } = req.body;
+  const { id, rating, comment } = req.body;
+  console.log(id)
 
   try {
     const user = await User.findById(req.userId);
@@ -15,24 +15,31 @@ export const writeReviewToArtistProfile = async (req, res) => {
     if (user.role !== "customer") {
       return res
         .status(403)
-        .json({ message: "Only customers can write a reviews." });
+        .json({ message: "Only customers can write a review." });
     }
 
-    const artist = await ArtistProfile.findById(artistId);
+    const artist = await User.findById(id);
+
 
     if (!artist) {
-      return res.status(404).json({ message: "Artist not found." });
+      return res.status(404).json({ message: "Artist not found" });
     }
+
+        // Ensure the reviews array exists or initialize it
+        if (!artist.reviews) {
+          artist.reviews = []; // Initialize the reviews array if it doesn't exist
+        }
 
     const newReview = new Review({
       customer: req.userId,
-      artist: artistId,
+      artist: id,
       rating,
       comment,
     });
 
     await newReview.save();
-    artist.reviews.push(newReview._id);
+   console.log(newReview)
+    artist.reviews.push(newReview.id);
     await artist.save();
 
     res
