@@ -7,14 +7,14 @@ const useSubmitReview = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  const submitReview = async (rating, comment) => {
+  const submitReview = async (id,rating, comment) => {
     setloading(true);
     setError(null);
     setSuccess(false);
 
     try {
       const response = await api.post("/api/submit-review", {
-        artistId,
+       id,
         rating,
         comment,
       });
