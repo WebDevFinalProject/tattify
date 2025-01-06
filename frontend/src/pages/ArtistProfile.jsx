@@ -39,37 +39,31 @@ function PublicProfile() {
           toggleEditMode={toggleEditMode}
           handleInputChange={handleInputChange}
         />
-        <Bio
-          artist={artist}
-          isEditing={isEditing}
-          formData={formData}
-          handleSave={handleSave}
-          setIsEditing={setIsEditing}
-          handleInputChange={handleInputChange}
-        />
-        <Details
-          artist={artist}
-          isEditing={isEditing}
-          formData={formData}
-          handleSave={handleSave}
-          setIsEditing={setIsEditing}
-          handleInputChange={handleInputChange}
-        />
-        <Portfolio artist={artist} />
-        <Reviews />
+
+        <div className="bio-details">
+          <Bio
+            artist={artist}
+            isEditing={isEditing}
+            formData={formData}
+            handleSave={handleSave}
+            setIsEditing={setIsEditing}
+            handleInputChange={handleInputChange}
+          />
+          <Details
+            artist={artist}
+            isEditing={isEditing}
+            formData={formData}
+            handleSave={handleSave}
+            setIsEditing={setIsEditing}
+            handleInputChange={handleInputChange}
+          />
+        </div>
+        <div className="porfolio-reviews">
+          <Portfolio artist={artist} />
+          <Reviews artist={artist} />
+        </div>
       </Wrapper>
       <Footer />
-      {/* Save Button (for all edits) */}
-      {isEditing && (
-        <div className="artist-save-button-container">
-          <button onClick={handleSave} className="save-button">
-            Save Changes
-          </button>
-          <button onClick={() => setIsEditing(false)} className="cancel-button">
-            Cancel
-          </button>
-        </div>
-      )}
     </>
   );
 }

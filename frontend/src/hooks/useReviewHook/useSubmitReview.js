@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import api from "../../components/api.js";
 
@@ -7,14 +6,14 @@ const useSubmitReview = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  const submitReview = async (id,rating, comment) => {
+  const submitReview = async (id, rating, comment) => {
     setloading(true);
     setError(null);
     setSuccess(false);
 
     try {
       const response = await api.post("/api/submit-review", {
-       id,
+        id,
         rating,
         comment,
       });
@@ -22,6 +21,10 @@ const useSubmitReview = () => {
       return response.data;
     } catch (err) {
       setError(err.response?.data?.message || "Failed to submit review");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
     } finally {
       setloading(false);
     }
@@ -30,4 +33,3 @@ const useSubmitReview = () => {
 };
 
 export default useSubmitReview;
-

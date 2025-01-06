@@ -5,8 +5,6 @@ import { BiSolidCameraPlus } from "react-icons/bi";
 import { UserContext } from "../../context/ContextProvider";
 import { useParams } from "react-router-dom";
 import useImageDelete from "../../hooks/useImageDelete";
-import { HiTrash } from "react-icons/hi";
-import { IoIosMore } from "react-icons/io";
 
 function Portfolio({ artist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
