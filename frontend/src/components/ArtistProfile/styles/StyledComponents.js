@@ -41,11 +41,7 @@ export const Wrapper = styled.section`
     gap: 4rem;
     grid-template-columns: 25% 75%;
     grid-template-rows: auto;
-    grid-template-areas:
-      "main main"
-      "bio portfolio"
-      "details portfolio"
-      ". reviews";
+    grid-template-areas: "main main";
 
     > div:nth-child(1) {
       grid-area: main;
@@ -59,18 +55,6 @@ export const Wrapper = styled.section`
         padding-top: 14rem;
         padding-left: 1rem;
       }
-    }
-    > div:nth-child(2) {
-      grid-area: bio;
-    }
-    > div:nth-child(3) {
-      grid-area: details;
-    }
-    > div:nth-child(4) {
-      grid-area: portfolio;
-    }
-    > div:nth-child(5) {
-      grid-area: reviews;
     }
   }
 `;

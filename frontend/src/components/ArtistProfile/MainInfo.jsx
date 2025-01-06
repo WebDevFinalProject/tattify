@@ -87,20 +87,6 @@ const MainInfo = ({
               <FontAwesomeIcon icon={faPenToSquare} size="3x" />
             </button>
           )}
-
-          {/*   {isOwner && isEditing && (
-            <>
-              <button className="save-button" onClick={handleSave}>
-                Save Changes
-              </button>
-              <button
-                className="cancel-button"
-                onClick={() => setIsEditing(false)}
-              >
-                Cancel
-              </button>
-            </>
-          )} */}
           <button className="chat-button">Chat</button>
         </div>
       </div>
@@ -108,22 +94,4 @@ const MainInfo = ({
   );
 };
 
-// Local state for editing
-// const [editableArtist, setEditableArtist] = useState({
-//     firstName: artist?.firstName || "",
-//     lastName: artist?.lastName || "",
-//     city: artist?.city || "",
-//     country: artist?.country || "",
-// });
-
-// Toggle edit mode
-// const handleEditClick = () => {
-//     setIsEditing(!isEditing);
-// };
-
-// Save changes
-// const handleSave = () => {
-//     if (onSave) onSave(editableArtist); // Pass updated data to parent
-//     setIsEditing(false);
-// };
 export default MainInfo;
