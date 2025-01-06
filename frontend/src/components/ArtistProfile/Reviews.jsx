@@ -61,49 +61,53 @@ const Reviews = ({ artist }) => {
               Leave a Review
             </button>
           ) : (
-            <div className="review-form">
-              <h2>Submit a Review</h2>
-              <div
-                onClick={() => {
-                  setShowForm(!showForm);
-                }}
-                className="review-cancel"
-              >
-                <ImCross size={15} />
+            <>
+              <div className="overlay">
+                <div className="review-form">
+                  <h2>Submit a Review</h2>
+                  <div
+                    onClick={() => {
+                      setShowForm(!showForm);
+                    }}
+                    className="review-cancel"
+                  >
+                    <ImCross size={15} />
+                  </div>
+                  <form onSubmit={handleSubmit}>
+                    <div className="rating-section">
+                      <label htmlFor="rating">Rating (1-5):</label>
+                      <StarRating rating={rating} onStarClick={setRating} />
+                    </div>
+
+                    <div className="comment-section">
+                      <label htmlFor="comment">Comment:</label>
+                      <textarea
+                        id="comment"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        placeholder="Write your review here..."
+                        required
+                        className="comment-input"
+                      />
+                    </div>
+                    {success && (
+                      <p className="success-message">
+                        Review submitted successfully!
+                      </p>
+                    )}
+                    {error && <p className="error-message">{error}</p>}
+
+                    <button
+                      type="submit"
+                      disabled={!rating || !comment.trim() || loading}
+                      className="submit-button"
+                    >
+                      {loading ? "Submitting..." : "Submit Review"}
+                    </button>
+                  </form>
+                </div>
               </div>
-              <form onSubmit={handleSubmit}>
-                <div className="rating-section">
-                  <label htmlFor="rating">Rating (1-5):</label>
-                  <StarRating rating={rating} onStarClick={setRating} />
-                </div>
-
-                <div className="comment-section">
-                  <label htmlFor="comment">Comment:</label>
-                  <textarea
-                    id="comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    placeholder="Write your review here..."
-                    required
-                    className="comment-input"
-                  />
-                </div>
-                {success && (
-                  <p className="success-message">
-                    Review submitted successfully!
-                  </p>
-                )}
-                {error && <p className="error-message">{error}</p>}
-
-                <button
-                  type="submit"
-                  disabled={!rating || !comment.trim() || loading}
-                  className="submit-button"
-                >
-                  {loading ? "Submitting..." : "Submit Review"}
-                </button>
-              </form>
-            </div>
+            </>
           )}
         </div>
         {artist.reviews && artist.reviews.length > 0 ? (
