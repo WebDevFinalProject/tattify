@@ -15,8 +15,9 @@ const Chat = () => {
     const loadChat = async () => {
       try {
         const history = await fetchChatHistory(user._id);
-        if (history?.data) {
-          setChats(history.data);
+        console.log(history[0]?.messages[0].content)
+        if (history.length > 0) {
+          setChats(history);
         }
       } catch (error) {
         console.error(error);
@@ -48,7 +49,7 @@ const Chat = () => {
   const messageHandler = async () => {
     if (!newMessage.trim()) return;
 
-    const receiverId = user && user?._id === id;
+    const receiverId = user && id;
 
     try {
       await sendMessage(user._id, receiverId, newMessage);

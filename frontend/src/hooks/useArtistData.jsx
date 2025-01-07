@@ -21,13 +21,13 @@ const useArtistData = () => {
     };
 
     fetchArtist();
-    interval = setInterval(fetchArtist, 1000);
+   /*  interval = setInterval(fetchArtist, 1000);
 
     return () => {
       if (interval) {
         clearInterval(interval);
       }
-    };
+    }; */
   }, [id]);
 
   return { artist, loading };

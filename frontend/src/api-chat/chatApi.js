@@ -9,6 +9,7 @@ export const fetchChatHistory = async () => {
     return res.data;
   } catch (error) {
     console.error("Error fetching chat history:", error);
+    console.log(error)
   }
 };
 
