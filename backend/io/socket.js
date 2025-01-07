@@ -6,7 +6,7 @@ export const initializeSocket = (io) => {
 
     socket.on("join_room", (room) => {
       socket.join(room);
-      console.log("User joined");
+      console.log(`User joined room: ${room}`);
     });
 
     socket.on("send_message", async (data) => {
@@ -16,7 +16,6 @@ export const initializeSocket = (io) => {
         participants: { $all: [senderId, receiverId] },
       });
 
-      
       if (!chat) {
         chat = new ChatModel({
           participants: [senderId, receiverId],
@@ -31,6 +30,10 @@ export const initializeSocket = (io) => {
 
       const room = `${senderId}_${receiverId}`;
       io.to(room).emit("receive_message", message);
+    });
+    
+    socket.on("disconnect", () => {
+      console.log("User disconnected:", socket.id);
     });
   });
 };
