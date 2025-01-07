@@ -5,11 +5,11 @@ const ConfirmDeactivateModal = ({ showModal, onConfirm, onCancel }) => {
   if (!showModal) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="deactivate-modal-overlay">
+      <div className="deactivate-modal-content">
         <h2>Deactivate Account</h2>
         <p className="deactivate-subheading">Deactivating your account is temporary, and it means your profile will be hidden unti you reactivate it through logging in.</p>
-        <div className="modal-actions">
+        <div className="deactivate-modal-actions">
           <button onClick={onConfirm}>Deactivate</button>
           <button onClick={onCancel}>Cancel</button>
         </div>
