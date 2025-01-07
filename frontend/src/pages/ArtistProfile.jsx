@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
 import MainInfo from "../components/ArtistProfile/MainInfo.jsx";
@@ -9,11 +9,15 @@ import useArtistData from "../hooks/useArtistData.jsx";
 import Portfolio from "../components/ArtistProfile/Portfolio.jsx";
 import Reviews from "../components/ArtistProfile/Reviews.jsx";
 import useEditArtistProfile from "../hooks/useEditArtistProfile.jsx";
+import { UserContext } from "../context/ContextProvider.jsx";
+import { HiChat } from "react-icons/hi";
+import Chat from "../components/Chat/Chat.jsx";
 
 function PublicProfile() {
   //import fetched data from database
   const { artist, loading } = useArtistData();
-
+  const { user, clickHandlerVisibility, isOpen } = useContext(UserContext);
+  
   // import editing logic from custom hook
   const {
     isEditing,
@@ -63,6 +67,14 @@ function PublicProfile() {
           <Reviews artist={artist} />
         </div>
       </Wrapper>
+
+      {user  && (
+        <>
+          <HiChat size={30} onClick={clickHandlerVisibility} />
+        </>
+      )}
+
+      {isOpen && <Chat />}
       <Footer />
     </>
   );
