@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiChat, HiLogout, HiUser } from "react-icons/hi";
@@ -6,10 +6,12 @@ import { TiUserDelete } from "react-icons/ti";
 import { FaPeopleArrows } from "react-icons/fa";
 import CustomSlideImages from "./CustomSlideImages";
 import api from "../api";
+import ConfirmDeactivateModal from "./confirmDeactivateModal"; // Import the modal component
 
 const DropdownNav = () => {
   const { user, loading, logout } = useContext(UserContext);
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
 
   if (loading) {
     return <div>loading...</div>;
@@ -23,26 +25,24 @@ const DropdownNav = () => {
 
   // DEACTIVATE PROFILE
   const deactivateProfileHandler = async () => {
-    const confirmDeactivation = window.confirm(
-      "Are you sure you want to deactivate your profile? This action can be reversed."
-    );
-    if (!confirmDeactivation) return;
+    setShowModal(true); // Show the modal when user attempts to deactivate
+  };
 
+  const confirmDeactivation = async () => {
     try {
-      const response = await api.patch(
-        `/api/artists/${user._id}`,
-        {}, // No request body required for deactivation
-      
-      );
-
+      const response = await api.patch(`/api/artists/${user._id}`, {});
       alert(response.data.message || "Your profile has been deactivated.");
       logoutHandler(); // Log out the user after deactivation
     } catch (error) {
       console.error("Error deactivating profile:", error);
-      alert(
-        error.response?.data?.message || "Something went wrong. Please try again later."
-      );
+      alert(error.response?.data?.message || "Something went wrong. Please try again later.");
+    } finally {
+      setShowModal(false); // Hide the modal after action
     }
+  };
+
+  const cancelDeactivation = () => {
+    setShowModal(false); // Hide the modal if user cancels
   };
 
   return (
@@ -62,18 +62,15 @@ const DropdownNav = () => {
 
           {user.role === "artist" && (
             <>
-              <NavLink
-                to={`/artist-profile/${user._id}`}
-                className="nav-profile-links"
-              >
+              <NavLink to={`/artist-profile/${user._id}`} className="nav-profile-links">
                 <HiUser />
                 &nbsp; Your Profile
               </NavLink>
               <button
-                className="nav-button-logout" 
+                className="nav-button-logout"
                 onClick={deactivateProfileHandler}
               >
-               <TiUserDelete size={21} /> &nbsp; Deactivate Profile
+                <TiUserDelete size={21} /> &nbsp; Deactivate Profile
               </button>
             </>
           )}
@@ -86,9 +83,17 @@ const DropdownNav = () => {
           </button>
         </div>
       </div>
+
+      {/* Show the ConfirmModal when needed */}
+      <ConfirmDeactivateModal
+        showModal={showModal}
+        onConfirm={confirmDeactivation}
+        onCancel={cancelDeactivation}
+      />
     </>
   );
 };
 
 export default DropdownNav;
+
 
