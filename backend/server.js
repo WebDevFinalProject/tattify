@@ -17,9 +17,10 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
+    credentials: true,
   },
-  path: '/socket.io',
 });
+
 app.use(
   cors({
     origin: "http://localhost:5173", // The frontend URL
@@ -44,6 +45,6 @@ app.use("/api", contactRoutes);
 app.use("/api", forgotPasswordRoutes);
 app.use("/api", chatRoute);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("Server is listening!", PORT);
 });
