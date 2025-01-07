@@ -5,8 +5,8 @@ import "./styles/review.css";
 import { H2 } from "./styles/StyledComponents";
 import { ImCross } from "react-icons/im";
 
-const StarRating = ({ rating, onStarClick }) => (
-  <div className="stars">
+const StarRating = ({ rating, onStarClick, size = 30 }) => (
+  <div className="stars" style={{ fontSize: `${size}px` }}>
     {[1, 2, 3, 4, 5].map((starIndex) => (
       <span
         key={starIndex}
@@ -28,7 +28,6 @@ const Reviews = ({ artist }) => {
   const [showForm, setShowForm] = useState(false); // Toggle form visibility
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Pagination state
   const [visibleReviews, setVisibleReviews] = useState(3);
@@ -38,17 +37,16 @@ const Reviews = ({ artist }) => {
 
     try {
       await submitReview(id, rating, comment);
-      setIsSubmitted(true);
       setRating(0);
       setComment("");
       navigate(`/artist-profile/${id}`);
     } catch (err) {
-      setIsSubmitted(false);
+      console.error("Error submitting review:", err);
     }
   };
 
   const handleLoadMore = () => {
-    setVisibleReviews((prevVisibleReviews) => prevVisibleReviews + 3); // Load 4 more reviews
+    setVisibleReviews((prevVisibleReviews) => prevVisibleReviews + 3); // Load 3 more reviews
   };
 
   return (
@@ -86,8 +84,8 @@ const Reviews = ({ artist }) => {
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="Write your review here..."
-                        required
                         className="comment-input"
+                        required
                       />
                     </div>
                     {success && (
@@ -99,7 +97,7 @@ const Reviews = ({ artist }) => {
 
                     <button
                       type="submit"
-                      disabled={!rating || !comment.trim() || loading}
+                      disabled={!rating || loading}
                       className="submit-button"
                     >
                       {loading ? "Submitting..." : "Submit Review"}
@@ -110,7 +108,7 @@ const Reviews = ({ artist }) => {
             </>
           )}
         </div>
-        {artist.reviews && artist.reviews.length > 0 ? (
+        {artist.reviews?.length > 0 ? (
           artist.reviews.slice(0, visibleReviews).map((rev, index) => (
             <div key={index} className="review-item">
               <div className="review-content">
@@ -123,8 +121,10 @@ const Reviews = ({ artist }) => {
                   <div className="rev-content">
                     <h4>{rev.customer.firstName}</h4>
                     <div className="rating">
-                      <StarRating rating={rev.rating} onStarClick={() => {}} />
+                      <StarRating rating={rev.rating} size={16} />
                       <span>
+                        {" "}
+                        <span className="rev-line">|</span>
                         {new Date(rev.createdAt).toLocaleDateString()}
                       </span>
                     </div>
@@ -135,7 +135,7 @@ const Reviews = ({ artist }) => {
             </div>
           ))
         ) : (
-          <p>No reviews yet.</p>
+          <p className="no-rev">No reviews yet.</p>
         )}
       </div>
 

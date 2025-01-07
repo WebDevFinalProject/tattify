@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.603);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,17 +73,12 @@
 }
 
 .star {
-  font-size: 30px;
   cursor: pointer;
   color: gray;
   transition: color 0.3s ease;
 }
 
 .star.selected {
-  color: gold;
-}
-
-.star:hover {
   color: gold;
 }
 
@@ -136,6 +131,11 @@
 .review-button {
   position: absolute;
   right: 0;
+}
+
+.load-more {
+  margin-top: 2.5rem;
+  margin-left: 1.5rem;
 }
 
 .review-button:hover {
@@ -196,8 +196,18 @@
 }
 
 .rev-comment {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   margin: 1.5rem 0;
+}
+
+.rev-line {
+  color: grey;
+  margin-right: 1.3rem;
+}
+
+.no-rev {
+  padding: 4rem 0;
+  font-size: 1.6rem;
 }
 
 /* Optional Fade-In Animation */

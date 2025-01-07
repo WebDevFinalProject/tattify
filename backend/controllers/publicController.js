@@ -19,6 +19,7 @@ export const publicProfile = async (req, res) => {
       .populate("user", "firstName lastName profileImage")
       .populate({
         path: "reviews", // Populate the reviews and specific fields within reviews
+        options: { sort: { createdAt: -1 } },
         populate: {
           path: "customer", // Populate the customer reference in reviews
           select: "firstName profileImage",
