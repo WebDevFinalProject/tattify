@@ -1,7 +1,7 @@
 import express from "express";
 import {
   createArtistProfile,
-  deleteArtistProfile,
+  deactivateArtistProfile,
   getArtistProfile,
   updateArtistProfile,
 } from "../controllers/profileController.js";
@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post("/artists/create-profile", auth, createArtistProfile);
 router.get("/artists/profile", getArtistProfile); // artist cards
-router.delete("/artists/:artistId", auth, deleteArtistProfile);
+router.patch("/artists/:artistId", auth, deactivateArtistProfile);
 router.put("/artists/:id", auth, updateArtistProfile);
 
 //delete image in portfolio

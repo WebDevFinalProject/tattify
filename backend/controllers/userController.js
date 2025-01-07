@@ -77,6 +77,11 @@ export const userLogin = async (req, res) => {
     if (!isMatch) {
       return res.status(400).send({ msg: "Incorrect password!" });
     }
+
+    // Set isActive to true if the user is successfully authenticated
+    user.isActive = true;
+    await user.save();
+
     const token = generateJWT(user._id);
 
     res
