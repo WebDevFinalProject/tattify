@@ -11,28 +11,43 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const { id } = useParams();
 
+  // Load chat history and set up socket
   useEffect(() => {
+    if (!user) return;
+
     const loadChat = async () => {
       try {
         const history = await fetchChatHistory(user._id);
-        console.log(history[0]?.messages[0].content)
-        if (history.length > 0) {
-          setChats(history);
-        }
+
+        // Combine all chats with the same participant into one unified chat
+        const combinedChats = [];
+
+        history.forEach((chat) => {
+          const existingChat = combinedChats.find(
+            (c) => c.participant._id === chat.participant._id
+          );
+          if (existingChat) {
+            existingChat.messages.push(...chat.messages);
+          } else {
+            combinedChats.push({
+              participant: chat.participant,
+              messages: chat.messages,
+            });
+          }
+        });
+
+        setChats(combinedChats);
       } catch (error) {
         console.error(error);
       }
     };
-    if (user) {
-      loadChat();
-    }
 
-    /* SOCKET */
+    loadChat();
 
     socket.on("receive_message", (message) => {
       setChats((prev) =>
         prev.map((chat) =>
-          chat._id === message.chatId
+          chat.participant._id === message.sender._id
             ? { ...chat, messages: [...chat.messages, message] }
             : chat
         )
@@ -44,12 +59,11 @@ const Chat = () => {
     };
   }, [user]);
 
-  // SENDING-MESSAGES
-
+  // Handle sending message
   const messageHandler = async () => {
     if (!newMessage.trim()) return;
 
-    const receiverId = user && id;
+    const receiverId = /* user && id; */ currentChat?.participant._id;
 
     try {
       await sendMessage(user._id, receiverId, newMessage);
@@ -58,10 +72,20 @@ const Chat = () => {
         receiverId,
         content: newMessage,
       });
+
+      setCurrentChat((prev) => ({
+        ...prev,
+        messages: [...prev.messages, { sender: user, content: newMessage }],
+      }));
+
       setNewMessage("");
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleChatSelection = (chat) => {
+    setCurrentChat(chat);
   };
 
   return (
@@ -74,25 +98,39 @@ const Chat = () => {
             {chats.length > 0 ? (
               chats.map((chat) => (
                 <div
-                  key={chat._id}
-                  onClick={() => setChats([chat])}
-                  style={{ cursor: "pointer", margin: "10px 0" }}
+                  key={chat.participant._id}
+                  onClick={() => handleChatSelection(chat)}
                 >
-                  {chat.participants
-                    .filter((p) => p._id !== user._id)
-                    .map((p) => (
-                      <span key={p._id}>
-                        {p.firstName} {p.lastName}
-                      </span>
-                    ))}
+                  <span>
+                    {chat.participant.firstName} {chat.participant.lastName}
+                  </span>
                 </div>
               ))
             ) : (
               <p>No chat history available</p>
             )}
           </div>
-          <div>
+
+          {/* Display current chat messages */}
+          {currentChat && (
             <div>
+              <h3>
+                Chat with {currentChat.participant.firstName}{" "}
+                {currentChat.participant.lastName}
+              </h3>
+              <div>
+                {currentChat.messages.map((msg, index) => (
+                  <div key={index}>
+                    <strong>
+                      {msg.sender._id === user._id
+                        ? "You:" // Display "You" if the logged-in user is the sender
+                        : `${msg.sender.firstName} ${msg.sender.lastName}:`}
+                    </strong>
+                    <span>{msg.content}</span>
+                  </div>
+                ))}
+              </div>
+
               {/* Message input and send button */}
               <input
                 value={newMessage}
@@ -101,7 +139,7 @@ const Chat = () => {
               />
               <button onClick={messageHandler}>Send</button>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>
