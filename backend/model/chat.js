@@ -24,10 +24,10 @@ const messageSchema = new mongoose.Schema(
 // only for registered users
 const chatSchema = new mongoose.Schema(
   {
-    participants: {
+    participants: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
-    },
+    }],
     messages: [messageSchema],
   },
   { timestamps: true }

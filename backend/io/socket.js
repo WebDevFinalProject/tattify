@@ -16,6 +16,7 @@ export const initializeSocket = (io) => {
         participants: { $all: [senderId, receiverId] },
       });
 
+      
       if (!chat) {
         chat = new ChatModel({
           participants: [senderId, receiverId],
