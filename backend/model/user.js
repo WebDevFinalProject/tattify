@@ -42,6 +42,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+    isActive: { type: Boolean, default: true },
 });
 
 const User = mongoose.model("Users", userSchema);
