@@ -1,4 +1,4 @@
-.modal-overlay {
+.deactivate-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,19 +10,19 @@
     align-items: center;
   }
   
-  .modal-content {
-    background: white;
+  .deactivate-modal-content {
+    background: rgb(251, 250, 250);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     max-width: 400px;
   }
   
-  .modal-actions {
+  .deactivate-modal-actions {
     margin-top: 20px;
   }
   
-  .modal-actions button {
+  .deactivate-modal-actions button {
     padding: 8px;
     margin: 0 10px;
     cursor: pointer;
