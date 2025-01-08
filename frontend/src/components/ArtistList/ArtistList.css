@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gafata&family=Varta:wght@300..700&display=swap");
 
-.artistListCard{
+.artistListCard {
   box-shadow: 0 4px 15px rgba(237, 12, 12, 0.2);
-  cursor: "pointer" 
+  cursor: "pointer";
 }
 
 .artistListCard:hover {
@@ -16,7 +16,6 @@
   background-position: center;
   height: 300px;
   border-radius: 10px;
-  position: relative;
   color: white;
   text-align: center;
 
@@ -26,13 +25,13 @@
   }
   p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-top: 1.6rem;
   }
 }
 
 .artist-list {
   background-color: #f1eae3;
-  
 }
 
 .search-bar-heading {
@@ -45,7 +44,8 @@
   font-size: 2em;
   background: rgba(255, 255, 255, 0.321);
   border: none;
-
+  max-width: 350px;
+  margin-top: 3.2rem;
 }
 
 .search-bar input::placeholder {
@@ -53,13 +53,10 @@
   font-weight: 500;
 }
 
-.search-bar input:hover{
+.search-bar input:hover {
   border: 2px solid rgba(248, 164, 164, 0.703);
   background-color: #b8b7b66d;
 }
 .search-bar {
   text-align: center;
 }
-
-
-

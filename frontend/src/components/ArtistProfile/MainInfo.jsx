@@ -3,14 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { UserContext } from "../../context/ContextProvider";
+import { useParams } from "react-router";
+import { HiLocationMarker } from "react-icons/hi";
 
-const MainInfo = ({ artist, isEditing, setIsEditing, handleInputChange }) => {
+const MainInfo = ({
+  artist,
+  isEditing,
+  setIsEditing,
+  handleSave,
+  formData,
+  handleInputChange,
+  toggleEditMode,
+}) => {
   const { user } = useContext(UserContext);
+  const { id } = useParams();
 
-  //Toggle edit mode
-  const handleEditClick = () => {
-    setIsEditing(!isEditing);
-  };
+  const isOwner = user && user?._id === id;
 
   return (
     <>
@@ -19,118 +27,69 @@ const MainInfo = ({ artist, isEditing, setIsEditing, handleInputChange }) => {
           <FontAwesomeIcon icon={faStar} />
         </button>
         <img
-          src={`${user ? user.profileImage : artist.profileImage}`}
-          alt="profile image"
+          src={artist.profileImage}
+          alt={`${artist.firstName} ${artist.lastName}`}
         />
-
         {/* Editable fields for name, city, country */}
         <div>
-          {isEditing ? (
+          {isOwner && isEditing && (
             <>
-              <form action="" className="edit-artist-profile-form">
+              <form className="edit-artist-profile-form" onSubmit={handleSave}>
                 <input
                   type="text"
                   name="firstName"
-                  value={artist.firstName || ""}
+                  value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="First Name"
                 />
                 <input
                   type="text"
                   name="lastName"
-                  value={artist.lastName || ""}
+                  value={formData.lastName}
                   onChange={handleInputChange}
                   placeholder="Last Name"
                 />
                 <input
                   type="text"
                   name="city"
-                  value={artist.city || ""}
+                  value={formData.city}
                   onChange={handleInputChange}
                   placeholder="City"
                 />
                 <input
                   type="text"
                   name="country"
-                  value={artist.country || ""}
+                  value={formData.country}
                   onChange={handleInputChange}
                   placeholder="Country"
                 />
+
+                <button>Submit</button>
+                <button onClick={() => setIsEditing(false)}>Cancel</button>
               </form>
             </>
-          ) : (
-            <>
-              <h2>
-                {artist.firstName} {artist.lastName}
-              </h2>
-              <p>
-                {artist.city}, {artist.country}
-              </p>
-            </>
           )}
-        </div>
 
+          <h2>
+            {artist.firstName} {artist.lastName}
+          </h2>
+          <p>
+            <HiLocationMarker size={15} /> {artist.city}, {artist.country}
+          </p>
+        </div>
         {/* Buttons for desktop */}
         <div className="button-container">
           <button className="star-button-desktop">
             <FontAwesomeIcon icon={faStar} size="3x" />
           </button>
-
-          {/* Edit button */}
-          {!isEditing && (
-            <button className="edit-button-desktop" onClick={handleEditClick}>
+          {isOwner && !isEditing && (
+            <button className="edit-button-desktop" onClick={toggleEditMode}>
               <FontAwesomeIcon icon={faPenToSquare} size="3x" />
             </button>
           )}
-
-          {/* Save and Cancel buttons (show when in edit mode) */}
-          {isEditing && (
-            <>
-              <button className="save-button" onClick={() => handleEditClick()}>
-                Save Changes
-              </button>
-              <button
-                className="cancel-button"
-                onClick={() => setIsEditing(false)}
-              >
-                Cancel
-              </button>
-            </>
-          )}
-
           <button className="chat-button">Chat</button>
         </div>
       </div>
-      {/*   ) : (
-        <p>No artist data available.</p>
-      )} */}
-      {/* {artist ? (
-                <div className="artist-profile-main-info-container">
-                    <button className="star-button-phone">
-                        <FontAwesomeIcon icon={faStar} />
-                    </button>
-                    <img src={artist.profileImage} alt="" />
-                    <div>
-                        <h2>
-                            {artist.firstName} {artist.lastName}
-                        </h2>
-                        <p>
-                            {artist.city}, {artist.country}
-                        </p>
-                    </div>
-                    <div className="button-container">
-                        <button className="star-button-desktop">
-                            <FontAwesomeIcon icon={faStar} size="3x" />
-                        </button>
-                        <button className="edit-button-desktop">
-                            <FontAwesomeIcon icon={faPenToSquare} size="3x" />
-                        </button>
-                        <button className="chat-button">Chat</button>
-                    </div>
-                </div>
-            ) : (
-                <p>No artist data available.</p>
-            )} */}
     </>
   );
 };

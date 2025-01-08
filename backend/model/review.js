@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const reviewSchema = new mongoose.Schema({
   customer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Users", // The user model, assuming this references customers
+    ref: "Users",
     required: true,
   },
   artist: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ArtistPortfolio",
+    ref: "Users",
     required: true,
   },
   rating: {

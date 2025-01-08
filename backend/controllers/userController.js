@@ -33,9 +33,12 @@ export async function registration(req, res) {
     //Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const name = firstName[0].toUpperCase() + firstName.slice(1);
+    const famName = lastName[0].toUpperCase() + lastName.slice(1);
+
     const newUser = new User({
-      firstName,
-      lastName,
+      firstName: name,
+      lastName: famName,
       email,
       password: hashedPassword,
       role,
@@ -74,6 +77,11 @@ export const userLogin = async (req, res) => {
     if (!isMatch) {
       return res.status(400).send({ msg: "Incorrect password!" });
     }
+
+    // Set isActive to true if the user is successfully authenticated
+    user.isActive = true;
+    await user.save();
+
     const token = generateJWT(user._id);
 
     res

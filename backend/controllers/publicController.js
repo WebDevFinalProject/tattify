@@ -1,4 +1,4 @@
-import ArtistPortfolio from "../model/profile.js";
+import ArtistProfile from "../model/profile.js";
 import User from "../model/user.js";
 
 export const publicProfile = async (req, res) => {
@@ -15,13 +15,14 @@ export const publicProfile = async (req, res) => {
         .json({ message: "Artist not found or not an artist!" });
     }
 
-    const artist = await ArtistPortfolio.findOne({ user: id })
+    const artist = await ArtistProfile.findOne({ user: id })
       .populate("user", "firstName lastName profileImage")
       .populate({
         path: "reviews", // Populate the reviews and specific fields within reviews
+        options: { sort: { createdAt: -1 } },
         populate: {
           path: "customer", // Populate the customer reference in reviews
-          select: "firstName",
+          select: "firstName profileImage",
         },
       })
       .select(
@@ -34,6 +35,7 @@ export const publicProfile = async (req, res) => {
       createdAt: review.createdAt,
       customer: {
         firstName: review.customer.firstName,
+        profileImage: review.customer.profileImage,
       },
     }));
 

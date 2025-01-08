@@ -80,12 +80,7 @@ export const createArtistProfile = async (req, res) => {
 // Get all artists card
 export const getArtistProfile = async (req, res) => {
   try {
-    const {
-      search,
-      page = 1,
-      limit = 9,
-    } = req.query;
-    
+    const { search, page = 1, limit = 9 } = req.query;
 
     const userFilter = search
       ? {
@@ -93,18 +88,21 @@ export const getArtistProfile = async (req, res) => {
             { firstName: { $regex: search, $options: "i" } },
             { lastName: { $regex: search, $options: "i" } },
           ],
+          isActive: true, // Ensure only active users are included
         }
-      : {};
+      : { isActive: true }; // Ensure only active users are included
+
+    const userIds = await getUserIds(userFilter);
 
     const profileFilter = search
       ? {
           $or: [
             { city: { $regex: search, $options: "i" } },
             { country: { $regex: search, $options: "i" } },
-            { user: { $in: await getUserIds(userFilter) } }, // Get user IDs if search exists
+            { user: { $in: userIds } }, // Get user IDs if search exists
           ],
         }
-      : {};
+      : { user: { $in: userIds } }; // Ensure only profiles of active users are included
 
     const artists = await ArtistProfile.find(profileFilter)
       .populate({
@@ -130,14 +128,16 @@ export const getArtistProfile = async (req, res) => {
 
 // Helper function to get user IDs based on user filter
 const getUserIds = async (filter) => {
-  const users = await User.find(filter).select("_id");
+  const users = await User.find(filter).select("_id");;
   return users.map((user) => user._id);
 };
 
 //UPDATE ARTIST PROFILE
 export const updateArtistProfile = async (req, res) => {
-  const { artistId } = req.params;
+  const { id } = req.params;
   const {
+    firstName,
+    lastName,
     bio,
     specialties,
     experience,
@@ -153,61 +153,72 @@ export const updateArtistProfile = async (req, res) => {
   } = req.body;
 
   try {
-    const artist = await ArtistProfile.findById(artistId);
-    if (!artist) return res.status(404).json({ message: "Artist not found" });
-    if (artist.user.toString() !== req.userId)
-      return res.status(403).json({ message: "Unauthorized" });
+    const artistProfile = await ArtistProfile.findOne({ user: id });
 
-    // Update fields dynamically
-    const updatedFields = {
-      bio,
-      specialties,
-      experience,
-      certifications,
-      languagesSpoken,
-      city,
-      country,
-      studioLocation,
-      basePrice,
-      pricingDetails,
-      socialLinks,
-      isAvailable,
-    };
+    if (!artistProfile) {
+      return res.status(404).json({ message: "Artist profile not found." });
+    }
 
-    Object.keys(updatedFields).forEach((key) => {
-      if (updatedFields[key] !== undefined) artist[key] = updatedFields[key];
-    });
+    // Update the artist profile with the provided data
+    artistProfile.bio = bio || artistProfile.bio;
+    artistProfile.specialties = specialties || artistProfile.specialties;
+    artistProfile.experience = experience || artistProfile.experience;
+    artistProfile.certifications =
+      certifications || artistProfile.certifications;
+    artistProfile.languagesSpoken =
+      languagesSpoken || artistProfile.languagesSpoken;
+    artistProfile.city = city || artistProfile.city;
+    artistProfile.country = country || artistProfile.country;
+    artistProfile.studioLocation =
+      studioLocation || artistProfile.studioLocation;
+    artistProfile.basePrice = basePrice || artistProfile.basePrice;
+    artistProfile.pricingDetails =
+      pricingDetails || artistProfile.pricingDetails;
+    artistProfile.socialLinks = socialLinks || artistProfile.socialLinks;
+    artistProfile.isAvailable = isAvailable ?? artistProfile.isAvailable;
 
-    await artist.save();
-    res.status(200).json({ message: "Profile updated", artist });
+    artistProfile.updatedAt = Date.now();
+    // Save the updated artist profile
+    await artistProfile.save();
+
+    // Optionally update user profile if needed
+    const user = await User.findById(id);
+    if (user) {
+      user.firstName = firstName || user.firstName;
+      user.lastName = lastName || user.lastName;
+      await user.save();
+    }
+
+    res.status(200).json(artistProfile);
   } catch (error) {
-    res.status(500).json({ message: "Error updating profile", error });
+    res.status(500).json({ message: "Error updating profile" });
   }
 };
 
-// Delete Artist Profile
-export const deleteArtistProfile = async (req, res) => {
+
+// Deactivate Artist Profile
+export const deactivateArtistProfile = async (req, res) => {
   try {
     const { artistId } = req.params;
-
     // Check if the profile exists
-    const artist = await ArtistProfile.findById(artistId);
+    const artist = await User.findById(artistId);
     if (!artist) {
       return res.status(404).json({ message: "Artist not found" });
     }
 
-    // Ensure that only the artist or an admin can delete the profile
-    if (artist.user.toString() !== req.userId) {
+    // Ensure that only the artist or an admin can deactivate the profile
+    if (artist.role !== "artist") {
       return res
         .status(403)
-        .json({ message: "You are not authorized to delete this profile" });
+        .json({ message: "You are not authorized to deactivate this profile" });
     }
 
-    // Delete the artist profile
-    await artist.deleteOne();
-    res.status(200).json({ message: "Profile deleted successfully" });
+    // Deactivate the artist profile
+    artist.isActive = false;
+    await artist.save();
+
+    res.status(200).json({ message: "Profile deactivated successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting profile", error });
+    res.status(500).json({ message: "Error deactivating profile", error });
   }
 };
-

@@ -70,6 +70,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739044/jtUnj8Dr_m55oy5.jpg",
     ],
     isProfileComplete: true,
+    isActive: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739703/5o4gdu9k_z1k1oh.jpg",
     artistProfile: {
@@ -97,6 +98,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738971/JgNBK1Km_xcahe6.jpg",
     ],
     isProfileComplete: true,
+    isActive: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739698/fbNjexhe_zdq2yk.jpg",
     artistProfile: {
@@ -124,6 +126,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738968/-n7OfHtW_j1n7et.jpg",
     ],
     isProfileComplete: true,
+    isActive: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739702/1kmxydF__lwjhz2.jpg",
     artistProfile: {
@@ -151,6 +154,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738963/2TLdx3C5_lirpzv.jpg",
     ],
     isProfileComplete: true,
+    isActive: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739707/k-GCS_bM_vljlyt.jpg",
     artistProfile: {
@@ -178,6 +182,7 @@ const artists = [
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733738957/0oEaou8Y_squwd1.jpg",
     ],
     isProfileComplete: true,
+    isActive: true,
     profileImage:
       "https://res.cloudinary.com/dfgid3dy3/image/upload/v1733739691/y4Snflxw_hosmrd.jpg",
     artistProfile: {
