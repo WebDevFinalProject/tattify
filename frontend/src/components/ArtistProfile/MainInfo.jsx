@@ -20,6 +20,11 @@ const MainInfo = ({
 
     const isOwner = user && user?._id === id;
 
+    // capitalizing first letter
+    const capitalizeFirstLetter = (str) => {
+        return str.replace(/\b\w/g, (char) => char.toUpperCase());
+    };
+
     return (
         <>
             <div className="artist-profile-main-info-container">
@@ -159,11 +164,12 @@ const MainInfo = ({
                     )}
 
                     <h2>
-                        {artist.firstName} {artist.lastName}
+                        {capitalizeFirstLetter(artist.firstName)}{" "}
+                        {capitalizeFirstLetter(artist.lastName)}
                     </h2>
                     <p>
                         <HiLocationMarker size={15} /> {artist.city},{" "}
-                        {artist.country}
+                        {capitalizeFirstLetter(artist.country)}
                     </p>
                 </div>
                 {/* Buttons for desktop */}
