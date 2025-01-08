@@ -37,6 +37,20 @@ const Chat = () => {
         });
 
         setChats(combinedChats);
+
+        if (id) {
+          const chat = combinedChats.find(
+            (chat) => chat.participant._id === id
+          );
+          if (chat) {
+            setCurrentChat(chat);
+          } else {
+            setCurrentChat({
+              participant : {_id : id},
+              messages: [],
+            });
+          }
+        }
       } catch (error) {
         console.error(error);
       }
@@ -63,7 +77,7 @@ const Chat = () => {
   const messageHandler = async () => {
     if (!newMessage.trim()) return;
 
-    const receiverId = /* user && id; */ currentChat?.participant._id;
+    const receiverId = /* user && id; */ currentChat?.participant._id || id;
 
     try {
       await sendMessage(user._id, receiverId, newMessage);

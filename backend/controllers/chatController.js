@@ -61,6 +61,7 @@ export const sendMessage = async (req, res) => {
     });
 
     await chat.save();
+    console.log(chat)
 
     res.status(201).json(chat);
   } catch (error) {
