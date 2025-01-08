@@ -10,9 +10,21 @@ export const getUserChatHistory = async (req, res) => {
     }
     const chats = await ChatModel.find({ participants: req.userId })
       .populate("participants", "firstName lastName profileImage role")
+      .populate("messages.sender", "firstName lastName profileImage")
       .exec();
 
-    res.status(200).json(chats);
+    // Aggregate chats by participant, merge messages for each person
+    const aggregatedChats = chats.map((chat) => {
+      const otherParticipant = chat.participants.find(
+        (p) => p._id.toString() !== req.userId
+      );
+      return {
+        participant: otherParticipant,
+        messages: chat.messages,
+      };
+    });
+
+    res.status(200).json(aggregatedChats);
   } catch (error) {
     res.status(500).json({ message: "Error fetching chat history" });
   }
@@ -26,7 +38,9 @@ export const sendMessage = async (req, res) => {
 
     // Validate inputs
     if (!senderId || !receiverId || !content) {
-      return res.status(400).json({ error: 'senderId, receiverId, and mcontent are required.' });
+      return res
+        .status(400)
+        .json({ error: "senderId, receiverId, and mcontent are required." });
     }
 
     // Convert senderId and receiverId to ObjectId
@@ -40,16 +54,18 @@ export const sendMessage = async (req, res) => {
       participants,
       messages: [
         {
-          sender:  new mongoose.Types.ObjectId(senderId),
+          sender: new mongoose.Types.ObjectId(senderId),
           content: content, // Ensure the "content" field is provided
         },
       ],
     });
 
     await chat.save();
+    console.log(chat)
+
     res.status(201).json(chat);
   } catch (error) {
-    console.error('Error sending message:', error);
+    console.error("Error sending message:", error);
     res.status(500).json({ error: error.message });
   }
 };
