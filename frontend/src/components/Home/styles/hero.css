@@ -29,8 +29,10 @@
       font-size: 14.5rem;
       text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.445);
       padding-top: 2rem;
-      position: relative;
-      z-index: 200;
+      position   : relative;
+      z-index    : 200;
+      padding-top: 2rem;
+      
     }
 
     p {
