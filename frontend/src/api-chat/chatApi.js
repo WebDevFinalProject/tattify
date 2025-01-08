@@ -13,20 +13,3 @@ export const fetchChatHistory = async () => {
   }
 };
 
-// sending
-
-export const sendMessage = async (senderId, receiverId, content) => {
-  try {
-    const res = await axios.post(
-      "http://localhost:4000/api/send",
-      { senderId, receiverId, content },
-      {
-        withCredentials: true,
-      }
-    );
-
-    return res;
-  } catch (error) {
-    console.error("Error sending message:", err);
-  }
-};

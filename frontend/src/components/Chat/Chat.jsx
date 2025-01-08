@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
-import { fetchChatHistory, sendMessage } from "../../api-chat/chatApi";
+import { fetchChatHistory } from "../../api-chat/chatApi";
 import socket from "../../utils-io/socket";
 import { useParams } from "react-router-dom";
 
 const Chat = () => {
-  const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
+  const { user, isOpen } = useContext(UserContext);
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
@@ -26,6 +26,7 @@ const Chat = () => {
           const existingChat = combinedChats.find(
             (c) => c.participant._id === chat.participant._id
           );
+
           if (!existingChat) {
             combinedChats.push({
               participant: chat.participant,
@@ -64,10 +65,40 @@ const Chat = () => {
       );
     });
 
+    // Listen for chat updates (real-time)
+    socket.on("chat_update", (message) => {
+      setChats((prevChats) => {
+        const updatedChats = prevChats.map((chat) => {
+          if (chat.participant._id === message.sender._id) {
+            return {
+              ...chat,
+              messages: [...chat.messages, message],
+            };
+          }
+          return chat;
+        });
+
+        // If the current chat is not in the list, add it
+        if (
+          !updatedChats.find(
+            (chat) => chat.participant._id === message.sender._id
+          )
+        ) {
+          updatedChats.push({
+            participant: message.sender,
+            messages: [message],
+          });
+        }
+
+        return updatedChats;
+      });
+    });
+
     return () => {
       socket.off("receive_message");
+      socket.off("chat_update");
     };
-  }, [user]);
+  }, [user, id]);
 
   // Handle sending message
   const messageHandler = async () => {
@@ -76,7 +107,6 @@ const Chat = () => {
     const receiverId = currentChat?.participant._id;
 
     try {
-      await sendMessage(user._id, receiverId, newMessage);
       socket.emit("send_message", {
         senderId: user._id,
         receiverId,
