@@ -80,6 +80,10 @@ export const PortfolioContainer = styled.div`
     .portfolio-image-box {
         position: relative;
 
+        &:hover .delete-button {
+            opacity: 1;
+        }
+
         .delete-button {
             position: absolute;
             bottom: 0;
@@ -89,6 +93,8 @@ export const PortfolioContainer = styled.div`
             border: 2px solid grey;
             border-radius: 0.3rem;
             background-color: white;
+            opacity: 0;
+            transition: 0.7s ease;
 
             svg {
                 transform: scale(1.3);
