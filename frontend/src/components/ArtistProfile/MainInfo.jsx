@@ -85,7 +85,7 @@ const MainInfo = ({
                                                 <input
                                                     type="text"
                                                     name="country"
-                                                    value={formData.country}
+                                                    value={artist.country}
                                                     onChange={handleInputChange}
                                                     placeholder="Country"
                                                 />
