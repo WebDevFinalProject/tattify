@@ -26,9 +26,7 @@ const Chat = () => {
           const existingChat = combinedChats.find(
             (c) => c.participant._id === chat.participant._id
           );
-          if (existingChat) {
-            existingChat.messages.push(...chat.messages);
-          } else {
+          if (!existingChat) {
             combinedChats.push({
               participant: chat.participant,
               messages: chat.messages,
@@ -42,11 +40,9 @@ const Chat = () => {
           const chat = combinedChats.find(
             (chat) => chat.participant._id === id
           );
-          if (chat) {
-            setCurrentChat(chat);
-          } else {
+          if (!chat) {
             setCurrentChat({
-              participant : {_id : id},
+              participant: { _id: id },
               messages: [],
             });
           }
@@ -62,7 +58,7 @@ const Chat = () => {
       setChats((prev) =>
         prev.map((chat) =>
           chat.participant._id === message.sender._id
-            ? { ...chat, messages: [...chat.messages, message] }
+            ? { ...chat, messages: [...chat.messages, message] } // Add the message to the existing array
             : chat
         )
       );
@@ -75,9 +71,9 @@ const Chat = () => {
 
   // Handle sending message
   const messageHandler = async () => {
-    if (!newMessage.trim()) return;
+    if (!newMessage.trim() || !currentChat) return;
 
-    const receiverId = /* user && id; */ currentChat?.participant._id || id;
+    const receiverId = currentChat?.participant._id;
 
     try {
       await sendMessage(user._id, receiverId, newMessage);
