@@ -1,5 +1,6 @@
-/* Chat Window */
-.chat-popup-window {
+
+  /* Chat Window */
+  .chat-popup-window {
     width: 300px; /* Fixed width for the chat */
     height: 500px; /* Fixed height */
     position: fixed;
@@ -77,8 +78,8 @@
     align-self: flex-start;
   }
   
-/* Input Area */
-.message-input {
+  /* Input Area */
+  .message-input {
     display: flex;
     gap: 8px;
     padding: 10px;
@@ -114,4 +115,3 @@
   .message-input button:hover {
     background-color: #0056b3;
   }
-  

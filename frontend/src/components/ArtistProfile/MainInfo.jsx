@@ -186,9 +186,9 @@ const MainInfo = ({ artist }) => {
           >
             Chat
           </button>
-          {isOpen && <Chat />}
+          
           {/* Availability Slider */}
-          <div className="availability-slider">
+       <div className="availability-slider">
             <label className="switch">
               <input
                 type="checkbox"
@@ -200,9 +200,10 @@ const MainInfo = ({ artist }) => {
             <span className="availability-label">
               {formData.isAvailable ? "Profile Active" : "Profile Inactive"}
             </span>
-          </div>
+          </div> 
         </div>
       </div>
+      {isOpen && <Chat />}
     </>
   );
 };

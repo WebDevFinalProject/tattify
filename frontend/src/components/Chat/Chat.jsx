@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import "./chat.css";
 
 const Chat = () => {
-  const { user } = useContext(UserContext);
+  const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
@@ -112,13 +112,15 @@ const Chat = () => {
   };
 
   return (
-    <div className="chat-popup-window">
-      <div className="chat-header">
-        <h2>Chat</h2>
-        <button className="close-button" onClick={clickHandlerVisibility}>
-          &times;
-        </button>
-      </div>
+    <>
+      {isOpen && (
+        <div className="chat-popup-window">
+          <div className="chat-header">
+            <h2>Chat</h2>
+            <button className="close-button" onClick={clickHandlerVisibility}>
+              &times;
+            </button>
+          </div>
 
       <div className="chat-content">
         {/* Chat List */}
@@ -144,43 +146,45 @@ const Chat = () => {
           )}
         </div>
 
-        {/* Current Chat */}
-        {currentChat && (
-          <div className="chat-messages">
-            <h3>
-              {currentChat.participant.firstName}{" "}
-              {currentChat.participant.lastName}
-            </h3>
-            <div className="messages">
-              {currentChat.messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`message ${
-                    msg.sender._id === user._id ? "sent" : "received"
-                  }`}
-                >
-                  <strong>
-                    {msg.sender._id === user._id
-                      ? "You:" // Display "You" if the logged-in user is the sender
-                      : `${msg.sender.firstName} ${msg.sender.lastName}:`}
-                  </strong>
-                  <span>{msg.content}</span>
+            {/* Current Chat */}
+            {currentChat && (
+              <div className="chat-messages">
+                <h3>
+                  {currentChat.participant.firstName}{" "}
+                  {currentChat.participant.lastName}
+                </h3>
+                <div className="messages">
+                  {currentChat.messages.map((msg, index) => (
+                    <div
+                      key={index}
+                      className={`message ${
+                        msg.sender._id === user._id ? "sent" : "received"
+                      }`}
+                    >
+                      <strong>
+                        {msg.sender._id === user._id
+                          ? "You:" // Display "You" if the logged-in user is the sender
+                          : `${msg.sender.firstName} ${msg.sender.lastName}:`}
+                      </strong>
+                      <span>{msg.content}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <div className="message-input">
-              <input
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type a message..."
-              />
-              <button onClick={messageHandler}>Send</button>
-            </div>
+                <div className="message-input">
+                  <input
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Type a message..."
+                  />
+                  <button onClick={messageHandler}>Send</button>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 
