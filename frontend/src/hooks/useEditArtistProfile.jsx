@@ -15,13 +15,15 @@ const useEditArtistProfile = () => {
     basePrice: user?.basePrice || "",
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
+            languages: user?.languages || "",
+        experience: user?.experience || "",
     isAvailable: user?.isAvailable || false,
   });
 
-  // Handle edit mode
-  const toggleEditMode = () => {
-    setIsEditing(!isEditing);
-  };
+    // Handle edit mode
+    const toggleEditMode = () => {
+        setIsEditing(!isEditing);
+    };
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -50,19 +52,19 @@ const useEditArtistProfile = () => {
     }
   };
 
-  // Save updated data to the backend
-  const handleSave = async (e) => {
-    e.preventDefault();
-    try {
-      await api.put(`/api/artists/${id}`, formData);
+    // Save updated data to the backend
+    const handleSave = async (e) => {
+        e.preventDefault();
+        try {
+            await api.put(`/api/artists/${id}`, formData);
 
-      setUser((prevData) => ({ ...prevData, ...formData }));
-      setIsEditing(false); // Exit edit mode
-      toggleEditMode();
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
+            setUser((prevData) => ({ ...prevData, ...formData }));
+            setIsEditing(false); // Exit edit mode
+            toggleEditMode();
+        } catch (error) {
+            console.error("Error updating profile:", error);
+        }
+    };
 
   return {
     isEditing,
