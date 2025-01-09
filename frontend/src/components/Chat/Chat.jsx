@@ -5,10 +5,11 @@ import socket from "../../utils-io/socket";
 import { useParams } from "react-router-dom";
 
 const Chat = () => {
-  const { user, isOpen } = useContext(UserContext);
+  const { user } = useContext(UserContext); // Removed isOpen as we don't need to check visibility here
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [hasNewMessage, setHasNewMessage] = useState(false); // New state to trigger re-render
   const { id } = useParams();
 
   // Load chat history and set up socket
@@ -18,15 +19,12 @@ const Chat = () => {
     const loadChat = async () => {
       try {
         const history = await fetchChatHistory(user._id);
-
-        // Combine all chats with the same participant into one unified chat
         const combinedChats = [];
 
         history.forEach((chat) => {
           const existingChat = combinedChats.find(
             (c) => c.participant._id === chat.participant._id
           );
-
           if (!existingChat) {
             combinedChats.push({
               participant: chat.participant,
@@ -56,29 +54,25 @@ const Chat = () => {
     loadChat();
 
     socket.on("receive_message", (message) => {
+      console.log("New message:", message);
       setChats((prev) =>
         prev.map((chat) =>
           chat.participant._id === message.sender._id
-            ? { ...chat, messages: [...chat.messages, message] } // Add the message to the existing array
+            ? { ...chat, messages: [...chat.messages, message] }
             : chat
         )
       );
     });
 
-    // Listen for chat updates (real-time)
-    socket.on("chat_update", (message) => {
-      setChats((prevChats) => {
-        const updatedChats = prevChats.map((chat) => {
-          if (chat.participant._id === message.sender._id) {
-            return {
-              ...chat,
-              messages: [...chat.messages, message],
-            };
-          }
-          return chat;
-        });
+    socket.on("receive_message", (message) => {
+      setChats((prev) => {
+        const updatedChats = prev.map((chat) =>
+          chat.participant._id === message.sender._id
+            ? { ...chat, messages: [...chat.messages, message] }
+            : chat
+        );
 
-        // If the current chat is not in the list, add it
+        // Check if sender is in the current chat list
         if (
           !updatedChats.find(
             (chat) => chat.participant._id === message.sender._id
@@ -96,14 +90,12 @@ const Chat = () => {
 
     return () => {
       socket.off("receive_message");
-      socket.off("chat_update");
     };
   }, [user, id]);
 
   // Handle sending message
   const messageHandler = async () => {
     if (!newMessage.trim() || !currentChat) return;
-
     const receiverId = currentChat?.participant._id;
 
     try {
@@ -125,64 +117,58 @@ const Chat = () => {
   };
 
   const handleChatSelection = (chat) => {
+    const room = `${user._id}_${chat.participant._id}`;
+    socket.emit("join_room", room);
+
     setCurrentChat(chat);
   };
 
   return (
-    <>
-      {isOpen && (
-        <div className="chat-window">
-          <h2>Chat with Artist</h2>
-          <div>
-            {/* Display chat list */}
-            {chats.length > 0 ? (
-              chats.map((chat) => (
-                <div
-                  key={chat.participant._id}
-                  onClick={() => handleChatSelection(chat)}
-                >
-                  <span>
-                    {chat.participant.firstName} {chat.participant.lastName}
-                  </span>
-                </div>
-              ))
-            ) : (
-              <p>No chat history available</p>
-            )}
-          </div>
-
-          {/* Display current chat messages */}
-          {currentChat && (
-            <div>
-              <h3>
-                Chat with {currentChat.participant.firstName}{" "}
-                {currentChat.participant.lastName}
-              </h3>
-              <div>
-                {currentChat.messages.map((msg, index) => (
-                  <div key={index}>
-                    <strong>
-                      {msg.sender._id === user._id
-                        ? "You:" // Display "You" if the logged-in user is the sender
-                        : `${msg.sender.firstName} ${msg.sender.lastName}:`}
-                    </strong>
-                    <span>{msg.content}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Message input and send button */}
-              <input
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type a message..."
-              />
-              <button onClick={messageHandler}>Send</button>
+    <div className="chat-window">
+      <h2>Chat with Artist</h2>
+      <div>
+        {chats.length > 0 ? (
+          chats.map((chat) => (
+            <div
+              key={chat.participant._id}
+              onClick={() => handleChatSelection(chat)}
+            >
+              <span>
+                {chat.participant.firstName} {chat.participant.lastName}
+              </span>
             </div>
-          )}
+          ))
+        ) : (
+          <p>No chat history available</p>
+        )}
+      </div>
+      {currentChat && (
+        <div>
+          <h3>
+            Chat with {currentChat.participant.firstName}{" "}
+            {currentChat.participant.lastName}
+          </h3>
+          <div>
+            {currentChat.messages.map((msg, index) => (
+              <div key={index}>
+                <strong>
+                  {msg.sender._id === user._id
+                    ? "You:"
+                    : `${msg.sender.firstName} ${msg.sender.lastName}:`}
+                </strong>
+                <span>{msg.content}</span>
+              </div>
+            ))}
+          </div>
+          <input
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type a message..."
+          />
+          <button onClick={messageHandler}>Send</button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
