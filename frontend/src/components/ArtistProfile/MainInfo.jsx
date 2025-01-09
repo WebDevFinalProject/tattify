@@ -203,7 +203,7 @@ const MainInfo = ({ artist }) => {
           </div> 
         </div>
       </div>
-      {isOpen && <Chat />}
+      {isOpen && user && <Chat />}
     </>
   );
 };
