@@ -51,6 +51,12 @@ const ArtistList = () => {
     navigate(`/artist-profile/${artistId}`); // Navigate to the artist profile page
   };
 
+  // Handle button click (navigate to register page)
+  const handleButtonClick = (e) => {
+    e.stopPropagation(); // Prevent the card click from firing
+    navigate("/register"); // Navigate to the register page
+  };
+
   return (
     <div className="artist-list">
       <NavBar />
@@ -85,7 +91,7 @@ const ArtistList = () => {
             <div key={artist._id} className="col-xl-4 col-md-6">
               <div
                 className="card mb-4 artistListCard p-2 m-4"
-                onClick={() => handleCardClick(artist.user._id)} // Navigate on click
+                onClick={() => handleCardClick(artist.user._id)} // Navigate on card click
               >
                 <div className="portfolio-container d-flex">
                   {Array.from({ length: 3 }).map((_, index) => {
@@ -142,7 +148,10 @@ const ArtistList = () => {
                     <SlLocationPin className="fs-5" />
                     {artist.city}, {artist.country}
                   </p>
-                  <button className="btn btn-danger fs-5">
+                  <button
+                    className="btn btn-danger fs-5"
+                    onClick={handleButtonClick} // Handle button click
+                  >
                     <span className="text-light">Chat</span>
                   </button>
                 </div>
