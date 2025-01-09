@@ -3,14 +3,14 @@ import { UserContext } from "../../context/ContextProvider";
 import { fetchChatHistory } from "../../api-chat/chatApi";
 import socket from "../../utils-io/socket";
 import { useParams } from "react-router-dom";
-import "./chat.css"
+import "./chat.css";
 
 const Chat = () => {
-  const { user } = useContext(UserContext); 
+  const { user } = useContext(UserContext);
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
-  const [hasNewMessage, setHasNewMessage] = useState(false); 
+  const [hasNewMessage, setHasNewMessage] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Chat = () => {
     const loadChat = async () => {
       try {
         const history = await fetchChatHistory(user._id);
-        
+
         const combinedChats = [];
         history.forEach((chat) => {
           const existingChat = combinedChats.find(
@@ -52,7 +52,6 @@ const Chat = () => {
     };
 
     loadChat();
-
 
     socket.on("receive_message", (message) => {
       setChats((prev) => {
@@ -113,79 +112,76 @@ const Chat = () => {
   };
 
   return (
-    <>
-        <div className="chat-popup-window">
-          <div className="chat-header">
-            <h2>Chat</h2>
-            <button className="close-button" onClick={clickHandlerVisibility}>
-              &times;
-            </button>
-          </div>
+    <div className="chat-popup-window">
+      <div className="chat-header">
+        <h2>Chat</h2>
+        <button className="close-button" onClick={clickHandlerVisibility}>
+          &times;
+        </button>
+      </div>
 
-          <div className="chat-content">
-            {/* Chat List */}
-            <div className="chat-list">
-              {chats.length > 0 ? (
-                chats.map((chat) => (
-                  <div
-                    key={chat.participant._id}
-                    onClick={() => handleChatSelection(chat)}
-                    className={`chat-item ${
-                      currentChat?.participant._id === chat.participant._id
-                        ? "active"
-                        : ""
-                    }`}
-                  >
-                    <span>
-                      {chat.participant.firstName} {chat.participant.lastName}
-                    </span>
-                  </div>
-                ))
-              ) : (
-                <p>No chat history available</p>
-              )}
+      <div className="chat-content">
+        {/* Chat List */}
+        <div className="chat-list">
+          {chats.length > 0 ? (
+            chats.map((chat) => (
+              <div
+                key={chat.participant._id}
+                onClick={() => handleChatSelection(chat)}
+                className={`chat-item ${
+                  currentChat?.participant._id === chat.participant._id
+                    ? "active"
+                    : ""
+                }`}
+              >
+                <span>
+                  {chat.participant.firstName} {chat.participant.lastName}
+                </span>
+              </div>
+            ))
+          ) : (
+            <p>No chat history available</p>
+          )}
+        </div>
+
+        {/* Current Chat */}
+        {currentChat && (
+          <div className="chat-messages">
+            <h3>
+              {currentChat.participant.firstName}{" "}
+              {currentChat.participant.lastName}
+            </h3>
+            <div className="messages">
+              {currentChat.messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`message ${
+                    msg.sender._id === user._id ? "sent" : "received"
+                  }`}
+                >
+                  <strong>
+                    {msg.sender._id === user._id
+                      ? "You:" // Display "You" if the logged-in user is the sender
+                      : `${msg.sender.firstName} ${msg.sender.lastName}:`}
+                  </strong>
+                  <span>{msg.content}</span>
+                </div>
+              ))}
             </div>
 
-            {/* Current Chat */}
-            {currentChat && (
-              <div className="chat-messages">
-                <h3>
-                   {currentChat.participant.firstName}{" "}
-                  {currentChat.participant.lastName}
-                </h3>
-                <div className="messages">
-                  {currentChat.messages.map((msg, index) => (
-                    <div
-                      key={index}
-                      className={`message ${
-                        msg.sender._id === user._id ? "sent" : "received"
-                      }`}
-                    >
-                      <strong>
-                      {msg.sender._id === user._id
-                        ? "You:" // Display "You" if the logged-in user is the sender
-                        : `${msg.sender.firstName} ${msg.sender.lastName}:`}
-                      </strong>
-                      <span>{msg.content}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="message-input">
-                  <input
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="Type a message..."
-                  />
-                  <button onClick={messageHandler}>Send</button>
-                </div>
-              </div>
-            )}
+            <div className="message-input">
+              <input
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                placeholder="Type a message..."
+              />
+              <button onClick={messageHandler}>Send</button>
+            </div>
           </div>
-        </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default Chat;
-
