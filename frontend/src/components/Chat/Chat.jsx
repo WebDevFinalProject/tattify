@@ -3,6 +3,7 @@ import { UserContext } from "../../context/ContextProvider";
 import { fetchChatHistory, sendMessage } from "../../api-chat/chatApi";
 import socket from "../../utils-io/socket";
 import { useParams } from "react-router-dom";
+import "./chat.css"
 
 const Chat = () => {
   const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
@@ -11,7 +12,6 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const { id } = useParams();
 
-  // Load chat history and set up socket
   useEffect(() => {
     if (!user) return;
 
@@ -19,9 +19,7 @@ const Chat = () => {
       try {
         const history = await fetchChatHistory(user._id);
 
-        // Combine all chats with the same participant into one unified chat
         const combinedChats = [];
-
         history.forEach((chat) => {
           const existingChat = combinedChats.find(
             (c) => c.participant._id === chat.participant._id
@@ -58,7 +56,7 @@ const Chat = () => {
       setChats((prev) =>
         prev.map((chat) =>
           chat.participant._id === message.sender._id
-            ? { ...chat, messages: [...chat.messages, message] } // Add the message to the existing array
+            ? { ...chat, messages: [...chat.messages, message] }
             : chat
         )
       );
@@ -69,7 +67,6 @@ const Chat = () => {
     };
   }, [user]);
 
-  // Handle sending message
   const messageHandler = async () => {
     if (!newMessage.trim() || !currentChat) return;
 
@@ -101,55 +98,74 @@ const Chat = () => {
   return (
     <>
       {isOpen && (
-        <div className="chat-window">
-          <h2>Chat with Artist</h2>
-          <div>
-            {/* Display chat list */}
-            {chats.length > 0 ? (
-              chats.map((chat) => (
-                <div
-                  key={chat.participant._id}
-                  onClick={() => handleChatSelection(chat)}
-                >
-                  <span>
-                    {chat.participant.firstName} {chat.participant.lastName}
-                  </span>
-                </div>
-              ))
-            ) : (
-              <p>No chat history available</p>
-            )}
+        <div className="chat-popup-window">
+          <div className="chat-header">
+            <h2>Chat</h2>
+            <button className="close-button" onClick={clickHandlerVisibility}>
+              &times;
+            </button>
           </div>
 
-          {/* Display current chat messages */}
-          {currentChat && (
-            <div>
-              <h3>
-                Chat with {currentChat.participant.firstName}{" "}
-                {currentChat.participant.lastName}
-              </h3>
-              <div>
-                {currentChat.messages.map((msg, index) => (
-                  <div key={index}>
-                    <strong>
+          <div className="chat-content">
+            {/* Chat List */}
+            <div className="chat-list">
+              {chats.length > 0 ? (
+                chats.map((chat) => (
+                  <div
+                    key={chat.participant._id}
+                    onClick={() => handleChatSelection(chat)}
+                    className={`chat-item ${
+                      currentChat?.participant._id === chat.participant._id
+                        ? "active"
+                        : ""
+                    }`}
+                  >
+                    <span>
+                      {chat.participant.firstName} {chat.participant.lastName}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p>No chat history available</p>
+              )}
+            </div>
+
+            {/* Current Chat */}
+            {currentChat && (
+              <div className="chat-messages">
+                <h3>
+                   {currentChat.participant.firstName}{" "}
+                  {currentChat.participant.lastName}
+                </h3>
+                <div className="messages">
+                  {currentChat.messages.map((msg, index) => (
+                    <div
+                      key={index}
+                      className={`message ${
+                        msg.sender._id === user._id ? "sent" : "received"
+                      }`}
+                    >
+                      <strong>
                       {msg.sender._id === user._id
                         ? "You:" // Display "You" if the logged-in user is the sender
                         : `${msg.sender.firstName} ${msg.sender.lastName}:`}
-                    </strong>
-                    <span>{msg.content}</span>
-                  </div>
-                ))}
-              </div>
+                      </strong>
+                      <span>{msg.content}</span>
+                    </div>
+                  ))}
+                </div>
 
-              {/* Message input and send button */}
-              <input
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type a message..."
-              />
-              <button onClick={messageHandler}>Send</button>
-            </div>
-          )}
+                <div className="message-input">
+                  <input
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Type a message..."
+                  />
+                  <button onClick={messageHandler}>Send</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </>
@@ -157,3 +173,4 @@ const Chat = () => {
 };
 
 export default Chat;
+

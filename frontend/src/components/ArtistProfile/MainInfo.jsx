@@ -6,9 +6,10 @@ import { UserContext } from "../../context/ContextProvider";
 import { useParams } from "react-router";
 import { HiLocationMarker } from "react-icons/hi";
 import useEditArtistProfile from "../../hooks/useEditArtistProfile";
+import Chat from "../Chat/Chat.jsx";
 
 const MainInfo = ({ artist }) => {
-  const { user } = useContext(UserContext);
+  const { user, clickHandlerVisibility, isOpen } = useContext(UserContext);
   const { id } = useParams();
 
   const {
@@ -23,7 +24,7 @@ const MainInfo = ({ artist }) => {
 
   const isOwner = user && user?._id === id;
 
-  // capitalizing first letter
+  // Capitalizing the first letter of words
   const capitalizeFirstLetter = (str) => {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
   };
@@ -41,120 +42,120 @@ const MainInfo = ({ artist }) => {
         {/* Editable fields for name, city, country */}
         <div>
           {isOwner && isEditing && (
-            <>
-              <div className="overlay">
-                <div className="edit-artist-profile-form-container">
-                  <h2>Edit Information</h2>
-                  <form
-                    className="edit-artist-profile-form"
-                    onSubmit={handleSave}
-                  >
-                    <div className="paired-inputs">
-                      <div>
-                        <label htmlFor="">First name</label>
-                        <input
-                          type="text"
-                          name="firstName"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          placeholder="First Name"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="">Last name</label>
-                        <input
-                          type="text"
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          placeholder="Last Name"
-                        />
-                      </div>
-                    </div>
-                    <div className="paired-inputs">
-                      <div>
-                        <label htmlFor="">City</label>
-                        <input
-                          type="text"
-                          name="city"
-                          value={formData.city}
-                          onChange={handleInputChange}
-                          placeholder="City"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="">Country</label>
-                        <input
-                          type="text"
-                          name="country"
-                          value={artist.country}
-                          onChange={handleInputChange}
-                          placeholder="Country"
-                        />
-                      </div>
-                    </div>
+            <div className="overlay">
+              <div className="edit-artist-profile-form-container">
+                <h2>Edit Information</h2>
+                <form
+                  className="edit-artist-profile-form"
+                  onSubmit={handleSave}
+                >
+                  <div className="paired-inputs">
                     <div>
-                      <label htmlFor="">Styles</label>
+                      <label htmlFor="">First name</label>
                       <input
                         type="text"
-                        name="specialties"
-                        value={formData.specialties}
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleInputChange}
-                        placeholder="Styles"
+                        placeholder="First Name"
                       />
                     </div>
                     <div>
-                      <label htmlFor="">Languages</label>
+                      <label htmlFor="">Last name</label>
                       <input
                         type="text"
-                        name="languagesSpoken"
-                        value={formData.languagesSpoken}
+                        name="lastName"
+                        value={formData.lastName}
                         onChange={handleInputChange}
-                        placeholder="Languages"
+                        placeholder="Last Name"
                       />
                     </div>
+                  </div>
+                  <div className="paired-inputs">
                     <div>
-                      <label htmlFor="">Base price</label>
+                      <label htmlFor="">City</label>
                       <input
                         type="text"
-                        name="basePrice"
-                        value={formData.basePrice}
+                        name="city"
+                        value={formData.city}
                         onChange={handleInputChange}
-                        placeholder="Base price"
+                        placeholder="City"
                       />
                     </div>
                     <div>
-                      <label htmlFor="">Experience</label>
+                      <label htmlFor="">Country</label>
                       <input
                         type="text"
-                        name="experience"
-                        value={formData.experience}
+                        name="country"
+                        value={formData.country}
                         onChange={handleInputChange}
-                        placeholder="Experience"
+                        placeholder="Country"
                       />
                     </div>
-                    <div>
-                      <label htmlFor="">Bio</label>
-                      <textarea
-                        type="text"
-                        name="bio"
-                        rows={5}
-                        value={formData.bio}
-                        onChange={handleInputChange}
-                        placeholder="Bio"
-                      />
-                    </div>
-
-                    <div className="button-container">
-                      <button>Submit</button>
-                      <button onClick={() => setIsEditing(false)}>
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                  </div>
+                  <div>
+                    <label htmlFor="">Styles</label>
+                    <input
+                      type="text"
+                      name="specialties"
+                      value={formData.specialties}
+                      onChange={handleInputChange}
+                      placeholder="Styles"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="">Languages</label>
+                    <input
+                      type="text"
+                      name="languagesSpoken"
+                      value={formData.languagesSpoken}
+                      onChange={handleInputChange}
+                      placeholder="Languages"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="">Base price</label>
+                    <input
+                      type="text"
+                      name="basePrice"
+                      value={formData.basePrice}
+                      onChange={handleInputChange}
+                      placeholder="Base price"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="">Experience</label>
+                    <input
+                      type="text"
+                      name="experience"
+                      value={formData.experience}
+                      onChange={handleInputChange}
+                      placeholder="Experience"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="">Bio</label>
+                    <textarea
+                      type="text"
+                      name="bio"
+                      rows={5}
+                      value={formData.bio}
+                      onChange={handleInputChange}
+                      placeholder="Bio"
+                    />
+                  </div>
+                  <div className="button-container">
+                    <button type="submit">Submit</button>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditing(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
               </div>
-            </>
+            </div>
           )}
 
           <h2>
@@ -172,11 +173,20 @@ const MainInfo = ({ artist }) => {
             <FontAwesomeIcon icon={faStar} size="3x" />
           </button>
           {isOwner && !isEditing && (
-            <button className="edit-button-desktop" onClick={toggleEditMode}>
+            <button
+              className="edit-button-desktop"
+              onClick={toggleEditMode}
+            >
               <FontAwesomeIcon icon={faPenToSquare} size="3x" />
             </button>
           )}
-          <button className="chat-button">Chat</button>
+          <button
+            className="chat-button"
+            onClick={clickHandlerVisibility}
+          >
+            Chat
+          </button>
+          {isOpen && <Chat />}
           {/* Availability Slider */}
           <div className="availability-slider">
             <label className="switch">
