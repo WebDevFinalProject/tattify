@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { useParams } from "react-router";
 import { HiLocationMarker } from "react-icons/hi";
+import Chat from "../Chat/Chat.jsx";
 
 const MainInfo = ({
     artist,
@@ -15,7 +16,7 @@ const MainInfo = ({
     handleInputChange,
     toggleEditMode,
 }) => {
-    const { user } = useContext(UserContext);
+    const { user, clickHandlerVisibility, isOpen} = useContext(UserContext);
     const { id } = useParams();
 
     const isOwner = user && user?._id === id;
@@ -185,9 +186,11 @@ const MainInfo = ({
                             <FontAwesomeIcon icon={faPenToSquare} size="3x" />
                         </button>
                     )}
-                    <button className="chat-button">Chat</button>
+                    <button className="chat-button" onClick={clickHandlerVisibility}>Chat</button>
                 </div>
+                
             </div>
+            {isOpen && <Chat />}
         </>
     );
 };
