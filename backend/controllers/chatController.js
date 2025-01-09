@@ -1,7 +1,6 @@
 // get user history
 
 import ChatModel from "../model/chat.js";
-import mongoose from "mongoose";
 
 export const getUserChatHistory = async (req, res) => {
   try {
@@ -30,42 +29,3 @@ export const getUserChatHistory = async (req, res) => {
   }
 };
 
-// messaging between users
-
-export const sendMessage = async (req, res) => {
-  try {
-    const { senderId, receiverId, content } = req.body;
-
-    // Validate inputs
-    if (!senderId || !receiverId || !content) {
-      return res
-        .status(400)
-        .json({ error: "senderId, receiverId, and mcontent are required." });
-    }
-
-    // Convert senderId and receiverId to ObjectId
-    const participants = [
-      new mongoose.Types.ObjectId(senderId),
-      new mongoose.Types.ObjectId(receiverId),
-    ];
-
-    // Create chat document
-    const chat = new ChatModel({
-      participants,
-      messages: [
-        {
-          sender: new mongoose.Types.ObjectId(senderId),
-          content: content, // Ensure the "content" field is provided
-        },
-      ],
-    });
-
-    await chat.save();
-    console.log(chat)
-
-    res.status(201).json(chat);
-  } catch (error) {
-    console.error("Error sending message:", error);
-    res.status(500).json({ error: error.message });
-  }
-};

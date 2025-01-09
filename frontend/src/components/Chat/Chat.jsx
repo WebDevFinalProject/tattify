@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
-import { fetchChatHistory, sendMessage } from "../../api-chat/chatApi";
+import { fetchChatHistory } from "../../api-chat/chatApi";
 import socket from "../../utils-io/socket";
 import { useParams } from "react-router-dom";
 import "./chat.css"
 
 const Chat = () => {
-  const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
+  const { user } = useContext(UserContext); 
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [hasNewMessage, setHasNewMessage] = useState(false); 
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Chat = () => {
     const loadChat = async () => {
       try {
         const history = await fetchChatHistory(user._id);
-
+        
         const combinedChats = [];
         history.forEach((chat) => {
           const existingChat = combinedChats.find(
@@ -52,28 +53,41 @@ const Chat = () => {
 
     loadChat();
 
+
     socket.on("receive_message", (message) => {
-      setChats((prev) =>
-        prev.map((chat) =>
+      setChats((prev) => {
+        const updatedChats = prev.map((chat) =>
           chat.participant._id === message.sender._id
             ? { ...chat, messages: [...chat.messages, message] }
             : chat
-        )
-      );
+        );
+
+        // Check if sender is in the current chat list
+        if (
+          !updatedChats.find(
+            (chat) => chat.participant._id === message.sender._id
+          )
+        ) {
+          updatedChats.push({
+            participant: message.sender,
+            messages: [message],
+          });
+        }
+
+        return updatedChats;
+      });
     });
 
     return () => {
       socket.off("receive_message");
     };
-  }, [user]);
+  }, [user, id]);
 
   const messageHandler = async () => {
     if (!newMessage.trim() || !currentChat) return;
-
     const receiverId = currentChat?.participant._id;
 
     try {
-      await sendMessage(user._id, receiverId, newMessage);
       socket.emit("send_message", {
         senderId: user._id,
         receiverId,
@@ -92,12 +106,14 @@ const Chat = () => {
   };
 
   const handleChatSelection = (chat) => {
+    const room = `${user._id}_${chat.participant._id}`;
+    socket.emit("join_room", room);
+
     setCurrentChat(chat);
   };
 
   return (
     <>
-      {isOpen && (
         <div className="chat-popup-window">
           <div className="chat-header">
             <h2>Chat</h2>
@@ -167,8 +183,7 @@ const Chat = () => {
             )}
           </div>
         </div>
-      )}
-    </>
+    </div>
   );
 };
 
