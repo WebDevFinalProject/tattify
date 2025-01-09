@@ -15,6 +15,7 @@ const useEditArtistProfile = () => {
     basePrice: user?.basePrice || "",
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
+    isAvailable: user?.isAvailable || false,
   });
 
   // Handle edit mode
@@ -26,6 +27,27 @@ const useEditArtistProfile = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+  // Toggle availability
+  const toggleAvailability = async () => {
+    try {
+      const updatedAvailability = !formData.isAvailable;
+      setFormData((prevData) => ({
+        ...prevData,
+        isAvailable: updatedAvailability,
+      }));
+
+      await api.put(`/api/artists/${id}`, {
+        isAvailable: updatedAvailability,
+      });
+
+      setUser((prevUser) => ({
+        ...prevUser,
+        isAvailable: updatedAvailability,
+      }));
+    } catch (error) {
+      console.error("Error toggling availability:", error);
+    }
   };
 
   // Save updated data to the backend
@@ -49,6 +71,7 @@ const useEditArtistProfile = () => {
     formData,
     handleInputChange,
     handleSave,
+    toggleAvailability,
   };
 };
 
