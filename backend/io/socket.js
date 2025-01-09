@@ -30,8 +30,11 @@ export const initializeSocket = (io) => {
 
       const room = `${senderId}_${receiverId}`;
       io.to(room).emit("receive_message", message);
+
+      // Emit chat_update to all clients (this will include the updated chat history)
+      io.emit("chat_update", message);
     });
-    
+
     socket.on("disconnect", () => {
       console.log("User disconnected:", socket.id);
     });
