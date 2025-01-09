@@ -74,7 +74,7 @@ function PublicProfile() {
         </>
       )}
 
-      {isOpen && <Chat />}
+{/*        {isOpen && <Chat />}  */}
       <Footer />
     </>
   );
