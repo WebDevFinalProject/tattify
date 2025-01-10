@@ -166,24 +166,42 @@ const Chat = () => {
             {currentChat && (
               <div className="chat-messages">
                 <h3>
-                  {currentChat.participant.firstName}{" "}
+                  <span>
+                    <img
+                      src={currentChat.participant.profileImage}
+                      alt="profile-image"
+                      className="profile-chat-image"
+                    />
+                  </span>
+                  {currentChat.participant.firstName}
                   {currentChat.participant.lastName}
                 </h3>
                 <div className="messages">
                   {currentChat.messages.map((msg, index) => (
-                    <div
-                      key={index}
-                      className={`message ${
-                        msg.sender._id === user._id ? "sent" : "received"
-                      }`}
-                    >
-                      <strong>
-                        {msg.sender._id === user._id
-                          ? "You:" // Display "You" if the logged-in user is the sender
-                          : `${msg.sender.firstName} ${msg.sender.lastName}:`}
-                      </strong>
-                      <span>{msg.content}</span>
-                    </div>
+                    <>
+                      {msg.sender._id !== user._id && (
+                        <div className="message-header">
+                          <img
+                            src={msg.sender.profileImage} // Assuming profileImage is the URL of the sender's image
+                            alt={`${msg.sender.firstName} ${msg.sender.lastName}`}
+                            className="profile-pic"
+                          />
+                        </div>
+                      )}
+                      <div
+                        key={index}
+                        className={`message ${
+                          msg.sender._id === user._id ? "sent" : "received"
+                        }`}
+                      >
+                        <strong>
+                          {msg.sender._id === user._id
+                            ? "You:" // Display "You" if the logged-in user is the sender
+                            : ` ${msg.sender.firstName} ${msg.sender.lastName}:`}
+                        </strong>
+                        <span>{msg.content}</span>
+                      </div>
+                    </>
                   ))}
                 </div>
 
