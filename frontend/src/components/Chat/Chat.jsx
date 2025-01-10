@@ -10,7 +10,6 @@ const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
-  const [hasNewMessage, setHasNewMessage] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -39,7 +38,10 @@ const Chat = () => {
           const chat = combinedChats.find(
             (chat) => chat.participant._id === id
           );
-          if (!chat) {
+          if (chat) {
+            setCurrentChat(chat);
+          } else {
+            // If no chat exists, start a new conversation
             setCurrentChat({
               participant: { _id: id },
               messages: [],
@@ -61,7 +63,6 @@ const Chat = () => {
             : chat
         );
 
-        // Check if sender is in the current chat list
         if (
           !updatedChats.find(
             (chat) => chat.participant._id === message.sender._id
@@ -84,7 +85,7 @@ const Chat = () => {
 
   const messageHandler = async () => {
     if (!newMessage.trim() || !currentChat) return;
-    const receiverId = currentChat?.participant._id;
+    const receiverId = currentChat.participant._id;
 
     try {
       socket.emit("send_message", {
@@ -104,11 +105,26 @@ const Chat = () => {
     }
   };
 
-  const handleChatSelection = (chat) => {
+  const handleChatSelection = async (chat) => {
+    setCurrentChat(chat);
+
+    // Emit socket join for chat room
     const room = `${user._id}_${chat.participant._id}`;
     socket.emit("join_room", room);
 
-    setCurrentChat(chat);
+    // Fetch chat history again if needed
+    const history = await fetchChatHistory(user._id);
+    const selectedChatHistory = history.find(
+      (chatHistory) => chatHistory.participant._id === chat.participant._id
+    );
+    if (selectedChatHistory) {
+      setCurrentChat(selectedChatHistory);
+    } else {
+      setCurrentChat({
+        participant: chat.participant,
+        messages: [],
+      });
+    }
   };
 
   return (
@@ -122,29 +138,29 @@ const Chat = () => {
             </button>
           </div>
 
-      <div className="chat-content">
-        {/* Chat List */}
-        <div className="chat-list">
-          {chats.length > 0 ? (
-            chats.map((chat) => (
-              <div
-                key={chat.participant._id}
-                onClick={() => handleChatSelection(chat)}
-                className={`chat-item ${
-                  currentChat?.participant._id === chat.participant._id
-                    ? "active"
-                    : ""
-                }`}
-              >
-                <span>
-                  {chat.participant.firstName} {chat.participant.lastName}
-                </span>
-              </div>
-            ))
-          ) : (
-            <p>No chat history available</p>
-          )}
-        </div>
+          <div className="chat-content">
+            {/* Chat List */}
+            <div className="chat-list">
+              {chats.length > 0 ? (
+                chats.map((chat) => (
+                  <div
+                    key={chat.participant._id}
+                    onClick={() => handleChatSelection(chat)}
+                    className={`chat-item ${
+                      currentChat?.participant._id === chat.participant._id
+                        ? "active"
+                        : ""
+                    }`}
+                  >
+                    <span>
+                      {chat.participant.firstName} {chat.participant.lastName}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p>No chat history available</p>
+              )}
+            </div>
 
             {/* Current Chat */}
             {currentChat && (
