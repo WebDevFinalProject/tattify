@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { fetchChatHistory } from "../../api-chat/chatApi";
 import socket from "../../utils-io/socket";
@@ -11,6 +11,7 @@ const Chat = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const { id } = useParams();
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     if (!user) return;
@@ -64,7 +65,7 @@ const Chat = () => {
         );
 
         if (
-          !updatedChats.find(
+          !updatedChats.some(
             (chat) => chat.participant._id === message.sender._id
           )
         ) {
@@ -82,6 +83,12 @@ const Chat = () => {
       socket.off("receive_message");
     };
   }, [user, id]);
+
+  useEffect(() => {
+    if (currentChat) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [currentChat?.messages]);
 
   const messageHandler = async () => {
     if (!newMessage.trim() || !currentChat) return;
@@ -173,13 +180,20 @@ const Chat = () => {
               <div className="chat-messages">
                 <h3>
                   <span>
-                    <img
-                      src={currentChat.participant.profileImage}
-                      alt="profile-image"
-                      className="profile-chat-image"
-                    />
+                    {currentChat.participant.profileImage ? (
+                      <img
+                        src={currentChat.participant.profileImage}
+                        alt={`${
+                          currentChat.participant.firstName || "Participant"
+                        } ${currentChat.participant.lastName || ""}`}
+                        className="profile-chat-image"
+                      />
+                    ) : null}
                   </span>
-                  {`${currentChat.participant.firstName} ${currentChat.participant.lastName}    `}
+                  {currentChat.participant.firstName ||
+                  currentChat.participant.lastName
+                    ? ` ${currentChat.participant.firstName} ${currentChat.participant.lastName}`
+                    : "Start a conversation"}
                 </h3>
                 <div className="messages">
                   {currentChat.messages.map((msg, index) => (
@@ -208,6 +222,7 @@ const Chat = () => {
                       </div>
                     </>
                   ))}
+                  <div ref={messagesEndRef} />
                 </div>
 
                 <div className="message-input">
@@ -216,7 +231,7 @@ const Chat = () => {
                     // onChange={(e) => setNewMessage(e.target.value)}
                     onChange={changeHandler}
                     placeholder="Type a message..."
-                    rows='1'
+                    rows="1"
                   />
                   <button onClick={messageHandler}>Send</button>
                 </div>
