@@ -127,6 +127,12 @@ const Chat = () => {
     }
   };
 
+  const changeHandler = (e) => {
+    setNewMessage(e.target.value);
+    e.target.style.height = "auto";
+    e.target.style.height = `${Math.min(e.target.scrollHeight, 100)}px`;
+  };
+
   return (
     <>
       {isOpen && (
@@ -173,8 +179,7 @@ const Chat = () => {
                       className="profile-chat-image"
                     />
                   </span>
-                  {currentChat.participant.firstName}
-                  {currentChat.participant.lastName}
+                  {`${currentChat.participant.firstName} ${currentChat.participant.lastName}    `}
                 </h3>
                 <div className="messages">
                   {currentChat.messages.map((msg, index) => (
@@ -206,10 +211,12 @@ const Chat = () => {
                 </div>
 
                 <div className="message-input">
-                  <input
+                  <textarea
                     value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
+                    // onChange={(e) => setNewMessage(e.target.value)}
+                    onChange={changeHandler}
                     placeholder="Type a message..."
+                    rows='1'
                   />
                   <button onClick={messageHandler}>Send</button>
                 </div>

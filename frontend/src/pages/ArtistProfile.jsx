@@ -17,7 +17,7 @@ function PublicProfile() {
   //import fetched data from database
   const { artist, loading } = useArtistData();
   const { user, clickHandlerVisibility, isOpen } = useContext(UserContext);
-  
+
   // import editing logic from custom hook
   const {
     isEditing,
@@ -67,14 +67,6 @@ function PublicProfile() {
           <Reviews artist={artist} />
         </div>
       </Wrapper>
-
-      {user  && (
-        <>
-          <HiChat size={30} onClick={clickHandlerVisibility} />
-        </>
-      )}
-
-{/*        {isOpen && <Chat />}  */}
       <Footer />
     </>
   );
