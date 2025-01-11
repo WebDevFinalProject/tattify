@@ -4,85 +4,14 @@ import { fetchChatHistory } from "../../api-chat/chatApi";
 import socket from "../../utils-io/socket";
 import { useParams } from "react-router-dom";
 import "./chat.css";
+import useChat from "../../hooks/chatCustomHook/useChat";
 
 const Chat = () => {
   const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
-  const [chats, setChats] = useState([]);
-  const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const { id } = useParams();
   const messagesEndRef = useRef(null);
-
-  useEffect(() => {
-    if (!user) return;
-
-    const loadChat = async () => {
-      try {
-        const history = await fetchChatHistory(user._id);
-
-        const combinedChats = [];
-        history.forEach((chat) => {
-          const existingChat = combinedChats.find(
-            (c) => c.participant._id === chat.participant._id
-          );
-          if (!existingChat) {
-            combinedChats.push({
-              participant: chat.participant,
-              messages: chat.messages,
-            });
-          }
-        });
-
-        setChats(combinedChats);
-
-        if (id) {
-          const chat = combinedChats.find(
-            (chat) => chat.participant._id === id
-          );
-          if (chat) {
-            setCurrentChat(chat);
-          } else {
-            // If no chat exists, start a new conversation
-            setCurrentChat({
-              participant: { _id: id },
-              messages: [],
-            });
-          }
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    loadChat();
-
-    socket.on("receive_message", (message) => {
-      setChats((prev) => {
-        const updatedChats = prev.map((chat) =>
-          chat.participant._id === message.sender._id
-            ? { ...chat, messages: [...chat.messages, message] }
-            : chat
-        );
-
-        if (
-          !updatedChats.some(
-            (chat) => chat.participant._id === message.sender._id
-          )
-        ) {
-          updatedChats.push({
-            participant: message.sender,
-            messages: [message],
-          });
-        }
-
-        return updatedChats;
-      });
-    });
-
-    return () => {
-      socket.off("receive_message");
-    };
-  }, [user, id]);
+  const { chats, currentChat, setCurrentChat } = useChat();
 
   useEffect(() => {
     if (currentChat) {
@@ -138,6 +67,19 @@ const Chat = () => {
     setNewMessage(e.target.value);
     e.target.style.height = "auto";
     e.target.style.height = `${Math.min(e.target.scrollHeight, 100)}px`;
+  };
+
+  const renderMessageContent = (content) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return content.split(urlRegex).map((part, index) =>
+      urlRegex.test(part) ? (
+        <a key={index} href={part} target="_blank" rel="noopener noreferrer">
+          {part}
+        </a>
+      ) : (
+        part
+      )
+    );
   };
 
   return (
@@ -218,7 +160,7 @@ const Chat = () => {
                             ? "You:" // Display "You" if the logged-in user is the sender
                             : ` ${msg.sender.firstName} ${msg.sender.lastName}:`}
                         </strong>
-                        <span>{msg.content}</span>
+                        <span>{renderMessageContent(msg.content)}</span>
                       </div>
                     </>
                   ))}
