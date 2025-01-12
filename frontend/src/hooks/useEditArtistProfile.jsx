@@ -4,53 +4,65 @@ import api from "../components/api";
 import { useParams } from "react-router-dom";
 
 const useEditArtistProfile = () => {
-  const [isEditing, setIsEditing] = useState(false); // Edit mode state
-  const { id } = useParams();
-  const { user, setUser } = useContext(UserContext); // Access user from Context
-  const [formData, setFormData] = useState({
-    bio: user?.bio || "",
-    specialties: user?.specialties || [],
-    city: user?.city || "",
-    country: user?.country || "",
-    basePrice: user?.basePrice || "",
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
-            languages: user?.languages || "",
+    const [isEditing, setIsEditing] = useState(false); // Edit mode state
+    const { id } = useParams();
+    const { user, setUser } = useContext(UserContext); // Access user from Context
+    const [formData, setFormData] = useState({
+        bio: user?.bio || "",
+        specialties: user?.specialties || [],
+        city: user?.city || "",
+        country: user?.country || "",
+        basePrice: user?.basePrice || "",
+        firstName: user?.firstName || "",
+        lastName: user?.lastName || "",
+        languagesSpoken: user?.languagesSpoken || [],
         experience: user?.experience || "",
-    isAvailable: user?.isAvailable || false,
-  });
+        isAvailable: user?.isAvailable || false,
+    });
 
     // Handle edit mode
     const toggleEditMode = () => {
         setIsEditing(!isEditing);
     };
 
-  // Handle input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-  // Toggle availability
-  const toggleAvailability = async () => {
-    try {
-      const updatedAvailability = !formData.isAvailable;
-      setFormData((prevData) => ({
-        ...prevData,
-        isAvailable: updatedAvailability,
-      }));
+    // Handle input changes
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    // };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name === "specialties" || name === "languagesSpoken") {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value.split(",").map((item) => item.trim()),
+            }));
+        } else {
+            setFormData((prevData) => ({ ...prevData, [name]: value }));
+        }
+    };
 
-      await api.put(`/api/artists/${id}`, {
-        isAvailable: updatedAvailability,
-      });
+    // Toggle availability
+    const toggleAvailability = async () => {
+        try {
+            const updatedAvailability = !formData.isAvailable;
+            setFormData((prevData) => ({
+                ...prevData,
+                isAvailable: updatedAvailability,
+            }));
 
-      setUser((prevUser) => ({
-        ...prevUser,
-        isAvailable: updatedAvailability,
-      }));
-    } catch (error) {
-      console.error("Error toggling availability:", error);
-    }
-  };
+            await api.put(`/api/artists/${id}`, {
+                isAvailable: updatedAvailability,
+            });
+
+            setUser((prevUser) => ({
+                ...prevUser,
+                isAvailable: updatedAvailability,
+            }));
+        } catch (error) {
+            console.error("Error toggling availability:", error);
+        }
+    };
 
     // Save updated data to the backend
     const handleSave = async (e) => {
@@ -66,15 +78,16 @@ const useEditArtistProfile = () => {
         }
     };
 
-  return {
-    isEditing,
-    setIsEditing,
-    toggleEditMode,
-    formData,
-    handleInputChange,
-    handleSave,
-    toggleAvailability,
-  };
+    return {
+        isEditing,
+        setIsEditing,
+        toggleEditMode,
+        formData,
+        setFormData,
+        handleInputChange,
+        handleSave,
+        toggleAvailability,
+    };
 };
 
 export default useEditArtistProfile;
