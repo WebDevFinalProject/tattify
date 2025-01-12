@@ -74,11 +74,16 @@ export const PortfolioContainer = styled.div`
   margin-bottom: 4rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
-  justify-content: center;
+  gap: 2rem;
 
   .portfolio-image-box {
     position: relative;
+    flex: 1 1 calc(33.333% - 1.2rem); /* Default: 3 items per row */
+    max-width: calc(33.333% - 2rem);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover .delete-button {
       opacity: 1;
@@ -88,23 +93,45 @@ export const PortfolioContainer = styled.div`
       position: absolute;
       bottom: 0;
       right: 0px;
-      width: 2.4rem;
-      height: 2.4rem;
-      border: 2px solid grey;
+      width: 3rem;
+      height: 3rem;
+      border: none;
       border-radius: 0.3rem;
-      background-color: white;
+      background-color: rgba(0, 0, 0, 0.43);
+      color: white;
       opacity: 0;
       transition: 0.7s ease;
+      font-size: 2rem;
 
       svg {
         transform: scale(1.3);
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.95);
+        color: grey;
       }
     }
   }
 
   img {
-    max-width: 25rem;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (min-width: 481px) and (max-width: 1024px) {
+    .portfolio-image-box {
+      flex: 1 1 calc(50% - 1.2rem); /* 2 items per row on medium screens */
+      max-width: calc(50% - 1.2rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .portfolio-image-box {
+      flex: 1 1 100%; /* 1 item per row on small screens */
+      max-width: 80%;
+      margin: auto;
+    }
   }
 
   .modal {

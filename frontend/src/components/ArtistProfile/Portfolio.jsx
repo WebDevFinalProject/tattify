@@ -15,10 +15,10 @@ import "swiper/css/pagination";
 import useStopScroll from "../../hooks/useStopScroll";
 
 function Portfolio({ artist }) {
+  const { user} = useContext(UserContext);
+  const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { deleteImageHandler } = useImageDelete();
-  const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
-  const { id } = useParams();
   const [openImg, setOpenImg] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 

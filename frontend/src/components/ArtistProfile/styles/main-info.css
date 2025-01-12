@@ -1,309 +1,302 @@
 .artist-profile-main-info-container {
-    padding       : 7rem 5rem 5rem 5rem;
-    display       : flex;
+  padding: 7rem 5rem 5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+
+  div {
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    align-items   : center;
-    width         : 100%;
-    position      : relative;
+    align-items: center;
 
-    div {
-        width         : 100%;
-        display       : flex;
-        flex-direction: column;
-        align-items   : center;
+    h2 {
+      font-family: "Lora", serif;
+      font-weight: 900;
+      font-size: 2.9rem;
+    }
 
-        h2 {
-            font-family: "Lora", serif;
-            font-weight: 900;
-            font-size  : 2.9rem;
-        }
+    p {
+      font-family: "Antic", sans-serif;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #a24435;
 
-        p {
-            font-family: "Antic", sans-serif;
-            font-size  : 2rem;
+      .location-marker {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    /* EDIT PROFILE FORM STYLING */
+    .overlay {
+      display: flex;
+      justify-content: center !important;
+      align-items: center !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.603);
+      z-index: 1000;
+
+      .edit-artist-profile-form-container {
+        display: flex;
+        align-items: center;
+        max-width: 50rem;
+        border-radius: 10px;
+        padding: 3rem;
+        background-color: #e1d6cc;
+        box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.425);
+        margin-bottom: 15rem;
+        overflow: scroll;
+
+        form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          /* align-items   : start; */
+          font-family: "Antic", sans-serif;
+          font-size: 1.8rem;
+
+          div {
+            padding: 0;
+            align-items: start;
+          }
+
+          .paired-inputs {
+            display: flex;
+            flex-direction: row;
+
+            > :nth-child(1) {
+              padding-right: 3rem;
+            }
+          }
+
+          label {
+            /* font-size    : 1.6rem; */
+            margin-top: 3rem;
+            margin-bottom: 0.5rem;
+            margin-left: 0.3rem;
+            letter-spacing: 1px;
             font-weight: bold;
-            color      : #a24435;
+          }
 
-        }
+          input {
+            display: block;
+            width: 100%;
+            height: 3.5rem;
+            border: none;
+            border-bottom: 2px solid black;
+            padding-left: 1rem;
+            /* font-size   : 1.6rem; */
 
-        /* EDIT PROFILE FORM STYLING */
-        .overlay {
-            display         : flex;
-            justify-content : center !important;
-            align-items     : center !important;
-            position        : fixed;
-            top             : 0;
-            left            : 0;
-            width           : 100%;
-            height          : 100%;
-            background-color: rgba(0, 0, 0, 0.603);
-            z-index         : 1000;
-
-            .edit-artist-profile-form-container {
-                display         : flex;
-                align-items     : center;
-                max-width       : 50rem;
-                border-radius   : 10px;
-                padding         : 3rem;
-                background-color: #e1d6cc;
-                box-shadow      : -2px -2px 15px rgba(0, 0, 0, 0.425);
-                margin-bottom   : 15rem;
-                overflow        : scroll;
-
-
-                form {
-                    width            : 100%;
-                    display          : flex;
-                    flex-direction   : column;
-                    /* align-items   : start; */
-                    font-family      : "Antic",
-                        sans-serif;
-                    font-size: 1.8rem;
-
-                    div {
-                        padding    : 0;
-                        align-items: start;
-                    }
-
-                    .paired-inputs {
-                        display       : flex;
-                        flex-direction: row;
-
-                        >:nth-child(1) {
-                            padding-right: 3rem;
-                        }
-                    }
-
-                    label {
-                        /* font-size    : 1.6rem; */
-                        margin-top    : 3rem;
-                        margin-bottom : 0.5rem;
-                        margin-left   : 0.3rem;
-                        letter-spacing: 1px;
-                        font-weight   : bold;
-                    }
-
-                    input {
-                        display        : block;
-                        width          : 100%;
-                        height         : 3.5rem;
-                        border         : none;
-                        border-bottom  : 2px solid black;
-                        padding-left   : 1rem;
-                        /* font-size   : 1.6rem; */
-
-                        &&::placeholder {
-                            font-size: 1.6rem;
-                        }
-                    }
-
-                    textarea {
-                        width        : 100%;
-                        font-size    : 1.6rem;
-                        border       : none;
-                        border-bottom: 2px solid black;
-                        padding-left : 1rem;
-
-                        &&::placeholder {
-                            font-size: 1.6rem;
-                        }
-                    }
-
-                    .button-container {
-                        display        : flex;
-                        justify-content: space-around;
-                        flex-direction : row;
-
-                        button {
-                            border        : none;
-                            border-radius : 30px;
-                            height        : 4rem;
-                            width         : 14rem;
-                            margin-top    : 2rem;
-                            padding-bottom: 0.2rem;
-                            padding-top   : 2px;
-                            cursor        : pointer;
-                            font-family   : Verdana,
-                                Geneva,
-                                Tahoma,
-                                sans-serif;
-                            color         : whitesmoke;
-                            font-size     : 1.5rem;
-                            text-transform: uppercase;
-                        }
-
-                        >:nth-child(1) {
-                            background-color: #830707;
-                            margin-bottom   : 0px;
-
-                        }
-
-                        >:nth-child(2) {
-                            background-color: grey;
-                        }
-                    }
-                }
+            &&::placeholder {
+              font-size: 1.6rem;
             }
-        }
-    }
+          }
 
-    .star-button-phone {
-        background-color: transparent;
-        border          : none;
-        position        : absolute;
-        top             : 5%;
-        right           : -1.2rem;
-        transform       : scale(3);
-        cursor          : pointer;
-        color           : black;
+          textarea {
+            width: 100%;
+            font-size: 1.6rem;
+            border: none;
+            border-bottom: 2px solid black;
+            padding-left: 1rem;
 
-        &&:hover {
-            background-color: transparent;
-        }
-    }
-
-    .button-container {
-        .chat-button {
-            background-color: #830707;
-            border          : none;
-            border-radius   : 30px;
-            height          : 4rem;
-            width           : 14rem;
-            margin-top      : 2rem;
-            padding-bottom  : 0.2rem;
-            padding-top     : 2px;
-            cursor          : pointer;
-            font-family     : Verdana, Geneva, Tahoma, sans-serif;
-            color           : whitesmoke;
-            font-size       : 1.5rem;
-            text-transform  : uppercase;
-            flex            : 0 0 auto;
-            transition      : 0.3s ease;
-
-            &&:hover {
-                background-color: #b31b1b;
+            &&::placeholder {
+              font-size: 1.6rem;
             }
-        }
+          }
 
-        .star-button-desktop {
-            display: none;
-        }
+          .button-container {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
 
-        .edit-button-desktop {
-            margin-top      : 1.8rem;
-            width           : 4rem;
-            height          : 4rem;
-            display         : block;
-            border          : none;
-            background-color: transparent;
-            color           : black;
+            button {
+              border: none;
+              border-radius: 30px;
+              height: 4rem;
+              width: 14rem;
+              margin-top: 2rem;
+              padding-bottom: 0.2rem;
+              padding-top: 2px;
+              cursor: pointer;
+              font-family: Verdana, Geneva, Tahoma, sans-serif;
+              color: whitesmoke;
+              font-size: 1.5rem;
+              text-transform: uppercase;
+            }
+
+            > :nth-child(1) {
+              background-color: #830707;
+              margin-bottom: 0px;
+            }
+
+            > :nth-child(2) {
+              background-color: grey;
+            }
+          }
         }
+      }
+    }
+  }
+
+  .star-button-phone {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 5%;
+    right: -1.2rem;
+    transform: scale(3);
+    cursor: pointer;
+    color: black;
+
+    &&:hover {
+      background-color: transparent;
+    }
+  }
+
+  .button-container {
+    .chat-button {
+      background-color: #830707;
+      border: none;
+      border-radius: 30px;
+      height: 4rem;
+      width: 14rem;
+      margin-top: 2rem;
+      padding-bottom: 0.2rem;
+      padding-top: 2px;
+      cursor: pointer;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: whitesmoke;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      flex: 0 0 auto;
+      transition: 0.3s ease;
+
+      &&:hover {
+        background-color: #b31b1b;
+      }
     }
 
-    img {
-        width        : 23rem;
-        border       : 0.7rem solid white;
-        border-radius: 50%;
+    .star-button-desktop {
+      display: none;
     }
+
+    .edit-button-desktop {
+      margin-top: 1.8rem;
+      width: 4rem;
+      height: 4rem;
+      display: block;
+      border: none;
+      background-color: transparent;
+      color: black;
+    }
+  }
+
+  img {
+    width: 23rem;
+    border: 0.7rem solid white;
+    border-radius: 50%;
+  }
 }
 
 @media (min-width: 768px) {
-    .artist-profile-main-info-container {
-
-        .overlay .edit-artist-profile-form-container {
-            overflow: visible !important;
-        }
-
-        .chat-button {
-            margin-top: 16rem;
-
-        }
-
-        .button-container {
-            display        : flex;
-            flex-direction : row;
-            justify-content: end;
-            gap            : 1rem;
-
-            .star-button-desktop {
-                margin-top      : 1.8rem;
-                width           : 4rem;
-                height          : 4rem;
-                display         : block;
-                border          : none;
-                background-color: transparent;
-                color           : black;
-
-                &&:hover {
-                    background-color: transparent;
-                }
-            }
-        }
-
-        .star-button-phone {
-            display: none;
-        }
-
-
+  .artist-profile-main-info-container {
+    .overlay .edit-artist-profile-form-container {
+      overflow: visible !important;
     }
+
+    .chat-button {
+      margin-top: 16rem;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      gap: 1rem;
+
+      .star-button-desktop {
+        margin-top: 1.8rem;
+        width: 4rem;
+        height: 4rem;
+        display: block;
+        border: none;
+        background-color: transparent;
+        color: black;
+
+        &&:hover {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .star-button-phone {
+      display: none;
+    }
+  }
 }
 
 .availability-slider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px; /* Adds spacing below the input fields */
-  }
-  
-  /* Switch */
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-  }
-  
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 34px;
-    z-index: 10;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-  }
-  
-  input:checked + .slider {
-    background-color: #4caf50;
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(18px);
-  }
-  
-  /* Availability Label */
-  .availability-label {
-    font-size: 0.9rem;
-    color: #555;
-  } 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px; /* Adds spacing below the input fields */
+}
+
+/* Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+  z-index: 10;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+/* Availability Label */
+.availability-label {
+  font-size: 0.9rem;
+  color: #555;
+}

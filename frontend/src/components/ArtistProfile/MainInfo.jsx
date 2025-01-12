@@ -146,10 +146,7 @@ const MainInfo = ({ artist }) => {
                   </div>
                   <div className="button-container">
                     <button type="submit">Submit</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditing(false)}
-                    >
+                    <button type="button" onClick={() => setIsEditing(false)}>
                       Cancel
                     </button>
                   </div>
@@ -163,7 +160,7 @@ const MainInfo = ({ artist }) => {
             {capitalizeFirstLetter(artist.lastName)}
           </h2>
           <p>
-            <HiLocationMarker size={15} /> {artist.city},{" "}
+            <HiLocationMarker size={17} className="location-marker"/> {artist.city},{" "}
             {capitalizeFirstLetter(artist.country)}
           </p>
         </div>
@@ -173,22 +170,16 @@ const MainInfo = ({ artist }) => {
             <FontAwesomeIcon icon={faStar} size="3x" />
           </button>
           {isOwner && !isEditing && (
-            <button
-              className="edit-button-desktop"
-              onClick={toggleEditMode}
-            >
+            <button className="edit-button-desktop" onClick={toggleEditMode}>
               <FontAwesomeIcon icon={faPenToSquare} size="3x" />
             </button>
           )}
-          <button
-            className="chat-button"
-            onClick={clickHandlerVisibility}
-          >
+          <button className="chat-button" onClick={clickHandlerVisibility}>
             Chat
           </button>
-          
+
           {/* Availability Slider */}
-       <div className="availability-slider">
+          {/*  <div className="availability-slider">
             <label className="switch">
               <input
                 type="checkbox"
@@ -200,7 +191,7 @@ const MainInfo = ({ artist }) => {
             <span className="availability-label">
               {formData.isAvailable ? "Profile Active" : "Profile Inactive"}
             </span>
-          </div> 
+          </div>  */}
         </div>
       </div>
       {isOpen && user && <Chat />}
