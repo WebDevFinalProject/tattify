@@ -15,6 +15,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  height: 90vh;
 
   .hero-text-container {
     display: flex;
@@ -29,10 +30,9 @@
       font-size: 14.5rem;
       text-shadow: 4px 4px 6px rgba(66, 68, 90, 0.445);
       padding-top: 2rem;
-      position   : relative;
-      z-index    : 200;
+      position: relative;
+      z-index: 200;
       padding-top: 2rem;
-      
     }
 
     p {

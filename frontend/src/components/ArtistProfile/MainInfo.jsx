@@ -205,23 +205,24 @@ const MainInfo = ({ artist }) => {
                     >
                         Chat
                     </button>
-                    {isOpen && <Chat />}
+                    
                     {/* Availability Slider */}
                     {/* <div className="availability-slider">
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={formData.isAvailable}
-                onChange={toggleAvailability}
-              />
-              <span className="slider round"></span>
-            </label>
-            <span className="availability-label">
-              {formData.isAvailable ? "Profile Active" : "Profile Inactive"}
-            </span>
-          </div> */}
+                    <label className="switch">
+                        <input
+                            type="checkbox"
+                            checked={formData.isAvailable}
+                            onChange={toggleAvailability}
+                        />
+                        <span className="slider round"></span>
+                    </label>
+                    <span className="availability-label">
+                        {formData.isAvailable ? "Profile Active" : "Profile Inactive"}
+                    </span>
+                    </div> */}
                 </div>
             </div>
+            {isOpen && user && <Chat />}
         </>
     );
 };

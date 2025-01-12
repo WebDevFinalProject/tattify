@@ -116,7 +116,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: auto;
   padding: 5rem 0;
   gap: 3rem;
 }
