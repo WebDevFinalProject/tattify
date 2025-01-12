@@ -60,3 +60,9 @@
 .search-bar {
   text-align: center;
 }
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}

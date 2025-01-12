@@ -4,6 +4,7 @@ import useSubmitReview from "../../hooks/useReviewHook/useSubmitReview";
 import "./styles/review.css";
 import { H2 } from "./styles/StyledComponents";
 import { ImCross } from "react-icons/im";
+import useStopScroll from "../../hooks/useStopScroll";
 
 const StarRating = ({ rating, onStarClick, size = 30 }) => (
   <div className="stars" style={{ fontSize: `${size}px` }}>
@@ -31,6 +32,7 @@ const Reviews = ({ artist }) => {
 
   // Pagination state
   const [visibleReviews, setVisibleReviews] = useState(3);
+  useStopScroll(showForm);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

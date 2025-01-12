@@ -7,7 +7,9 @@ import { useParams } from "react-router";
 import { HiLocationMarker } from "react-icons/hi";
 import useEditArtistProfile from "../../hooks/useEditArtistProfile";
 import Chat from "../Chat/Chat.jsx";
+import useStopScroll from "../../hooks/useStopScroll.jsx";
 import { useEffect } from "react";
+
 
 const MainInfo = ({ artist }) => {
     const { user, clickHandlerVisibility, isOpen } = useContext(UserContext);
@@ -24,13 +26,16 @@ const MainInfo = ({ artist }) => {
         handleSave,
     } = useEditArtistProfile();
 
-    const isOwner = user && user?._id === id;
+  const isOwner = user && user?._id === id;
+  useStopScroll(isEditing);
+
+
 
     // Capitalizing the first letter of words
     const capitalizeFirstLetter = (str) => {
         return str.replace(/\b\w/g, (char) => char.toUpperCase());
     };
-
+  
     // Accessing and displaying data in edit data form
     useEffect(() => {
         if (user && isOwner) {
@@ -175,56 +180,51 @@ const MainInfo = ({ artist }) => {
                                 </form>
                             </div>
                         </div>
-                    )}
+ 
+          )}
 
-                    <h2>
-                        {capitalizeFirstLetter(artist.firstName)}{" "}
-                        {capitalizeFirstLetter(artist.lastName)}
-                    </h2>
-                    <p>
-                        <HiLocationMarker size={15} /> {artist.city},{" "}
-                        {capitalizeFirstLetter(artist.country)}
-                    </p>
-                </div>
-                {/* Buttons for desktop */}
-                <div className="button-container">
-                    <button className="star-button-desktop">
-                        <FontAwesomeIcon icon={faStar} size="3x" />
-                    </button>
-                    {isOwner && !isEditing && (
-                        <button
-                            className="edit-button-desktop"
-                            onClick={toggleEditMode}
-                        >
-                            <FontAwesomeIcon icon={faPenToSquare} size="3x" />
-                        </button>
-                    )}
-                    <button
-                        className="chat-button"
-                        onClick={clickHandlerVisibility}
-                    >
-                        Chat
-                    </button>
-                    
-                    {/* Availability Slider */}
-                    {/* <div className="availability-slider">
-                    <label className="switch">
-                        <input
-                            type="checkbox"
-                            checked={formData.isAvailable}
-                            onChange={toggleAvailability}
-                        />
-                        <span className="slider round"></span>
-                    </label>
-                    <span className="availability-label">
-                        {formData.isAvailable ? "Profile Active" : "Profile Inactive"}
-                    </span>
-                    </div> */}
-                </div>
-            </div>
-            {isOpen && user && <Chat />}
-        </>
-    );
+          <h2>
+            {capitalizeFirstLetter(artist.firstName)}{" "}
+            {capitalizeFirstLetter(artist.lastName)}
+          </h2>
+          <p>
+            <HiLocationMarker size={17} className="location-marker" />{" "}
+            {artist.city}, {capitalizeFirstLetter(artist.country)}
+          </p>
+        </div>
+        {/* Buttons for desktop */}
+        <div className="button-container">
+          <button className="star-button-desktop">
+            <FontAwesomeIcon icon={faStar} size="3x" />
+          </button>
+          {isOwner && !isEditing && (
+            <button className="edit-button-desktop" onClick={toggleEditMode}>
+              <FontAwesomeIcon icon={faPenToSquare} size="3x" />
+            </button>
+          )}
+          <button className="chat-button" onClick={clickHandlerVisibility}>
+            Chat
+          </button>
+
+          {/* Availability Slider */}
+          {/*  <div className="availability-slider">
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={formData.isAvailable}
+                onChange={toggleAvailability}
+              />
+              <span className="slider round"></span>
+            </label>
+            <span className="availability-label">
+              {formData.isAvailable ? "Profile Active" : "Profile Inactive"}
+            </span>
+          </div>  */}
+        </div>
+      </div>
+      {isOpen && user && <Chat />}
+    </>
+  );
 };
 
 export default MainInfo;

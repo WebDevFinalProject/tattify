@@ -8,6 +8,7 @@ import { FaCamera } from "react-icons/fa";
 import DropdownNav from "./Navigation/DropdownNav";
 import ProfileImageUpload from "./uploading/ProfileImageUpload";
 import useLocationFinder from "../hooks/useLocationFinder";
+import useStopScroll from "../hooks/useStopScroll";
 
 function NavBar() {
   useLocationFinder();
@@ -27,6 +28,8 @@ function NavBar() {
   const handleProfileImageSuccess = async () => {
     toggleUploadDialog();
   };
+
+  useStopScroll(isUploadDialogOpen);
 
   return (
     <>

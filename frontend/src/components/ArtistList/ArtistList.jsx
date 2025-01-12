@@ -161,7 +161,7 @@ const ArtistList = () => {
         </div>
 
         {/* Pagination */}
-        <div className="pagination-controls text-center pt-3 pb-5 fs-3">
+        <div className="pagination-controls pt-3 pb-5 fs-3">
           <button
             className="btn btn-light fs-3"
             onClick={() => setPage(page > 1 ? page - 1 : 1)}

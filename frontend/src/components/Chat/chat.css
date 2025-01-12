@@ -5,7 +5,7 @@
   position: fixed;
   bottom: 50px;
   right: 15px;
-  z-index: 1000;
+  z-index: 998;
   width: 80px;
   height: 80px;
   padding: 10px;
@@ -28,7 +28,7 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  z-index: 100000;
+  z-index: 999;
   font-family: Arial, sans-serif;
   animation: chat-effect ease forwards 0.3s;
 }
@@ -146,12 +146,14 @@
   padding: 8px 12px;
   border-radius: 10px;
   word-wrap: break-word;
+  font-size: 1.2rem;
 }
 
 .message.sent {
   color: black;
   margin-left: auto;
   background-color: #dbd6d6;
+  border-radius: 10px 15px 0px 15px;
 }
 
 .message.received {
@@ -160,6 +162,7 @@
   margin-right: auto;
   position: relative;
   left: 25px;
+  border-radius: 0px 15px 10px 15px;
 }
 
 .message-input {
