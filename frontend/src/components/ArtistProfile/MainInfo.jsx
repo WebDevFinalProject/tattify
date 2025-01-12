@@ -7,6 +7,7 @@ import { useParams } from "react-router";
 import { HiLocationMarker } from "react-icons/hi";
 import useEditArtistProfile from "../../hooks/useEditArtistProfile";
 import Chat from "../Chat/Chat.jsx";
+import useStopScroll from "../../hooks/useStopScroll.jsx";
 
 const MainInfo = ({ artist }) => {
   const { user, clickHandlerVisibility, isOpen } = useContext(UserContext);
@@ -23,6 +24,7 @@ const MainInfo = ({ artist }) => {
   } = useEditArtistProfile();
 
   const isOwner = user && user?._id === id;
+  useStopScroll(isEditing);
 
   // Capitalizing the first letter of words
   const capitalizeFirstLetter = (str) => {
@@ -42,7 +44,7 @@ const MainInfo = ({ artist }) => {
         {/* Editable fields for name, city, country */}
         <div>
           {isOwner && isEditing && (
-            <div className="overlay">
+            <div className="overlay-edit">
               <div className="edit-artist-profile-form-container">
                 <h2>Edit Information</h2>
                 <form
@@ -160,8 +162,8 @@ const MainInfo = ({ artist }) => {
             {capitalizeFirstLetter(artist.lastName)}
           </h2>
           <p>
-            <HiLocationMarker size={17} className="location-marker"/> {artist.city},{" "}
-            {capitalizeFirstLetter(artist.country)}
+            <HiLocationMarker size={17} className="location-marker" />{" "}
+            {artist.city}, {capitalizeFirstLetter(artist.country)}
           </p>
         </div>
         {/* Buttons for desktop */}
