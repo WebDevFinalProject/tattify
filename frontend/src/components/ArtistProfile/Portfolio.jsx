@@ -8,10 +8,11 @@ import useImageDelete from "../../hooks/useImageDelete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Mousewheel, Keyboard } from "swiper/modules";
+import { Navigation, Mousewheel, Keyboard, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import useStopScroll from "../../hooks/useStopScroll";
 
 function Portfolio({ artist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,6 +26,7 @@ function Portfolio({ artist }) {
 
   // Toggle Modal
   const toggleModal = () => setIsModalOpen(!isModalOpen);
+  useStopScroll(isModalOpen);
 
   const openImage = (index) => {
     setCurrentIndex(index);
@@ -32,14 +34,7 @@ function Portfolio({ artist }) {
   };
   const closeImage = () => setOpenImg(false);
 
-  /* stop the background from scrolling */
-  useEffect(() => {
-    if (openImg) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [openImg]);
+  useStopScroll(openImg);
 
   return (
     <>
@@ -80,8 +75,8 @@ function Portfolio({ artist }) {
             {/* image clickable  */}
             {openImg && (
               <div className="modal">
-                <button className="close-button" onClick={closeImage}>
-                  Close
+                <button id="close-button-swiper" onClick={closeImage}>
+                  x
                 </button>
                 <Swiper
                   initialSlide={currentIndex}
@@ -89,21 +84,17 @@ function Portfolio({ artist }) {
                   pagination={{ clickable: true }}
                   spaceBetween={10}
                   slidesPerView={1}
-                  modules={[Navigation, Mousewheel, Keyboard]}
+                  modules={[Navigation, Mousewheel, Keyboard, Pagination]}
                   mousewheel={true}
                   keyboard={true}
-                  className="swiper-container"
+                  className="swiper-portfolio"
                 >
                   {artist.portfolio.map((imageUrl, index) => (
                     <SwiperSlide key={index}>
                       <img
                         src={imageUrl}
                         alt={`Portfolio ${index + 1}`}
-                        style={{
-                          width: "100%",
-                          height: "80%",
-                          objectFit: "contain",
-                        }}
+                        id="porfolio-swipe"
                       />
                     </SwiperSlide>
                   ))}

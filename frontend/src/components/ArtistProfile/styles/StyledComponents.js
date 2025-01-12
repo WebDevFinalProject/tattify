@@ -113,33 +113,46 @@ export const PortfolioContainer = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.93);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
   }
 
-  .close-button {
+  #close-button-swiper {
     position: absolute;
-    top: 30px;
+    top: 5%;
     right: 50px;
+    border-radius: 10px;
+    background-color: transparent;
     border: none;
-    padding: 10px 15px;
-    font-size: 16px;
+    font-size: 4rem;
     cursor: pointer;
     z-index: 1100;
+
+    &:hover {
+      color: gray;
+    }
   }
 
-  .swiper-container {
-    width: 80%;
+  .swiper-portfolio {
+    width: 100%;
     height: 80%;
+    padding: 0 10px;
   }
 
-  .swiper-slide img {
+  .swiper-portfolio img {
     display: block;
     max-width: 100%;
     max-height: 100%;
     margin: auto;
+  }
+  #porfolio-swipe {
+    height: 85%;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+    padding-top: 6rem;
   }
 `;
