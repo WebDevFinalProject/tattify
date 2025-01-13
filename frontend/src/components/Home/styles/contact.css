@@ -1,58 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gafata&family=Varta:wght@300..700&display=swap");
 
 .contact-body {
-  --text-color-heading: #830707;
-  --form-text-color: #45342d;
+  --text-color-heading   : #830707;
+  --form-text-color      : #45342d;
   --main-background-color: #f08f7f;
   --form-background-color: #f2e2d7;
 }
 
 .contact-body {
-  height: 100%;
+  height          : 100%;
   background-color: var(--main-background-color);
-  padding: 4rem;
+  padding         : 4rem;
 
   h1 {
     font-family: "Abril Fatface", serif;
     font-weight: 400;
-    font-style: normal;
-    color: var(--text-color-heading);
-    font-size: clamp(40px, 5vw, 66px);
-    text-align: center;
+    font-style : normal;
+    color      : var(--text-color-heading);
+    font-size  : clamp(4.5rem, 5vw, 6.6rem);
+    text-align : center;
     padding-top: 10px;
   }
 
   p {
-    text-align: center;
-    color: var(--text-color-heading);
-    font-size: 16px;
+    text-align : center;
+    color      : var(--text-color-heading);
+    font-size  : 16px;
     font-family: "Lato", serif;
-    position: relative;
-    top: 15px;
+    position   : relative;
+    top        : 15px;
   }
 }
 
 .hero-contact-form {
-  display: flex;
-  flex-direction: column;
+  display        : flex;
+  flex-direction : column;
   justify-content: space-around;
-  position: relative;
-  margin-top: 220px;
-  padding-bottom: 7em;
+  position       : relative;
+  margin-top     : 220px;
+  padding-bottom : 7em;
 }
 
 .hero-contact-form input {
-  width: 350px;
-  outline: none;
-  height: 25px;
-  margin: 10px auto;
-  background-color: var(--form-background-color);
-  border: none;
+  width              : 350px;
+  outline            : none;
+  height             : 25px;
+  margin             : 10px auto;
+  background-color   : var(--form-background-color);
+  border             : none;
   border-bottom-style: solid;
   border-bottom-color: var(--form-text-color);
-  padding: 20px;
-  cursor: pointer;
-  font-size: 1.5rem;
+  padding            : 20px;
+  cursor             : pointer;
+  font-size          : 1.5rem;
 
   &:focus {
     border-color: #a86060;
@@ -60,19 +60,20 @@
 }
 
 .hero-contact-form textarea {
-  margin: 0 auto;
-  height: 200px;
-  width: 350px;
-  background-color: var(--form-background-color);
-  border: none;
-  padding-top: 5px;
+  margin             : 0 auto;
+  height             : 200px;
+  width              : 350px;
+  background-color   : var(--form-background-color);
+  border             : none;
+  padding-top        : 5px;
   border-bottom-style: solid;
   border-bottom-color: var(--form-text-color);
-  padding: 14px;
-  outline: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  resize: none;
+  padding            : 14px;
+  outline            : none;
+  cursor             : pointer;
+  font-size          : 1.5rem;
+  resize             : none;
+
   &:focus {
     border-color: #a86060;
   }
@@ -80,27 +81,27 @@
 
 .hero-contact-form input::placeholder,
 .hero-contact-form textarea::placeholder {
-  font-size: 1.2rem;
+  font-size  : 1.2rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-style: italic;
-  color: var(--form-text-color);
+  font-style : italic;
+  color      : var(--form-text-color);
 }
 
 .hero-contact-form button {
-  color: var(--form-background-color);
+  color           : var(--form-background-color);
   background-color: var(--text-color-heading);
-  border: none;
-  border-radius: 30px;
-  height: 3rem;
-  width: 8rem;
-  font-family: Verdana, Tahoma, sans-serif;
-  font-size: 1.3rem;
-  position: absolute;
+  border          : none;
+  border-radius   : 30px;
+  height          : 3rem;
+  width           : 8rem;
+  font-family     : Verdana, Tahoma, sans-serif;
+  font-size       : 1.3rem;
+  position        : absolute;
   /* Positions button 10px from the right of the container */
-  top: 400px;
-  bottom: 0%;
-  left: 50%;
-  transform: translateX(-50%);
+  top             : 400px;
+  bottom          : 0%;
+  left            : 50%;
+  transform       : translateX(-50%);
 
   &:hover {
     background-color: #b31b1b;
@@ -109,8 +110,8 @@
 
 .vertical-line {
   border-left: 1.5px solid var(--form-background-color);
-  height: 200px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  height     : 200px;
+  position   : absolute;
+  left       : 50%;
+  transform  : translateX(-50%);
 }

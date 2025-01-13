@@ -4,25 +4,26 @@ import Journey from "../components/Home/Journey";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Suggestion from "../components/Home/Suggestion";
-
 import Hero from "../components/Home/Hero";
 import ChatButton from "../components/Chat/ChatButton";
 import { UserContext } from "../context/ContextProvider";
+import About from "../components/Home/About";
 
 const Home = () => {
-  const { user } = useContext(UserContext);
-  return (
-    <>
-      <NavBar />
-      <body>
-        {user && <ChatButton />}
-        <Hero />
-        <Journey />
-        <Suggestion />
-        <Contact />
-        <Footer />
-      </body>
-    </>
-  );
+    const { user } = useContext(UserContext);
+    return (
+        <>
+            <NavBar />
+            <body>
+                {user && <ChatButton />}
+                <Hero />
+                <About />
+                <Journey />
+                <Suggestion />
+                <Contact />
+                <Footer />
+            </body>
+        </>
+    );
 };
 export default Home;
