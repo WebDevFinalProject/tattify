@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../NavBar";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { UserContext } from "../../context/ContextProvider";
@@ -6,7 +6,7 @@ import "../Community/forum.css";
 import Footer from "../Footer";
 import api from "../api";
 import useGetPosts from "../../hooks/communitypost/useGetPosts";
-import useGetComment from "../../hooks/communitypost/useGetComment";
+import { format, formatDate } from "date-fns";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -16,9 +16,36 @@ const Forum = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const { postLists } = useGetPosts();
-  const { comments } = useGetComment();
+  const [selectedPostId, setSelectedPostId] = useState(null);
+  const [commentsData, setCommentsData] = useState({}); //store comments by postId
+  const [openComments, setOpenComments] = useState({}); // Track visibility of comments for each post
 
-  //GET-All posts
+  // Get comments when selectedPostId changes
+  useEffect(() => {
+    if (selectedPostId) {
+      let interval;
+      const fetchComments = async () => {
+        try {
+          const response = await api.get(`/api/comments/${selectedPostId}`);
+          setCommentsData((prevState) => ({
+            ...prevState,
+            [selectedPostId]: response.data,
+          }));
+        } catch (error) {
+          console.error("Error fetching comments:", error);
+        }
+      };
+      fetchComments();
+
+      interval = setInterval(fetchComments, 1000);
+
+      return () => {
+        if (interval) {
+          clearInterval(interval);
+        }
+      };
+    }
+  }, [selectedPostId]); // Trigger when selectedPostId changes
 
   const clickVisibility = () => {
     if (!user) {
@@ -47,8 +74,12 @@ const Forum = () => {
   };
 
   const commentHandler = async (postId) => {
-    await api.post("/api/comment", { content: comment, post: postId });
-    setComment("");
+    try {
+      await api.post("/api/comment", { content: comment, post: postId });
+      setComment("");
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
   };
 
   const commentChangeHandler = (e) => {
@@ -56,6 +87,11 @@ const Forum = () => {
 
     e.target.style.height = "auto";
     e.target.style.height = `${Math.min(e.target.scrollHeight, 50)}px`;
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
   };
 
   return (
@@ -100,27 +136,59 @@ const Forum = () => {
           <hr />
 
           {postLists.map((item, index) => (
-            <div key={index}>
-              <div className="post-info">
-                <img src={item.author.profileImage} alt="" />
-                <h3>{item.author.firstName}</h3>
+            <div key={index} className="forum-posts">
+              <div>
+                <div className="post-info">
+                  <img src={item.author.profileImage} alt="" />
+                  <div>
+                    <h3>{item.author.firstName}</h3>
+                    <p>Posted on : {formatDate(item.createdAt)}</p>
+                  </div>
+                </div>
+                <p className="post-content">{item.content}</p>
+                <button
+                  onClick={() => setSelectedPostId(item._id)}
+                  className="view-comments"
+                >
+                  View Comments
+                </button>
               </div>
-              <p>{item.content}</p>
-              <button onClick={() => commentHandler(item._id)}>Comment</button>
 
-              {comments.map((comment) => (
-                <>{comment.author}</>
-              ))}
+              {selectedPostId === item._id && (
+                <div className="comment-lists">
+                  {commentsData[selectedPostId] &&
+                  commentsData[selectedPostId].length > 0 ? (
+                    commentsData[selectedPostId].map(
+                      (comment, commentIndex) => (
+                        <div key={commentIndex}>
+                          <div className="comment-info">
+                            <img src={comment.author.profileImage} alt="" />
+                            <h5>{comment.author.firstName}</h5>
+                          </div>
+                          <p className="comment-content"> {comment.content}</p>
+                          <p className="date-commented">
+                            {formatDate(item.createdAt)}
+                          </p>
+                        </div>
+                      )
+                    )
+                  ) : (
+                    <p>No comments yet.</p>
+                  )}
 
-              <div className="write-comment">
-                <textarea
-                  value={comment}
-                  onChange={commentChangeHandler}
-                  placeholder="Share your thoughts..."
-                  rows="1"
-                />
-                <button onClick={() => commentHandler(item._id)}>Post</button>
-              </div>
+                  <div className="write-comment">
+                    <textarea
+                      value={comment}
+                      onChange={commentChangeHandler}
+                      placeholder="Write your comment"
+                      rows="1"
+                    />
+                    <button onClick={() => commentHandler(item._id)}>
+                      Post Comment
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
