@@ -16,7 +16,7 @@ import ArtistList from "./components/ArtistList/ArtistList.jsx";
 import FirstTattooGuide from "./components/article/FirstTattooGuide/FirstTattooGuide.jsx";
 import ForgotPassword from "./components/Login/forgotPassword/forgotPassword.jsx";
 import ResetPassword from "./components/Login/forgotPassword/resetPassword.jsx";
-
+import Forum from "./components/Community/Forum.jsx";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -45,6 +45,7 @@ function App() {
         <Route path="/customer-profile" element={user && <ArtistList />} />
         <Route path="/artist/create-profile" element={<ArtistForm />} />
         <Route path="/artist-profile/:id" element={<ArtistProfile />} />
+        <Route path="/users/forum" element={<Forum />} />
 
         {/* Default route */}
         <Route path="*" element={<Navigate to="/" />} />
