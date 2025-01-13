@@ -9,7 +9,6 @@ import useChat from "../../hooks/chatCustomHook/useChat";
 const Chat = () => {
   const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
   const [newMessage, setNewMessage] = useState("");
-  const { id } = useParams();
   const messagesEndRef = useRef(null);
   const { chats, currentChat, setCurrentChat } = useChat();
 
@@ -82,6 +81,8 @@ const Chat = () => {
     );
   };
 
+  const isSelfChat = currentChat?.participant._id === user._id;
+
   return (
     <>
       {isOpen && (
@@ -120,23 +121,28 @@ const Chat = () => {
             {/* Current Chat */}
             {currentChat && (
               <div className="chat-messages">
-                <h3>
-                  <span>
-                    {currentChat.participant.profileImage ? (
-                      <img
-                        src={currentChat.participant.profileImage}
-                        alt={`${
-                          currentChat.participant.firstName || "Participant"
-                        } ${currentChat.participant.lastName || ""}`}
-                        className="profile-chat-image"
-                      />
-                    ) : null}
-                  </span>
-                  {currentChat.participant.firstName ||
-                  currentChat.participant.lastName
-                    ? ` ${currentChat.participant.firstName} ${currentChat.participant.lastName}`
-                    : "Start a conversation"}
-                </h3>
+                {!isSelfChat && (
+                  <div className="chat-messages">
+                    <h3>
+                      <span>
+                        {currentChat.participant.profileImage ? (
+                          <img
+                            src={currentChat.participant.profileImage}
+                            alt={`${
+                              currentChat.participant.firstName || "Participant"
+                            } ${currentChat.participant.lastName || ""}`}
+                            className="profile-chat-image"
+                          />
+                        ) : null}
+                      </span>
+                      {currentChat.participant.firstName ||
+                      currentChat.participant.lastName
+                        ? ` ${currentChat.participant.firstName} ${currentChat.participant.lastName}`
+                        : "Start a conversation"}
+                    </h3>
+                  </div>
+                )}
+
                 <div className="messages">
                   {currentChat.messages.map((msg, index) => (
                     <>
@@ -168,14 +174,21 @@ const Chat = () => {
                 </div>
 
                 <div className="message-input">
-                  <textarea
-                    value={newMessage}
-                    // onChange={(e) => setNewMessage(e.target.value)}
-                    onChange={changeHandler}
-                    placeholder="Type a message..."
-                    rows="1"
-                  />
-                  <button onClick={messageHandler}>Send</button>
+                  {!isSelfChat ? (
+                    <>
+                      <textarea
+                        value={newMessage}
+                        onChange={changeHandler}
+                        placeholder="Type a message..."
+                        rows="1"
+                      />
+                      <button onClick={messageHandler}>Send</button>
+                    </>
+                  ) : (
+                    <p className="self-chat-warning">
+                      Select a chat from your history.
+                    </p>
+                  )}
                 </div>
               </div>
             )}

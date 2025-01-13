@@ -215,6 +215,13 @@
   background-color: #8d2f2f;
 }
 
+.self-chat-warning {
+  color: #830707;
+  margin: auto;
+  padding-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
 @keyframes chat-effect {
   0% {
     max-width: 0;
