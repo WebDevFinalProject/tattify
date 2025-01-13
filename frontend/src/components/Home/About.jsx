@@ -1,5 +1,7 @@
 import { CenteredWrap, StyledH2, StyledParagraph, Title } from "./styles/about";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import Photo1 from "../../assets/about-photo.png";
+import Photo2 from "../../assets/about-photo-2.png";
 // import "./styles/about.css";
 
 const About = () => {
@@ -34,6 +36,11 @@ const About = () => {
                 <Title ref={titleRef} isVisible={titleVisible}>
                     About Us
                 </Title>
+                <img
+                    src={Photo1}
+                    alt=""
+                    style={{ width: "45rem", border: "1rem solid white" }}
+                />
                 <StyledH2 ref={missionRef} isVisible={missionVisible}>
                     Our mission...
                 </StyledH2>
@@ -53,7 +60,6 @@ const About = () => {
                     often don't work into your favour, even if you play by their
                     rules.
                 </StyledParagraph>
-
                 <StyledParagraph
                     ref={paragraphRef3}
                     isVisible={paragraphVisible3}
@@ -63,14 +69,12 @@ const About = () => {
                     reasons they don't know - which means their content is shown
                     to little to no people.
                 </StyledParagraph>
-
                 <StyledParagraph
                     ref={paragraphRef4}
                     isVisible={paragraphVisible4}
                 >
                     We believe this can be changed.
                 </StyledParagraph>
-
                 <StyledParagraph
                     ref={paragraphRef5}
                     isVisible={paragraphVisible5}
@@ -80,7 +84,15 @@ const About = () => {
                     and putting their work out without having to play by the
                     opaque rules of algorithms.
                 </StyledParagraph>
-
+                <img
+                    src={Photo2}
+                    alt=""
+                    style={{
+                        width: "50rem",
+                        margin: "2rem",
+                        border: "1rem solid white",
+                    }}
+                />
                 <StyledH2 ref={teamRef} isVisible={teamVisible}>
                     The team
                 </StyledH2>
