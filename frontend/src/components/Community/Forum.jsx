@@ -4,13 +4,21 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 import { UserContext } from "../../context/ContextProvider";
 import "../Community/forum.css";
 import Footer from "../Footer";
-import { useNavigate } from "react-router-dom";
+import api from "../api";
+import useGetPosts from "../../hooks/communitypost/useGetPosts";
+import useGetComment from "../../hooks/communitypost/useGetComment";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
-  const [post, setPost] = useState();
+  const [post, setPost] = useState("");
+  const [comment, setComment] = useState("");
   const [openToWrite, setOpenToWrite] = useState(false);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const { postLists } = useGetPosts();
+  const { comments } = useGetComment();
+
+  //GET-All posts
 
   const clickVisibility = () => {
     if (!user) {
@@ -29,7 +37,27 @@ const Forum = () => {
     e.target.style.height = `${Math.min(e.target.scrollHeight, 100)}px`;
   };
 
-  const submitHandler = () => {};
+  const submitHandler = async () => {
+    try {
+      await api.post("/api/post", { content: post });
+      setPost("");
+    } catch (error) {
+      setError("Failed to create post!");
+    }
+  };
+
+  const commentHandler = async (postId) => {
+    await api.post("/api/comment", { content: comment, post: postId });
+    setComment("");
+  };
+
+  const commentChangeHandler = (e) => {
+    setComment(e.target.value);
+
+    e.target.style.height = "auto";
+    e.target.style.height = `${Math.min(e.target.scrollHeight, 50)}px`;
+  };
+
   return (
     <div className="forum">
       <NavBar />
@@ -70,6 +98,31 @@ const Forum = () => {
         <div className="posts-section">
           <h2>All Posts</h2>
           <hr />
+
+          {postLists.map((item, index) => (
+            <div key={index}>
+              <div className="post-info">
+                <img src={item.author.profileImage} alt="" />
+                <h3>{item.author.firstName}</h3>
+              </div>
+              <p>{item.content}</p>
+              <button onClick={() => commentHandler(item._id)}>Comment</button>
+
+              {comments.map((comment) => (
+                <>{comment.author}</>
+              ))}
+
+              <div className="write-comment">
+                <textarea
+                  value={comment}
+                  onChange={commentChangeHandler}
+                  placeholder="Share your thoughts..."
+                  rows="1"
+                />
+                <button onClick={() => commentHandler(item._id)}>Post</button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <Footer />

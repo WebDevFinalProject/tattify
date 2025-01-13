@@ -4,7 +4,7 @@
 
 .community-page {
   background-color: #f7f2ee8c;
-  height: 100vh;
+  min-height: 100vh;
   width: 75%;
   margin: auto;
   padding: 4rem;
@@ -97,6 +97,11 @@
 
 .create-post-btn button span {
   margin-right: 4px;
+}
+
+.post-info img {
+  width: 40px;
+  border-radius: 50%;
 }
 
 @media (max-width: 800px) {
