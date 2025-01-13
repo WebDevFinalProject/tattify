@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Photo1 from "../../../assets/about-photo.png";
 
 // media queries
 const size = {
@@ -85,4 +86,12 @@ export const StyledParagraph = styled.p`
         margin-bottom: 5rem;
     }
     ${({ isVisible }) => (isVisible ? fadeIn : fadeOut)}
+`;
+
+export const Container = styled.div`
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
