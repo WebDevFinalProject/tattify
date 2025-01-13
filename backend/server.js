@@ -11,6 +11,8 @@ import { Server } from "socket.io";
 import http from "http";
 import { initializeSocket } from "./io/socket.js";
 import chatRoute from "./routes/chatRoute.js";
+import communityRoutes from "./routes/communityRoute.js";
+
 
 const app = express();
 const server = http.createServer(app);
@@ -44,6 +46,7 @@ app.use("/api", profileRoutes);
 app.use("/api", contactRoutes);
 app.use("/api", forgotPasswordRoutes);
 app.use("/api", chatRoute);
+app.use("/api", communityRoutes)
 
 server.listen(PORT, () => {
   console.log("Server is listening!", PORT);
