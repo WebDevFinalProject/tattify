@@ -18,7 +18,6 @@ const Forum = () => {
   const { postLists } = useGetPosts();
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [commentsData, setCommentsData] = useState({}); //store comments by postId
-  const [openComments, setOpenComments] = useState({}); // Track visibility of comments for each post
 
   // Get comments when selectedPostId changes
   useEffect(() => {
@@ -147,10 +146,17 @@ const Forum = () => {
                 </div>
                 <p className="post-content">{item.content}</p>
                 <button
-                  onClick={() => setSelectedPostId(item._id)}
+                  onClick={() => {
+                    // Toggle the selected post's visibility for comments
+                    setSelectedPostId((prevId) =>
+                      prevId === item._id ? null : item._id
+                    );
+                  }}
                   className="view-comments"
                 >
-                  View Comments
+                  {selectedPostId === item._id
+                    ? "Hide Comments"
+                    : "View Comments"}
                 </button>
               </div>
 
