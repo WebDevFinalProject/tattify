@@ -305,6 +305,10 @@
   .write-post textarea {
     width: 95%;
   }
+
+  .pagination-posts {
+    padding-bottom: 5rem;
+  }
 }
 
 @media (min-width: 801px) and (max-width: 1024px) {
