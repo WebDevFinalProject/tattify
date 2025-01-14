@@ -25,7 +25,9 @@ function Footer() {
 
           <div className="footer-section">
             <ul>
-              <li>About Us</li>
+              <NavLink to="/#about" className="footer-navlink">
+                <li>About Us</li>
+              </NavLink>
 
               <NavLink className="footer-navlink" to="/#contact-form">
                 <li>Contact Us </li>

@@ -47,7 +47,7 @@ function NavBar() {
             <h2>Tattify</h2>
           </div>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="#">About</NavLink>
+          <NavLink to="/#about">About</NavLink>
           <NavLink to="/#contact-form">Contact</NavLink>
           <NavLink to="/articles">Article</NavLink>
           <NavLink to="/users/forum">Community</NavLink>
