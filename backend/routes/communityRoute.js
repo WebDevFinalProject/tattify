@@ -2,6 +2,7 @@ import express from "express";
 import {
   createComment,
   createPost,
+  deletePost,
   getAllPosts,
   getCommentsByPost,
   getPostById,
@@ -14,6 +15,7 @@ const router = express.Router();
 router.post("/post", auth, createPost);
 router.get("/posts", getAllPosts);
 router.get("/posts/:id", getPostById);
+router.delete("/delete/:postId", auth, deletePost);
 
 // Comment Routes
 router.post("/comment", auth, createComment);

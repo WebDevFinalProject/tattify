@@ -122,6 +122,11 @@
   font-size: 1.3rem;
 }
 
+.forum-posts a {
+  text-decoration: none;
+  overflow-wrap: break-word;
+}
+
 .post-info img {
   width: 40px;
   border-radius: 50%;

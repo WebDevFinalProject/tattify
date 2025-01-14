@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../NavBar";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import { HiMinus, HiPlus, HiTrash } from "react-icons/hi";
 import { UserContext } from "../../context/ContextProvider";
 import "../Community/forum.css";
 import Footer from "../Footer";
 import api from "../api";
 import useGetPosts from "../../hooks/communitypost/useGetPosts";
-import { format, formatDate } from "date-fns";
+import useRenderingContent from "../../hooks/useRenderingContent";
+import useDeletePost from "../../hooks/communitypost/useDeletePost";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -15,9 +16,11 @@ const Forum = () => {
   const [openToWrite, setOpenToWrite] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const { postLists } = useGetPosts();
+  const { postLists, setPostLists } = useGetPosts();
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [commentsData, setCommentsData] = useState({}); //store comments by postId
+  const { renderMessageContent } = useRenderingContent();
+  const delePost = useDeletePost();
 
   // Get comments when selectedPostId changes
   useEffect(() => {
@@ -66,6 +69,7 @@ const Forum = () => {
   const submitHandler = async () => {
     try {
       await api.post("/api/post", { content: post });
+      clickVisibility();
       setPost("");
     } catch (error) {
       setError("Failed to create post!");
@@ -91,6 +95,19 @@ const Forum = () => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString();
+  };
+
+  //DELETE
+
+  const deleteHandler = async (postId) => {
+    try {
+      await delePost(postId);
+      setPostLists((prevPost) =>
+        prevPost.filter((post) => post._id !== postId)
+      );
+    } catch (error) {
+      console.error("Error deleting the post");
+    }
   };
 
   return (
@@ -144,7 +161,12 @@ const Forum = () => {
                     <p>Posted on : {formatDate(item.createdAt)}</p>
                   </div>
                 </div>
-                <p className="post-content">{item.content}</p>
+                <p className="post-content">
+                  {renderMessageContent(item.content)}
+                </p>
+                <div onClick={() => deleteHandler(item._id)}>
+                  <HiTrash />
+                </div>
                 <button
                   onClick={() => {
                     // Toggle the selected post's visibility for comments
@@ -171,7 +193,10 @@ const Forum = () => {
                             <img src={comment.author.profileImage} alt="" />
                             <h5>{comment.author.firstName}</h5>
                           </div>
-                          <p className="comment-content"> {comment.content}</p>
+                          <p className="comment-content">
+                            {" "}
+                            {renderMessageContent(comment.content)}
+                          </p>
                           <p className="date-commented">
                             {formatDate(item.createdAt)}
                           </p>
