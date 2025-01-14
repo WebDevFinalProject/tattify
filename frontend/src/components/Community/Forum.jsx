@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../NavBar";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import { HiMinus, HiPlus, HiTrash } from "react-icons/hi";
 import { UserContext } from "../../context/ContextProvider";
 import "../Community/forum.css";
 import Footer from "../Footer";
 import api from "../api";
 import useGetPosts from "../../hooks/communitypost/useGetPosts";
 import useRenderingContent from "../../hooks/useRenderingContent";
+import useDeletePost from "../../hooks/communitypost/useDeletePost";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -15,10 +16,11 @@ const Forum = () => {
   const [openToWrite, setOpenToWrite] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const { postLists } = useGetPosts();
+  const { postLists, setPostLists } = useGetPosts();
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [commentsData, setCommentsData] = useState({}); //store comments by postId
   const { renderMessageContent } = useRenderingContent();
+  const delePost = useDeletePost();
 
   // Get comments when selectedPostId changes
   useEffect(() => {
@@ -95,6 +97,19 @@ const Forum = () => {
     return date.toLocaleDateString();
   };
 
+  //DELETE
+
+  const deleteHandler = async (postId) => {
+    try {
+      await delePost(postId);
+      setPostLists((prevPost) =>
+        prevPost.filter((post) => post._id !== postId)
+      );
+    } catch (error) {
+      console.error("Error deleting the post");
+    }
+  };
+
   return (
     <div className="forum">
       <NavBar />
@@ -149,6 +164,9 @@ const Forum = () => {
                 <p className="post-content">
                   {renderMessageContent(item.content)}
                 </p>
+                <div onClick={() => deleteHandler(item._id)}>
+                  <HiTrash />
+                </div>
                 <button
                   onClick={() => {
                     // Toggle the selected post's visibility for comments

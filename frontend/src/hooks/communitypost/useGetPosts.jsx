@@ -23,7 +23,7 @@ const useGetPosts = () => {
       }
     };
   }, []);
-  return { postLists };
+  return { postLists, setPostLists };
 };
 
 export default useGetPosts;
