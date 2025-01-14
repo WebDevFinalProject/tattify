@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { H2, PortfolioContainer } from "./styles/StyledComponents";
 import UploadPortfolio from "./UploadPortfolio";
 import { BiSolidCameraPlus } from "react-icons/bi";
@@ -13,9 +13,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import useStopScroll from "../../hooks/useStopScroll";
+import usePagination from "../../hooks/usePaginationHook";
+
 
 function Portfolio({ artist }) {
-  const { user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { deleteImageHandler } = useImageDelete();
@@ -24,7 +26,11 @@ function Portfolio({ artist }) {
 
   const isOwner = user && user?._id === id;
 
-  // Toggle Modal
+  // Pagination logic using custom hook
+  const itemsPerPage = 3;
+  const { currentItems, currentPage, totalPages, nextPage, prevPage } =
+    usePagination(artist ? artist.portfolio : [], itemsPerPage);
+
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   useStopScroll(isModalOpen);
 
@@ -53,14 +59,14 @@ function Portfolio({ artist }) {
 
           {/* Display Portfolio Images */}
           <PortfolioContainer>
-            {artist.portfolio.map((imageUrl, index) => (
+            {currentItems.map((imageUrl, index) => (
               <div key={index} className="portfolio-image-box">
                 <img
                   index={index}
                   src={imageUrl}
                   alt={`Portfolio image ${index + 1}`}
                   style={{ cursor: "pointer" }}
-                  onClick={() => openImage(index)}
+                  onClick={() => openImage(currentPage * itemsPerPage + index)}
                 />
                 {isOwner && (
                   <button
@@ -72,7 +78,7 @@ function Portfolio({ artist }) {
                 )}
               </div>
             ))}
-            {/* image clickable  */}
+            {/* Modal for image preview */}
             {openImg && (
               <div className="modal">
                 <button id="close-button-swiper" onClick={closeImage}>
@@ -102,6 +108,27 @@ function Portfolio({ artist }) {
               </div>
             )}
           </PortfolioContainer>
+
+          {/* Pagination Controls */}
+          <div className="pagination">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 0}
+              className="pagination-button"
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentPage + 1} of {totalPages}
+            </span>
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages - 1}
+              className="pagination-button"
+            >
+              Next
+            </button>
+          </div>
         </div>
       ) : (
         <p>Nothing to show here</p>
