@@ -8,6 +8,7 @@
   width: 75%;
   margin: auto;
   padding: 4rem;
+  margin-top: 3rem;
 }
 
 .forum-heading {
@@ -50,6 +51,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
   gap: 2rem;
 
   textarea {
@@ -66,25 +68,16 @@
     }
   }
 
-  button {
-    padding: 1rem 3rem 1rem 3rem;
-    color: #f2e2d7;
-    background-color: #830707;
-    border: none;
-    border-radius: 30px;
-    height: 3.5rem;
-    width: 14rem;
-    padding: 0.8rem 1.5rem 0.8rem 1.5rem;
-    cursor: pointer;
-    color: #f2e2d7;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-decoration: none;
-    font-size: 1.4rem;
+  p {
+    margin: auto;
+    font-size: 1.8rem;
+    font-weight: 500;
   }
 }
 
 .forum-heading button,
-.write-post button {
+.write-post button,
+.view-comments {
   &:hover {
     background-color: #b31b1b;
     color: rgb(175, 169, 169);
@@ -101,10 +94,22 @@
   margin-right: 4px;
 }
 
+.posts-section h2 {
+  margin-left: 2rem;
+  padding-top: 5rem;
+}
+
 .forum-posts {
   background-color: #e7dfd7;
   margin: 2rem;
-  padding: 2rem;
+  padding: 2rem 15rem 2rem 2rem;
+  position: relative;
+}
+
+.period {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .post-info {
@@ -119,6 +124,17 @@
   }
 }
 
+.post-author {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+
+  img {
+    width: 80px;
+    border-radius: 50%;
+  }
+}
+
 .post-content {
   margin-left: 5rem;
   font-size: 1.5rem;
@@ -129,10 +145,26 @@
   overflow-wrap: break-word;
 }
 
-.delete-podt-btn {
+.delete-post-btn {
   margin-left: 5px;
-  position: relative;
-  bottom: 2px;
+  position: absolute;
+  bottom: 3px;
+  right: 30px;
+  top: 25px;
+  font-size: 1.5rem;
+
+  p {
+    background-color: #f1efec;
+    color: black;
+    padding: 5px 15px 5px 15px;
+    border: none;
+    border-radius: 8px 0 8px 8px;
+
+    &:hover {
+      color: #6d6868;
+      background-color: #e7dfd7fa;
+    }
+  }
 }
 
 .post-info img {
@@ -175,37 +207,50 @@
 
 .write-comment {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   padding-top: 2rem;
 
   textarea {
     resize: none;
     outline: none;
-    padding-left: 5px;
+    border: none;
+    width: 150px;
+    background-color: transparent;
+    border-bottom: 1px solid black;
+    font-size: 1.3rem;
+    margin: 2rem 0;
 
     &:focus {
       border-color: #830707;
     }
   }
 
-  button {
-    background-color: #706f6f;
-    border: none;
-    padding: 5px 10px 5px 10px;
-    border-radius: 5px;
-    color: white;
+  textarea::placeholder {
+    font-style: italic;
+  }
 
-    &:hover {
-      background-color: rgb(199, 195, 195);
-      color: black;
-    }
+  div {
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+}
+
+.send-comment {
+  height: 100%;
+  display: flex;
+  font-size: 1.8rem;
+
+  &:hover {
+    color: #830707;
+    font-size: 2rem;
   }
 }
 
 .load-comment {
   color: #830707;
-  font-size: 1rem;
+  font-size: 1.3rem;
   margin-top: 2rem;
+  margin-left: 2rem;
 
   &:hover {
     text-decoration: underline;
@@ -217,16 +262,35 @@
   font-size: 0.8rem;
 }
 
+.pagination-posts {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 1.5rem;
+  margin-top: 10rem;
+}
+
+.arrow-post:hover {
+  color: #830707;
+  font-size: 2rem;
+}
+
 @media (max-width: 800px) {
   .community-page {
     width: 100%;
     padding: 0;
+    margin-top: 0;
   }
 
   .forum-heading {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+  }
+
+  .forum-posts {
+    padding: 2rem;
   }
 
   .heading-message {
@@ -236,6 +300,16 @@
 
   .posts-section {
     padding: 0 1.2rem;
+  }
+
+  .write-post textarea {
+    width: 95%;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 1024px) {
+  .forum-posts {
+    padding: 2rem;
   }
 
   .write-post textarea {
