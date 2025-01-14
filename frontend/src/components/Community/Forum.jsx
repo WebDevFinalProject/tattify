@@ -1,6 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import NavBar from "../NavBar";
-import { HiMinus, HiPlus, HiTrash } from "react-icons/hi";
+import {
+  HiArrowLeft,
+  HiArrowRight,
+  HiMinus,
+  HiPlus,
+  HiTrash,
+} from "react-icons/hi";
 import { UserContext } from "../../context/ContextProvider";
 import "../Community/forum.css";
 import Footer from "../Footer";
@@ -9,7 +15,11 @@ import useGetPosts from "../../hooks/communitypost/useGetPosts";
 import useRenderingContent from "../../hooks/useRenderingContent";
 import useDeletePost from "../../hooks/communitypost/useDeletePost";
 import useLoadPagination from "../../hooks/useLoadPagination";
+import { FaRegCommentAlt } from "react-icons/fa";
 import { TbLoader } from "react-icons/tb";
+import { MdOutlineMoreHoriz } from "react-icons/md";
+import { RiSendPlane2Fill } from "react-icons/ri";
+import usePagination from "../../hooks/usePaginationHook";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -23,8 +33,13 @@ const Forum = () => {
   const [commentsData, setCommentsData] = useState({}); //store comments by postId
   const { renderMessageContent } = useRenderingContent();
   const delePost = useDeletePost();
+  const [openMore, setOpenMore] = useState(false);
 
   const { visibleContent, handleLoadMore } = useLoadPagination();
+
+  // Use pagination hook for posts
+  const { currentItems, currentPage, totalPages, nextPage, prevPage } =
+    usePagination(postLists, 5);
 
   // Get comments when selectedPostId changes
   useEffect(() => {
@@ -105,6 +120,13 @@ const Forum = () => {
 
   const deleteHandler = async (postId) => {
     try {
+      if (
+        !window.confirm(
+          "Are you sure you want to delete? \n\nThis will permanently delete your post."
+        )
+      )
+        return;
+
       await delePost(postId);
       setPostLists((prevPost) =>
         prevPost.filter((post) => post._id !== postId)
@@ -144,10 +166,17 @@ const Forum = () => {
             <textarea
               value={post}
               onChange={changeHandler}
-              placeholder="Share your thoughts..."
+              placeholder={`Share your thought ${user.firstName}..`}
               rows="5"
             />
-            <button onClick={submitHandler}>Post</button>
+
+            <p
+              onClick={submitHandler}
+              style={{ color: post ? "#b31b1b" : "grey" }}
+              disabled={!post}
+            >
+              Post
+            </p>
           </div>
         )}
 
@@ -155,24 +184,32 @@ const Forum = () => {
           <h2>All Posts</h2>
           <hr />
 
-          {postLists.map((item, index) => (
+          {currentItems.map((item, index) => (
             <div key={index} className="forum-posts">
               <div>
                 <div className="post-info">
-                  <img src={item.author.profileImage} alt="" />
+                  {user?._id === item.author._id && (
+                    <>
+                      <p
+                        className="period"
+                        onClick={() => setOpenMore(!openMore)}
+                      >
+                        <MdOutlineMoreHoriz size={25} />
+                      </p>
+
+                      <span
+                        onClick={() => deleteHandler(item._id)}
+                        className="delete-post-btn"
+                      >
+                        {openMore && <p>Delete</p>}
+                      </span>
+                    </>
+                  )}
+
+                  <img src={item.author.profileImage} alt="profile-image" />
                   <div>
                     <h3>{item.author.firstName}</h3>
-                    <p>
-                      Posted on : {formatDate(item.createdAt)}
-                      {item.author._id === user._id && (
-                        <span
-                          onClick={() => deleteHandler(item._id)}
-                          className="delete-podt-btn"
-                        >
-                          <HiTrash size={15} />
-                        </span>
-                      )}
-                    </p>
+                    <p>Posted on : {formatDate(item.createdAt)}</p>
                   </div>
                 </div>
                 <p className="post-content">
@@ -188,9 +225,14 @@ const Forum = () => {
                   }}
                   className="view-comments"
                 >
-                  {selectedPostId === item._id
-                    ? "Hide Comments"
-                    : "View Comments"}
+                  {selectedPostId === item._id ? (
+                    "Hide Comments"
+                  ) : (
+                    <>
+                      {" "}
+                      <FaRegCommentAlt /> Comments{" "}
+                    </>
+                  )}
                 </button>
               </div>
 
@@ -226,25 +268,42 @@ const Forum = () => {
                       onClick={() => handleLoadMore(item._id)} // Load More for each post
                       className="load-comment"
                     >
-                      <TbLoader size={15} /> {" "}Load more...
+                      <TbLoader size={15} /> Load more...
                     </div>
                   )}
 
                   <div className="write-comment">
-                    <textarea
-                      value={comment}
-                      onChange={commentChangeHandler}
-                      placeholder="Write your comment"
-                      rows="1"
-                    />
-                    <button onClick={() => commentHandler(item._id)}>
-                      Post Comment
-                    </button>
+                    {user && (
+                      <textarea
+                        value={comment}
+                        onChange={commentChangeHandler}
+                        placeholder="Write your comment"
+                        rows="1"
+                      />
+                    )}
+                    <div
+                      onClick={() => commentHandler(item._id)}
+                      style={{ color: comment ? "black" : "grey" }}
+                    >
+                      {comment && <RiSendPlane2Fill className="send-comment" />}
+                    </div>
                   </div>
                 </div>
               )}
             </div>
           ))}
+        </div>
+
+        <div className="pagination-posts">
+          <div onClick={prevPage} disabled={currentPage === 0}>
+            <HiArrowLeft className="arrow-post" />
+          </div>
+          <span>
+            Page {currentPage + 1} of {totalPages}
+          </span>
+          <div onClick={nextPage} disabled={currentPage === totalPages - 1}>
+            <HiArrowRight className="arrow-post" />
+          </div>
         </div>
       </div>
       <Footer />
