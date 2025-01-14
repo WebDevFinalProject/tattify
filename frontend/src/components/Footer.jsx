@@ -4,6 +4,7 @@ import { PiTelegramLogo } from "react-icons/pi";
 import { MdEmail } from "react-icons/md";
 import { FaFacebook } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 
 function Footer() {
   return (
@@ -25,9 +26,15 @@ function Footer() {
           <div className="footer-section">
             <ul>
               <li>About Us</li>
-              <li>Contact Us</li>
+
+              <NavLink className="footer-navlink" to="/#contact-form">
+                <li>Contact Us </li>
+              </NavLink>
+
               <li>Affiliates</li>
-              <li>Support</li>
+              <NavLink className="footer-navlink" to="/#contact-form">
+                <li>Support </li>
+              </NavLink>
             </ul>
           </div>
         </div>
