@@ -8,6 +8,8 @@ import api from "../api";
 import useGetPosts from "../../hooks/communitypost/useGetPosts";
 import useRenderingContent from "../../hooks/useRenderingContent";
 import useDeletePost from "../../hooks/communitypost/useDeletePost";
+import useLoadPagination from "../../hooks/useLoadPagination";
+import { TbLoader } from "react-icons/tb";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -21,6 +23,8 @@ const Forum = () => {
   const [commentsData, setCommentsData] = useState({}); //store comments by postId
   const { renderMessageContent } = useRenderingContent();
   const delePost = useDeletePost();
+
+  const { visibleContent, handleLoadMore } = useLoadPagination();
 
   // Get comments when selectedPostId changes
   useEffect(() => {
@@ -158,15 +162,23 @@ const Forum = () => {
                   <img src={item.author.profileImage} alt="" />
                   <div>
                     <h3>{item.author.firstName}</h3>
-                    <p>Posted on : {formatDate(item.createdAt)}</p>
+                    <p>
+                      Posted on : {formatDate(item.createdAt)}
+                      {item.author._id === user._id && (
+                        <span
+                          onClick={() => deleteHandler(item._id)}
+                          className="delete-podt-btn"
+                        >
+                          <HiTrash size={15} />
+                        </span>
+                      )}
+                    </p>
                   </div>
                 </div>
                 <p className="post-content">
                   {renderMessageContent(item.content)}
                 </p>
-                <div onClick={() => deleteHandler(item._id)}>
-                  <HiTrash />
-                </div>
+
                 <button
                   onClick={() => {
                     // Toggle the selected post's visibility for comments
@@ -186,8 +198,9 @@ const Forum = () => {
                 <div className="comment-lists">
                   {commentsData[selectedPostId] &&
                   commentsData[selectedPostId].length > 0 ? (
-                    commentsData[selectedPostId].map(
-                      (comment, commentIndex) => (
+                    commentsData[selectedPostId]
+                      .slice(0, visibleContent[selectedPostId] || 3)
+                      .map((comment, commentIndex) => (
                         <div key={commentIndex}>
                           <div className="comment-info">
                             <img src={comment.author.profileImage} alt="" />
@@ -201,10 +214,20 @@ const Forum = () => {
                             {formatDate(item.createdAt)}
                           </p>
                         </div>
-                      )
-                    )
+                      ))
                   ) : (
                     <p>No comments yet.</p>
+                  )}
+
+                  {/* LOAD MORE */}
+                  {commentsData[selectedPostId]?.length >
+                    (visibleContent[selectedPostId] || 3) && (
+                    <div
+                      onClick={() => handleLoadMore(item._id)} // Load More for each post
+                      className="load-comment"
+                    >
+                      <TbLoader size={15} /> {" "}Load more...
+                    </div>
                   )}
 
                   <div className="write-comment">
