@@ -6,7 +6,7 @@ import "../Community/forum.css";
 import Footer from "../Footer";
 import api from "../api";
 import useGetPosts from "../../hooks/communitypost/useGetPosts";
-import { format, formatDate } from "date-fns";
+import useRenderingContent from "../../hooks/useRenderingContent";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -18,6 +18,7 @@ const Forum = () => {
   const { postLists } = useGetPosts();
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [commentsData, setCommentsData] = useState({}); //store comments by postId
+  const { renderMessageContent } = useRenderingContent();
 
   // Get comments when selectedPostId changes
   useEffect(() => {
@@ -66,6 +67,7 @@ const Forum = () => {
   const submitHandler = async () => {
     try {
       await api.post("/api/post", { content: post });
+      clickVisibility();
       setPost("");
     } catch (error) {
       setError("Failed to create post!");
@@ -144,7 +146,9 @@ const Forum = () => {
                     <p>Posted on : {formatDate(item.createdAt)}</p>
                   </div>
                 </div>
-                <p className="post-content">{item.content}</p>
+                <p className="post-content">
+                  {renderMessageContent(item.content)}
+                </p>
                 <button
                   onClick={() => {
                     // Toggle the selected post's visibility for comments
@@ -171,7 +175,10 @@ const Forum = () => {
                             <img src={comment.author.profileImage} alt="" />
                             <h5>{comment.author.firstName}</h5>
                           </div>
-                          <p className="comment-content"> {comment.content}</p>
+                          <p className="comment-content">
+                            {" "}
+                            {renderMessageContent(comment.content)}
+                          </p>
                           <p className="date-commented">
                             {formatDate(item.createdAt)}
                           </p>

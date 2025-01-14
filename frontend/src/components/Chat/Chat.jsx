@@ -2,15 +2,16 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { fetchChatHistory } from "../../api-chat/chatApi";
 import socket from "../../utils-io/socket";
-import { useParams } from "react-router-dom";
 import "./chat.css";
 import useChat from "../../hooks/chatCustomHook/useChat";
+import useRenderingContent from "../../hooks/useRenderingContent";
 
 const Chat = () => {
   const { user, isOpen, clickHandlerVisibility } = useContext(UserContext);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null);
   const { chats, currentChat, setCurrentChat } = useChat();
+  const { renderMessageContent } = useRenderingContent();
 
   useEffect(() => {
     if (currentChat) {
@@ -66,19 +67,6 @@ const Chat = () => {
     setNewMessage(e.target.value);
     e.target.style.height = "auto";
     e.target.style.height = `${Math.min(e.target.scrollHeight, 100)}px`;
-  };
-
-  const renderMessageContent = (content) => {
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    return content.split(urlRegex).map((part, index) =>
-      urlRegex.test(part) ? (
-        <a key={index} href={part} target="_blank" rel="noopener noreferrer">
-          {part}
-        </a>
-      ) : (
-        part
-      )
-    );
   };
 
   const isSelfChat = currentChat?.participant._id === user._id;
