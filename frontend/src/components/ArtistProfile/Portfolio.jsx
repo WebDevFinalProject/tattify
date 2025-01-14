@@ -1,5 +1,9 @@
 import { useContext, useState } from "react";
-import { H2, PortfolioContainer } from "./styles/StyledComponents";
+import {
+  H2,
+  PortfolioContainer,
+  PortfolioPagination,
+} from "./styles/StyledComponents";
 import UploadPortfolio from "./UploadPortfolio";
 import { BiSolidCameraPlus } from "react-icons/bi";
 import { UserContext } from "../../context/ContextProvider";
@@ -14,7 +18,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import useStopScroll from "../../hooks/useStopScroll";
 import usePagination from "../../hooks/usePaginationHook";
-
+import { IoArrowBackOutline,IoArrowForwardOutline } from "react-icons/io5";
 
 function Portfolio({ artist }) {
   const { user } = useContext(UserContext);
@@ -27,7 +31,7 @@ function Portfolio({ artist }) {
   const isOwner = user && user?._id === id;
 
   // Pagination logic using custom hook
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
   const { currentItems, currentPage, totalPages, nextPage, prevPage } =
     usePagination(artist ? artist.portfolio : [], itemsPerPage);
 
@@ -110,25 +114,25 @@ function Portfolio({ artist }) {
           </PortfolioContainer>
 
           {/* Pagination Controls */}
-          <div className="pagination">
+          <PortfolioPagination>
             <button
               onClick={prevPage}
               disabled={currentPage === 0}
-              className="pagination-button"
+              className="portfolio-pagination-button"
             >
-              Previous
+              <IoArrowBackOutline />
             </button>
             <span>
-              Page {currentPage + 1} of {totalPages}
+              {currentPage + 1} of {totalPages}
             </span>
             <button
               onClick={nextPage}
               disabled={currentPage === totalPages - 1}
-              className="pagination-button"
+              className="portfolio-pagination-button"
             >
-              Next
+              <IoArrowForwardOutline />
             </button>
-          </div>
+          </PortfolioPagination>
         </div>
       ) : (
         <p>Nothing to show here</p>

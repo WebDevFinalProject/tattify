@@ -183,3 +183,34 @@ export const PortfolioContainer = styled.div`
     padding-top: 6rem;
   }
 `;
+
+
+export const PortfolioPagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px; 
+
+ .portfolio-pagination-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 18px;
+    
+ 
+
+    &:disabled {
+      cursor: not-allowed;
+      color: #aaa; 
+    }
+  }
+
+  span {
+    font-size: 14px; 
+    color: #555; 
+  }
+`;
+
+
+
