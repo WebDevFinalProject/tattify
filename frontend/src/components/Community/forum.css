@@ -58,9 +58,11 @@
     padding: 1rem;
     outline: none;
     font-size: 1.4rem;
+    border-radius: 5px;
+    border: none;
 
     &:focus {
-      border-color: #830707;
+      border-bottom: 3px solid #830707;
     }
   }
 
@@ -119,12 +121,18 @@
 
 .post-content {
   margin-left: 5rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .forum-posts a {
   text-decoration: none;
   overflow-wrap: break-word;
+}
+
+.delete-podt-btn {
+  margin-left: 5px;
+  position: relative;
+  bottom: 2px;
 }
 
 .post-info img {
@@ -146,6 +154,7 @@
   cursor: pointer;
   color: #f2e2d7;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-top: 1.5rem;
 }
 
 .comment-lists {
@@ -193,6 +202,16 @@
   }
 }
 
+.load-comment {
+  color: #830707;
+  font-size: 1rem;
+  margin-top: 2rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .date-commented {
   margin-left: 4rem;
   font-size: 0.8rem;
@@ -217,5 +236,9 @@
 
   .posts-section {
     padding: 0 1.2rem;
+  }
+
+  .write-post textarea {
+    width: 95%;
   }
 }
