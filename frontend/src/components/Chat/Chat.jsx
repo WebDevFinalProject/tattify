@@ -110,7 +110,7 @@ const Chat = () => {
             {currentChat && (
               <div className="chat-messages">
                 {!isSelfChat && (
-                  <div className="chat-messages">
+                  <div className="chat-message">
                     <h3>
                       <span>
                         {currentChat.participant.profileImage ? (
