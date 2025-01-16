@@ -1,6 +1,14 @@
 import User from "../model/user.js";
 import ArtistProfile from "../model/profile.js";
 
+function toCapitalize(a) {
+  return a[0].toUpperCase() + a.slice(1).toLowerCase();
+}
+
+function toCapitalizeAnArray(a) {
+  return a.map((a) => toCapitalize(a));
+}
+
 //create portfolio
 export const createArtistProfile = async (req, res) => {
   const {
@@ -40,21 +48,13 @@ export const createArtistProfile = async (req, res) => {
         .json({ message: "Artist profile already exists." });
     }
 
-    function toCapitalize(a) {
-      return a[0].toUpperCase() + a.slice(1).toLowerCase();
-    }
-
-    function toCapitalizeAnArray(a) {
-      return a.map((a) => toCapitalize(a));
-    }
-
     // Create the new artist profile
     const artistProfile = await ArtistProfile.create({
       user: userId, // Use the authenticated user's ID
       bio,
       specialties: toCapitalizeAnArray(specialties),
       city: toCapitalize(city),
-      country,
+      country: toCapitalize(country),
       basePrice,
       certifications,
       languagesSpoken: toCapitalizeAnArray(languagesSpoken),
@@ -169,14 +169,17 @@ export const updateArtistProfile = async (req, res) => {
 
     // Update the artist profile with the provided data
     artistProfile.bio = bio || artistProfile.bio;
-    artistProfile.specialties = specialties || artistProfile.specialties;
+    artistProfile.specialties = toCapitalizeAnArray(
+      specialties || artistProfile.specialties
+    );
     artistProfile.experience = experience || artistProfile.experience;
     artistProfile.certifications =
       certifications || artistProfile.certifications;
-    artistProfile.languagesSpoken =
-      languagesSpoken || artistProfile.languagesSpoken;
-    artistProfile.city = city || artistProfile.city;
-    artistProfile.country = country || artistProfile.country;
+    artistProfile.languagesSpoken = toCapitalizeAnArray(
+      languagesSpoken || artistProfile.languagesSpoken
+    );
+    artistProfile.city = toCapitalize(city || artistProfile.city);
+    artistProfile.country = toCapitalize(country || artistProfile.country);
     artistProfile.studioLocation =
       studioLocation || artistProfile.studioLocation;
     artistProfile.basePrice = basePrice || artistProfile.basePrice;
