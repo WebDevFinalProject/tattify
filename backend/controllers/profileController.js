@@ -40,16 +40,24 @@ export const createArtistProfile = async (req, res) => {
         .json({ message: "Artist profile already exists." });
     }
 
+    function toCapitalize(a) {
+      return a[0].toUpperCase() + a.slice(1).toLowerCase();
+    }
+
+    function toCapitalizeAnArray(a) {
+      return a.map((a) => toCapitalize(a));
+    }
+
     // Create the new artist profile
     const artistProfile = await ArtistProfile.create({
       user: userId, // Use the authenticated user's ID
       bio,
-      specialties,
-      city,
+      specialties: toCapitalizeAnArray(specialties),
+      city: toCapitalize(city),
       country,
       basePrice,
       certifications,
-      languagesSpoken,
+      languagesSpoken: toCapitalizeAnArray(languagesSpoken),
       studioLocation,
       pricingDetails,
       socialLinks,
@@ -128,7 +136,7 @@ export const getArtistProfile = async (req, res) => {
 
 // Helper function to get user IDs based on user filter
 const getUserIds = async (filter) => {
-  const users = await User.find(filter).select("_id");;
+  const users = await User.find(filter).select("_id");
   return users.map((user) => user._id);
 };
 
@@ -194,7 +202,6 @@ export const updateArtistProfile = async (req, res) => {
     res.status(500).json({ message: "Error updating profile" });
   }
 };
-
 
 // Deactivate Artist Profile
 export const deactivateArtistProfile = async (req, res) => {
