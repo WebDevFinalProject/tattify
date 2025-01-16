@@ -20,6 +20,7 @@ import { TbLoader } from "react-icons/tb";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 import { RiSendPlane2Fill } from "react-icons/ri";
 import usePagination from "../../hooks/usePaginationHook";
+import ChatButton from "../Chat/ChatButton";
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -306,6 +307,7 @@ const Forum = () => {
           </div>
         </div>
       </div>
+      <ChatButton />
       <Footer />
     </div>
   );

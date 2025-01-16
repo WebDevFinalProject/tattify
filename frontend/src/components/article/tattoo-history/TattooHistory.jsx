@@ -8,8 +8,7 @@ import polynesian from "../../../assets/tattoo-history-images/polynesian.jpeg";
 import robotic from "../../../assets/tattoo-history-images/robotic.jpeg";
 import future from "../../../assets/tattoo-history-images/the future.jpeg";
 import styles1 from "../../../assets/tattoo-history-images/various_styles.jpeg";
-import styles2 from "../../../assets/tattoo-history-images/various_styles2.jpeg";
-import styles3 from "../../../assets/tattoo-history-images/various_styles3.jpeg";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -192,8 +191,6 @@ const TattooHistory = () => {
                 <div className="history-body">
                   <div className="styles-images">
                     <img src={styles1} alt="Various Styles of Tattoo!" />
-                    <img src={styles2} alt="Various Styles of Tattoo!" />
-                    <img src={styles3} alt="Various Styles of Tattoo!" />
                   </div>
                   <div className="renaissance">
                     <p>

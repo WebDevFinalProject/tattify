@@ -5,6 +5,7 @@ import "./ArtistList.css";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 import api from "../api";
+import ChatButton from "../Chat/ChatButton";
 
 const ArtistList = () => {
   const navigate = useNavigate();
@@ -181,6 +182,7 @@ const ArtistList = () => {
           </button>
         </div>
       </div>
+      <ChatButton />
     </div>
   );
 };

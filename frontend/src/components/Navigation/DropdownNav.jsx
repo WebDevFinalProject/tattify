@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { NavLink, useNavigate } from "react-router-dom";
-import { HiChat, HiLogout, HiUser } from "react-icons/hi";
+import { HiLogout, HiUser } from "react-icons/hi";
 import { FaPeopleArrows } from "react-icons/fa";
 import CustomSlideImages from "./CustomSlideImages";
 import DeactivateProfile from "./DeactivateProfile/DeactivateProfile"; // Import the new component
@@ -49,10 +49,6 @@ const DropdownNav = () => {
             />
           </>
         )}
-
-        <NavLink className="chat-link">
-          <HiChat /> &nbsp; Messages
-        </NavLink>
         <button className="nav-button-logout" onClick={logoutHandler}>
           <HiLogout size={21} /> &nbsp; Logout
         </button>

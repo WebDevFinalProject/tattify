@@ -5,16 +5,12 @@ import { H2 } from "./styles/StyledComponents";
 function Bio({ artist }) {
   return (
     <>
-      {artist ? (
-        <div className="artist-bio-container">
-          <H2>Bio</H2>
+      <div className="artist-bio-container">
+        <H2>Bio</H2>
 
-          {/* Edit mode: Show input */}
-          <p>{artist.bio}</p>
-        </div>
-      ) : (
-        <p>Bio not available</p>
-      )}
+        {/* Edit mode: Show input */}
+        <p>{artist.bio ? artist.bio : "Bio not available"}</p>
+      </div>
     </>
   );
 }
