@@ -8,25 +8,15 @@ import { Wrapper } from "../components/ArtistProfile/styles/StyledComponents.js"
 import useArtistData from "../hooks/useArtistData.jsx";
 import Portfolio from "../components/ArtistProfile/Portfolio.jsx";
 import Reviews from "../components/ArtistProfile/Reviews.jsx";
-import useEditArtistProfile from "../hooks/useEditArtistProfile.jsx";
 import { UserContext } from "../context/ContextProvider.jsx";
-import { HiChat } from "react-icons/hi";
-import Chat from "../components/Chat/Chat.jsx";
+import { useParams } from "react-router-dom";
 
 function PublicProfile() {
   //import fetched data from database
   const { artist, loading } = useArtistData();
-  const { user, clickHandlerVisibility, isOpen } = useContext(UserContext);
-
-  // import editing logic from custom hook
-  const {
-    isEditing,
-    setIsEditing,
-    toggleEditMode,
-    formData,
-    handleInputChange,
-    handleSave,
-  } = useEditArtistProfile();
+  const { user } = useContext(UserContext);
+  const { id } = useParams();
+  const isOwner = user && user?._id === id;
 
   if (loading) return <p>Loading...</p>;
 
@@ -34,37 +24,14 @@ function PublicProfile() {
     <>
       <NavBar />
       <Wrapper>
-        <MainInfo
-          artist={artist}
-          isEditing={isEditing}
-          formData={formData}
-          handleSave={handleSave}
-          setIsEditing={setIsEditing}
-          toggleEditMode={toggleEditMode}
-          handleInputChange={handleInputChange}
-        />
-
+        <MainInfo artist={artist} />
         <div className="bio-details">
-          <Bio
-            artist={artist}
-            isEditing={isEditing}
-            formData={formData}
-            handleSave={handleSave}
-            setIsEditing={setIsEditing}
-            handleInputChange={handleInputChange}
-          />
-          <Details
-            artist={artist}
-            isEditing={isEditing}
-            formData={formData}
-            handleSave={handleSave}
-            setIsEditing={setIsEditing}
-            handleInputChange={handleInputChange}
-          />
+          <Bio artist={artist} />
+          <Details artist={artist} />
         </div>
         <div className="porfolio-reviews">
           <Portfolio artist={artist} />
-          <Reviews artist={artist} />
+          <Reviews artist={artist} isOwner={isOwner} />
         </div>
       </Wrapper>
       <Footer />

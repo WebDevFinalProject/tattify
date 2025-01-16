@@ -20,7 +20,7 @@ const StarRating = ({ rating, onStarClick, size = 30 }) => (
   </div>
 );
 
-const Reviews = ({ artist }) => {
+const Reviews = ({ artist, isOwner }) => {
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -56,11 +56,14 @@ const Reviews = ({ artist }) => {
       <div className="review-box">
         <div className="review-container">
           <H2>REVIEWS</H2>
-          {!showForm ? (
+
+          {!isOwner && (
             <button className="review-button" onClick={() => setShowForm(true)}>
               Leave a Review
             </button>
-          ) : (
+          )}
+
+          {showForm && (
             <>
               <div className="overlay">
                 <div className="review-form">
