@@ -72,7 +72,7 @@ const MainInfo = ({ artist }) => {
                 >
                   <div className="paired-inputs">
                     <div>
-                      <label htmlFor="">First name</label>
+                      <label>First name</label>
                       <input
                         type="text"
                         name="firstName"
@@ -82,7 +82,7 @@ const MainInfo = ({ artist }) => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="">Last name</label>
+                      <label>Last name</label>
                       <input
                         type="text"
                         name="lastName"
@@ -94,7 +94,7 @@ const MainInfo = ({ artist }) => {
                   </div>
                   <div className="paired-inputs">
                     <div>
-                      <label htmlFor="">City</label>
+                      <label>City</label>
                       <input
                         type="text"
                         name="city"
@@ -104,7 +104,7 @@ const MainInfo = ({ artist }) => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="">Country</label>
+                      <label>Country</label>
                       <input
                         type="text"
                         name="country"
@@ -115,7 +115,7 @@ const MainInfo = ({ artist }) => {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="">Styles</label>
+                    <label>Styles</label>
                     <input
                       type="text"
                       name="specialties"
@@ -125,7 +125,7 @@ const MainInfo = ({ artist }) => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Languages</label>
+                    <label>Languages</label>
                     <input
                       type="text"
                       name="languagesSpoken"
@@ -135,9 +135,9 @@ const MainInfo = ({ artist }) => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Base price</label>
+                    <label>Base price</label>
                     <input
-                      type="text"
+                      type="number"
                       name="basePrice"
                       value={formData.basePrice}
                       onChange={handleInputChange}
@@ -145,7 +145,7 @@ const MainInfo = ({ artist }) => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Experience</label>
+                    <label>Experience</label>
                     <input
                       type="text"
                       name="experience"
@@ -155,7 +155,7 @@ const MainInfo = ({ artist }) => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Bio</label>
+                    <label>Bio</label>
                     <textarea
                       type="text"
                       name="bio"
