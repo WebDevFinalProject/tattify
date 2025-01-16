@@ -32,7 +32,7 @@ function Details({ artist }) {
             <h3>Started tattooing</h3>
             <p>
               {artist.experience
-                ? `${artist.experience} ago`
+                ? `${artist.experience} years ago`
                 : "Experience not specified"}
             </p>
           </div>
