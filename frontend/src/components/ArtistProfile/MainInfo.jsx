@@ -20,7 +20,7 @@ const MainInfo = ({ artist }) => {
     toggleEditMode,
     formData,
     setFormData,
-    handleInputChange,
+    handleChange,
     toggleAvailability,
     handleSave,
   } = useEditArtistProfile();
@@ -77,7 +77,7 @@ const MainInfo = ({ artist }) => {
                         type="text"
                         name="firstName"
                         value={formData.firstName}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="First Name"
                       />
                     </div>
@@ -87,7 +87,7 @@ const MainInfo = ({ artist }) => {
                         type="text"
                         name="lastName"
                         value={formData.lastName}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="Last Name"
                       />
                     </div>
@@ -99,7 +99,7 @@ const MainInfo = ({ artist }) => {
                         type="text"
                         name="city"
                         value={formData.city}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="City"
                       />
                     </div>
@@ -109,7 +109,7 @@ const MainInfo = ({ artist }) => {
                         type="text"
                         name="country"
                         value={formData.country}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="Country"
                       />
                     </div>
@@ -120,7 +120,7 @@ const MainInfo = ({ artist }) => {
                       type="text"
                       name="specialties"
                       value={formData.specialties}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Styles"
                     />
                   </div>
@@ -130,7 +130,7 @@ const MainInfo = ({ artist }) => {
                       type="text"
                       name="languagesSpoken"
                       value={formData.languagesSpoken}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Languages"
                     />
                   </div>
@@ -140,7 +140,7 @@ const MainInfo = ({ artist }) => {
                       type="number"
                       name="basePrice"
                       value={formData.basePrice}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Base price"
                     />
                   </div>
@@ -150,7 +150,7 @@ const MainInfo = ({ artist }) => {
                       type="text"
                       name="experience"
                       value={formData.experience}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Experience"
                     />
                   </div>
@@ -161,7 +161,7 @@ const MainInfo = ({ artist }) => {
                       name="bio"
                       rows={5}
                       value={formData.bio}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Bio"
                     />
                   </div>
