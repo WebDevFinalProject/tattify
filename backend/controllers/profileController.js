@@ -1,12 +1,13 @@
 import User from "../model/user.js";
 import ArtistProfile from "../model/profile.js";
 
-function toCapitalize(a) {
-  return a[0].toUpperCase() + a.slice(1).toLowerCase();
+function toCapitalize(str) {
+  const cleaned = str.trim();
+  return cleaned[0].toUpperCase() + cleaned.slice(1).toLowerCase();
 }
 
-function toCapitalizeAnArray(a) {
-  return a.map((a) => toCapitalize(a));
+function toCapitalizeAnArray(arr) {
+  return arr.map((item) => toCapitalize(item)); // Apply capitalization to each item
 }
 
 //create portfolio
