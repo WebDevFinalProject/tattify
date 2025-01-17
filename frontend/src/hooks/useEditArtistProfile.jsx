@@ -2,39 +2,32 @@ import { useContext, useState } from "react";
 import { UserContext } from "../context/ContextProvider";
 import api from "../components/api";
 import { useParams } from "react-router-dom";
+import useChangeHandler from "./useChangeHandler";
 
 const useEditArtistProfile = () => {
   const [isEditing, setIsEditing] = useState(false); // Edit mode state
   const { id } = useParams();
   const { user, setUser } = useContext(UserContext); // Access user from Context
-  const [formData, setFormData] = useState({
-    bio: user?.bio || "",
-    specialties: user?.specialties || [],
-    city: user?.city || "",
-    country: user?.country || "",
-    basePrice: user?.basePrice || "",
+
+  const initialState = {
+    bio: "",
+    specialties: [],
+    city: "",
+    country: "",
+    basePrice: "",
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
-    languagesSpoken: user?.languagesSpoken || [],
-    experience: user?.experience || "",
-    isAvailable: user?.isAvailable || false,
-  });
+    languagesSpoken: [],
+    experience: "",
+    isAvailable: false,
+  };
+
+  const { formData, setFormData, handleChange } =
+    useChangeHandler(initialState);
 
   // Handle edit mode
   const toggleEditMode = () => {
     setIsEditing(!isEditing);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "specialties" || name === "languagesSpoken") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value.split(",").map((item) => item),
-      }));
-    } else {
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-    }
   };
 
   // Toggle availability
@@ -79,7 +72,7 @@ const useEditArtistProfile = () => {
     toggleEditMode,
     formData,
     setFormData,
-    handleInputChange,
+    handleChange,
     handleSave,
     toggleAvailability,
   };
