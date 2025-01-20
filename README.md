@@ -1,4 +1,4 @@
-![logo](/public/for-readme/logo-png)
+![logo](/public/for-readme/logo.png)
 
 ## About the project
 This is a full-stack project created by a team of four students who took part in DCI's Web Developer course. 
