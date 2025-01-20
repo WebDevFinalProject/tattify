@@ -42,13 +42,13 @@ Tattify is a dynamic platform designed to bridge the gap between tattoo artists 
 ## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./screenshots/homepage.png" alt="E-commerce Screenshot 1" style="width: 46%;">
-  <img src="./screenshots/profile.png" alt="E-commerce Screenshot 2" style="width: 46%;">
+  <img src="./screenshots/homepage.png" alt="E-commerce Screenshot 1" style="width: 46%; height: 250px">
+  <img src="./screenshots/profile.png" alt="E-commerce Screenshot 2" style="width: 46%;height: 250px">
 
-   <img src="./screenshots/community.png" alt="E-commerce Screenshot 1" style="width: 46%;">
-  <img src="./screenshots/chat.png" alt="E-commerce Screenshot 2" style="width: 46%;">
-    <img src="./screenshots/article.png" alt="E-commerce Screenshot 1" style="width: 46%;">
-  <img src="./screenshots/artists.png" alt="E-commerce Screenshot 2" style="width: 46%;">
+   <img src="./screenshots/community.png" alt="E-commerce Screenshot 1" style="width: 46%;height: 250px">
+  <img src="./screenshots/chat.png" alt="E-commerce Screenshot 2" style="width: 46%;height: 250px">
+    <img src="./screenshots/article.png" alt="E-commerce Screenshot 1" style="width: 46%;height: 250px">
+  <img src="./screenshots/artists.png" alt="E-commerce Screenshot 2" style="width: 46%;height: 250px">
 </div>
 <p align="right">(<a href="#tattify-top">back to top</a>)</p>
 
@@ -56,7 +56,7 @@ Tattify is a dynamic platform designed to bridge the gap between tattoo artists 
 
 ## Live Demo
 
-Check out the live version of TattooConnect here: [Tattify Live](https://tattify-1.onrender.com/)
+Check out the live version of Tattify here: [Tattify Live](https://tattify-1.onrender.com/)
 
 <a id="technology"></a>
 
