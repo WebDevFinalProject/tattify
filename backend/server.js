@@ -18,14 +18,14 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://tattify-1.onrender.com",
     credentials: true,
   },
 });
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // The frontend URL
+    origin: "https://tattify-1.onrender.com", // The frontend URL
     credentials: true, // Allow credentials to be sent with the request
   })
 );
