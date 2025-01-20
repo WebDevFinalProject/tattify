@@ -115,3 +115,31 @@
   left       : 50%;
   transform  : translateX(-50%);
 }
+
+@media only screen and (max-width: 320px) {
+  .hero-contact-form input {
+    width: 100%;
+  }
+
+  .hero-contact-form textarea {
+    width: 100%;
+  }
+
+  .vertical-line {
+    border-left: 1.5px solid var(--form-background-color);
+    height     : 200px;
+    position   : absolute;
+    left       : 50%;
+    transform  : translateX(-50%);
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .hero-contact-form input {
+    width: 100%;
+  }
+
+  .hero-contact-form textarea {
+    width: 100%;
+  }
+}
