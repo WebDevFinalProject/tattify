@@ -43,16 +43,18 @@ export const CenteredWrap = styled.div`
     padding: 5rem 2rem;
     background-color: var(--background2-color);
     img {
-        width: 45rem;
+        width: 30rem;
         margin: 2rem;
         border: 1rem solid white;
-        @media ${device.mobileS} {
-            width: 30rem;
-        }
     }
     @media ${device.tablet} {
         /* background-color: lightblue; */
         padding: 5 15rem;
+        img {
+            width: 45rem;
+            margin: 2rem;
+            border: 1rem solid white;
+        }
     }
 
     @media ${device.laptop} {
@@ -68,14 +70,17 @@ export const CenteredWrap = styled.div`
 
 export const Title = styled.h1`
     font-family: var(--font-title);
-    /* font-size: 4.5rem; */
-    font-size: clamp(4.5rem, 5vw, 6.6rem);
+    font-size: 5rem;
+    /* font-size: clamp(4.5rem, 5vw, 6.6rem); */
     border-bottom: 1px solid black;
     padding: 0 7rem 2rem 7rem;
     margin-bottom: 5rem;
     ${({ isVisible }) => (isVisible ? fadeIn : fadeOut)}
     @media ${device.mobileS} {
         padding: 0 3rem 2rem 3rem;
+    }
+    @media ${device.laptop} {
+        font-size: 6rem;
     }
 `;
 
