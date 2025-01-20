@@ -2,92 +2,80 @@ import { useContext, useState } from "react";
 import { UserContext } from "../context/ContextProvider";
 import api from "../components/api";
 import { useParams } from "react-router-dom";
+import useChangeHandler from "./useChangeHandler";
 
 const useEditArtistProfile = () => {
-    const [isEditing, setIsEditing] = useState(false); // Edit mode state
-    const { id } = useParams();
-    const { user, setUser } = useContext(UserContext); // Access user from Context
-    const [formData, setFormData] = useState({
-        bio: user?.bio || "",
-        specialties: user?.specialties || [],
-        city: user?.city || "",
-        country: user?.country || "",
-        basePrice: user?.basePrice || "",
-        firstName: user?.firstName || "",
-        lastName: user?.lastName || "",
-        languagesSpoken: user?.languagesSpoken || [],
-        experience: user?.experience || "",
-        isAvailable: user?.isAvailable || false,
-    });
+  const [isEditing, setIsEditing] = useState(false); // Edit mode state
+  const { id } = useParams();
+  const { user, setUser } = useContext(UserContext); // Access user from Context
 
-    // Handle edit mode
-    const toggleEditMode = () => {
-        setIsEditing(!isEditing);
-    };
+  const initialState = {
+    bio: "",
+    specialties: [],
+    city: "",
+    country: "",
+    basePrice: "",
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
+    languagesSpoken: [],
+    experience: "",
+    isAvailable: false,
+  };
 
-    // Handle input changes
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    // };
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "specialties" || name === "languagesSpoken") {
-            setFormData((prevData) => ({
-                ...prevData,
-                [name]: value.split(",").map((item) => item.trim()),
-            }));
-        } else {
-            setFormData((prevData) => ({ ...prevData, [name]: value }));
-        }
-    };
+  const { formData, setFormData, handleChange } =
+    useChangeHandler(initialState);
 
-    // Toggle availability
-    const toggleAvailability = async () => {
-        try {
-            const updatedAvailability = !formData.isAvailable;
-            setFormData((prevData) => ({
-                ...prevData,
-                isAvailable: updatedAvailability,
-            }));
+  // Handle edit mode
+  const toggleEditMode = () => {
+    setIsEditing(!isEditing);
+  };
 
-            await api.put(`/api/artists/${id}`, {
-                isAvailable: updatedAvailability,
-            });
+  // Toggle availability
+  const toggleAvailability = async () => {
+    try {
+      const updatedAvailability = !formData.isAvailable;
+      setFormData((prevData) => ({
+        ...prevData,
+        isAvailable: updatedAvailability,
+      }));
 
-            setUser((prevUser) => ({
-                ...prevUser,
-                isAvailable: updatedAvailability,
-            }));
-        } catch (error) {
-            console.error("Error toggling availability:", error);
-        }
-    };
+      await api.put(`/api/artists/${id}`, {
+        isAvailable: updatedAvailability,
+      });
 
-    // Save updated data to the backend
-    const handleSave = async (e) => {
-        e.preventDefault();
-        try {
-            await api.put(`/api/artists/${id}`, formData);
+      setUser((prevUser) => ({
+        ...prevUser,
+        isAvailable: updatedAvailability,
+      }));
+    } catch (error) {
+      console.error("Error toggling availability:", error);
+    }
+  };
 
-            setUser((prevData) => ({ ...prevData, ...formData }));
-            setIsEditing(false); // Exit edit mode
-            toggleEditMode();
-        } catch (error) {
-            console.error("Error updating profile:", error);
-        }
-    };
+  // Save updated data to the backend
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      await api.put(`/api/artists/${id}`, formData);
 
-    return {
-        isEditing,
-        setIsEditing,
-        toggleEditMode,
-        formData,
-        setFormData,
-        handleInputChange,
-        handleSave,
-        toggleAvailability,
-    };
+      setUser((prevData) => ({ ...prevData, ...formData }));
+      setIsEditing(false); // Exit edit mode
+      toggleEditMode();
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
+  return {
+    isEditing,
+    setIsEditing,
+    toggleEditMode,
+    formData,
+    setFormData,
+    handleChange,
+    handleSave,
+    toggleAvailability,
+  };
 };
 
 export default useEditArtistProfile;

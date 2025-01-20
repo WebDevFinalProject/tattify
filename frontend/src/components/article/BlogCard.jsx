@@ -2,6 +2,7 @@ import React from "react";
 import blogsData from "./blogsData";
 import { Link } from "react-router-dom";
 import "./blogcard.css";
+import ChatButton from "../Chat/ChatButton";
 
 const BlogCard = () => {
   return (
@@ -28,6 +29,7 @@ const BlogCard = () => {
           </div>
         ))}
       </div>
+      <ChatButton />
     </div>
   );
 };

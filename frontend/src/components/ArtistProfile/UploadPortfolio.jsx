@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import useAddPortfolioImages from "../../hooks/useAddPortfolioImages";
 import "./styles/UploadPortfolio.css";
-import { HiPlus } from "react-icons/hi";
 import { ImCross } from "react-icons/im";
 
 function UploadPortfolio({ onClose }) {

@@ -15,7 +15,7 @@ const useChangeHandler = (initialState) => {
     ) {
       setFormData((prev) => ({
         ...prev,
-        [name]: value.split(",").map((item) => item.trim()),
+        [name]: value.split(",").map((item) => item),
       }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));

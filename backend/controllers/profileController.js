@@ -1,6 +1,15 @@
 import User from "../model/user.js";
 import ArtistProfile from "../model/profile.js";
 
+function toCapitalize(str) {
+  const cleaned = str.trim();
+  return cleaned[0].toUpperCase() + cleaned.slice(1).toLowerCase();
+}
+
+function toCapitalizeAnArray(arr) {
+  return arr.map((item) => toCapitalize(item)); // Apply capitalization to each item
+}
+
 //create portfolio
 export const createArtistProfile = async (req, res) => {
   const {
@@ -44,12 +53,12 @@ export const createArtistProfile = async (req, res) => {
     const artistProfile = await ArtistProfile.create({
       user: userId, // Use the authenticated user's ID
       bio,
-      specialties,
-      city,
-      country,
+      specialties: toCapitalizeAnArray(specialties),
+      city: toCapitalize(city),
+      country: toCapitalize(country),
       basePrice,
       certifications,
-      languagesSpoken,
+      languagesSpoken: toCapitalizeAnArray(languagesSpoken),
       studioLocation,
       pricingDetails,
       socialLinks,
@@ -128,7 +137,7 @@ export const getArtistProfile = async (req, res) => {
 
 // Helper function to get user IDs based on user filter
 const getUserIds = async (filter) => {
-  const users = await User.find(filter).select("_id");;
+  const users = await User.find(filter).select("_id");
   return users.map((user) => user._id);
 };
 
@@ -161,14 +170,17 @@ export const updateArtistProfile = async (req, res) => {
 
     // Update the artist profile with the provided data
     artistProfile.bio = bio || artistProfile.bio;
-    artistProfile.specialties = specialties || artistProfile.specialties;
+    artistProfile.specialties = toCapitalizeAnArray(
+      specialties || artistProfile.specialties
+    );
     artistProfile.experience = experience || artistProfile.experience;
     artistProfile.certifications =
       certifications || artistProfile.certifications;
-    artistProfile.languagesSpoken =
-      languagesSpoken || artistProfile.languagesSpoken;
-    artistProfile.city = city || artistProfile.city;
-    artistProfile.country = country || artistProfile.country;
+    artistProfile.languagesSpoken = toCapitalizeAnArray(
+      languagesSpoken || artistProfile.languagesSpoken
+    );
+    artistProfile.city = toCapitalize(city || artistProfile.city);
+    artistProfile.country = toCapitalize(country || artistProfile.country);
     artistProfile.studioLocation =
       studioLocation || artistProfile.studioLocation;
     artistProfile.basePrice = basePrice || artistProfile.basePrice;
@@ -194,7 +206,6 @@ export const updateArtistProfile = async (req, res) => {
     res.status(500).json({ message: "Error updating profile" });
   }
 };
-
 
 // Deactivate Artist Profile
 export const deactivateArtistProfile = async (req, res) => {

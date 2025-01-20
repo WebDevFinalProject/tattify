@@ -20,9 +20,8 @@ const StarRating = ({ rating, onStarClick, size = 30 }) => (
     </div>
 );
 
-const Reviews = ({ artist }) => {
+const Reviews = ({ artist, isOwner }) => {
     const { id } = useParams();
-
     const navigate = useNavigate();
     const { submitReview, loading, error, success } = useSubmitReview();
 
@@ -56,22 +55,21 @@ const Reviews = ({ artist }) => {
             <div className="review-box">
                 <div className="review-container">
                     <H2>REVIEWS</H2>
-                    {!showForm ? (
+                    {!isOwner && (
                         <button
                             className="review-button"
                             onClick={() => setShowForm(true)}
                         >
                             Leave a Review
                         </button>
-                    ) : (
+                    )}
+                    {showForm && (
                         <>
                             <div className="overlay">
                                 <div className="review-form">
                                     <h2>Submit a Review</h2>
                                     <div
-                                        onClick={() => {
-                                            setShowForm(!showForm);
-                                        }}
+                                        onClick={() => setShowForm(false)}
                                         className="review-cancel"
                                     >
                                         <ImCross size={15} />
@@ -86,7 +84,6 @@ const Reviews = ({ artist }) => {
                                                 onStarClick={setRating}
                                             />
                                         </div>
-
                                         <div className="comment-section">
                                             <label htmlFor="comment">
                                                 Comment:
@@ -112,7 +109,6 @@ const Reviews = ({ artist }) => {
                                                 {error}
                                             </p>
                                         )}
-
                                         <div className="submit-review-button-container">
                                             <button
                                                 type="submit"
@@ -183,4 +179,5 @@ const Reviews = ({ artist }) => {
         </>
     );
 };
+
 export default Reviews;

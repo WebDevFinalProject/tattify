@@ -20,7 +20,7 @@ const MainInfo = ({ artist }) => {
     toggleEditMode,
     formData,
     setFormData,
-    handleInputChange,
+    handleChange,
     toggleAvailability,
     handleSave,
   } = useEditArtistProfile();
@@ -72,96 +72,96 @@ const MainInfo = ({ artist }) => {
                 >
                   <div className="paired-inputs">
                     <div>
-                      <label htmlFor="">First name</label>
+                      <label>First name</label>
                       <input
                         type="text"
                         name="firstName"
                         value={formData.firstName}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="First Name"
                       />
                     </div>
                     <div>
-                      <label htmlFor="">Last name</label>
+                      <label>Last name</label>
                       <input
                         type="text"
                         name="lastName"
                         value={formData.lastName}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="Last Name"
                       />
                     </div>
                   </div>
                   <div className="paired-inputs">
                     <div>
-                      <label htmlFor="">City</label>
+                      <label>City</label>
                       <input
                         type="text"
                         name="city"
                         value={formData.city}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="City"
                       />
                     </div>
                     <div>
-                      <label htmlFor="">Country</label>
+                      <label>Country</label>
                       <input
                         type="text"
                         name="country"
                         value={formData.country}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="Country"
                       />
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="">Styles</label>
+                    <label>Styles</label>
                     <input
                       type="text"
                       name="specialties"
                       value={formData.specialties}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Styles"
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Languages</label>
+                    <label>Languages</label>
                     <input
                       type="text"
                       name="languagesSpoken"
                       value={formData.languagesSpoken}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Languages"
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Base price</label>
+                    <label>Base price</label>
                     <input
-                      type="text"
+                      type="number"
                       name="basePrice"
                       value={formData.basePrice}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Base price"
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Experience</label>
+                    <label>Experience</label>
                     <input
                       type="text"
                       name="experience"
                       value={formData.experience}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Experience"
                     />
                   </div>
                   <div>
-                    <label htmlFor="">Bio</label>
+                    <label>Bio</label>
                     <textarea
                       type="text"
                       name="bio"
                       rows={5}
                       value={formData.bio}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Bio"
                     />
                   </div>

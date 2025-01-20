@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/ContextProvider";
 import { NavLink, useNavigate } from "react-router-dom";
-import { HiChat, HiLogout, HiUser } from "react-icons/hi";
+import { HiLogout, HiUser } from "react-icons/hi";
 import { FaPeopleArrows } from "react-icons/fa";
 import CustomSlideImages from "./CustomSlideImages";
 import DeactivateProfile from "./DeactivateProfile/DeactivateProfile"; // Import the new component
@@ -20,12 +20,18 @@ const DropdownNav = () => {
     navigate("/login");
   };
 
+  function toCapitalize(a) {
+    return a[0].toUpperCase() + a.slice(1).toLowerCase();
+  }
+
   return (
     <div className="nav-profile-path open-profile-dropdown">
       <div className="account-dropdown-menu">
         <CustomSlideImages />
         <h2 className="customer-name">
-          {`Welcome, ${user.firstName} ${user.lastName}!`}
+          {`Welcome, ${toCapitalize(user.firstName)} ${toCapitalize(
+            user.lastName
+          )}!`}
         </h2>
         {user.role === "customer" && (
           <NavLink to="/artists" className="nav-profile-links">
@@ -49,10 +55,6 @@ const DropdownNav = () => {
             />
           </>
         )}
-
-        <NavLink className="chat-link">
-          <HiChat /> &nbsp; Messages
-        </NavLink>
         <button className="nav-button-logout" onClick={logoutHandler}>
           <HiLogout size={21} /> &nbsp; Logout
         </button>

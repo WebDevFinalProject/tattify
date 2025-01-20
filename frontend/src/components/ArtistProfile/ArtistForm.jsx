@@ -108,7 +108,7 @@ const ArtistForm = () => {
           className="formArtist-input"
           type="text"
           name="specialties"
-          value={formData.specialties.join(", ")}
+          value={formData.specialties}
           onChange={handleChange}
           placeholder="e.g., Traditional, Minimalist, Abstract"
           required
@@ -197,7 +197,7 @@ const ArtistForm = () => {
           className="formArtist-input "
           type="text"
           name="languagesSpoken"
-          value={formData.languagesSpoken.join(", ")}
+          value={formData.languagesSpoken}
           onChange={handleChange}
           placeholder="e.g., English, Spanish, French"
         />
@@ -214,7 +214,7 @@ const ArtistForm = () => {
           className="formArtist-input"
           type="text"
           name="socialLinks"
-          value={formData.socialLinks.join(", ")}
+          value={formData.socialLinks}
           onChange={handleChange}
           placeholder="e.g., Instagram, Facebook"
         />
