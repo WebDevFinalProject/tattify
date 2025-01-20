@@ -45,6 +45,29 @@ function Login() {
     <>
       <NavBar />
       <div className="login-page">
+        <div className="test-login-info">
+          <h3>Test Account Information</h3>
+          <ul>
+            <li>Customer</li>
+            <ul>
+              <li>
+                Email : <span>diana.lee@example.com</span>
+              </li>
+              <li>
+                Password : <span>DianaPass2024!</span>
+              </li>
+            </ul>
+            <li>Artist</li>
+            <ul>
+              <li>
+                Email : <span>liam.clark@example.com</span>
+              </li>
+              <li>
+                Password : <span>P@ssw0rd123</span>
+              </li>
+            </ul>
+          </ul>
+        </div>
         <div className="container-login">
           <div className="logo">
             <h1>Tattify</h1>
