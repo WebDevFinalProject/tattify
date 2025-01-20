@@ -1,4 +1,3 @@
-
 # Tattify
 
 <a id="tattify-top"></a>
@@ -42,13 +41,13 @@ Tattify is a dynamic platform designed to bridge the gap between tattoo artists 
 ## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./screenshots/homepage.png" alt="E-commerce Screenshot 1" style="width: 46%; height: 250px">
-  <img src="./screenshots/profile.png" alt="E-commerce Screenshot 2" style="width: 46%;height: 250px">
+  <img src="./screenshots/homepage.png" alt="E-commerce Screenshot 1" style="width: 40%; height: 250px">
+  <img src="./screenshots/profile.png" alt="E-commerce Screenshot 2" style="width: 40%;height: 250px">
 
-   <img src="./screenshots/community.png" alt="E-commerce Screenshot 1" style="width: 46%;height: 250px">
-  <img src="./screenshots/chat.png" alt="E-commerce Screenshot 2" style="width: 46%;height: 250px">
-    <img src="./screenshots/article.png" alt="E-commerce Screenshot 1" style="width: 46%;height: 250px">
-  <img src="./screenshots/artists.png" alt="E-commerce Screenshot 2" style="width: 46%;height: 250px">
+   <img src="./screenshots/community.png" alt="E-commerce Screenshot 1" style="width: 40%;height: 250px">
+  <img src="./screenshots/chat.png" alt="E-commerce Screenshot 2" style="width: 40%;height: 250px">
+    <img src="./screenshots/article.png" alt="E-commerce Screenshot 1" style="width: 40%;height: 250px">
+  <img src="./screenshots/artists.png" alt="E-commerce Screenshot 2" style="width: 40%;height: 250px">
 </div>
 <p align="right">(<a href="#tattify-top">back to top</a>)</p>
 
@@ -132,4 +131,3 @@ If you have any questions or suggestions, feel free to reach out!
   - [GitHub](https://github.com/Viktoriya2024)
 
 <p align="right">(<a href="#tattify-top">back to top</a>)</p>
-
