@@ -53,7 +53,7 @@ export async function registration(req, res) {
       .cookie("jwt", token, {
         httpOnly: true,
         secure: false,
-        sameSite: "lax",
+        sameSite: "none",
       })
       .status(201)
       .json({
@@ -88,7 +88,7 @@ export const userLogin = async (req, res) => {
       .cookie("jwt", token, {
         httpOnly: true,
         secure: false,
-        sameSite: "lax",
+        sameSite: "none",
       })
       .json({
         user: {
@@ -154,7 +154,7 @@ export const logout = (req, res) => {
     .clearCookie("jwt", {
       httpOnly: true,
       secure: false,
-      sameSite: "lax",
+      sameSite: "none",
     })
     .status(200)
     .json({ message: "User logged out successfully!" });
