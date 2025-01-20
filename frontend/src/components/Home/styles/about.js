@@ -41,8 +41,15 @@ export const CenteredWrap = styled.div`
     align-items: center;
     text-align: justify;
     padding: 5rem 2rem;
-    /* background-color: rgb(229, 209, 188); */
     background-color: var(--background2-color);
+    img {
+        width: 45rem;
+        margin: 2rem;
+        border: 1rem solid white;
+        @media ${device.mobileS} {
+            width: 30rem;
+        }
+    }
     @media ${device.tablet} {
         /* background-color: lightblue; */
         padding: 5 15rem;
@@ -67,6 +74,9 @@ export const Title = styled.h1`
     padding: 0 7rem 2rem 7rem;
     margin-bottom: 5rem;
     ${({ isVisible }) => (isVisible ? fadeIn : fadeOut)}
+    @media ${device.mobileS} {
+        padding: 0 3rem 2rem 3rem;
+    }
 `;
 
 export const StyledH2 = styled.i`
@@ -86,12 +96,4 @@ export const StyledParagraph = styled.p`
         margin-bottom: 5rem;
     }
     ${({ isVisible }) => (isVisible ? fadeIn : fadeOut)}
-`;
-
-export const Container = styled.div`
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 `;
