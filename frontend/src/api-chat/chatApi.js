@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const fetchChatHistory = async () => {
   try {
-    const res = await axios.get("http://localhost:4000/api/chat-history", {
+    const res = await axios.get("https://tattify.onrender.com/api/chat-history", {
       withCredentials: true,
     });
 
