@@ -90,7 +90,7 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (min-width: 320px) {
   .hero-container {
     .hero-text-container {
       h1 {
@@ -100,7 +100,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (min-width: 375px) {
   .hero-container {
     .hero-text-container {
       h1 {

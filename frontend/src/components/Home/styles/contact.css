@@ -143,3 +143,13 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 425px) {
+  .hero-contact-form input {
+    width: 100%;
+  }
+
+  .hero-contact-form textarea {
+    width: 100%;
+  }
+}
