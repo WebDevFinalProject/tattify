@@ -4,11 +4,33 @@
   font-family: "Lato", sans-serif;
   background-color: #d9c6bc;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
-  padding: 20px;
+  gap: 5rem;
+  padding: 10px;
+}
+
+.test-login-info {
+  background-color: #e1d6cc;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  margin-top: 4rem;
+  padding: 2rem 4rem 2rem 4rem;
+  border-radius: 20px;
+  max-width: 500px;
+  white-space: nowrap;
+
+  h3,
+  span {
+    color: #2d2d8f;
+    font-weight: 800;
+  }
+
+  li {
+    margin: 10px;
+    font-size: 1.2rem;
+  }
 }
 
 .container-login {
@@ -133,6 +155,7 @@ ul {
     width: 100%;
     height: auto;
   }
+
   .logo h1 {
     font-size: 5rem;
   }
@@ -162,6 +185,7 @@ ul {
     background-color: transparent;
     box-shadow: none;
     border-radius: 0;
+    padding: 0;
   }
   .logo h1 {
     font-size: 5rem;
@@ -176,6 +200,7 @@ ul {
     padding: 30px 15px;
     box-shadow: none;
     border-radius: 8px;
+    width: 100%;
   }
 
   .form {
