@@ -72,7 +72,7 @@ Check out the live version of Tattify here: [Tattify Live](https://tattify-1.onr
 - [JWT](https://jwt.io/): For secure authentication using JSON Web Tokens.
 - [Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies): For session management and user data persistence.
 - [Context API](): For managing global state.
-- Socket.IO: For real-time messaging and communication.
+- [Socket.IO](https://socket.io/): For real-time messaging and communication.
 
 <p align="right">(<a href="#tattify-top">back to top</a>)</p>
 
