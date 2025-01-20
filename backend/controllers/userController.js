@@ -52,8 +52,9 @@ export async function registration(req, res) {
     res
       .cookie("jwt", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+
       })
       .status(201)
       .json({
@@ -87,8 +88,10 @@ export const userLogin = async (req, res) => {
     res
       .cookie("jwt", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+
       })
       .json({
         user: {
@@ -153,8 +156,10 @@ export const logout = (req, res) => {
   res
     .clearCookie("jwt", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+
     })
     .status(200)
     .json({ message: "User logged out successfully!" });

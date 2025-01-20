@@ -2,8 +2,8 @@
 
 :root {
   --background2-color: #f2e2d7;
-  --text-color: #120d0b;
-  --font-primary: "PT Serif", serif;
+  --text-color       : #120d0b;
+  --font-primary     : "PT Serif", serif;
 }
 
 .abril-fatface-regular {
@@ -19,39 +19,39 @@
 }
 
 .suggestion-container {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  height: 80vh;
+  display         : flex;
+  justify-content : center;
+  text-align      : center;
+  height          : 80vh;
   background-color: var(--background2-color);
 }
 
 .text {
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  overflow       : hidden;
+  white-space    : nowrap;
+  position       : relative;
+  display        : flex;
+  flex-direction : column;
   justify-content: center;
-  gap: 1em;
-  align-items: center;
+  gap            : 1em;
+  align-items    : center;
 }
 
 .text h2 {
-  font-size: clamp(2rem, 2vw, 3.5rem);
+  font-size  : clamp(2rem, 2vw, 3.5rem);
   font-family: "Abril Fatface", serif;
   font-weight: 100;
-  overflow: hidden;
-  animation: typewriter 4s steps(75);
-  color: var(--text-color);
+  overflow   : hidden;
+  animation  : typewriter 4s steps(75);
+  color      : var(--text-color);
 }
 
 .author {
   font-family: var(--font-primary);
   font-family: "Lato", serif;
-  font-size: 1.5rem;
+  font-size  : 1.5rem;
   font-weight: 400;
-  color: var(--text-color);
+  color      : var(--text-color);
 }
 
 @keyframes typewriter {
@@ -64,13 +64,31 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 320px) {
   .text {
     white-space: wrap;
-    margin: 0 5%;
+    margin     : 0 5%;
 
     h2 {
-      animation: none;
+      font-size: 2.5rem;
+    }
+  }
+}
+
+@media (min-width: 425px) {
+  .text {
+    white-space: wrap;
+    margin     : 0 5%;
+  }
+}
+
+@media (min-width: 768px) {
+  .text {
+    white-space: wrap;
+    margin     : 0 5%;
+
+    h2 {
+      font-size: 3rem;
     }
   }
 }

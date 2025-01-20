@@ -16,7 +16,7 @@ export const forgotPassword = async (req, res) => {
     const resetToken = generateJWT(user._id);
 
     // Construct reset URL
-    const resetUrl = `http://localhost:5173/reset-password/${user._id}`;
+    const resetUrl = `https://tattify-1.onrender.com/reset-password/${user._id}`;
 
    
     // Email message
