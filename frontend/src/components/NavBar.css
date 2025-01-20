@@ -2,22 +2,22 @@
 
 .navbar-container {
   background-color: #d4c6bd;
-  display         : flex;
-  justify-content : space-between;
-  align-items     : center;
-  padding         : 2rem 5rem;
-  position        : sticky;
-  top             : 0px;
-  box-shadow      : 0px 8px 27px -9px #00000091;
-  z-index         : 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5rem;
+  position: sticky;
+  top: 0px;
+  box-shadow: 0px 8px 27px -9px #00000091;
+  z-index: 1000;
 
   .logo-container {
     a {
       text-decoration: none;
-      color          : rgb(7, 7, 7);
-      font-family    : "Abril Fatface", serif;
-      font-size      : 4rem;
-      font-weight    : 100;
+      color: rgb(7, 7, 7);
+      font-family: "Abril Fatface", serif;
+      font-size: 4rem;
+      font-weight: 100;
     }
   }
 }
@@ -28,16 +28,16 @@
 }
 
 .nav-links {
-  width          : 45%;
-  display        : flex;
+  width: 45%;
+  display: flex;
   justify-content: space-around;
 }
 
 .nav-links a {
-  font-size      : 1.9rem;
+  font-size: 1.9rem;
   text-decoration: none;
-  font-family    : Verdana, Geneva, Tahoma, sans-serif;
-  color          : #45342d;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #45342d;
 
   &:hover {
     color: #45342da1;
@@ -45,38 +45,38 @@
 }
 
 .nav-account {
-  position     : relative;
+  position: relative;
   border-radius: 50%;
-  height       : 50px;
-  object-fit   : cover;
+  height: 50px;
+  object-fit: cover;
 }
 
 .nav-account img {
-  height       : 50px;
+  height: 50px;
   border-radius: 50%;
-  margin-left  : 2rem;
+  margin-left: 2rem;
 }
 
 .camera-icon {
-  position : absolute;
+  position: absolute;
   font-size: 1.6rem;
-  top      : 40px;
-  right    : 1px;
-  color    : rgb(105, 103, 103);
+  top: 40px;
+  right: 1px;
+  color: rgb(105, 103, 103);
 }
 
 .button-container .nav-button {
-  color           : #f2e2d7;
+  color: #f2e2d7;
   background-color: #830707;
-  border          : none;
-  border-radius   : 30px;
-  height          : 3.5rem;
-  width           : 14rem;
-  padding         : 0.8rem 1.5rem 0.8rem 1.5rem;
-  cursor          : pointer;
-  font-family     : Verdana, Geneva, Tahoma, sans-serif;
-  text-decoration : none;
-  font-size       : 1.4rem;
+  border: none;
+  border-radius: 30px;
+  height: 3.5rem;
+  width: 14rem;
+  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+  cursor: pointer;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+  font-size: 1.4rem;
 
   &:visited {
     color: #f2e2d7;
@@ -101,22 +101,22 @@
 
 .open-profile-dropdown {
   background-color: #d4c6bd;
-  position        : absolute;
-  top             : 95px;
-  width           : 450px;
-  min-height      : 60vh;
-  right           : 0px;
-  border-radius   : 10px;
-  box-shadow      : -1px 1px 4px rgba(116, 114, 114, 0.637);
-  animation       : profile-nav ease forwards 0.3s;
+  position: absolute;
+  top: 105px;
+  width: 450px;
+  max-height: 60vh;
+  right: 0px;
+  border-radius: 10px;
+  box-shadow: -1px 1px 4px rgba(116, 114, 114, 0.637);
+  animation: profile-nav ease forwards 0.3s;
 }
 
 .account-dropdown-menu {
-  display       : flex;
+  display: flex;
   flex-direction: column;
-  align-items   : flex-start;
-  padding       : 5rem 0;
-  gap           : 3rem;
+  align-items: flex-start;
+  padding: 5rem 0;
+  gap: 3rem;
 }
 
 .nav-button-logout,
@@ -124,11 +124,11 @@
 .chat-link,
 .nav-profile-links {
   text-decoration: none;
-  font-size      : 1.9rem;
-  color          : #45342d;
-  padding-left   : 1rem;
-  margin         : 0 15%;
-  font-family    : Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.9rem;
+  color: #45342d;
+  padding-left: 1rem;
+  margin: 0 15%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .chat-link,
@@ -145,71 +145,71 @@
 
 .nav-button-logout {
   background-color: transparent;
-  border          : none;
+  border: none;
 }
 
 .mySwiper2 {
-  width     : 70%;
+  width: 70%;
   max-height: 125px;
-  margin    : auto;
+  margin: auto;
 }
 
 .slide-images img {
   object-fit: contain;
-  height    : 100%;
-  width     : 100%;
+  height: 100%;
+  width: 100%;
 }
 
 @keyframes dropdown {
   0% {
     max-height: 0;
-    opacity   : 0;
+    opacity: 0;
   }
 
   100% {
-    max-height: 500px;
-    opacity   : 1;
+    max-height: 450px;
+    opacity: 1;
   }
 }
 
 @keyframes profile-nav {
   0% {
     max-width: 0;
-    opacity  : 0;
+    opacity: 0;
   }
 
   100% {
     max-width: 100%;
-    opacity  : 1;
+    opacity: 1;
   }
 }
 
 .upload-dialog {
-  position        : fixed;
-  top             : 0;
-  left            : 0;
-  width           : 100vw;
-  height          : 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   /* Transparent dark background */
-  display         : flex;
-  justify-content : center;
-  align-items     : center;
-  z-index         : 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
   /* Ensure it appears above all other content */
 }
 
 .upload-dialog-content {
   background-color: rgba(242, 240, 240, 0.986);
-  border-radius   : 8px;
-  box-shadow      : 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width       : 400px;
-  min-height      : 250px;
-  width           : 90%;
-  text-align      : center;
-  display         : flex;
-  flex-direction  : column;
-  justify-content : space-around;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  min-height: 250px;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
   h2 {
     padding: 2rem 0;
@@ -218,27 +218,27 @@
 
 .file-input {
   text-align: center;
-  width     : 100%;
-  padding   : 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
 }
 
 .profileImage-upload-buttons {
-  width          : 100%;
-  display        : flex;
+  width: 100%;
+  display: flex;
   justify-content: center;
-  padding-bottom : 1rem;
-  align-items    : baseline;
+  padding-bottom: 1rem;
+  align-items: baseline;
 }
 
 .uploadimage-button {
-  margin          : 0.5rem;
-  padding         : 1rem;
-  border          : none;
-  border-radius   : 4px;
-  cursor          : pointer;
-  font-size       : 12px;
+  margin: 0.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
   background-color: #830707;
-  color           : white;
+  color: white;
 }
 
 .uploadimage-button:hover {
@@ -246,7 +246,7 @@
 }
 
 .uploadimage-button:disabled {
-  cursor : not-allowed;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 
@@ -266,30 +266,31 @@
 
   .nav-header-dropdown {
     padding-bottom: 1em;
-    font-size     : 3.5rem;
+    font-size: 3.5rem;
   }
 
   .nav-header-dropdown h2 {
-    color      : black;
+    color: black;
     font-family: var(--font-title);
-    font-size  : 5rem;
+    font-size: 5rem;
   }
 
   .nav-links {
-    display         : none;
-    flex-direction  : column;
-    justify-content : center;
-    align-items     : center;
-    gap             : 2em;
-    position        : absolute;
-    top             : 120px;
-    left            : 0;
-    width           : 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    width: 100vw;
+    max-height: 450px;
     background-color: #d4c6bd;
-    height          : 450px;
-    z-index         : 999;
-    box-shadow      : 0px 8px 27px -9px #00000091;
-    animation       : dropdown 0.3s ease forwards;
+    padding: 4rem 0;
+    z-index: 999;
+    box-shadow: 0px 8px 27px -9px #00000091;
+    animation: dropdown 0.3s ease forwards;
   }
 
   .nav-links.open-nav {
@@ -298,5 +299,6 @@
 
   .open-profile-dropdown {
     top: 115px;
+    overflow-y: auto;
   }
 }
