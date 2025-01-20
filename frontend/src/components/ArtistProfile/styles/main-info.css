@@ -207,6 +207,12 @@
   }
 }
 
+@media (max-width: 767px) {
+  .edit-artist-profile-form-container {
+    bottom: 1rem !important;
+  }
+}
+
 @media (min-width: 768px) {
   .artist-profile-main-info-container {
     .chat-button {
