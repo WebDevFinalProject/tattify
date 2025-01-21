@@ -67,11 +67,11 @@
 }
 
 @media (max-width: 480px) {
-  .artistListCard {
+  .cardArtistList {
     width: 95%;
   }
 
   .search-bar input::placeholder {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
