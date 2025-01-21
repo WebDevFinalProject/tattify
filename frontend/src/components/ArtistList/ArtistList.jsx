@@ -55,9 +55,13 @@ const ArtistList = () => {
   };
 
   // Handle button click (navigate to register page)
-  const handleButtonClick = (e) => {
+  const handleButtonClick = (e, artistId) => {
     e.stopPropagation(); // Prevent the card click from firing
-    navigate("/register"); // Navigate to the register page
+    if (!user) {
+      navigate("login");
+    } else {
+      navigate(`/artist-profile/${artistId}`); // Navigate to the artist profile page
+    }
   };
 
   return (
@@ -153,7 +157,7 @@ const ArtistList = () => {
                   </p>
                   <button
                     className="btn btn-danger fs-5"
-                    onClick={handleButtonClick} // Handle button click
+                    onClick={(e) => handleButtonClick(e, artist.user._id)}
                   >
                     <span className="text-light">Chat</span>
                   </button>
