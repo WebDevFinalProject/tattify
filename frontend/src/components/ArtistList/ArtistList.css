@@ -71,7 +71,11 @@
     width: 95%;
   }
 
+  .artistListCard {
+    margin: 0 0;
+  }
+
   .search-bar input::placeholder {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 }
