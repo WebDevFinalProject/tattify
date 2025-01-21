@@ -307,7 +307,7 @@ const Forum = () => {
           </div>
         </div>
       </div>
-      <ChatButton />
+      {user && <ChatButton />}
       <Footer />
     </div>
   );

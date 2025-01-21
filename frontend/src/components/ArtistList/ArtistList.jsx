@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SlLocationPin } from "react-icons/sl";
 import "./ArtistList.css";
@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 import api from "../api";
 import ChatButton from "../Chat/ChatButton";
+import { UserContext } from "../../context/ContextProvider";
 
 const ArtistList = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -182,7 +184,7 @@ const ArtistList = () => {
           </button>
         </div>
       </div>
-      <ChatButton />
+      {user && <ChatButton />}
     </div>
   );
 };
