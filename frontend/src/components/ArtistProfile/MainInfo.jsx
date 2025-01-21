@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { UserContext } from "../../context/ContextProvider";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { HiLocationMarker } from "react-icons/hi";
 import useEditArtistProfile from "../../hooks/useEditArtistProfile";
 import Chat from "../Chat/Chat.jsx";
@@ -13,6 +13,15 @@ import { useEffect } from "react";
 const MainInfo = ({ artist }) => {
   const { user, clickHandlerVisibility, isOpen } = useContext(UserContext);
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const chatHandler = () => {
+    if (!isOpen && !user) {
+      navigate("/login");
+    } else {
+      clickHandlerVisibility();
+    }
+  };
 
   const {
     isEditing,
@@ -195,7 +204,7 @@ const MainInfo = ({ artist }) => {
               <FontAwesomeIcon icon={faPenToSquare} size="3x" />
             </button>
           )}
-          <button className="chat-button" onClick={clickHandlerVisibility}>
+          <button className="chat-button" onClick={chatHandler}>
             Chat
           </button>
 
