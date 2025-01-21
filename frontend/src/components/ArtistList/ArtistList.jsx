@@ -58,7 +58,7 @@ const ArtistList = () => {
   const handleButtonClick = (e, artistId) => {
     e.stopPropagation(); // Prevent the card click from firing
     if (!user) {
-      navigate("login");
+      navigate("/login");
     } else {
       navigate(`/artist-profile/${artistId}`); // Navigate to the artist profile page
     }
