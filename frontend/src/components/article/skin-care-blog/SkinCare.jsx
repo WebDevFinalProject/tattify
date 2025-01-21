@@ -122,8 +122,8 @@ const SkinCare = () => {
               <div className="youtube-skin-care">
                 <iframe
                   allowFullScreen
-                  width="360"
-                  height="215"
+                  width="340"
+                  height="210"
                   src="https://www.youtube.com/embed/Xg9Dv7X6ck0?si=QtkC6-93-YHfO9D2"
                   title="YouTube video player"
                   frameborder="0"
