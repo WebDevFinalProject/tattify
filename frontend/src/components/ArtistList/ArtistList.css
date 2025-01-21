@@ -72,7 +72,7 @@
   }
 
   #artist-card {
-    margin: 0 0;
+    margin: 0 0 !important;
   }
 
   .search-bar input::placeholder {
