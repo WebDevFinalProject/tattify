@@ -98,6 +98,7 @@ const ArtistList = () => {
             <div key={artist._id} className="col-xl-4 col-md-6 cardArtistList">
               <div
                 className="card mb-4 artistListCard p-2 m-4"
+                id="artist-card"
                 onClick={() => handleCardClick(artist.user._id)} // Navigate on card click
               >
                 <div className="portfolio-container d-flex">
