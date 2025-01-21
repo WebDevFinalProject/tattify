@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useSubmitReview from "../../hooks/useReviewHook/useSubmitReview";
 import "./styles/review.css";
 import { H2 } from "./styles/StyledComponents";
 import { ImCross } from "react-icons/im";
 import useStopScroll from "../../hooks/useStopScroll";
+import { UserContext } from "../../context/ContextProvider";
 
 const StarRating = ({ rating, onStarClick, size = 30 }) => (
   <div className="stars" style={{ fontSize: `${size}px` }}>
@@ -23,6 +24,7 @@ const StarRating = ({ rating, onStarClick, size = 30 }) => (
 const Reviews = ({ artist, isOwner }) => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const { submitReview, loading, error, success } = useSubmitReview();
 
   const [showForm, setShowForm] = useState(false); // Toggle form visibility
@@ -55,7 +57,7 @@ const Reviews = ({ artist, isOwner }) => {
       <div className="review-box">
         <div className="review-container">
           <H2>REVIEWS</H2>
-          {!isOwner && (
+          {!isOwner && user && (
             <button className="review-button" onClick={() => setShowForm(true)}>
               Leave a Review
             </button>
