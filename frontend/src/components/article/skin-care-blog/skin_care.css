@@ -99,10 +99,10 @@
   text-align: justify;
   padding-top: 1.5em;
   margin-bottom: 1em;
-  font-size: clamp(0.8rem, 3.5vw, 1.5rem);
   line-height: 1.8em;
   color: #45342d;
   font-family: "Lato", serif;
+  font-size: clamp(0.8em, 3vw, 0.8em);
 }
 
 .article ul li {
