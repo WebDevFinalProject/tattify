@@ -51,6 +51,7 @@ function NavBar() {
           <NavLink to="/#contact-form">Contact</NavLink>
           <NavLink to="/articles">Article</NavLink>
           <NavLink to="/users/forum">Community</NavLink>
+          <NavLink to="/artists">Tattoo Artists</NavLink>
         </nav>
         {user ? (
           <div className="nav-dropdown-container">
