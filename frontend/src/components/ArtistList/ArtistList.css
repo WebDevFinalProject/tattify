@@ -80,3 +80,19 @@
     font-size: 1.6rem;
   }
 }
+
+/* LOADER */
+
+.loader2 {
+  width: 120px;
+  height: 20px;
+  margin: auto;
+  background: radial-gradient(circle closest-side, #830707 94%, #0000) 50% 50% /
+    calc(50% + 10px) 70% repeat-x #ccc;
+  animation: l9 1s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+@keyframes l9 {
+  100% {
+    background-position: calc(200% - 5px);
+  }
+}
