@@ -90,7 +90,7 @@ const ArtistList = () => {
 
         <h1 className="text-center mb-4 search-bar-heading">Our Artists</h1>
 
-        {loading && <p>Loading...</p>}
+        {/* {loading && <p>Loading...</p>} */}
         {error && <p className="text-danger">{error}</p>}
 
         <div className="row m-5">
