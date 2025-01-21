@@ -115,7 +115,7 @@ If you have any questions or suggestions, feel free to reach out!
 
 - **Aiza** - ([GitHub](https://github.com/AizStein) | [LinkedIn](https://www.linkedin.com/in/aiza-s-400319313))
 
-- **Urooj** - ([GitHub](https://github.com/UroojSharif))
+- **Urooj** - ([GitHub](https://github.com/UroojSharif) | [LinkedIn](https://www.linkedin.com/in/urooj-sharif-367686130))
 
 - **Dominik** - ([GitHub](https://github.com/Domszilu))
 
