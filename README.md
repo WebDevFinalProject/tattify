@@ -40,13 +40,13 @@ Tattify is a dynamic platform designed to bridge the gap between tattoo artists 
 
 ## Screenshots
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./screenshots/homepage.png" alt="Screenshot 1" style="width: 46%; height: 200px">
-  <img src="./screenshots/profile.png" alt="Screenshot 2" style="width: 46%;height: 200px">
-  <img src="./screenshots/community.png" alt="Screenshot 3" style="width: 46%;height: 200px">
-  <img src="./screenshots/chat.png" alt="Screenshot 4" style="width: 46%;height: 200px">
-  <img src="./screenshots/article.png" alt="Screenshot 5" style="width: 46%;height: 200px">
-  <img src="./screenshots/artists.png" alt="Screenshot 6" style="width: 46%;height: 200px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+  <img src="./screenshots/homepage.png" alt="Screenshot 1" style="width: 46%; height: auto">
+  <img src="./screenshots/profile.png" alt="Screenshot 2" style="width: 46%;height: auto">
+  <img src="./screenshots/community.png" alt="Screenshot 3" style="width: 46%;height: auto">
+  <img src="./screenshots/chat.png" alt="Screenshot 4" style="width: 46%;height: auto">
+  <img src="./screenshots/article.png" alt="Screenshot 5" style="width: 46%;height: auto">
+  <img src="./screenshots/artists.png" alt="Screenshot 6" style="width: 46%;height: auto">
 </div>
 <p align="right">(<a href="#tattify-top">back to top</a>)</p>
 
@@ -113,20 +113,12 @@ Check out the live version of Tattify here: [Tattify Live](https://tattify-1.onr
 
 If you have any questions or suggestions, feel free to reach out!
 
-- **Aiza**
+- **Aiza** - ([GitHub](https://github.com/AizStein) | [LinkedIn](https://www.linkedin.com/in/aiza-s-400319313))
 
-  - [GitHub](https://github.com/AizStein)
-  - [LinkedIn](https://www.linkedin.com/in/aiza-s-400319313)
+- **Urooj** - ([GitHub](https://github.com/UroojSharif))
 
-- **Urooj**
+- **Dominik** - ([GitHub](https://github.com/Domszilu))
 
-  - [GitHub](https://github.com/UroojSharif)
-
-- **Dominik**
-
-  - [GitHub](https://github.com/Domszilu)
-
-- **Viktoriya**
-  - [GitHub](https://github.com/Viktoriya2024)
+- **Viktoriya** - ([GitHub](https://github.com/Viktoriya2024))
 
 <p align="right">(<a href="#tattify-top">back to top</a>)</p>
