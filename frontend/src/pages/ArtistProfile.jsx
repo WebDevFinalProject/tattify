@@ -18,7 +18,21 @@ function PublicProfile() {
   const { id } = useParams();
   const isOwner = user && user?._id === id;
 
-  if (loading) return <p>Loading...</p>;
+  /*  if (loading) return <p>Loading...</p>; */
+
+  if (loading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <div className="loader"></div>
+      </div>
+    );
 
   return (
     <>
