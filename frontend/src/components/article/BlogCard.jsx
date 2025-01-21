@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import blogsData from "./blogsData";
 import { Link } from "react-router-dom";
 import "./blogcard.css";
 import ChatButton from "../Chat/ChatButton";
+import { UserContext } from "../../context/ContextProvider";
 
 const BlogCard = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className="blog-page-container">
       <header className="blog-header">
@@ -29,7 +32,7 @@ const BlogCard = () => {
           </div>
         ))}
       </div>
-      <ChatButton />
+      {user && <ChatButton />}
     </div>
   );
 };
