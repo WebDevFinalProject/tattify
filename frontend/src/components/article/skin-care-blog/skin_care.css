@@ -91,7 +91,7 @@
 
 .article h3 {
   margin-top: 1em;
-  font-size: clamp(1rem, 3.5vw, 1.8rem);
+  font-size: 1.8rem;
   color: #45342d;
 }
 
@@ -102,7 +102,7 @@
   line-height: 1.8em;
   color: #45342d;
   font-family: "Lato", serif;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
 }
 
 .article ul li {
