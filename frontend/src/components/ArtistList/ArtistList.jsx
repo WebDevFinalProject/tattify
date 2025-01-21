@@ -95,7 +95,7 @@ const ArtistList = () => {
 
         <div className="row m-5">
           {artists.map((artist) => (
-            <div key={artist._id} className="col-xl-4 col-md-6">
+            <div key={artist._id} className="col-xl-4 col-md-6 cardArtistList">
               <div
                 className="card mb-4 artistListCard p-2 m-4"
                 onClick={() => handleCardClick(artist.user._id)} // Navigate on card click
