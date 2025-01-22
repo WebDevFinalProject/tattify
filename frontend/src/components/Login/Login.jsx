@@ -17,8 +17,15 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Trim input values
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
     try {
-      const response = await api.post("/api/login", { email, password });
+      const response = await api.post("/api/login", {
+        email: trimmedEmail,
+        password: trimmedPassword,
+      });
 
       const { isProfileComplete, role, ...userData } = response.data.user;
       login({ ...userData, role });
