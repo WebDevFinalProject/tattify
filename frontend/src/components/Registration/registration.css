@@ -10,7 +10,7 @@
 
 #registraion-div {
   background-color: var(--main-background-color);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
 }
 
